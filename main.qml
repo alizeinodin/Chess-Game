@@ -51,4 +51,10 @@ ApplicationWindow {
         visible: true
         placeholderText: "Game Name"
     }
+
+    StackView
+    {
+            id: stackView
+            anchors.fill: parent
+    }
 }
