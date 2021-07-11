@@ -30,7 +30,7 @@ ApplicationWindow {
         font.family: "Times New Roman"
         font.bold: true
         horizontalAlignment: Text.AlignHCenter
-        font.pixelSize: 27
+        font.pixelSize: 33
     }
 
     TextField {
@@ -38,7 +38,7 @@ ApplicationWindow {
         x: 220
         y: 384
         text: qsTr("")
-        opacity: 0.37
+        opacity: 0.57
         clip: false
         visible: true
         placeholderText: "Game Name"
