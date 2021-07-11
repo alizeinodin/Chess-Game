@@ -16,7 +16,15 @@ ApplicationWindow {
             border.right: 5; border.bottom: 5
         }
 
-
+        Button {
+            id: button
+            x: 510
+            y: 388
+            width: 100
+            height: 33
+            text: qsTr("Next")
+            opacity: 0.57
+        }
 
     Text {
         id: element
