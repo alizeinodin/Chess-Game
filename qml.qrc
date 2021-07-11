@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>backchess.jpg</file>
+        <file>player.qml</file>
     </qresource>
 </RCC>
