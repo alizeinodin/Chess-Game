@@ -1,10 +1,10 @@
 #ifndef _KING_H
 #define _KING_H
-#include "chessBoard.h"
+#include "chessMan.h"
 #include <iostream>
 #include "using.h"
 
-class king : public ChessBoard
+class king : public ChessMan
 {
 public:
     virtual void movePiece(MOVE);

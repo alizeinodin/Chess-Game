@@ -1,10 +1,10 @@
 #ifndef _ROOK_H
 #define _ROOK_H
-#include "chessBoard.h"
+#include "chessMan.h"
 #include <iostream>
 #include "using.h"
 
-class rook : public ChessBoard
+class rook : public ChessMan
 {
 public:
     virtual void movePiece(MOVE);
