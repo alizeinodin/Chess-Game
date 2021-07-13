@@ -1,11 +1,11 @@
-#ifndef _CHECK_H
-#define _CHECK_H
+#ifndef _CELL_H
+#define _CELL_H
 #include <iostream>
 
 using ID = std::string;
 using COLOR = std::string;
 
-class Check
+class Cell
 {
     private:
     ID id;
@@ -13,9 +13,9 @@ class Check
     COLOR color;
 
     public:
-    Check(); // fill id, color in make
+    Cell(); // fill id, color in make
     ID getId();
     COLOR getColor();
 };
 
-#endif /* _CHECK_H */
+#endif /* _CELL_H */

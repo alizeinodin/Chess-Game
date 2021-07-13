@@ -1,12 +1,13 @@
 #ifndef _ROOK_H
 #define _ROOK_H
-#include <iostream>
 #include "chessBoard.h"
+#include <iostream>
+#include "using.h"
 
 class rook : public ChessBoard
 {
-    public:
-        virtual Move();
+public:
+    virtual void movePiece(MOVE);
 };
 
-#endif /* _ROOK_H */_ROOK_H
+#endif /* _ROOK_H */
