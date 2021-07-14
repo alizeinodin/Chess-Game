@@ -1,0 +1,17 @@
+[
+{
+  "directory": "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build",
+  "command": "/bin/x86_64-linux-gnu-g++-9   -I\"/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/include\"  -g   -std=gnu++11 -o CMakeFiles/app.dir/src/main.cpp.o -c \"/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/main.cpp\"",
+  "file": "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/main.cpp"
+},
+{
+  "directory": "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build",
+  "command": "/bin/x86_64-linux-gnu-g++-9   -I\"/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/include\"  -g   -std=gnu++11 -o CMakeFiles/app.dir/src/cell.cpp.o -c \"/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/cell.cpp\"",
+  "file": "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/cell.cpp"
+},
+{
+  "directory": "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build",
+  "command": "/bin/x86_64-linux-gnu-g++-9   -I\"/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/include\"  -g   -std=gnu++11 -o CMakeFiles/app.dir/src/id.cpp.o -c \"/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/id.cpp\"",
+  "file": "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/id.cpp"
+}
+]

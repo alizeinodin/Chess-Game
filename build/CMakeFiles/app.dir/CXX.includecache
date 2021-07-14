@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/id.h
+array
+-
+iostream
+-
+
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/id.cpp
+id.h
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/id.h
+
