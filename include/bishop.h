@@ -1,10 +1,10 @@
 #ifndef _BISHOP_H
 #define _BISHOP_H
-#include "chessBoard.h"
+#include "chessMan.h"
 #include <iostream>
 #include "using.h"
 
-class bishop : public ChessBoard
+class bishop : public ChessMan
 {
 public:
     virtual void movePiece(MOVE);

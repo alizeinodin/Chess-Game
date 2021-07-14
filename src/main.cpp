@@ -1,4 +1,5 @@
 #include <iostream>
+<<<<<<< HEAD
 #include "id.h"
 #include <array>
 using namespace std;
@@ -26,3 +27,13 @@ int main()
     // }
     return 0;
 }
+=======
+#include "king.h"
+#include "util.h"
+int main(int argc, char const *argv[])
+{
+    king k("wi");
+    k.movePiece("KE1F1");
+    return 0;
+}
+>>>>>>> 233d1494294eac9c8bf65f7e6de05ab5f6cf6c16
