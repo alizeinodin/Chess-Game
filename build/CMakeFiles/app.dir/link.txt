@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/app.dir/src/main.cpp.o CMakeFiles/app.dir/src/chessman.cpp.o CMakeFiles/app.dir/src/king.cpp.o CMakeFiles/app.dir/src/util.cpp.o CMakeFiles/app.dir/src/pawn.cpp.o CMakeFiles/app.dir/src/rook.cpp.o  -o app 

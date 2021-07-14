@@ -2,9 +2,13 @@
 #include "king.h"
 #include "util.h"
 #include "pawn.h"
+#include "rook.h"
+using namespace std;
+
+
 int main(int argc, char const *argv[])
 {
-    pawn p("#000000");
-    p.access("A3");
+    rook p("#000000");
+    p.access("B2");
     return 0;
 }
