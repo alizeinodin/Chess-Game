@@ -1,7 +1,9 @@
 #ifndef _CHESSBOARD_H
 #define _CHESSBOARD_H
 #include <iostream>
+#include <map>
 #include <array>
+#include "chessMan.h"
 #include "cell.h"
 
 class ChessBoard
@@ -14,6 +16,9 @@ class ChessBoard
     static ChessBoard & getInstance(); // sinleton pattern
     std::array<std::array<Cell, 8>, 8> start();
     std::array<std::array<Cell, 8>, 8> remmeber();
+    std::map<std::string, int> threats();
+    void testColor();
+    
     
 };
 #endif /* _CHESSBOARD_H*/

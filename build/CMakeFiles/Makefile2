@@ -44,10 +44,17 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
+<<<<<<< HEAD
 CMAKE_SOURCE_DIR = /home/erfa/project
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/erfa/project/build
+=======
+CMAKE_SOURCE_DIR = "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project"
+
+# The top-level build directory on which CMake was run.
+CMAKE_BINARY_DIR = "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build"
+>>>>>>> 534eac2a9fe7241af6bf8629b7c368f4b8fd42a4
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -74,14 +81,24 @@ clean: CMakeFiles/app.dir/clean
 CMakeFiles/app.dir/all:
 	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/depend
 	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/build
+<<<<<<< HEAD
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/erfa/project/build/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target app"
+=======
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles" --progress-num=1,2,3,4,5 "Built target app"
+>>>>>>> 534eac2a9fe7241af6bf8629b7c368f4b8fd42a4
 .PHONY : CMakeFiles/app.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/app.dir/rule: cmake_check_build_system
+<<<<<<< HEAD
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/erfa/project/build/CMakeFiles 7
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/app.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/erfa/project/build/CMakeFiles 0
+=======
+	$(CMAKE_COMMAND) -E cmake_progress_start "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles" 5
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/app.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles" 0
+>>>>>>> 534eac2a9fe7241af6bf8629b7c368f4b8fd42a4
 .PHONY : CMakeFiles/app.dir/rule
 
 # Convenience name for target.
