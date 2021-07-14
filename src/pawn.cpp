@@ -19,7 +19,7 @@ void pawn::movePiece(MOVE move)
 bool pawn::access(string acc)
 {
     char temp2[2];
-    temp2[0] = acc.at(1);
+    acc.copy(temp2,1,1);
     temp2[1] = '\0';
     int num = stoi(temp2);
     vector<string> Optimal_mode;

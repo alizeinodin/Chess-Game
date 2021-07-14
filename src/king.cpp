@@ -17,14 +17,15 @@ void king::movePiece(MOVE move)
 bool king::access(string acc)
 {
     char temp2[2];
-    temp2[0] = acc.at(1);
+    acc.copy(temp2,1,1);
     temp2[1] = '\0';
     char a[2];
     vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
     vector<string> temp;
     int dx[] = {1, 1, 1, -1, -1, -1, 0, 0}; // all possible moves.
     int dy[] = {1, -1, 0, -1, 1, 0, -1, 1}; // all possible moves.
-    acc.copy(a,1,1);
+    acc.copy(a,1,0);
+    a[2] = '\0';
     auto it = find(alfa.cbegin(),alfa.cend(),a);
     string t;
     int num = stoi(temp2);
