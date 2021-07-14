@@ -3,11 +3,26 @@
 
 CMakeFiles/app.dir/src/cell.cpp.o
  ../include/cell.h
+ ../include/chessMan.h
  ../include/id.h
+ ../include/moving.h
+ ../include/using.h
  /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/cell.cpp
+CMakeFiles/app.dir/src/chessBoard.cpp.o
+ ../include/cell.h
+ ../include/chessBoard.h
+ ../include/chessMan.h
+ ../include/moving.h
+ ../include/using.h
+ /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/chessBoard.cpp
 CMakeFiles/app.dir/src/id.cpp.o
  ../include/id.h
  /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/id.cpp
 CMakeFiles/app.dir/src/main.cpp.o
+ ../include/cell.h
+ ../include/chessBoard.h
+ ../include/chessMan.h
  ../include/id.h
+ ../include/moving.h
+ ../include/using.h
  /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/main.cpp

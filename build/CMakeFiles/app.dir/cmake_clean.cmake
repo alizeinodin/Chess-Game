@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/app.dir/src/cell.cpp.o"
+  "CMakeFiles/app.dir/src/chessBoard.cpp.o"
   "CMakeFiles/app.dir/src/id.cpp.o"
   "CMakeFiles/app.dir/src/main.cpp.o"
   "app"

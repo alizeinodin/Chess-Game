@@ -150,6 +150,33 @@ src/cell.cpp.s:
 	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/cell.cpp.s
 .PHONY : src/cell.cpp.s
 
+src/chessBoard.o: src/chessBoard.cpp.o
+
+.PHONY : src/chessBoard.o
+
+# target to build an object file
+src/chessBoard.cpp.o:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/chessBoard.cpp.o
+.PHONY : src/chessBoard.cpp.o
+
+src/chessBoard.i: src/chessBoard.cpp.i
+
+.PHONY : src/chessBoard.i
+
+# target to preprocess a source file
+src/chessBoard.cpp.i:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/chessBoard.cpp.i
+.PHONY : src/chessBoard.cpp.i
+
+src/chessBoard.s: src/chessBoard.cpp.s
+
+.PHONY : src/chessBoard.s
+
+# target to generate assembly for a file
+src/chessBoard.cpp.s:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/chessBoard.cpp.s
+.PHONY : src/chessBoard.cpp.s
+
 src/id.o: src/id.cpp.o
 
 .PHONY : src/id.o
@@ -216,6 +243,9 @@ help:
 	@echo "... src/cell.o"
 	@echo "... src/cell.i"
 	@echo "... src/cell.s"
+	@echo "... src/chessBoard.o"
+	@echo "... src/chessBoard.i"
+	@echo "... src/chessBoard.s"
 	@echo "... src/id.o"
 	@echo "... src/id.i"
 	@echo "... src/id.s"

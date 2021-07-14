@@ -17,10 +17,12 @@ class Cell
 
     public:
     Cell(); // fill id, color in make
-    Cell(ChessMan *); // fill id, color in make
+    //Cell(ChessMan *); // fill id, color in make
     ID getId();
     COLOR getColor();
     bool getState();
+    void setColor();
+    void setNut(ChessMan *);
 };
 
 #endif /* CELL_H */
