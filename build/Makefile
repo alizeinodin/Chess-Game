@@ -177,6 +177,33 @@ src/chessBoard.cpp.s:
 	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/chessBoard.cpp.s
 .PHONY : src/chessBoard.cpp.s
 
+src/fileConnect.o: src/fileConnect.cpp.o
+
+.PHONY : src/fileConnect.o
+
+# target to build an object file
+src/fileConnect.cpp.o:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/fileConnect.cpp.o
+.PHONY : src/fileConnect.cpp.o
+
+src/fileConnect.i: src/fileConnect.cpp.i
+
+.PHONY : src/fileConnect.i
+
+# target to preprocess a source file
+src/fileConnect.cpp.i:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/fileConnect.cpp.i
+.PHONY : src/fileConnect.cpp.i
+
+src/fileConnect.s: src/fileConnect.cpp.s
+
+.PHONY : src/fileConnect.s
+
+# target to generate assembly for a file
+src/fileConnect.cpp.s:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/fileConnect.cpp.s
+.PHONY : src/fileConnect.cpp.s
+
 src/id.o: src/id.cpp.o
 
 .PHONY : src/id.o
@@ -246,6 +273,9 @@ help:
 	@echo "... src/chessBoard.o"
 	@echo "... src/chessBoard.i"
 	@echo "... src/chessBoard.s"
+	@echo "... src/fileConnect.o"
+	@echo "... src/fileConnect.i"
+	@echo "... src/fileConnect.s"
 	@echo "... src/id.o"
 	@echo "... src/id.i"
 	@echo "... src/id.s"

@@ -10,9 +10,9 @@ class Cell
 {
     private:
     ID id;
-    bool isnull = false;
+    bool isnull = false; // the means of false is null
     COLOR color;
-    ChessMan * Nut = nullptr;
+    ChessMan * piece = nullptr;
 
 
     public:
@@ -22,7 +22,7 @@ class Cell
     COLOR getColor();
     bool getState();
     void setColor();
-    void setNut(ChessMan *);
+    void setPiece(ChessMan *);
 };
 
 #endif /* CELL_H */

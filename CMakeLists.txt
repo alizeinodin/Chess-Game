@@ -7,4 +7,5 @@ src/main.cpp
 src/cell.cpp 
 src/id.cpp
 src/chessBoard.cpp
+src/fileConnect.cpp
 )

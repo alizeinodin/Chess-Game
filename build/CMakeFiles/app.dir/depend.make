@@ -15,12 +15,16 @@ CMakeFiles/app.dir/src/chessBoard.cpp.o: ../include/moving.h
 CMakeFiles/app.dir/src/chessBoard.cpp.o: ../include/using.h
 CMakeFiles/app.dir/src/chessBoard.cpp.o: ../src/chessBoard.cpp
 
+CMakeFiles/app.dir/src/fileConnect.cpp.o: ../include/fileConnect.h
+CMakeFiles/app.dir/src/fileConnect.cpp.o: ../src/fileConnect.cpp
+
 CMakeFiles/app.dir/src/id.cpp.o: ../include/id.h
 CMakeFiles/app.dir/src/id.cpp.o: ../src/id.cpp
 
 CMakeFiles/app.dir/src/main.cpp.o: ../include/cell.h
 CMakeFiles/app.dir/src/main.cpp.o: ../include/chessBoard.h
 CMakeFiles/app.dir/src/main.cpp.o: ../include/chessMan.h
+CMakeFiles/app.dir/src/main.cpp.o: ../include/fileConnect.h
 CMakeFiles/app.dir/src/main.cpp.o: ../include/id.h
 CMakeFiles/app.dir/src/main.cpp.o: ../include/moving.h
 CMakeFiles/app.dir/src/main.cpp.o: ../include/using.h

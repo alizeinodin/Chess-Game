@@ -3,10 +3,16 @@
 #include <array>
 #include "cell.h"
 #include "chessBoard.h"
+#include "fileConnect.h"
+#include <fstream>
 using namespace std;
 
 int main()
 {
+    // string name = "test12.txt";
+    // FileConnect file(name);
+    // file.WriteToFile("E2D3E");
+    // cout << file.ReadToFile() << endl;
     // ChessBoard myBoard = ChessBoard::getInstance();
     // myBoard.testColor();
     // array<array<Cell, 8>, 8> test;

@@ -5,6 +5,7 @@
 #include <array>
 #include "chessMan.h"
 #include "cell.h"
+#include "fileConnect.h"
 
 class ChessBoard
 {
@@ -15,7 +16,7 @@ class ChessBoard
     public:
     static ChessBoard & getInstance(); // sinleton pattern
     std::array<std::array<Cell, 8>, 8> start();
-    std::array<std::array<Cell, 8>, 8> remmeber();
+    std::array<std::array<Cell, 8>, 8> remmeber(std::string);
     std::map<std::string, int> threats();
     void testColor();
     

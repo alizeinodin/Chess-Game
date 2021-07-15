@@ -34,6 +34,12 @@ moving.h
 map
 -
 
+../include/fileConnect.h
+iostream
+-
+fstream
+-
+
 ../include/id.h
 array
 -
@@ -48,6 +54,10 @@ iostream
 iostream
 -
 
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/fileConnect.cpp
+fileConnect.h
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/fileConnect.h
+
 /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/main.cpp
 iostream
 -
@@ -59,4 +69,8 @@ cell.h
 /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/cell.h
 chessBoard.h
 /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/chessBoard.h
+fileConnect.h
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/fileConnect.h
+fstream
+-
 
