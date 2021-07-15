@@ -1,7 +1,10 @@
 {
     "files.associations": {
+<<<<<<< HEAD
+=======
         "*.cpp": "cpp",
         "*.h": "cpp",
+>>>>>>> 534eac2a9fe7241af6bf8629b7c368f4b8fd42a4
         "array": "cpp",
         "atomic": "cpp",
         "bit": "cpp",
@@ -14,12 +17,18 @@
         "cstdint": "cpp",
         "cstdio": "cpp",
         "cstdlib": "cpp",
+<<<<<<< HEAD
+=======
         "cstring": "cpp",
+>>>>>>> 534eac2a9fe7241af6bf8629b7c368f4b8fd42a4
         "cwchar": "cpp",
         "cwctype": "cpp",
         "deque": "cpp",
         "map": "cpp",
+<<<<<<< HEAD
+=======
         "set": "cpp",
+>>>>>>> 534eac2a9fe7241af6bf8629b7c368f4b8fd42a4
         "unordered_map": "cpp",
         "vector": "cpp",
         "exception": "cpp",
@@ -49,6 +58,10 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "typeinfo": "cpp"
+<<<<<<< HEAD
+    }
+=======
     },
     "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools"
+>>>>>>> 534eac2a9fe7241af6bf8629b7c368f4b8fd42a4
 }

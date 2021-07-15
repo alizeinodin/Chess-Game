@@ -9,6 +9,8 @@
 ../include/cell.h
 iostream
 -
+<<<<<<< HEAD
+=======
 chessMan.h
 ../include/chessMan.h
 
@@ -23,6 +25,7 @@ chessMan.h
 ../include/chessMan.h
 cell.h
 ../include/cell.h
+>>>>>>> 534eac2a9fe7241af6bf8629b7c368f4b8fd42a4
 
 ../include/chessMan.h
 iostream
@@ -34,22 +37,76 @@ moving.h
 map
 -
 
+<<<<<<< HEAD
 ../include/fileConnect.h
 iostream
 -
 fstream
 -
 
+=======
+<<<<<<< HEAD
+../include/king.h
+chessMan.h
+../include/chessMan.h
+iostream
+-
+using.h
+../include/using.h
+=======
+>>>>>>> 373edc2f9159d4e6e6a32f4af4fcfd8b1d47c633
 ../include/id.h
 array
 -
 iostream
 -
+>>>>>>> 534eac2a9fe7241af6bf8629b7c368f4b8fd42a4
 
 ../include/moving.h
 iostream
 -
 
+<<<<<<< HEAD
+../include/rook.h
+chessMan.h
+../include/chessMan.h
+iostream
+-
+using.h
+../include/using.h
+
+../include/using.h
+iostream
+-
+
+../include/util.h
+array
+-
+cell.h
+../include/cell.h
+
+/home/erfa/project/src/king.cpp
+king.h
+/home/erfa/project/src/king.h
+util.h
+/home/erfa/project/src/util.h
+vector
+-
+algorithm
+-
+
+/home/erfa/project/src/rook.cpp
+rook.h
+/home/erfa/project/src/rook.h
+util.h
+/home/erfa/project/src/util.h
+vector
+-
+algorithm
+-
+iostream
+-
+=======
 ../include/using.h
 iostream
 -
@@ -69,8 +126,12 @@ cell.h
 /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/cell.h
 chessBoard.h
 /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/chessBoard.h
+<<<<<<< HEAD
 fileConnect.h
 /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/fileConnect.h
 fstream
 -
+=======
+>>>>>>> 534eac2a9fe7241af6bf8629b7c368f4b8fd42a4
+>>>>>>> 373edc2f9159d4e6e6a32f4af4fcfd8b1d47c633
 

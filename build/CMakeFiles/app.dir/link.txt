@@ -1,1 +1,9 @@
+<<<<<<< HEAD
 /bin/g++-9  -g  -rdynamic CMakeFiles/app.dir/src/main.cpp.o CMakeFiles/app.dir/src/cell.cpp.o CMakeFiles/app.dir/src/id.cpp.o CMakeFiles/app.dir/src/chessBoard.cpp.o CMakeFiles/app.dir/src/fileConnect.cpp.o  -o app 
+=======
+<<<<<<< HEAD
+/usr/bin/c++     CMakeFiles/app.dir/src/main.cpp.o CMakeFiles/app.dir/src/chessman.cpp.o CMakeFiles/app.dir/src/king.cpp.o CMakeFiles/app.dir/src/util.cpp.o CMakeFiles/app.dir/src/pawn.cpp.o CMakeFiles/app.dir/src/rook.cpp.o  -o app 
+=======
+/bin/g++-9    -rdynamic CMakeFiles/app.dir/src/main.cpp.o CMakeFiles/app.dir/src/cell.cpp.o CMakeFiles/app.dir/src/id.cpp.o CMakeFiles/app.dir/src/chessBoard.cpp.o  -o app 
+>>>>>>> 534eac2a9fe7241af6bf8629b7c368f4b8fd42a4
+>>>>>>> 373edc2f9159d4e6e6a32f4af4fcfd8b1d47c633

@@ -48,10 +48,17 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
+<<<<<<< HEAD
+CMAKE_SOURCE_DIR = /home/erfa/project
+
+# The top-level build directory on which CMake was run.
+CMAKE_BINARY_DIR = /home/erfa/project/build
+=======
 CMAKE_SOURCE_DIR = "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project"
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build"
+>>>>>>> 534eac2a9fe7241af6bf8629b7c368f4b8fd42a4
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -69,8 +76,13 @@ rebuild_cache/fast: rebuild_cache
 
 # Special rule for the target edit_cache
 edit_cache:
+<<<<<<< HEAD
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+=======
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
 	/usr/bin/cmake-gui -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+>>>>>>> 534eac2a9fe7241af6bf8629b7c368f4b8fd42a4
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -80,9 +92,15 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
+<<<<<<< HEAD
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/erfa/project/build/CMakeFiles /home/erfa/project/build/CMakeFiles/progress.marks
+	$(MAKE) -f CMakeFiles/Makefile2 all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/erfa/project/build/CMakeFiles 0
+=======
 	$(CMAKE_COMMAND) -E cmake_progress_start "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles/progress.marks"
 	$(MAKE) -f CMakeFiles/Makefile2 all
 	$(CMAKE_COMMAND) -E cmake_progress_start "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles" 0
+>>>>>>> 534eac2a9fe7241af6bf8629b7c368f4b8fd42a4
 .PHONY : all
 
 # The main clean target
@@ -123,6 +141,61 @@ app/fast:
 	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/build
 .PHONY : app/fast
 
+<<<<<<< HEAD
+src/chessman.o: src/chessman.cpp.o
+
+.PHONY : src/chessman.o
+
+# target to build an object file
+src/chessman.cpp.o:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/chessman.cpp.o
+.PHONY : src/chessman.cpp.o
+
+src/chessman.i: src/chessman.cpp.i
+
+.PHONY : src/chessman.i
+
+# target to preprocess a source file
+src/chessman.cpp.i:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/chessman.cpp.i
+.PHONY : src/chessman.cpp.i
+
+src/chessman.s: src/chessman.cpp.s
+
+.PHONY : src/chessman.s
+
+# target to generate assembly for a file
+src/chessman.cpp.s:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/chessman.cpp.s
+.PHONY : src/chessman.cpp.s
+
+src/king.o: src/king.cpp.o
+
+.PHONY : src/king.o
+
+# target to build an object file
+src/king.cpp.o:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/king.cpp.o
+.PHONY : src/king.cpp.o
+
+src/king.i: src/king.cpp.i
+
+.PHONY : src/king.i
+
+# target to preprocess a source file
+src/king.cpp.i:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/king.cpp.i
+.PHONY : src/king.cpp.i
+
+src/king.s: src/king.cpp.s
+
+.PHONY : src/king.s
+
+# target to generate assembly for a file
+src/king.cpp.s:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/king.cpp.s
+.PHONY : src/king.cpp.s
+=======
 src/cell.o: src/cell.cpp.o
 
 .PHONY : src/cell.o
@@ -230,6 +303,7 @@ src/id.s: src/id.cpp.s
 src/id.cpp.s:
 	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/id.cpp.s
 .PHONY : src/id.cpp.s
+>>>>>>> 534eac2a9fe7241af6bf8629b7c368f4b8fd42a4
 
 src/main.o: src/main.cpp.o
 
@@ -258,6 +332,90 @@ src/main.cpp.s:
 	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+<<<<<<< HEAD
+src/pawn.o: src/pawn.cpp.o
+
+.PHONY : src/pawn.o
+
+# target to build an object file
+src/pawn.cpp.o:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/pawn.cpp.o
+.PHONY : src/pawn.cpp.o
+
+src/pawn.i: src/pawn.cpp.i
+
+.PHONY : src/pawn.i
+
+# target to preprocess a source file
+src/pawn.cpp.i:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/pawn.cpp.i
+.PHONY : src/pawn.cpp.i
+
+src/pawn.s: src/pawn.cpp.s
+
+.PHONY : src/pawn.s
+
+# target to generate assembly for a file
+src/pawn.cpp.s:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/pawn.cpp.s
+.PHONY : src/pawn.cpp.s
+
+src/rook.o: src/rook.cpp.o
+
+.PHONY : src/rook.o
+
+# target to build an object file
+src/rook.cpp.o:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/rook.cpp.o
+.PHONY : src/rook.cpp.o
+
+src/rook.i: src/rook.cpp.i
+
+.PHONY : src/rook.i
+
+# target to preprocess a source file
+src/rook.cpp.i:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/rook.cpp.i
+.PHONY : src/rook.cpp.i
+
+src/rook.s: src/rook.cpp.s
+
+.PHONY : src/rook.s
+
+# target to generate assembly for a file
+src/rook.cpp.s:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/rook.cpp.s
+.PHONY : src/rook.cpp.s
+
+src/util.o: src/util.cpp.o
+
+.PHONY : src/util.o
+
+# target to build an object file
+src/util.cpp.o:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/util.cpp.o
+.PHONY : src/util.cpp.o
+
+src/util.i: src/util.cpp.i
+
+.PHONY : src/util.i
+
+# target to preprocess a source file
+src/util.cpp.i:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/util.cpp.i
+.PHONY : src/util.cpp.i
+
+src/util.s: src/util.cpp.s
+
+.PHONY : src/util.s
+
+# target to generate assembly for a file
+src/util.cpp.s:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/util.cpp.s
+.PHONY : src/util.cpp.s
+
+=======
+>>>>>>> 534eac2a9fe7241af6bf8629b7c368f4b8fd42a4
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -267,6 +425,26 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... app"
+<<<<<<< HEAD
+	@echo "... src/chessman.o"
+	@echo "... src/chessman.i"
+	@echo "... src/chessman.s"
+	@echo "... src/king.o"
+	@echo "... src/king.i"
+	@echo "... src/king.s"
+	@echo "... src/main.o"
+	@echo "... src/main.i"
+	@echo "... src/main.s"
+	@echo "... src/pawn.o"
+	@echo "... src/pawn.i"
+	@echo "... src/pawn.s"
+	@echo "... src/rook.o"
+	@echo "... src/rook.i"
+	@echo "... src/rook.s"
+	@echo "... src/util.o"
+	@echo "... src/util.i"
+	@echo "... src/util.s"
+=======
 	@echo "... src/cell.o"
 	@echo "... src/cell.i"
 	@echo "... src/cell.s"
@@ -282,6 +460,7 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+>>>>>>> 534eac2a9fe7241af6bf8629b7c368f4b8fd42a4
 .PHONY : help
 
 
