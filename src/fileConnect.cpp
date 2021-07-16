@@ -29,3 +29,8 @@ FileConnect::~FileConnect()
 {
     myFile.close();
 }
+
+fstream & FileConnect::getFile()
+{
+    return myFile;
+}

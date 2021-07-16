@@ -4,6 +4,12 @@
 #include <map>
 #include <array>
 #include "chessMan.h"
+#include "king.h"
+#include "queen.h"
+#include "knight.h"
+#include "bishop.h"
+#include "rook.h"
+#include "pawn.h"
 #include "cell.h"
 #include "fileConnect.h"
 
@@ -18,8 +24,9 @@ class ChessBoard
     std::array<std::array<Cell, 8>, 8> start();
     std::array<std::array<Cell, 8>, 8> remmeber(std::string);
     std::map<std::string, int> threats();
-    void testColor();
-    
+    void updateBoard(std::string, std::string);
+    Cell & search(std::string);
+    ChessMan * makePiece(char, std::string);
     
 };
 #endif /* _CHESSBOARD_H*/

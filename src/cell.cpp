@@ -30,5 +30,17 @@ void Cell::setColor()
 
 void Cell::setPiece(ChessMan * myPiece)
 {
+    isnull = false;
     this->piece = myPiece;
+}
+
+ChessMan * Cell::getPiece()
+{
+    return piece;
+}
+
+void Cell::empty()
+{
+    isnull = true;
+    piece = nullptr;
 }

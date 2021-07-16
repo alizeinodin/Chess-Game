@@ -10,19 +10,20 @@ class Cell
 {
     private:
     ID id;
-    bool isnull = false; // the means of false is null
+    bool isnull = true; // the means of true is null
     COLOR color;
     ChessMan * piece = nullptr;
 
 
     public:
     Cell(); // fill id, color in make
-    //Cell(ChessMan *); // fill id, color in make
     ID getId();
     COLOR getColor();
     bool getState();
     void setColor();
     void setPiece(ChessMan *);
+    ChessMan * getPiece();
+    void empty();
 };
 
 #endif /* CELL_H */

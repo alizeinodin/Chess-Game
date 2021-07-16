@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-# Install script for directory: /home/erfa/project
-=======
 # Install script for directory: /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project
->>>>>>> 534eac2a9fe7241af6bf8629b7c368f4b8fd42a4
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -49,9 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-<<<<<<< HEAD
-file(WRITE "/home/erfa/project/build/${CMAKE_INSTALL_MANIFEST}"
-=======
 file(WRITE "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/${CMAKE_INSTALL_MANIFEST}"
->>>>>>> 534eac2a9fe7241af6bf8629b7c368f4b8fd42a4
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

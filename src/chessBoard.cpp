@@ -17,18 +17,6 @@ ChessBoard::ChessBoard()
     }
 }
 
-void ChessBoard::testColor()
-{
-    for (size_t i = 0; i < 8; i++)
-    {
-        for (size_t j = 0; j < 8; j++)
-        {
-            cout << Board[i][j].getId() << " : " << Board[i][j].getColor() << "\t";
-        }
-        cout << endl;
-    }
-}
-
 array<array<Cell, 8>, 8> ChessBoard::start()
 {
     /*
@@ -106,18 +94,77 @@ array<array<Cell, 8>, 8> ChessBoard::start()
     return Board;
 }
 
-array<array<string, 8>, 8> ChessBoard::remmeber(string fileName)
+array<array<Cell, 8>, 8> ChessBoard::remmeber(string fileName)
 {
-    map ChessMap <stirng, ChessBoard *>;
+    start();
     FileConnect File(fileName);
     while (1)
     {
-        if(File.eof())
+        if (File.getFile().eof())
         {
             break;
         }
-        string chessMove = File.ReadToFile();
-        
+        string chessRemmber = File.ReadFromFile();
+        updateBoard(chessRemmber.substr(2, 3), chessRemmber.substr(4, 5));
     }
-    
+}
+
+Cell &ChessBoard::search(string ID)
+{
+    for (auto &i : Board)
+    {
+        for (auto &j : i)
+        {
+            if (j.getId() == ID)
+            {
+                return j;
+            }
+        }
+    }
+}
+
+void ChessBoard::updateBoard(string first, string second)
+{
+    Cell firstCell = search(first);
+    Cell secondCell = search(second);
+
+    ChessMan *tempPiece = nullptr;
+    tempPiece = firstCell.getPiece();
+
+    firstCell.empty();
+    secondCell.setPiece(tempPiece);
+}
+
+ChessMan *ChessBoard::makePiece(char selectPiece, string color)
+{
+    ChessMan *piece = nullptr;
+    if (selectPiece == 'K')
+    {
+        // piece = new king(color);
+    }
+    else if (selectPiece == 'Q')
+    {
+        // piece = new queen(color);
+    }
+    else if (selectPiece == 'R')
+    {
+        // piece = new rook(color);
+    }
+    else if (selectPiece == 'B')
+    {
+        // piece = new bishop(color);
+    }
+    else if (selectPiece == 'H')
+    {
+        // piece = new knight(color);
+    }
+    else if (selectPiece == 'P')
+    {
+        // piece = new pawn(color);
+    }
+    else
+    {
+        throw invalid_argument("ERROR: invalid order in make piece");
+    }
+    return piece;
 }

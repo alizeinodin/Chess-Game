@@ -11,6 +11,7 @@ class FileConnect
         FileConnect(std::string);
         void WriteToFile(std::string);
         std::string ReadFromFile();
+        std::fstream & getFile();
         ~FileConnect();
 };
 
