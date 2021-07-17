@@ -1,16 +1,17 @@
 #include <iostream>
-<<<<<<< HEAD
 #include "king.h"
 #include "util.h"
 #include "pawn.h"
 #include "rook.h"
+#include "bishop.h"
+
 using namespace std;
 
 
 int main(int argc, char const *argv[])
 {
-    rook p("#000000");
-    p.access("B2");
+    bishop p("#000000");
+    p.access("D4");
 // =======
 // #include "id.h"
 // #include <array>
@@ -51,6 +52,6 @@ int main(int argc, char const *argv[])
 // {
 //     king k("wi");
 //     k.movePiece("KE1F1");
-//     return 0;
-// }
+    return 0;
+}
 // >>>>>>> 233d1494294eac9c8bf65f7e6de05ab5f6cf6c16

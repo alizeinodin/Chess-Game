@@ -24,3 +24,20 @@ bool iscell(string cell)
 
     return false;
 }
+
+int get_num(std::string str)
+{
+    char temp2[2];
+    str.copy(temp2,1,1);
+    temp2[1] = '\0';
+    int num = stoi(temp2);
+    return num;
+}
+
+char * get_char(std::string str)
+{
+    char  character[2];
+    str.copy( character,1,0);
+    character[2] = '\0';
+    return character;
+}

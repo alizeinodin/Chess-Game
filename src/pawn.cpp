@@ -18,10 +18,7 @@ void pawn::movePiece(MOVE move)
 
 bool pawn::access(string acc)
 {
-    char temp2[2];
-    acc.copy(temp2,1,1);
-    temp2[1] = '\0';
-    int num = stoi(temp2);
+    int num = get_num(acc);
     vector<string> Optimal_mode;
     string temp;
     
