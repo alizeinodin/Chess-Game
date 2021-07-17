@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 set(CMAKE_C_COMPILER "/usr/bin/cc")
+=======
+set(CMAKE_C_COMPILER "/bin/gcc-9")
+>>>>>>> origin
 set(CMAKE_C_COMPILER_ARG1 "")
 set(CMAKE_C_COMPILER_ID "GNU")
 set(CMAKE_C_COMPILER_VERSION "9.3.0")
@@ -17,11 +21,19 @@ set(CMAKE_C_SIMULATE_VERSION "")
 
 
 
+<<<<<<< HEAD
 set(CMAKE_AR "/usr/bin/ar")
 set(CMAKE_C_COMPILER_AR "/usr/bin/gcc-ar-9")
 set(CMAKE_RANLIB "/usr/bin/ranlib")
 set(CMAKE_C_COMPILER_RANLIB "/usr/bin/gcc-ranlib-9")
 set(CMAKE_LINKER "/usr/bin/ld")
+=======
+set(CMAKE_AR "/bin/ar")
+set(CMAKE_C_COMPILER_AR "/bin/gcc-ar-9")
+set(CMAKE_RANLIB "/bin/ranlib")
+set(CMAKE_C_COMPILER_RANLIB "/bin/gcc-ranlib-9")
+set(CMAKE_LINKER "/bin/ld")
+>>>>>>> origin
 set(CMAKE_MT "")
 set(CMAKE_COMPILER_IS_GNUCC 1)
 set(CMAKE_C_COMPILER_LOADED 1)

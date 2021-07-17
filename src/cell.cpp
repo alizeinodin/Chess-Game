@@ -28,7 +28,19 @@ void Cell::setColor()
     // if counter == 8 and color was black in next line first element must be black in chess
 }
 
-void Cell::setNut(ChessMan * Nut)
+void Cell::setPiece(ChessMan * myPiece)
 {
-    this->Nut = Nut;
+    isnull = false;
+    this->piece = myPiece;
+}
+
+ChessMan * Cell::getPiece()
+{
+    return piece;
+}
+
+void Cell::empty()
+{
+    isnull = true;
+    piece = nullptr;
 }

@@ -1,17 +1,16 @@
 #include "king.h"
 #include "util.h"
-#include <vector>
 #include <algorithm>
+#include <vector>
 using namespace std;
 
-king ::king(COLOR c) : ChessMan(c) {}
+king::king(COLOR c) : ChessMan(c) {}
 
 void king::movePiece(MOVE move)
 {
     if (move.at(0) == 'K')
     {
-        
-    } 
+    }
 }
 
 bool king::access(std::string origin, std::string destination, std::array<std::array<Cell, 8>, 8> &board)
@@ -25,6 +24,10 @@ bool king::access(std::string origin, std::string destination, std::array<std::a
     Cell celltemp;
     int num = get_num(origin);
     for (size_t i = 0; i < 8; i++)
+    {
+        temp += (it + dx[i])->at(0);
+        temp += to_string(num + dy[i]);
+        if (iscell(temp))
         {
             temp += (it+dx[i])->at(0);
             temp += to_string(num + dy[i]);

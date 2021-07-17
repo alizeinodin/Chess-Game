@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 /home/erfa/project/build/CMakeFiles/rebuild_cache.dir
 /home/erfa/project/build/CMakeFiles/edit_cache.dir
 /home/erfa/project/build/CMakeFiles/app.dir
+=======
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles/rebuild_cache.dir
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles/edit_cache.dir
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles/app.dir
+>>>>>>> origin

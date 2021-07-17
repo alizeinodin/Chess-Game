@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+<<<<<<< HEAD
   "CMakeFiles/app.dir/src/bishop.cpp.o"
   "CMakeFiles/app.dir/src/chessman.cpp.o"
   "CMakeFiles/app.dir/src/king.cpp.o"
@@ -6,6 +7,13 @@ file(REMOVE_RECURSE
   "CMakeFiles/app.dir/src/pawn.cpp.o"
   "CMakeFiles/app.dir/src/rook.cpp.o"
   "CMakeFiles/app.dir/src/util.cpp.o"
+=======
+  "CMakeFiles/app.dir/src/cell.cpp.o"
+  "CMakeFiles/app.dir/src/chessBoard.cpp.o"
+  "CMakeFiles/app.dir/src/fileConnect.cpp.o"
+  "CMakeFiles/app.dir/src/id.cpp.o"
+  "CMakeFiles/app.dir/src/main.cpp.o"
+>>>>>>> origin
   "app"
   "app.pdb"
 )
