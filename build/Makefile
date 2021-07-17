@@ -48,17 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-<<<<<<< HEAD
 CMAKE_SOURCE_DIR = /home/erfa/project
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/erfa/project/build
-=======
-CMAKE_SOURCE_DIR = "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project"
-
-# The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build"
->>>>>>> 534eac2a9fe7241af6bf8629b7c368f4b8fd42a4
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -76,13 +69,8 @@ rebuild_cache/fast: rebuild_cache
 
 # Special rule for the target edit_cache
 edit_cache:
-<<<<<<< HEAD
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
 	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-=======
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/bin/cmake-gui -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
->>>>>>> 534eac2a9fe7241af6bf8629b7c368f4b8fd42a4
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -92,15 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-<<<<<<< HEAD
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/erfa/project/build/CMakeFiles /home/erfa/project/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/erfa/project/build/CMakeFiles 0
-=======
-	$(CMAKE_COMMAND) -E cmake_progress_start "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles/progress.marks"
-	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles" 0
->>>>>>> 534eac2a9fe7241af6bf8629b7c368f4b8fd42a4
 .PHONY : all
 
 # The main clean target
@@ -141,7 +123,33 @@ app/fast:
 	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/build
 .PHONY : app/fast
 
-<<<<<<< HEAD
+src/bishop.o: src/bishop.cpp.o
+
+.PHONY : src/bishop.o
+
+# target to build an object file
+src/bishop.cpp.o:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/bishop.cpp.o
+.PHONY : src/bishop.cpp.o
+
+src/bishop.i: src/bishop.cpp.i
+
+.PHONY : src/bishop.i
+
+# target to preprocess a source file
+src/bishop.cpp.i:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/bishop.cpp.i
+.PHONY : src/bishop.cpp.i
+
+src/bishop.s: src/bishop.cpp.s
+
+.PHONY : src/bishop.s
+
+# target to generate assembly for a file
+src/bishop.cpp.s:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/bishop.cpp.s
+.PHONY : src/bishop.cpp.s
+
 src/chessman.o: src/chessman.cpp.o
 
 .PHONY : src/chessman.o
@@ -195,88 +203,6 @@ src/king.s: src/king.cpp.s
 src/king.cpp.s:
 	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/king.cpp.s
 .PHONY : src/king.cpp.s
-=======
-src/cell.o: src/cell.cpp.o
-
-.PHONY : src/cell.o
-
-# target to build an object file
-src/cell.cpp.o:
-	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/cell.cpp.o
-.PHONY : src/cell.cpp.o
-
-src/cell.i: src/cell.cpp.i
-
-.PHONY : src/cell.i
-
-# target to preprocess a source file
-src/cell.cpp.i:
-	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/cell.cpp.i
-.PHONY : src/cell.cpp.i
-
-src/cell.s: src/cell.cpp.s
-
-.PHONY : src/cell.s
-
-# target to generate assembly for a file
-src/cell.cpp.s:
-	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/cell.cpp.s
-.PHONY : src/cell.cpp.s
-
-src/chessBoard.o: src/chessBoard.cpp.o
-
-.PHONY : src/chessBoard.o
-
-# target to build an object file
-src/chessBoard.cpp.o:
-	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/chessBoard.cpp.o
-.PHONY : src/chessBoard.cpp.o
-
-src/chessBoard.i: src/chessBoard.cpp.i
-
-.PHONY : src/chessBoard.i
-
-# target to preprocess a source file
-src/chessBoard.cpp.i:
-	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/chessBoard.cpp.i
-.PHONY : src/chessBoard.cpp.i
-
-src/chessBoard.s: src/chessBoard.cpp.s
-
-.PHONY : src/chessBoard.s
-
-# target to generate assembly for a file
-src/chessBoard.cpp.s:
-	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/chessBoard.cpp.s
-.PHONY : src/chessBoard.cpp.s
-
-src/id.o: src/id.cpp.o
-
-.PHONY : src/id.o
-
-# target to build an object file
-src/id.cpp.o:
-	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/id.cpp.o
-.PHONY : src/id.cpp.o
-
-src/id.i: src/id.cpp.i
-
-.PHONY : src/id.i
-
-# target to preprocess a source file
-src/id.cpp.i:
-	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/id.cpp.i
-.PHONY : src/id.cpp.i
-
-src/id.s: src/id.cpp.s
-
-.PHONY : src/id.s
-
-# target to generate assembly for a file
-src/id.cpp.s:
-	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/id.cpp.s
-.PHONY : src/id.cpp.s
->>>>>>> 534eac2a9fe7241af6bf8629b7c368f4b8fd42a4
 
 src/main.o: src/main.cpp.o
 
@@ -305,7 +231,6 @@ src/main.cpp.s:
 	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
-<<<<<<< HEAD
 src/pawn.o: src/pawn.cpp.o
 
 .PHONY : src/pawn.o
@@ -387,8 +312,6 @@ src/util.cpp.s:
 	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/util.cpp.s
 .PHONY : src/util.cpp.s
 
-=======
->>>>>>> 534eac2a9fe7241af6bf8629b7c368f4b8fd42a4
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -398,7 +321,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... app"
-<<<<<<< HEAD
+	@echo "... src/bishop.o"
+	@echo "... src/bishop.i"
+	@echo "... src/bishop.s"
 	@echo "... src/chessman.o"
 	@echo "... src/chessman.i"
 	@echo "... src/chessman.s"
@@ -417,20 +342,6 @@ help:
 	@echo "... src/util.o"
 	@echo "... src/util.i"
 	@echo "... src/util.s"
-=======
-	@echo "... src/cell.o"
-	@echo "... src/cell.i"
-	@echo "... src/cell.s"
-	@echo "... src/chessBoard.o"
-	@echo "... src/chessBoard.i"
-	@echo "... src/chessBoard.s"
-	@echo "... src/id.o"
-	@echo "... src/id.i"
-	@echo "... src/id.s"
-	@echo "... src/main.o"
-	@echo "... src/main.i"
-	@echo "... src/main.s"
->>>>>>> 534eac2a9fe7241af6bf8629b7c368f4b8fd42a4
 .PHONY : help
 
 

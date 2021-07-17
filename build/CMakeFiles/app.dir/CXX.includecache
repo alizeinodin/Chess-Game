@@ -6,15 +6,23 @@
 
 #IncludeRegexTransform: 
 
+../include/bishop.h
+chessMan.h
+../include/chessMan.h
+iostream
+-
+using.h
+../include/using.h
+
 ../include/cell.h
 iostream
 -
-<<<<<<< HEAD
-=======
 chessMan.h
 ../include/chessMan.h
 
 ../include/chessBoard.h
+util.h
+../include/util.h
 iostream
 -
 map
@@ -25,7 +33,6 @@ chessMan.h
 ../include/chessMan.h
 cell.h
 ../include/cell.h
->>>>>>> 534eac2a9fe7241af6bf8629b7c368f4b8fd42a4
 
 ../include/chessMan.h
 iostream
@@ -37,7 +44,6 @@ moving.h
 map
 -
 
-<<<<<<< HEAD
 ../include/king.h
 chessMan.h
 ../include/chessMan.h
@@ -45,19 +51,19 @@ iostream
 -
 using.h
 ../include/using.h
-=======
-../include/id.h
-array
--
-iostream
--
->>>>>>> 534eac2a9fe7241af6bf8629b7c368f4b8fd42a4
 
 ../include/moving.h
 iostream
 -
 
-<<<<<<< HEAD
+../include/pawn.h
+chessMan.h
+../include/chessMan.h
+using.h
+../include/using.h
+iostream
+-
+
 ../include/rook.h
 chessMan.h
 ../include/chessMan.h
@@ -76,9 +82,43 @@ array
 cell.h
 ../include/cell.h
 
+/home/erfa/project/src/bishop.cpp
+bishop.h
+/home/erfa/project/src/bishop.h
+util.h
+/home/erfa/project/src/util.h
+vector
+-
+algorithm
+-
+
 /home/erfa/project/src/king.cpp
 king.h
 /home/erfa/project/src/king.h
+util.h
+/home/erfa/project/src/util.h
+vector
+-
+algorithm
+-
+
+/home/erfa/project/src/main.cpp
+iostream
+-
+king.h
+/home/erfa/project/src/king.h
+util.h
+/home/erfa/project/src/util.h
+pawn.h
+/home/erfa/project/src/pawn.h
+rook.h
+/home/erfa/project/src/rook.h
+bishop.h
+/home/erfa/project/src/bishop.h
+
+/home/erfa/project/src/pawn.cpp
+pawn.h
+/home/erfa/project/src/pawn.h
 util.h
 /home/erfa/project/src/util.h
 vector
@@ -97,21 +137,18 @@ algorithm
 -
 iostream
 -
-=======
-../include/using.h
-iostream
--
 
-/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/main.cpp
-iostream
+/home/erfa/project/src/util.cpp
+util.h
+/home/erfa/project/src/util.h
+chessBoard.h
+/home/erfa/project/src/chessBoard.h
+cstring
 -
-id.h
-/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/id.h
+algorithm
+-
+vector
+-
 array
 -
-cell.h
-/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/cell.h
-chessBoard.h
-/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/chessBoard.h
->>>>>>> 534eac2a9fe7241af6bf8629b7c368f4b8fd42a4
 
