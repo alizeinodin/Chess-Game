@@ -22,6 +22,7 @@ CMakeFiles/app.dir/src/chessBoard.cpp.o
  ../include/queen.h
  ../include/rook.h
  ../include/using.h
+ ../include/util.h
  /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/chessBoard.cpp
 CMakeFiles/app.dir/src/fileConnect.cpp.o
  ../include/fileConnect.h
@@ -32,16 +33,10 @@ CMakeFiles/app.dir/src/id.cpp.o
 CMakeFiles/app.dir/src/main.cpp.o
  ../include/bishop.h
  ../include/cell.h
- ../include/chessBoard.h
  ../include/chessMan.h
- ../include/fileConnect.h
- ../include/id.h
  ../include/king.h
- ../include/knight.h
  ../include/moving.h
  ../include/pawn.h
- ../include/player.h
- ../include/queen.h
  ../include/rook.h
  ../include/using.h
  ../include/util.h

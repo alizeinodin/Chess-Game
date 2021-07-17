@@ -1,14 +1,10 @@
 #include <iostream>
-#include "id.h"
-#include <array>
-#include "cell.h"
-#include "chessBoard.h"
-#include "fileConnect.h"
-#include <fstream>
 #include "king.h"
 #include "util.h"
 #include "pawn.h"
 #include "rook.h"
+#include "bishop.h"
+
 using namespace std;
 
 

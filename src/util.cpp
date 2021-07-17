@@ -2,7 +2,11 @@
 #include <cstring>
 #include <algorithm>
 #include <vector>
+<<<<<<< HEAD
 #include <random>
+=======
+#include <array>
+>>>>>>> b3f21c3291ecdfa927236d9ad219a03dee1ec222
 using namespace std;
 
 std::string makeID()
@@ -29,4 +33,40 @@ bool iscell(string cell)
     }
 
     return false;
+}
+
+int get_num(std::string str)
+{
+    char temp2[2];
+    str.copy(temp2,1,1);
+    temp2[1] = '\0';
+    int num = stoi(temp2);
+    return num;
+}
+
+char * get_char(std::string str)
+{
+    char  character[2];
+    str.copy( character,1,0);
+    character[2] = '\0';
+    return character;
+}
+
+Cell & search_cell(std::string str, std::array<std::array<Cell, 8>, 8> &board)
+{
+    auto it = find(board.at(0).begin(),board.at(0).end(), str);
+    if (it != board.at(0).cend())
+    {
+        return *it;
+    }
+    for (size_t i = 1; i < 8; i++)
+    {
+        it = find(board.at(i).begin(),board.at(i).end(), str);
+        if (it != board.at(i).cend())
+        {
+            return *it;
+        }
+        
+    }
+    
 }

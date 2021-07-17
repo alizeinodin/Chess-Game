@@ -8,7 +8,7 @@
 					"build" : ".",
 					"minimumCMakeVersion" : 
 					{
-						"string" : "3.0"
+						"string" : "3.16.0"
 					},
 					"projectIndex" : 0,
 					"source" : ".",
@@ -18,7 +18,7 @@
 					]
 				}
 			],
-			"name" : "Debug",
+			"name" : "",
 			"projects" : 
 			[
 				{
@@ -38,7 +38,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "app::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-app-Debug-a91d18435eee8f81c4f4.json",
+					"jsonFile" : "target-app-3b19d0b75bbe53a9b329.json",
 					"name" : "app",
 					"projectIndex" : 0
 				}

@@ -13,40 +13,42 @@ void king::movePiece(MOVE move)
     }
 }
 
-bool king::access(string acc)
+bool king::access(std::string origin, std::string destination, std::array<std::array<Cell, 8>, 8> &board)
 {
-    char temp2[2];
-    acc.copy(temp2, 1, 1);
-    temp2[1] = '\0';
-    char a[2];
+    char * a = get_char(origin);
     vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
-    vector<string> temp;
     int dx[] = {1, 1, 1, -1, -1, -1, 0, 0}; // all possible moves.
     int dy[] = {1, -1, 0, -1, 1, 0, -1, 1}; // all possible moves.
-    acc.copy(a, 1, 0);
-    a[2] = '\0';
-    auto it = find(alfa.cbegin(), alfa.cend(), a);
-    string t;
-    int num = stoi(temp2);
+    auto it = find(alfa.cbegin(),alfa.cend(),a);
+    string temp;
+    Cell celltemp;
+    int num = get_num(origin);
     for (size_t i = 0; i < 8; i++)
     {
-        t += (it + dx[i])->at(0);
-        t += to_string(num + dy[i]);
-        if (iscell(t))
+        temp += (it + dx[i])->at(0);
+        temp += to_string(num + dy[i]);
+        if (iscell(temp))
         {
-            temp.push_back(t);
+            temp += (it+dx[i])->at(0);
+            temp += to_string(num + dy[i]);
+            if (temp == destination)
+            {
+            if (iscell(temp))
+            {
+                celltemp = search_cell(temp,board);
+                if (!celltemp.getState())
+                {
+                    return true;
+                }
+                else
+                {
+                    temp.clear();
+                    break;
+                }
+            } 
+            } 
+            temp.clear();
         }
-        t.clear();
-    }
-    for (auto &i : temp)
-    {
-        if (i == acc)
-        {
-        }
-    }
-
-    // for (auto &i : temp)
-    // {
-    //     cout << i << endl;
-    // }
+        return false;
 }
+
