@@ -7,20 +7,32 @@ using namespace std;
 
 rook::rook(COLOR c) : ChessMan(c) {}
 
-bool rook::access(string acc)
+bool rook::access(std::string origin, std::string destination, std::array<std::array<Cell, 8>, 8> &board)
 {
+    Cell celltemp;
     vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
-    int num = get_num(acc);
-    vector<string> Optimal_mode;
+    int num = get_num(origin);
     string temp;
     int temp_num = num - 1;
     while (temp_num >= 0)
     {
-        temp += acc.at(0);
+        temp += origin.at(0);
         temp += to_string(temp_num);
+        if (temp == destination)
+        {
         if (iscell(temp))
         {
-            Optimal_mode.push_back(temp);
+            celltemp = search_cell(temp,board);
+                if (!celltemp.getState())
+                {
+                    return true;
+                }
+                else
+                {
+                    temp.clear();
+                    break;
+                }
+        }
         }
         temp.clear();
         temp_num--;
@@ -30,16 +42,28 @@ bool rook::access(string acc)
 
     while (temp_num <= 8)
     {
-        temp += acc.at(0);
+        temp += origin.at(0);
         temp += to_string(temp_num);
+        if (temp == destination)
+        {
         if (iscell(temp))
         {
-            Optimal_mode.push_back(temp);
+            celltemp = search_cell(temp,board);
+                if (!celltemp.getState())
+                {
+                    return true;
+                }
+                else
+                {
+                    temp.clear();
+                    break;
+                }
+        }
         }
         temp.clear();
         temp_num++;
     }
-    char *a = get_char(acc);
+    char *a = get_char(origin);
     
     auto it = (find(alfa.cbegin(),alfa.cend(),a) - 1);
     
@@ -47,9 +71,21 @@ bool rook::access(string acc)
     {
         temp += (it)->at(0);
         temp += to_string(num);
+        if (temp == destination)
+        {
         if (iscell(temp))
         {
-            Optimal_mode.push_back(temp);
+            celltemp = search_cell(temp,board);
+                if (!celltemp.getState())
+                {
+                    return true;
+                }
+                else
+                {
+                    temp.clear();
+                    break;
+                }
+        }
         }
         temp.clear();
         it--;
@@ -60,15 +96,24 @@ bool rook::access(string acc)
     {
         temp += (it)->at(0);
         temp += to_string(num);
+        if (temp == destination)
+        {
         if (iscell(temp))
         {
-            Optimal_mode.push_back(temp);
+            celltemp = search_cell(temp,board);
+                if (!celltemp.getState())
+                {
+                    return true;
+                }
+                else
+                {
+                    temp.clear();
+                    break;
+                }
+        }
         }
         temp.clear();
         it++;
     }
-    for (auto &i : Optimal_mode)
-        {
-            cout << i << endl;
-        }
+    return false;
 }

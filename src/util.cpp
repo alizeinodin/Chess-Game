@@ -2,6 +2,7 @@
 #include <cstring>
 #include <algorithm>
 #include <vector>
+#include <array>
 using namespace std;
 
 bool iscell(string cell)
@@ -40,4 +41,23 @@ char * get_char(std::string str)
     str.copy( character,1,0);
     character[2] = '\0';
     return character;
+}
+
+Cell & search_cell(std::string str, std::array<std::array<Cell, 8>, 8> &board)
+{
+    auto it = find(board.at(0).begin(),board.at(0).end(), str);
+    if (it != board.at(0).cend())
+    {
+        return *it;
+    }
+    for (size_t i = 1; i < 8; i++)
+    {
+        it = find(board.at(i).begin(),board.at(i).end(), str);
+        if (it != board.at(i).cend())
+        {
+            return *it;
+        }
+        
+    }
+    
 }

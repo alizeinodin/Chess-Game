@@ -12,23 +12,34 @@ void bishop::movePiece(MOVE)
 
 }
 
-bool bishop::access(std::string acc)
+bool bishop::access(std::string origin, std::string destination, std::array<std::array<Cell, 8>, 8> &board)
 {
     vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
-    
-    int num = get_num(acc);
-    vector<string> Optimal_mode;
+    Cell celltemp;
+    int num = get_num(origin);
     string temp;
     int temp_num = num - 1;
-    char  * character = get_char(acc);
+    char  * character = get_char(origin);
     auto it = (find(alfa.cbegin(),alfa.cend(), character) - 1);
     while ((it >= alfa.cbegin()) && (temp_num >= 0))
     {
         temp += (it)->at(0);
         temp += to_string(temp_num);
+        if (temp == destination)
+        {
         if (iscell(temp))
         {
-            Optimal_mode.push_back(temp);
+            celltemp = search_cell(temp,board);
+                if (!celltemp.getState())
+                {
+                    return true;
+                }
+                else
+                {
+                    temp.clear();
+                    break;
+                }
+        }
         }
         temp.clear();
         it--;
@@ -41,9 +52,21 @@ bool bishop::access(std::string acc)
     {
         temp += (it)->at(0);
         temp += to_string(temp_num);
+        if (temp == destination)
+        {
         if (iscell(temp))
         {
-            Optimal_mode.push_back(temp);
+            celltemp = search_cell(temp,board);
+                if (!celltemp.getState())
+                {
+                    return true;
+                }
+                else
+                {
+                    temp.clear();
+                    break;
+                }
+        }
         }
         temp.clear();
         it++;
@@ -56,9 +79,21 @@ bool bishop::access(std::string acc)
     {
         temp += (it)->at(0);
         temp += to_string(temp_num);
+        if (temp == destination)
+        {
         if (iscell(temp))
         {
-            Optimal_mode.push_back(temp);
+            celltemp = search_cell(temp,board);
+                if (!celltemp.getState())
+                {
+                    return true;
+                }
+                else
+                {
+                    temp.clear();
+                    break;
+                }
+        }
         }
         temp.clear();
         it++;
@@ -71,20 +106,25 @@ bool bishop::access(std::string acc)
     {
         temp += (it)->at(0);
         temp += to_string(temp_num);
+        if (temp == destination)
+        {
         if (iscell(temp))
         {
-            Optimal_mode.push_back(temp);
+            celltemp = search_cell(temp,board);
+                if (!celltemp.getState())
+                {
+                    return true;
+                }
+                else
+                {
+                    temp.clear();
+                    break;
+                }
+        }
         }
         temp.clear();
         it--;
         temp_num++;
     }
-    for (auto &i : Optimal_mode)
-    {
-        cout << i << endl;
-    }
-
-    
-
-    
+    return false;
 }
