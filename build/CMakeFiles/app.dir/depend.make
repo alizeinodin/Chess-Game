@@ -17,6 +17,7 @@ CMakeFiles/app.dir/src/chessBoard.cpp.o: ../include/king.h
 CMakeFiles/app.dir/src/chessBoard.cpp.o: ../include/knight.h
 CMakeFiles/app.dir/src/chessBoard.cpp.o: ../include/moving.h
 CMakeFiles/app.dir/src/chessBoard.cpp.o: ../include/pawn.h
+CMakeFiles/app.dir/src/chessBoard.cpp.o: ../include/player.h
 CMakeFiles/app.dir/src/chessBoard.cpp.o: ../include/queen.h
 CMakeFiles/app.dir/src/chessBoard.cpp.o: ../include/rook.h
 CMakeFiles/app.dir/src/chessBoard.cpp.o: ../include/using.h
@@ -38,9 +39,13 @@ CMakeFiles/app.dir/src/main.cpp.o: ../include/king.h
 CMakeFiles/app.dir/src/main.cpp.o: ../include/knight.h
 CMakeFiles/app.dir/src/main.cpp.o: ../include/moving.h
 CMakeFiles/app.dir/src/main.cpp.o: ../include/pawn.h
+CMakeFiles/app.dir/src/main.cpp.o: ../include/player.h
 CMakeFiles/app.dir/src/main.cpp.o: ../include/queen.h
 CMakeFiles/app.dir/src/main.cpp.o: ../include/rook.h
 CMakeFiles/app.dir/src/main.cpp.o: ../include/using.h
 CMakeFiles/app.dir/src/main.cpp.o: ../include/util.h
 CMakeFiles/app.dir/src/main.cpp.o: ../src/main.cpp
+
+CMakeFiles/app.dir/src/player.cpp.o: ../include/player.h
+CMakeFiles/app.dir/src/player.cpp.o: ../src/player.cpp
 

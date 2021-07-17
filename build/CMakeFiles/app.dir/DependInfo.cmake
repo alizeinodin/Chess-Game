@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/fileConnect.cpp" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles/app.dir/src/fileConnect.cpp.o"
   "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/id.cpp" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles/app.dir/src/id.cpp.o"
   "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/main.cpp" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles/app.dir/src/main.cpp.o"
+  "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/player.cpp" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles/app.dir/src/player.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

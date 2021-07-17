@@ -18,6 +18,7 @@ CMakeFiles/app.dir/src/chessBoard.cpp.o
  ../include/knight.h
  ../include/moving.h
  ../include/pawn.h
+ ../include/player.h
  ../include/queen.h
  ../include/rook.h
  ../include/using.h
@@ -39,8 +40,12 @@ CMakeFiles/app.dir/src/main.cpp.o
  ../include/knight.h
  ../include/moving.h
  ../include/pawn.h
+ ../include/player.h
  ../include/queen.h
  ../include/rook.h
  ../include/using.h
  ../include/util.h
  /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/main.cpp
+CMakeFiles/app.dir/src/player.cpp.o
+ ../include/player.h
+ /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/player.cpp

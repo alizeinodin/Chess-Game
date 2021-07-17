@@ -3,7 +3,6 @@ using namespace std;
 
 FileConnect::FileConnect(string name)
 {
-    cout << name << endl;
     myFile.open(name, ios::app);
     if(!myFile.is_open())
     {

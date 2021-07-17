@@ -4,6 +4,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/app.dir/src/fileConnect.cpp.o"
   "CMakeFiles/app.dir/src/id.cpp.o"
   "CMakeFiles/app.dir/src/main.cpp.o"
+  "CMakeFiles/app.dir/src/player.cpp.o"
   "app"
   "app.pdb"
 )

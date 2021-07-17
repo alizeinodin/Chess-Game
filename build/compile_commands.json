@@ -23,5 +23,10 @@
   "directory": "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build",
   "command": "/bin/g++-9   -I\"/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/include\"  -g   -std=gnu++11 -o CMakeFiles/app.dir/src/fileConnect.cpp.o -c \"/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/fileConnect.cpp\"",
   "file": "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/fileConnect.cpp"
+},
+{
+  "directory": "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build",
+  "command": "/bin/g++-9   -I\"/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/include\"  -g   -std=gnu++11 -o CMakeFiles/app.dir/src/player.cpp.o -c \"/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/player.cpp\"",
+  "file": "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/player.cpp"
 }
 ]

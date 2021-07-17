@@ -2,7 +2,13 @@
 #include <cstring>
 #include <algorithm>
 #include <vector>
+#include <random>
 using namespace std;
+
+std::string makeID()
+{
+    
+}
 
 bool iscell(string cell)
 {

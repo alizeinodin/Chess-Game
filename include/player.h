@@ -1,24 +1,28 @@
 #ifndef _PLAYER_H
 #define _PLAYER_H
 #include <iostream>
+#include <stdexcept>
 
 
-using ID = unsigned int;
+using PID = std::string;
 using Name = std::string;
 using Score = int;
+using COLOR = std::string;
 
-class player
+class Player
 {
     private:
-    ID id;
+    PID id;
     Name name;
     Score PScore = 0; // positive socre
     Score NScore = 0; // negative score
+    COLOR color;
 
 
     public:
-    player(Name);
+    Player(Name, COLOR);
     void addScore(size_t state, int score); // add score to p of n score
+    Score getScore(size_t); 
     
 };
 

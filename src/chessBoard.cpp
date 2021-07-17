@@ -9,12 +9,7 @@ ChessBoard &ChessBoard::getInstance()
 
 ChessBoard::ChessBoard()
 {
-    for (size_t i = 0; i < 8; i++)
-    {
-        for (size_t j = 0; j < 8; j++)
-        {
-        }
-    }
+    
 }
 
 array<array<Cell, 8>, 8> ChessBoard::start()
@@ -167,4 +162,15 @@ ChessMan *ChessBoard::makePiece(char selectPiece, string color)
         throw invalid_argument("ERROR: invalid order in make piece");
     }
     return piece;
+}
+
+void ChessBoard::order(string order)
+{
+    Cell cell = search(order.substr(1, 2));
+    cell.getPiece()->movePiece(order.substr(3, 4));
+}
+
+void ChessBoard::saveData(string order)
+{
+
 }

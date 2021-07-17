@@ -26,6 +26,7 @@ src/cell.cpp
 src/id.cpp
 src/chessBoard.cpp
 src/fileConnect.cpp
+src/player.cpp
 # src/pawn.cpp
 # src/util.cpp
 # src/king.cpp
