@@ -16,11 +16,11 @@ void king::movePiece(MOVE move)
 bool king::access(std::string origin, std::string destination, std::array<std::array<Cell, 8>, 8> &board)
 {
     char character[] = "a";
-    get_char(origin , character);
+    get_char(origin, character);
     vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
     int dx[] = {1, 1, 1, -1, -1, -1, 0, 0}; // all possible moves.
     int dy[] = {1, -1, 0, -1, 1, 0, -1, 1}; // all possible moves.
-    auto it = find(alfa.cbegin(),alfa.cend(),character);
+    auto it = find(alfa.cbegin(), alfa.cend(), character);
     string temp;
     Cell celltemp;
     int num = get_num(origin);
@@ -40,7 +40,7 @@ bool king::access(std::string origin, std::string destination, std::array<std::a
         {
             if (temp == destination)
             {
-                celltemp = search_cell(temp,board);
+                celltemp = search_cell(temp, board);
                 if (!celltemp.getState())
                 {
                     return true;
@@ -56,4 +56,3 @@ bool king::access(std::string origin, std::string destination, std::array<std::a
     }
     return false;
 }
-

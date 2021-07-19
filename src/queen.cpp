@@ -6,11 +6,9 @@ using namespace std;
 
 queen::queen(COLOR c) : ChessMan(c) {}
 
-void queen:: movePiece(MOVE m)
+void queen::movePiece(MOVE m)
 {
-
 }
-
 
 bool queen::access(std::string origin, std::string destination, std::array<std::array<Cell, 8>, 8> &board)
 {
@@ -69,7 +67,7 @@ bool queen::access(std::string origin, std::string destination, std::array<std::
         temp_num++;
     }
     char character[] = "a";
-    get_char(origin , character);
+    get_char(origin, character);
 
     auto it = (find(alfa.cbegin(), alfa.cend(), character) - 1);
 
@@ -122,7 +120,7 @@ bool queen::access(std::string origin, std::string destination, std::array<std::
         it++;
     }
 
-    get_char(origin , character);
+    get_char(origin, character);
     it = (find(alfa.cbegin(), alfa.cend(), character) - 1);
     temp_num = num - 1;
 

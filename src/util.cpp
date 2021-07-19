@@ -10,20 +10,20 @@ using namespace std;
 
 // std::string makeID()
 // {
-    
+
 // }
 
 bool iscell(string cell)
 {
     char temp[2];
-    cell.copy(temp,1,1);
+    cell.copy(temp, 1, 1);
     temp[1] = '\0';
     vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
     int num = stoi(temp);
-    cell.copy(temp,1,0);
+    cell.copy(temp, 1, 0);
     temp[1] = '\0';
-    
-    if (binary_search(alfa.cbegin(),alfa.cend(),temp))
+
+    if (binary_search(alfa.cbegin(), alfa.cend(), temp))
     {
         if (num < 9 && num > 0)
         {
@@ -37,29 +37,28 @@ bool iscell(string cell)
 int get_num(std::string str)
 {
     char temp2[2];
-    str.copy(temp2,1,1);
+    str.copy(temp2, 1, 1);
     temp2[1] = '\0';
     int num = stoi(temp2);
     return num;
 }
 
-void get_char(std::string str , char character[])
+void get_char(std::string str, char character[])
 {
-    
-    str.copy( character,1,0);
+
+    str.copy(character, 1, 0);
     character[2] = '\0';
-    
 }
 
-bool celltostr(Cell & cell, string &str)
+bool celltostr(Cell &cell, string &str)
 {
     return (cell.getId() == str);
 }
 
-Cell & search_cell(string str, array<array<Cell, 8>, 8> &board)
+Cell &search_cell(string str, array<array<Cell, 8>, 8> &board)
 {
-    char * character;
-    get_char(str , character);
+    char *character;
+    get_char(str, character);
     string temp = "ABCDEFGH";
     int x = temp.find(temp);
     int y = get_num(str);
@@ -67,6 +66,6 @@ Cell & search_cell(string str, array<array<Cell, 8>, 8> &board)
     {
         return board.at(x).at(y);
     }
-    
+
     throw out_of_range("cell not exist");
 }

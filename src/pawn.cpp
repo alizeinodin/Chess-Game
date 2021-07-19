@@ -7,14 +7,12 @@ using namespace std;
 
 pawn::pawn(COLOR c) : ChessMan(c) {}
 
-
 void pawn::movePiece(MOVE move)
 {
     if (move.at(0) == 'P')
     {
         /* code */
     }
-    
 }
 
 bool pawn::access(std::string origin, std::string destination, std::array<std::array<Cell, 8>, 8> &board)
@@ -26,29 +24,29 @@ bool pawn::access(std::string origin, std::string destination, std::array<std::a
     {
         if (num == 7)
         {
-            int dy[] = {-1,-2};
-        for (size_t i = 0; i < 2; i++)
-        {
-            temp += origin.at(0);
-            temp += to_string(num + dy[i]);
-            if (temp == destination)
+            int dy[] = {-1, -2};
+            for (size_t i = 0; i < 2; i++)
             {
-            if (iscell(temp))
-            {
-                celltemp = search_cell(temp,board);
-                if (!celltemp.getState())
+                temp += origin.at(0);
+                temp += to_string(num + dy[i]);
+                if (temp == destination)
                 {
-                    return true;
+                    if (iscell(temp))
+                    {
+                        celltemp = search_cell(temp, board);
+                        if (!celltemp.getState())
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            temp.clear();
+                            break;
+                        }
+                    }
                 }
-                else
-                {
-                    temp.clear();
-                    break;
-                }    
+                temp.clear();
             }
-            }
-            temp.clear();
-        }
         }
         else
         {
@@ -56,18 +54,18 @@ bool pawn::access(std::string origin, std::string destination, std::array<std::a
             temp += to_string(num - 1);
             if (temp == destination)
             {
-            if (iscell(temp))
-            {
-                celltemp = search_cell(temp,board);
-                if (!celltemp.getState())
+                if (iscell(temp))
                 {
-                    return true;
+                    celltemp = search_cell(temp, board);
+                    if (!celltemp.getState())
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        temp.clear();
+                    }
                 }
-                else
-                {
-                    temp.clear();
-                }
-            }
             }
             temp.clear();
         }
@@ -76,29 +74,29 @@ bool pawn::access(std::string origin, std::string destination, std::array<std::a
     {
         if (num == 2)
         {
-            int dy[] = {-1,-2};
-        for (size_t i = 0; i < 2; i++)
-        {
-            temp += origin.at(0);
-            temp += to_string(num + dy[i]);
-            if (temp == destination)
+            int dy[] = {-1, -2};
+            for (size_t i = 0; i < 2; i++)
             {
-            if (iscell(temp))
-            {
-                celltemp = search_cell(temp,board);
-                if (!celltemp.getState())
+                temp += origin.at(0);
+                temp += to_string(num + dy[i]);
+                if (temp == destination)
                 {
-                    return true;
+                    if (iscell(temp))
+                    {
+                        celltemp = search_cell(temp, board);
+                        if (!celltemp.getState())
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            temp.clear();
+                            break;
+                        }
+                    }
                 }
-                else
-                {
-                    temp.clear();
-                    break;
-                }
+                temp.clear();
             }
-            }
-            temp.clear();
-        }
         }
         else
         {
@@ -106,22 +104,21 @@ bool pawn::access(std::string origin, std::string destination, std::array<std::a
             temp += to_string(num + 1);
             if (temp == destination)
             {
-            if (iscell(temp))
-            {
-                celltemp = search_cell(temp,board);
-                if (!celltemp.getState())
+                if (iscell(temp))
                 {
-                    return true;
+                    celltemp = search_cell(temp, board);
+                    if (!celltemp.getState())
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        temp.clear();
+                    }
                 }
-                else
-                {
-                    temp.clear();
-                }
-            }
             }
             temp.clear();
         }
     }
-        return false;
-
+    return false;
 }

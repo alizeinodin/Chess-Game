@@ -9,11 +9,11 @@ knight::knight(COLOR c) : ChessMan(c) {}
 bool knight::access(std::string origin, std::string destination, std::array<std::array<Cell, 8>, 8> &board)
 {
     char character[] = "a";
-    get_char(origin , character);
+    get_char(origin, character);
     vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
     int dx[8] = {2, 2, -2, -2, 1, 1, -1, -1}; // all possible moves.
     int dy[8] = {1, -1, 1, -1, 2, -2, 2, -2}; // all possible moves.
-    auto it = find(alfa.cbegin(),alfa.cend(),character);
+    auto it = find(alfa.cbegin(), alfa.cend(), character);
     string temp;
     Cell celltemp;
     int num = get_num(origin);
@@ -32,20 +32,19 @@ bool knight::access(std::string origin, std::string destination, std::array<std:
         //cout << temp <<endl;
         if (iscell(temp))
         {
-            //celltemp = search_cell(temp,board);
-            //if (!celltemp.getState())
+            celltemp = search_cell(temp, board);
+            if (!celltemp.getState())
             {
-                //return true;
-                cout << temp <<endl;
+                return true;
+                //cout << temp <<endl;
             }
-            // else
-            // {
-            //     temp.clear()
-            //     break;
-            // }
-            temp.clear(); 
+            else
+            {
+                temp.clear(); 
+                break;
+            }
         }
-        temp.clear(); 
+        temp.clear();
     }
 
     return false;
@@ -53,5 +52,4 @@ bool knight::access(std::string origin, std::string destination, std::array<std:
 
 void knight::movePiece(MOVE m)
 {
-
 }

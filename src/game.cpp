@@ -15,7 +15,7 @@ void Game::setPlayer(size_t num, string name)
         break;
     case 2:
         player2 = new Player(name);
-        
+
         break;
 
     default:

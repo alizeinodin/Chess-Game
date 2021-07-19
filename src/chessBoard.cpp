@@ -9,7 +9,6 @@ ChessBoard &ChessBoard::getInstance()
 
 ChessBoard::ChessBoard()
 {
-    
 }
 
 array<array<Cell, 8>, 8> ChessBoard::start()
@@ -172,5 +171,4 @@ void ChessBoard::order(string order)
 
 void ChessBoard::saveData(string order)
 {
-
 }
