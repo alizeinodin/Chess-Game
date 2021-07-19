@@ -4,6 +4,8 @@
 #include <algorithm>
 using namespace std;
 
+queen::queen(COLOR c) :ChessMan(c) {}
+
 bool access(std::string origin, std::string destination, std::array<std::array<Cell, 8>, 8> &board)
 {
     Cell celltemp;
@@ -112,7 +114,7 @@ bool access(std::string origin, std::string destination, std::array<std::array<C
         temp.clear();
         it++;
     }
-    
+
 
     char  * character = get_char(origin);
     it = (find(alfa.cbegin(),alfa.cend(), character) - 1);
