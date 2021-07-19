@@ -1,0 +1,67 @@
+[
+{
+  "directory": "/home/erfa/project/build",
+  "command": "/bin/x86_64-linux-gnu-g++-9   -I/home/erfa/project/include  -g   -std=gnu++11 -o CMakeFiles/app.dir/src/main.cpp.o -c /home/erfa/project/src/main.cpp",
+  "file": "/home/erfa/project/src/main.cpp"
+},
+{
+  "directory": "/home/erfa/project/build",
+  "command": "/bin/x86_64-linux-gnu-g++-9   -I/home/erfa/project/include  -g   -std=gnu++11 -o CMakeFiles/app.dir/src/cell.cpp.o -c /home/erfa/project/src/cell.cpp",
+  "file": "/home/erfa/project/src/cell.cpp"
+},
+{
+  "directory": "/home/erfa/project/build",
+  "command": "/bin/x86_64-linux-gnu-g++-9   -I/home/erfa/project/include  -g   -std=gnu++11 -o CMakeFiles/app.dir/src/id.cpp.o -c /home/erfa/project/src/id.cpp",
+  "file": "/home/erfa/project/src/id.cpp"
+},
+{
+  "directory": "/home/erfa/project/build",
+  "command": "/bin/x86_64-linux-gnu-g++-9   -I/home/erfa/project/include  -g   -std=gnu++11 -o CMakeFiles/app.dir/src/fileConnect.cpp.o -c /home/erfa/project/src/fileConnect.cpp",
+  "file": "/home/erfa/project/src/fileConnect.cpp"
+},
+{
+  "directory": "/home/erfa/project/build",
+  "command": "/bin/x86_64-linux-gnu-g++-9   -I/home/erfa/project/include  -g   -std=gnu++11 -o CMakeFiles/app.dir/src/player.cpp.o -c /home/erfa/project/src/player.cpp",
+  "file": "/home/erfa/project/src/player.cpp"
+},
+{
+  "directory": "/home/erfa/project/build",
+  "command": "/bin/x86_64-linux-gnu-g++-9   -I/home/erfa/project/include  -g   -std=gnu++11 -o CMakeFiles/app.dir/src/pawn.cpp.o -c /home/erfa/project/src/pawn.cpp",
+  "file": "/home/erfa/project/src/pawn.cpp"
+},
+{
+  "directory": "/home/erfa/project/build",
+  "command": "/bin/x86_64-linux-gnu-g++-9   -I/home/erfa/project/include  -g   -std=gnu++11 -o CMakeFiles/app.dir/src/util.cpp.o -c /home/erfa/project/src/util.cpp",
+  "file": "/home/erfa/project/src/util.cpp"
+},
+{
+  "directory": "/home/erfa/project/build",
+  "command": "/bin/x86_64-linux-gnu-g++-9   -I/home/erfa/project/include  -g   -std=gnu++11 -o CMakeFiles/app.dir/src/king.cpp.o -c /home/erfa/project/src/king.cpp",
+  "file": "/home/erfa/project/src/king.cpp"
+},
+{
+  "directory": "/home/erfa/project/build",
+  "command": "/bin/x86_64-linux-gnu-g++-9   -I/home/erfa/project/include  -g   -std=gnu++11 -o CMakeFiles/app.dir/src/rook.cpp.o -c /home/erfa/project/src/rook.cpp",
+  "file": "/home/erfa/project/src/rook.cpp"
+},
+{
+  "directory": "/home/erfa/project/build",
+  "command": "/bin/x86_64-linux-gnu-g++-9   -I/home/erfa/project/include  -g   -std=gnu++11 -o CMakeFiles/app.dir/src/knight.cpp.o -c /home/erfa/project/src/knight.cpp",
+  "file": "/home/erfa/project/src/knight.cpp"
+},
+{
+  "directory": "/home/erfa/project/build",
+  "command": "/bin/x86_64-linux-gnu-g++-9   -I/home/erfa/project/include  -g   -std=gnu++11 -o CMakeFiles/app.dir/src/bishop.cpp.o -c /home/erfa/project/src/bishop.cpp",
+  "file": "/home/erfa/project/src/bishop.cpp"
+},
+{
+  "directory": "/home/erfa/project/build",
+  "command": "/bin/x86_64-linux-gnu-g++-9   -I/home/erfa/project/include  -g   -std=gnu++11 -o CMakeFiles/app.dir/src/queen.cpp.o -c /home/erfa/project/src/queen.cpp",
+  "file": "/home/erfa/project/src/queen.cpp"
+},
+{
+  "directory": "/home/erfa/project/build",
+  "command": "/bin/x86_64-linux-gnu-g++-9   -I/home/erfa/project/include  -g   -std=gnu++11 -o CMakeFiles/app.dir/src/chessman.cpp.o -c /home/erfa/project/src/chessman.cpp",
+  "file": "/home/erfa/project/src/chessman.cpp"
+}
+]

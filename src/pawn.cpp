@@ -1,5 +1,6 @@
 #include "pawn.h"
 #include "util.h"
+#include "cell.h"
 #include <vector>
 #include <algorithm>
 using namespace std;

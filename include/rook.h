@@ -1,6 +1,8 @@
 #ifndef _ROOK_H
 #define _ROOK_H
 #include "chessMan.h"
+#include "cell.h"
+#include <array>
 #include <iostream>
 #include "using.h"
 

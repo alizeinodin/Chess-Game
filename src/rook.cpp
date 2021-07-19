@@ -7,7 +7,7 @@ using namespace std;
 
 rook::rook(COLOR c) : ChessMan(c) {}
 
-bool rook::access(std::string origin, std::string destination, std::array<std::array<Cell, 8>, 8> &board)
+bool rook::access(string origin, string destination, array<array<Cell, 8>, 8> &board)
 {
     Cell celltemp;
     vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
@@ -63,9 +63,10 @@ bool rook::access(std::string origin, std::string destination, std::array<std::a
         temp.clear();
         temp_num++;
     }
-    char *a = get_char(origin);
+    char character[] = "a";
+    get_char(origin , character);
     
-    auto it = (find(alfa.cbegin(),alfa.cend(),a) - 1);
+    auto it = (find(alfa.cbegin(),alfa.cend(),character) - 1);
     
     while (it >= alfa.cbegin())
     {
@@ -90,7 +91,7 @@ bool rook::access(std::string origin, std::string destination, std::array<std::a
         temp.clear();
         it--;
     }
-    it = (find(alfa.cbegin(),alfa.cend(),a) + 1);
+    it = (find(alfa.cbegin(),alfa.cend(),character) + 1);
 
     while (it <= alfa.cend() - 1)
     {

@@ -19,7 +19,8 @@ bool bishop::access(std::string origin, std::string destination, std::array<std:
     int num = get_num(origin);
     string temp;
     int temp_num = num - 1;
-    char  * character = get_char(origin);
+    char character[] = "a";
+    get_char(origin , character);
     auto it = (find(alfa.cbegin(),alfa.cend(), character) - 1);
     while ((it >= alfa.cbegin()) && (temp_num >= 0))
     {

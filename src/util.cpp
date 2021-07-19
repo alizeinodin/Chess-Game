@@ -1,18 +1,17 @@
-#include "util.h"
+//#include "util.h"
+#include "cell.h"
 #include <cstring>
 #include <algorithm>
 #include <vector>
-<<<<<<< HEAD
-#include <random>
-=======
+#include <stdexcept>
 #include <array>
->>>>>>> b3f21c3291ecdfa927236d9ad219a03dee1ec222
+//#include <random>
 using namespace std;
 
-std::string makeID()
-{
+// std::string makeID()
+// {
     
-}
+// }
 
 bool iscell(string cell)
 {
@@ -44,29 +43,30 @@ int get_num(std::string str)
     return num;
 }
 
-char * get_char(std::string str)
+void get_char(std::string str , char character[])
 {
-    char  character[2];
+    
     str.copy( character,1,0);
     character[2] = '\0';
-    return character;
+    
 }
 
-Cell & search_cell(std::string str, std::array<std::array<Cell, 8>, 8> &board)
+bool celltostr(Cell & cell, string &str)
 {
-    auto it = find(board.at(0).begin(),board.at(0).end(), str);
-    if (it != board.at(0).cend())
+    return (cell.getId() == str);
+}
+
+Cell & search_cell(string str, array<array<Cell, 8>, 8> &board)
+{
+    char * character;
+    get_char(str , character);
+    string temp = "ABCDEFGH";
+    int x = temp.find(temp);
+    int y = get_num(str);
+    if (board.at(x).at(y).getId() == str)
     {
-        return *it;
-    }
-    for (size_t i = 1; i < 8; i++)
-    {
-        it = find(board.at(i).begin(),board.at(i).end(), str);
-        if (it != board.at(i).cend())
-        {
-            return *it;
-        }
-        
+        return board.at(x).at(y);
     }
     
+    throw out_of_range("cell not exist");
 }

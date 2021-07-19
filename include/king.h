@@ -2,6 +2,7 @@
 #define _KING_H
 #include "chessMan.h"
 #include <iostream>
+#include <array>
 #include "using.h"
 #include "cell.h"
 

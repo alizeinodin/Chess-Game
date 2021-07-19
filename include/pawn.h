@@ -2,6 +2,8 @@
 #define _PAWN_H
 #include "chessMan.h"
 #include "using.h"
+#include <array>
+#include "cell.h"
 #include <iostream>
 
 class pawn : public ChessMan

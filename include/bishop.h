@@ -1,6 +1,7 @@
 #ifndef _BISHOP_H
 #define _BISHOP_H
 #include "chessMan.h"
+#include "cell.h"
 #include <iostream>
 #include "using.h"
 

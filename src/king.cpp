@@ -15,11 +15,12 @@ void king::movePiece(MOVE move)
 
 bool king::access(std::string origin, std::string destination, std::array<std::array<Cell, 8>, 8> &board)
 {
-    char * a = get_char(origin);
+    char character[] = "a";
+    get_char(origin , character);
     vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
     int dx[] = {1, 1, 1, -1, -1, -1, 0, 0}; // all possible moves.
     int dy[] = {1, -1, 0, -1, 1, 0, -1, 1}; // all possible moves.
-    auto it = find(alfa.cbegin(),alfa.cend(),a);
+    auto it = find(alfa.cbegin(),alfa.cend(),character);
     string temp;
     Cell celltemp;
     int num = get_num(origin);
@@ -27,13 +28,17 @@ bool king::access(std::string origin, std::string destination, std::array<std::a
     {
         temp += (it + dx[i])->at(0);
         temp += to_string(num + dy[i]);
+        if (it + dx[i] == alfa.cend())
+        {
+            continue;
+        }
+        if (num + dy[i] > 9)
+        {
+            continue;
+        }
         if (iscell(temp))
         {
-            temp += (it+dx[i])->at(0);
-            temp += to_string(num + dy[i]);
             if (temp == destination)
-            {
-            if (iscell(temp))
             {
                 celltemp = search_cell(temp,board);
                 if (!celltemp.getState())
@@ -45,10 +50,10 @@ bool king::access(std::string origin, std::string destination, std::array<std::a
                     temp.clear();
                     break;
                 }
-            } 
-            } 
+            }
             temp.clear();
         }
-        return false;
+    }
+    return false;
 }
 

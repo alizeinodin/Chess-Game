@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project"
+CMAKE_SOURCE_DIR = /home/erfa/project
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build"
+CMAKE_BINARY_DIR = /home/erfa/project/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -69,8 +69,8 @@ rebuild_cache/fast: rebuild_cache
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/bin/cmake-gui -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles/progress.marks"
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/erfa/project/build/CMakeFiles /home/erfa/project/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/erfa/project/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -123,6 +123,33 @@ app/fast:
 	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/build
 .PHONY : app/fast
 
+src/bishop.o: src/bishop.cpp.o
+
+.PHONY : src/bishop.o
+
+# target to build an object file
+src/bishop.cpp.o:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/bishop.cpp.o
+.PHONY : src/bishop.cpp.o
+
+src/bishop.i: src/bishop.cpp.i
+
+.PHONY : src/bishop.i
+
+# target to preprocess a source file
+src/bishop.cpp.i:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/bishop.cpp.i
+.PHONY : src/bishop.cpp.i
+
+src/bishop.s: src/bishop.cpp.s
+
+.PHONY : src/bishop.s
+
+# target to generate assembly for a file
+src/bishop.cpp.s:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/bishop.cpp.s
+.PHONY : src/bishop.cpp.s
+
 src/cell.o: src/cell.cpp.o
 
 .PHONY : src/cell.o
@@ -150,32 +177,32 @@ src/cell.cpp.s:
 	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/cell.cpp.s
 .PHONY : src/cell.cpp.s
 
-src/chessBoard.o: src/chessBoard.cpp.o
+src/chessman.o: src/chessman.cpp.o
 
-.PHONY : src/chessBoard.o
+.PHONY : src/chessman.o
 
 # target to build an object file
-src/chessBoard.cpp.o:
-	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/chessBoard.cpp.o
-.PHONY : src/chessBoard.cpp.o
+src/chessman.cpp.o:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/chessman.cpp.o
+.PHONY : src/chessman.cpp.o
 
-src/chessBoard.i: src/chessBoard.cpp.i
+src/chessman.i: src/chessman.cpp.i
 
-.PHONY : src/chessBoard.i
+.PHONY : src/chessman.i
 
 # target to preprocess a source file
-src/chessBoard.cpp.i:
-	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/chessBoard.cpp.i
-.PHONY : src/chessBoard.cpp.i
+src/chessman.cpp.i:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/chessman.cpp.i
+.PHONY : src/chessman.cpp.i
 
-src/chessBoard.s: src/chessBoard.cpp.s
+src/chessman.s: src/chessman.cpp.s
 
-.PHONY : src/chessBoard.s
+.PHONY : src/chessman.s
 
 # target to generate assembly for a file
-src/chessBoard.cpp.s:
-	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/chessBoard.cpp.s
-.PHONY : src/chessBoard.cpp.s
+src/chessman.cpp.s:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/chessman.cpp.s
+.PHONY : src/chessman.cpp.s
 
 src/fileConnect.o: src/fileConnect.cpp.o
 
@@ -231,6 +258,60 @@ src/id.cpp.s:
 	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/id.cpp.s
 .PHONY : src/id.cpp.s
 
+src/king.o: src/king.cpp.o
+
+.PHONY : src/king.o
+
+# target to build an object file
+src/king.cpp.o:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/king.cpp.o
+.PHONY : src/king.cpp.o
+
+src/king.i: src/king.cpp.i
+
+.PHONY : src/king.i
+
+# target to preprocess a source file
+src/king.cpp.i:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/king.cpp.i
+.PHONY : src/king.cpp.i
+
+src/king.s: src/king.cpp.s
+
+.PHONY : src/king.s
+
+# target to generate assembly for a file
+src/king.cpp.s:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/king.cpp.s
+.PHONY : src/king.cpp.s
+
+src/knight.o: src/knight.cpp.o
+
+.PHONY : src/knight.o
+
+# target to build an object file
+src/knight.cpp.o:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/knight.cpp.o
+.PHONY : src/knight.cpp.o
+
+src/knight.i: src/knight.cpp.i
+
+.PHONY : src/knight.i
+
+# target to preprocess a source file
+src/knight.cpp.i:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/knight.cpp.i
+.PHONY : src/knight.cpp.i
+
+src/knight.s: src/knight.cpp.s
+
+.PHONY : src/knight.s
+
+# target to generate assembly for a file
+src/knight.cpp.s:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/knight.cpp.s
+.PHONY : src/knight.cpp.s
+
 src/main.o: src/main.cpp.o
 
 .PHONY : src/main.o
@@ -257,6 +338,33 @@ src/main.s: src/main.cpp.s
 src/main.cpp.s:
 	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
+
+src/pawn.o: src/pawn.cpp.o
+
+.PHONY : src/pawn.o
+
+# target to build an object file
+src/pawn.cpp.o:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/pawn.cpp.o
+.PHONY : src/pawn.cpp.o
+
+src/pawn.i: src/pawn.cpp.i
+
+.PHONY : src/pawn.i
+
+# target to preprocess a source file
+src/pawn.cpp.i:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/pawn.cpp.i
+.PHONY : src/pawn.cpp.i
+
+src/pawn.s: src/pawn.cpp.s
+
+.PHONY : src/pawn.s
+
+# target to generate assembly for a file
+src/pawn.cpp.s:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/pawn.cpp.s
+.PHONY : src/pawn.cpp.s
 
 src/player.o: src/player.cpp.o
 
@@ -285,6 +393,87 @@ src/player.cpp.s:
 	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/player.cpp.s
 .PHONY : src/player.cpp.s
 
+src/queen.o: src/queen.cpp.o
+
+.PHONY : src/queen.o
+
+# target to build an object file
+src/queen.cpp.o:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/queen.cpp.o
+.PHONY : src/queen.cpp.o
+
+src/queen.i: src/queen.cpp.i
+
+.PHONY : src/queen.i
+
+# target to preprocess a source file
+src/queen.cpp.i:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/queen.cpp.i
+.PHONY : src/queen.cpp.i
+
+src/queen.s: src/queen.cpp.s
+
+.PHONY : src/queen.s
+
+# target to generate assembly for a file
+src/queen.cpp.s:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/queen.cpp.s
+.PHONY : src/queen.cpp.s
+
+src/rook.o: src/rook.cpp.o
+
+.PHONY : src/rook.o
+
+# target to build an object file
+src/rook.cpp.o:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/rook.cpp.o
+.PHONY : src/rook.cpp.o
+
+src/rook.i: src/rook.cpp.i
+
+.PHONY : src/rook.i
+
+# target to preprocess a source file
+src/rook.cpp.i:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/rook.cpp.i
+.PHONY : src/rook.cpp.i
+
+src/rook.s: src/rook.cpp.s
+
+.PHONY : src/rook.s
+
+# target to generate assembly for a file
+src/rook.cpp.s:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/rook.cpp.s
+.PHONY : src/rook.cpp.s
+
+src/util.o: src/util.cpp.o
+
+.PHONY : src/util.o
+
+# target to build an object file
+src/util.cpp.o:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/util.cpp.o
+.PHONY : src/util.cpp.o
+
+src/util.i: src/util.cpp.i
+
+.PHONY : src/util.i
+
+# target to preprocess a source file
+src/util.cpp.i:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/util.cpp.i
+.PHONY : src/util.cpp.i
+
+src/util.s: src/util.cpp.s
+
+.PHONY : src/util.s
+
+# target to generate assembly for a file
+src/util.cpp.s:
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/util.cpp.s
+.PHONY : src/util.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -294,24 +483,45 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... app"
+	@echo "... src/bishop.o"
+	@echo "... src/bishop.i"
+	@echo "... src/bishop.s"
 	@echo "... src/cell.o"
 	@echo "... src/cell.i"
 	@echo "... src/cell.s"
-	@echo "... src/chessBoard.o"
-	@echo "... src/chessBoard.i"
-	@echo "... src/chessBoard.s"
+	@echo "... src/chessman.o"
+	@echo "... src/chessman.i"
+	@echo "... src/chessman.s"
 	@echo "... src/fileConnect.o"
 	@echo "... src/fileConnect.i"
 	@echo "... src/fileConnect.s"
 	@echo "... src/id.o"
 	@echo "... src/id.i"
 	@echo "... src/id.s"
+	@echo "... src/king.o"
+	@echo "... src/king.i"
+	@echo "... src/king.s"
+	@echo "... src/knight.o"
+	@echo "... src/knight.i"
+	@echo "... src/knight.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/pawn.o"
+	@echo "... src/pawn.i"
+	@echo "... src/pawn.s"
 	@echo "... src/player.o"
 	@echo "... src/player.i"
 	@echo "... src/player.s"
+	@echo "... src/queen.o"
+	@echo "... src/queen.i"
+	@echo "... src/queen.s"
+	@echo "... src/rook.o"
+	@echo "... src/rook.i"
+	@echo "... src/rook.s"
+	@echo "... src/util.o"
+	@echo "... src/util.i"
+	@echo "... src/util.s"
 .PHONY : help
 
 
