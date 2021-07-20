@@ -6,8 +6,31 @@ using namespace std;
 
 queen::queen(COLOR c) : ChessMan(c) {}
 
-void queen::movePiece(MOVE m)
+void queen::movePiece(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
 {
+    Cell cells[2];
+    if (move.at(0) == 'Q')
+    {
+        auto cellsid = cut_str(move);
+        if (this->access(cellsid.first, cellsid.second, board))
+        {
+            cells[0] = search_cell(cellsid.first, board);
+            cells[0].empty();
+            cells[1] = search_cell(cellsid.second , board);
+            cells[1].setPiece(this);
+        }
+        else
+        {
+            if(!cells[1].getState())
+            {
+                attack(move, cells[1]);
+            }
+            throw invalid_argument("can not move!!!");
+        }
+        
+        
+    }
+    throw invalid_argument("piece is not true");
 }
 
 bool queen::access(std::string origin, std::string destination, std::array<std::array<Cell, 8>, 8> &board)

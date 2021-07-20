@@ -69,3 +69,14 @@ Cell &search_cell(string str, array<array<Cell, 8>, 8> &board)
 
     throw out_of_range("cell not exist");
 }
+
+std::pair<std::string, std::string> cut_str(MOVE &move)
+{
+    char temp1[3];
+    char temp2[3];
+    move.copy(temp1, 2, 1);
+    temp1[2] = '\0';
+    move.copy(temp2, 2, 3);
+    temp2[2] = '\0';
+    return make_pair(temp1, temp2);
+}

@@ -18,18 +18,6 @@ moving.h
 array
 -
 
-../include/knight.h
-chessMan.h
-../include/chessMan.h
-cell.h
-../include/cell.h
-array
--
-iostream
--
-using.h
-../include/using.h
-
 ../include/moving.h
 iostream
 -
@@ -38,21 +26,17 @@ iostream
 string
 -
 
-../include/util.h
-array
--
-string
--
+/home/erfa/project/src/util.cpp
 cell.h
-../include/cell.h
-
-/home/erfa/project/src/knight.cpp
-knight.h
-/home/erfa/project/src/knight.h
-util.h
-/home/erfa/project/src/util.h
-vector
+/home/erfa/project/src/cell.h
+cstring
 -
 algorithm
+-
+vector
+-
+stdexcept
+-
+array
 -
 
