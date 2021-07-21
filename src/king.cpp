@@ -49,6 +49,7 @@ int king::attack(std::string move, Cell & cell)
 
 bool king::access(std::string origin, std::string destination, std::array<std::array<Cell, 8>, 8> &board)
 {
+    threat_id.clear();
     char character[] = "a";
     get_char(origin, character);
     vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
@@ -81,6 +82,7 @@ bool king::access(std::string origin, std::string destination, std::array<std::a
                 }
                 else
                 {
+                    threat_id.push_back(temp);
                     temp.clear();
                     break;
                 }

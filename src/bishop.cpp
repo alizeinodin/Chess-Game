@@ -38,6 +38,7 @@ void bishop::movePiece(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
 
 bool bishop::access(std::string origin, std::string destination, std::array<std::array<Cell, 8>, 8> &board)
 {
+    threat_id.clear();
     vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
     Cell celltemp;
     int num = get_num(origin);
@@ -61,6 +62,7 @@ bool bishop::access(std::string origin, std::string destination, std::array<std:
                 }
                 else
                 {
+                    threat_id.push_back(temp);
                     temp.clear();
                     break;
                 }
@@ -88,6 +90,7 @@ bool bishop::access(std::string origin, std::string destination, std::array<std:
                 }
                 else
                 {
+                    threat_id.push_back(temp);
                     temp.clear();
                     break;
                 }
@@ -115,6 +118,7 @@ bool bishop::access(std::string origin, std::string destination, std::array<std:
                 }
                 else
                 {
+                    threat_id.push_back(temp);
                     temp.clear();
                     break;
                 }
@@ -142,6 +146,7 @@ bool bishop::access(std::string origin, std::string destination, std::array<std:
                 }
                 else
                 {
+                    threat_id.push_back(temp);
                     temp.clear();
                     break;
                 }

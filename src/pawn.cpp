@@ -5,7 +5,7 @@
 #include <algorithm>
 using namespace std;
 
-pawn::pawn(COLOR c) : ChessMan(c) 
+pawn::pawn(COLOR c) : ChessMan(c)
 {
     piecetype = POWN;
 }
@@ -20,25 +20,24 @@ void pawn::movePiece(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
         {
             cells[0] = search_cell(cellsid.first, board);
             cells[0].empty();
-            cells[1] = search_cell(cellsid.second , board);
+            cells[1] = search_cell(cellsid.second, board);
             cells[1].setPiece(this);
         }
         else
         {
-            if(!cells[1].getState())
+            if (!cells[1].getState())
             {
                 attack(move, cells[1]);
             }
             throw invalid_argument("can not move!!!");
         }
-        
-        
     }
     throw invalid_argument("piece is not true");
 }
 
 bool pawn::access(std::string origin, std::string destination, std::array<std::array<Cell, 8>, 8> &board)
 {
+    threat_id.clear();
     Cell celltemp;
     int num = get_num(origin);
     string temp;
@@ -62,6 +61,7 @@ bool pawn::access(std::string origin, std::string destination, std::array<std::a
                         }
                         else
                         {
+                            threat_id.push_back(temp);
                             temp.clear();
                             break;
                         }
@@ -85,6 +85,7 @@ bool pawn::access(std::string origin, std::string destination, std::array<std::a
                     }
                     else
                     {
+                        threat_id.push_back(temp);
                         temp.clear();
                     }
                 }
@@ -112,6 +113,7 @@ bool pawn::access(std::string origin, std::string destination, std::array<std::a
                         }
                         else
                         {
+                            threat_id.push_back(temp);
                             temp.clear();
                             break;
                         }
@@ -135,6 +137,7 @@ bool pawn::access(std::string origin, std::string destination, std::array<std::a
                     }
                     else
                     {
+                        threat_id.push_back(temp);
                         temp.clear();
                     }
                 }

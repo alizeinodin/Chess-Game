@@ -38,6 +38,7 @@ void queen::movePiece(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
 
 bool queen::access(std::string origin, std::string destination, std::array<std::array<Cell, 8>, 8> &board)
 {
+    threat_id.clear();
     Cell celltemp;
     vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
     int num = get_num(origin);
@@ -58,6 +59,7 @@ bool queen::access(std::string origin, std::string destination, std::array<std::
                 }
                 else
                 {
+                    threat_id.push_back(temp);
                     temp.clear();
                     break;
                 }
@@ -84,6 +86,7 @@ bool queen::access(std::string origin, std::string destination, std::array<std::
                 }
                 else
                 {
+                    threat_id.push_back(temp);
                     temp.clear();
                     break;
                 }
@@ -112,6 +115,7 @@ bool queen::access(std::string origin, std::string destination, std::array<std::
                 }
                 else
                 {
+                    threat_id.push_back(temp);
                     temp.clear();
                     break;
                 }
@@ -137,6 +141,7 @@ bool queen::access(std::string origin, std::string destination, std::array<std::
                 }
                 else
                 {
+                    threat_id.push_back(temp);
                     temp.clear();
                     break;
                 }
@@ -165,6 +170,7 @@ bool queen::access(std::string origin, std::string destination, std::array<std::
                 }
                 else
                 {
+                    threat_id.push_back(temp);
                     temp.clear();
                     break;
                 }
@@ -192,6 +198,7 @@ bool queen::access(std::string origin, std::string destination, std::array<std::
                 }
                 else
                 {
+                    threat_id.push_back(temp);
                     temp.clear();
                     break;
                 }
@@ -219,6 +226,7 @@ bool queen::access(std::string origin, std::string destination, std::array<std::
                 }
                 else
                 {
+                    threat_id.push_back(temp);
                     temp.clear();
                     break;
                 }
@@ -246,6 +254,7 @@ bool queen::access(std::string origin, std::string destination, std::array<std::
                 }
                 else
                 {
+                    threat_id.push_back(temp);
                     temp.clear();
                     break;
                 }

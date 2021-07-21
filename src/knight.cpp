@@ -11,6 +11,7 @@ knight::knight(COLOR c) : ChessMan(c)
 
 bool knight::access(std::string origin, std::string destination, std::array<std::array<Cell, 8>, 8> &board)
 {
+    threat_id.clear();
     char character[] = "a";
     get_char(origin, character);
     vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
@@ -43,6 +44,7 @@ bool knight::access(std::string origin, std::string destination, std::array<std:
             }
             else
             {
+                threat_id.push_back(temp);
                 temp.clear(); 
                 break;
             }
