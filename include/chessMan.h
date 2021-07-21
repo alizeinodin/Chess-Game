@@ -1,5 +1,6 @@
 #include "using.h"
 #include "moving.h"
+#include "kishexcept.h"
 #include <array>
 #include <map>
 #ifndef _CHESSMAN_H

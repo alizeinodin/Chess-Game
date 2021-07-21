@@ -152,6 +152,7 @@ bool rook::access(string origin, string destination, array<array<Cell, 8>, 8> &b
 
 std::map<std::string, int> rook::threat(std::string cellid, array<array<Cell, 8>, 8> &board)
 {
+    bool kish;
     map<string, int> temp;
     this->access(cellid, "F5", board);
     for (size_t i = 0; i < threat_id.size(); i++)
@@ -171,7 +172,15 @@ std::map<std::string, int> rook::threat(std::string cellid, array<array<Cell, 8>
             case POWN:
                 temp.insert(make_pair(threat_id.at(i), 1));
                 break;
+            case KING: 
+                kish = true;
+                break;
             }
         }
     }
+    if (kish)
+    {
+        throw kishexcept();
+    }
+    return temp;
 }
