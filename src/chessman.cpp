@@ -6,3 +6,8 @@ COLOR ChessMan::get_color()
 {
     return color;
 }
+
+piece ChessMan:: get_type()
+{
+    return piecetype;
+}

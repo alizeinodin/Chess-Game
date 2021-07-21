@@ -4,7 +4,10 @@
 #include <algorithm>
 using namespace std;
 
-bishop::bishop(COLOR c) : ChessMan(c) {}
+bishop::bishop(COLOR c) : ChessMan(c) 
+{
+    piecetype = BISHOP;
+}
 
 void bishop::movePiece(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
 {
@@ -149,4 +152,31 @@ bool bishop::access(std::string origin, std::string destination, std::array<std:
         temp_num++;
     }
     return false;
+}
+
+
+std::map<std::string, int> bishop::threat(std::string cellid, array<array<Cell, 8>, 8> &board)
+{
+    map<string, int> temp;
+    this->access(cellid, "F5", board);
+    for (size_t i = 0; i < threat_id.size(); i++)
+    {
+        if (threat_id.at(i) != this->get_color())
+        {
+            switch (search_cell(threat_id.at(i), board).getPiece()->get_type())
+            {
+            case QUEEN:
+                temp.insert(make_pair(threat_id.at(i), 5));
+                break;
+            case ROOK:
+            case BISHOP:
+            case KNIGHT:
+                temp.insert(make_pair(threat_id.at(i), 2));
+                break;
+            case POWN:
+                temp.insert(make_pair(threat_id.at(i), 1));
+                break;
+            }
+        }
+    }
 }
