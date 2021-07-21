@@ -3,6 +3,7 @@
 #include "chessMan.h"
 #include "using.h"
 #include <iostream>
+#include "cell.h"
 
 class pawn : public ChessMan
 {

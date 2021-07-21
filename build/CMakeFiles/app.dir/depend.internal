@@ -27,19 +27,28 @@ CMakeFiles/app.dir/src/chessBoard.cpp.o
 CMakeFiles/app.dir/src/fileConnect.cpp.o
  ../include/fileConnect.h
  /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/fileConnect.cpp
+CMakeFiles/app.dir/src/game.cpp.o
+ ../include/bishop.h
+ ../include/cell.h
+ ../include/chessBoard.h
+ ../include/chessMan.h
+ ../include/fileConnect.h
+ ../include/game.h
+ ../include/king.h
+ ../include/knight.h
+ ../include/moving.h
+ ../include/pawn.h
+ ../include/player.h
+ ../include/queen.h
+ ../include/rook.h
+ ../include/using.h
+ ../include/util.h
+ /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/game.cpp
 CMakeFiles/app.dir/src/id.cpp.o
  ../include/id.h
  /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/id.cpp
 CMakeFiles/app.dir/src/main.cpp.o
- ../include/bishop.h
- ../include/cell.h
- ../include/chessMan.h
- ../include/king.h
- ../include/moving.h
- ../include/pawn.h
- ../include/rook.h
- ../include/using.h
- ../include/util.h
+ ../include/fileConnect.h
  /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/main.cpp
 CMakeFiles/app.dir/src/player.cpp.o
  ../include/player.h

@@ -10,6 +10,7 @@ src/id.cpp
 src/chessBoard.cpp
 src/fileConnect.cpp
 src/player.cpp
+src/game.cpp
 # src/pawn.cpp
 # src/util.cpp
 # src/king.cpp

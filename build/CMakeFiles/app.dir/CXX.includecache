@@ -66,6 +66,12 @@ iostream
 fstream
 -
 
+../include/game.h
+chessBoard.h
+../include/chessBoard.h
+player.h
+../include/player.h
+
 ../include/king.h
 chessMan.h
 ../include/chessMan.h
@@ -95,6 +101,8 @@ using.h
 ../include/using.h
 iostream
 -
+cell.h
+../include/cell.h
 
 ../include/player.h
 iostream
@@ -128,21 +136,7 @@ array
 cell.h
 ../include/cell.h
 
-/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/chessBoard.cpp
-chessBoard.h
-/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/chessBoard.h
-
-/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/main.cpp
-iostream
--
-king.h
-/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/king.h
-util.h
-/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/util.h
-pawn.h
-/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/pawn.h
-rook.h
-/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/rook.h
-bishop.h
-/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/bishop.h
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/game.cpp
+game.h
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/game.h
 

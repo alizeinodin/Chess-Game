@@ -44,3 +44,8 @@ void Cell::empty()
     isnull = true;
     piece = nullptr;
 }
+
+bool Cell::getState()
+{
+    return isnull;
+}

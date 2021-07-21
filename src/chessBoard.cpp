@@ -9,7 +9,6 @@ ChessBoard &ChessBoard::getInstance()
 
 ChessBoard::ChessBoard()
 {
-    
 }
 
 array<array<Cell, 8>, 8> ChessBoard::start()
@@ -92,7 +91,8 @@ array<array<Cell, 8>, 8> ChessBoard::start()
 array<array<Cell, 8>, 8> ChessBoard::remmeber(string fileName)
 {
     start();
-    FileConnect File(fileName);
+    FileConnect File;
+    File.addFile(fileName);
     while (1)
     {
         if (File.getFile().eof())
@@ -102,6 +102,7 @@ array<array<Cell, 8>, 8> ChessBoard::remmeber(string fileName)
         string chessRemmber = File.ReadFromFile();
         updateBoard(chessRemmber.substr(2, 3), chessRemmber.substr(4, 5));
     }
+    return Board;
 }
 
 Cell &ChessBoard::search(string ID)
@@ -116,6 +117,7 @@ Cell &ChessBoard::search(string ID)
             }
         }
     }
+    return Board[0][0]; // for warning
 }
 
 void ChessBoard::updateBoard(string first, string second)
@@ -127,6 +129,9 @@ void ChessBoard::updateBoard(string first, string second)
     tempPiece = firstCell.getPiece();
 
     firstCell.empty();
+    if (secondCell.getPiece() != nullptr)
+    {
+    }
     secondCell.setPiece(tempPiece);
 }
 
@@ -164,13 +169,26 @@ ChessMan *ChessBoard::makePiece(char selectPiece, string color)
     return piece;
 }
 
-void ChessBoard::order(string order)
+// void ChessBoard::order(string order, Game * game)
+// {
+//     Cell cell = search(order.substr(1, 2));
+//     cell.getPiece()->movePiece(order.substr(3, 4));
+//     game->save(order);
+// }
+
+void ChessBoard::undo()
 {
-    Cell cell = search(order.substr(1, 2));
-    cell.getPiece()->movePiece(order.substr(3, 4));
+    string move = File.undo();
+    updateBoard(move.substr(3, 4), move.substr(1, 2));
 }
 
-void ChessBoard::saveData(string order)
+void ChessBoard::setFile(string player1, string player2, string gamesName)
 {
+    string fileName = player1 + player2 + gamesName + string(".acd");
+    File.addFile(fileName);
+}
 
+void ChessBoard::save(string order)
+{
+    File.WriteToFile(order);
 }

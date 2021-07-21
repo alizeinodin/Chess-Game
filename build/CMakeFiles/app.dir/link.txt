@@ -1,1 +1,1 @@
-/usr/bin/c++     CMakeFiles/app.dir/src/main.cpp.o CMakeFiles/app.dir/src/cell.cpp.o CMakeFiles/app.dir/src/id.cpp.o CMakeFiles/app.dir/src/chessBoard.cpp.o CMakeFiles/app.dir/src/fileConnect.cpp.o CMakeFiles/app.dir/src/player.cpp.o  -o app 
+/bin/g++-9  -g   CMakeFiles/app.dir/src/main.cpp.o CMakeFiles/app.dir/src/cell.cpp.o CMakeFiles/app.dir/src/id.cpp.o CMakeFiles/app.dir/src/chessBoard.cpp.o CMakeFiles/app.dir/src/fileConnect.cpp.o CMakeFiles/app.dir/src/player.cpp.o CMakeFiles/app.dir/src/game.cpp.o  -o app 

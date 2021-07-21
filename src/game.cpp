@@ -1,5 +1,14 @@
 #include "game.h"
 using namespace std;
+Game &Game::getInstance()
+{
+    static Game game;
+    return game;
+}
+
+Game::Game()
+{
+}
 
 ChessBoard &Game::getBoard()
 {
@@ -11,11 +20,11 @@ void Game::setPlayer(size_t num, string name)
     switch (num)
     {
     case 1:
-        player1 = new Player(name);
+        player1 = new Player(name, string("white"));
         break;
     case 2:
-        player2 = new Player(name);
-        
+        player2 = new Player(name, string("black"));
+
         break;
 
     default:
