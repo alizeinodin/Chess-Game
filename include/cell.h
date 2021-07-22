@@ -24,6 +24,7 @@ class Cell
     void setPiece(ChessMan *);
     ChessMan * getPiece();
     void empty();
+    bool operator==(Cell &);
 };
 
 #endif /* CELL_H */

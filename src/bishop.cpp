@@ -4,7 +4,7 @@
 #include <algorithm>
 using namespace std;
 
-bishop::bishop(COLOR c) : ChessMan(c) 
+bishop::bishop(COLOR c) : ChessMan(c)
 {
     piecetype = BISHOP;
 }
@@ -15,28 +15,35 @@ void bishop::movePiece(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
     if (move.at(0) == 'B')
     {
         auto cellsid = cut_str(move);
-        if (this->access(cellsid.first, cellsid.second, board))
+        this->access(cellsid.first, board);
+        for (size_t i = 0; i < possible.size(); i++)
         {
-            cells[0] = search_cell(cellsid.first, board);
-            cells[0].empty();
-            cells[1] = search_cell(cellsid.second , board);
-            cells[1].setPiece(this);
-        }
-        else
-        {
-            if(!cells[1].getState())
+            if (possible.at(i).getId() == cellsid.second)
             {
-                attack(move, cells[1]);
+                cells[0] = search_cell(cellsid.first, board);
+                cells[0].empty();
+                cells[1] = search_cell(cellsid.second, board);
+                cells[1].setPiece(this);
+                return;
             }
-            throw invalid_argument("can not move!!!");
+            else
+            {
+                cells[0] = search_cell(cellsid.first, board);
+                cells[1] = search_cell(cellsid.second, board);
+                if (!cells[1].getState())
+                {
+                    cells[0].empty();
+                    this->attack(move, cells[1]);
+                    return;
+                }
+                throw invalid_argument("can not move!!!");
+            }
         }
-        
-        
     }
     throw invalid_argument("piece is not true");
 }
 
-bool bishop::access(std::string origin, std::string destination, std::array<std::array<Cell, 8>, 8> &board)
+void bishop::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
 {
     threat_id.clear();
     vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
@@ -51,23 +58,21 @@ bool bishop::access(std::string origin, std::string destination, std::array<std:
     {
         temp += (it)->at(0);
         temp += to_string(temp_num);
-        if (temp == destination)
+        if (iscell(temp))
         {
-            if (iscell(temp))
+            celltemp = search_cell(temp, board);
+            if (!celltemp.getState())
             {
-                celltemp = search_cell(temp, board);
-                if (!celltemp.getState())
-                {
-                    return true;
-                }
-                else
-                {
-                    threat_id.push_back(temp);
-                    temp.clear();
-                    break;
-                }
+                possible.push_back(celltemp);
+            }
+            else
+            {
+                threat_id.push_back(temp);
+                temp.clear();
+                break;
             }
         }
+
         temp.clear();
         it--;
         temp_num--;
@@ -79,23 +84,21 @@ bool bishop::access(std::string origin, std::string destination, std::array<std:
     {
         temp += (it)->at(0);
         temp += to_string(temp_num);
-        if (temp == destination)
+        if (iscell(temp))
         {
-            if (iscell(temp))
+            celltemp = search_cell(temp, board);
+            if (!celltemp.getState())
             {
-                celltemp = search_cell(temp, board);
-                if (!celltemp.getState())
-                {
-                    return true;
-                }
-                else
-                {
-                    threat_id.push_back(temp);
-                    temp.clear();
-                    break;
-                }
+                possible.push_back(celltemp);
+            }
+            else
+            {
+                threat_id.push_back(temp);
+                temp.clear();
+                break;
             }
         }
+
         temp.clear();
         it++;
         temp_num++;
@@ -107,23 +110,21 @@ bool bishop::access(std::string origin, std::string destination, std::array<std:
     {
         temp += (it)->at(0);
         temp += to_string(temp_num);
-        if (temp == destination)
+        if (iscell(temp))
         {
-            if (iscell(temp))
+            celltemp = search_cell(temp, board);
+            if (!celltemp.getState())
             {
-                celltemp = search_cell(temp, board);
-                if (!celltemp.getState())
-                {
-                    return true;
-                }
-                else
-                {
-                    threat_id.push_back(temp);
-                    temp.clear();
-                    break;
-                }
+                possible.push_back(celltemp);
+            }
+            else
+            {
+                threat_id.push_back(temp);
+                temp.clear();
+                break;
             }
         }
+
         temp.clear();
         it++;
         temp_num--;
@@ -135,36 +136,32 @@ bool bishop::access(std::string origin, std::string destination, std::array<std:
     {
         temp += (it)->at(0);
         temp += to_string(temp_num);
-        if (temp == destination)
+        if (iscell(temp))
         {
-            if (iscell(temp))
+            celltemp = search_cell(temp, board);
+            if (!celltemp.getState())
             {
-                celltemp = search_cell(temp, board);
-                if (!celltemp.getState())
-                {
-                    return true;
-                }
-                else
-                {
-                    threat_id.push_back(temp);
-                    temp.clear();
-                    break;
-                }
+                possible.push_back(celltemp);
+            }
+            else
+            {
+                threat_id.push_back(temp);
+                temp.clear();
+                break;
             }
         }
+
         temp.clear();
         it--;
         temp_num++;
     }
-    return false;
 }
-
 
 std::map<std::string, int> bishop::threat(std::string cellid, array<array<Cell, 8>, 8> &board)
 {
     bool kish;
     map<string, int> temp;
-    this->access(cellid, "F5", board);
+    this->access(cellid, board);
     for (size_t i = 0; i < threat_id.size(); i++)
     {
         if (threat_id.at(i) != this->get_color())
@@ -182,7 +179,7 @@ std::map<std::string, int> bishop::threat(std::string cellid, array<array<Cell, 
             case POWN:
                 temp.insert(make_pair(threat_id.at(i), 1));
                 break;
-            case KING: 
+            case KING:
                 kish = true;
                 break;
             }
@@ -193,4 +190,24 @@ std::map<std::string, int> bishop::threat(std::string cellid, array<array<Cell, 
         throw kishexcept();
     }
     return temp;
+}
+
+void bishop::attack(std::string move, Cell & cell)
+{
+    attackpiece = cell.getPiece();
+    cell.empty();
+    cell.setPiece(this);
+    switch (attackpiece->get_type())
+    {
+    case QUEEN:
+        attackscore = 15;
+        break;
+    case POWN:
+        attackscore = 3;
+        break;
+    case ROOK:
+    case BISHOP:
+    case KNIGHT:
+        attackscore = 8;
+    }
 }

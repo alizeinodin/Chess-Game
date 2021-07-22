@@ -11,3 +11,8 @@ piece ChessMan:: get_type()
 {
     return piecetype;
 }
+
+std::vector<Cell> ChessMan::get_possiblemoves()
+{
+    return possible;
+}
