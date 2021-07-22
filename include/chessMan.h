@@ -32,6 +32,8 @@ public:
     COLOR get_color();
     piece get_type();
     std::vector<Cell> get_possiblemoves();
+    ChessMan * get_attackpiece();
+    int get_attackscore();
 };
 
 #endif /* _CHESSMAN_H */
