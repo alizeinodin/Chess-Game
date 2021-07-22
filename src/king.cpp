@@ -46,6 +46,7 @@ void king::movePiece(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
 
 void king::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
 {
+    auto kingimpossible = possible_move_king(this->get_color(),board);
     threat_id.clear();
     char character[] = "a";
     get_char(origin, character);
@@ -73,7 +74,10 @@ void king::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
             celltemp = search_cell(temp, board);
             if (!celltemp.getState())
             {
-                possible.push_back(celltemp);
+                if (!binary_search(kingimpossible.cbegin(), kingimpossible.cend(), temp))
+                {
+                    possible.push_back(celltemp);
+                }
             }
             else
             {

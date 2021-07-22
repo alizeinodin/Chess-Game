@@ -80,3 +80,18 @@ std::pair<std::string, std::string> cut_str(MOVE &move)
     temp2[2] = '\0';
     return make_pair(temp1, temp2);
 }
+
+vector<ID> possible_move_king(COLOR color, std::array<std::array<Cell, 8>, 8> &board)
+{
+    vector<ID> temp;
+    for (auto &i : board)
+    {
+        for (auto &j : i)
+        {
+            if (j.getPiece()->get_color() != color)
+            {
+                temp.insert(temp.end(), j.getPiece()->get_possiblemoves().begin(), j.getPiece()->get_possiblemoves().end());
+            }
+        }
+    }
+}
