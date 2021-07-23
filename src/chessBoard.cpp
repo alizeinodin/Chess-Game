@@ -169,12 +169,12 @@ ChessMan *ChessBoard::makePiece(char selectPiece, string color)
     return piece;
 }
 
-// void ChessBoard::order(string order, Game * game)
-// {
-//     Cell cell = search(order.substr(1, 2));
-//     cell.getPiece()->movePiece(order.substr(3, 4));
-//     game->save(order);
-// }
+void ChessBoard::order(string order)
+{
+    Cell cell = search(order.substr(1, 2));
+    cell.getPiece()->movePiece(order.substr(3, 4));
+    save(order);
+}
 
 void ChessBoard::undo()
 {

@@ -1,7 +1,7 @@
+#include "chessMan.h"
 #ifndef CELL_H
 #define CELL_H
-#include <iostream>
-#include "chessMan.h"
+
 
 using ID = std::string;
 using COLOR = std::string;

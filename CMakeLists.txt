@@ -15,4 +15,8 @@ src/game.cpp
 # src/util.cpp
 # src/king.cpp
 # src/rook.cpp
+# src/knight.cpp
+# src/bishop.cpp
+# src/queen.cpp
+# src/chessman.cpp
 )

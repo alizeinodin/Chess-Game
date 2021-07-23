@@ -10,7 +10,7 @@ ID CellID()
     {
         static unsigned int counter = -1;
 
-        if(counter > 7)
+        if (counter > 7)
         {
             number++;
             counter = 0;

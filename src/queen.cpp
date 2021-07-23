@@ -1,18 +1,18 @@
-#include "bishop.h"
+#include "queen.h"
 #include "util.h"
 #include <vector>
 #include <algorithm>
 using namespace std;
 
-bishop::bishop(COLOR c) : ChessMan(c) 
+queen::queen(COLOR c) : ChessMan(c) 
 {
-    piecetype = BISHOP;
+    piecetype = QUEEN;
 }
 
-void bishop::movePiece(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
+void queen::movePiece(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
 {
     Cell cells[2];
-    if (move.at(0) == 'B')
+    if (move.at(0) == 'Q')
     {
         auto cellsid = cut_str(move);
         if (this->access(cellsid.first, cellsid.second, board))
@@ -36,17 +36,125 @@ void bishop::movePiece(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
     throw invalid_argument("piece is not true");
 }
 
-bool bishop::access(std::string origin, std::string destination, std::array<std::array<Cell, 8>, 8> &board)
+bool queen::access(std::string origin, std::string destination, std::array<std::array<Cell, 8>, 8> &board)
 {
     threat_id.clear();
-    vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
     Cell celltemp;
+    vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
     int num = get_num(origin);
     string temp;
     int temp_num = num - 1;
+    while (temp_num >= 0)
+    {
+        temp += origin.at(0);
+        temp += to_string(temp_num);
+        if (temp == destination)
+        {
+            if (iscell(temp))
+            {
+                celltemp = search_cell(temp, board);
+                if (!celltemp.getState())
+                {
+                    return true;
+                }
+                else
+                {
+                    threat_id.push_back(temp);
+                    temp.clear();
+                    break;
+                }
+            }
+        }
+        temp.clear();
+        temp_num--;
+    }
+
+    temp_num = num + 1;
+
+    while (temp_num <= 8)
+    {
+        temp += origin.at(0);
+        temp += to_string(temp_num);
+        if (temp == destination)
+        {
+            if (iscell(temp))
+            {
+                celltemp = search_cell(temp, board);
+                if (!celltemp.getState())
+                {
+                    return true;
+                }
+                else
+                {
+                    threat_id.push_back(temp);
+                    temp.clear();
+                    break;
+                }
+            }
+        }
+        temp.clear();
+        temp_num++;
+    }
     char character[] = "a";
     get_char(origin, character);
+
     auto it = (find(alfa.cbegin(), alfa.cend(), character) - 1);
+
+    while (it >= alfa.cbegin())
+    {
+        temp += (it)->at(0);
+        temp += to_string(num);
+        if (temp == destination)
+        {
+            if (iscell(temp))
+            {
+                celltemp = search_cell(temp, board);
+                if (!celltemp.getState())
+                {
+                    return true;
+                }
+                else
+                {
+                    threat_id.push_back(temp);
+                    temp.clear();
+                    break;
+                }
+            }
+        }
+        temp.clear();
+        it--;
+    }
+    it = (find(alfa.cbegin(), alfa.cend(), character) + 1);
+
+    while (it <= alfa.cend() - 1)
+    {
+        temp += (it)->at(0);
+        temp += to_string(num);
+        if (temp == destination)
+        {
+            if (iscell(temp))
+            {
+                celltemp = search_cell(temp, board);
+                if (!celltemp.getState())
+                {
+                    return true;
+                }
+                else
+                {
+                    threat_id.push_back(temp);
+                    temp.clear();
+                    break;
+                }
+            }
+        }
+        temp.clear();
+        it++;
+    }
+
+    get_char(origin, character);
+    it = (find(alfa.cbegin(), alfa.cend(), character) - 1);
+    temp_num = num - 1;
+
     while ((it >= alfa.cbegin()) && (temp_num >= 0))
     {
         temp += (it)->at(0);
@@ -160,7 +268,7 @@ bool bishop::access(std::string origin, std::string destination, std::array<std:
 }
 
 
-std::map<std::string, int> bishop::threat(std::string cellid, array<array<Cell, 8>, 8> &board)
+std::map<std::string, int> queen::threat(std::string cellid, array<array<Cell, 8>, 8> &board)
 {
     map<string, int> temp;
     this->access(cellid, "F5", board);

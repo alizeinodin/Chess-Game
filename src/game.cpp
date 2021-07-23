@@ -23,7 +23,11 @@ void Game::setPlayer(size_t num, string name)
         player1 = new Player(name, string("white"));
         break;
     case 2:
+<<<<<<< HEAD
         player2 = new Player(name, string("black"));
+=======
+        player2 = new Player(name);
+>>>>>>> 36e7c21c7b390f60cacad6e391ec170dee253fdb
 
         break;
 

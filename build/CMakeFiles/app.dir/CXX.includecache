@@ -9,14 +9,14 @@
 ../include/bishop.h
 chessMan.h
 ../include/chessMan.h
+cell.h
+../include/cell.h
 iostream
 -
 using.h
 ../include/using.h
 
 ../include/cell.h
-iostream
--
 chessMan.h
 ../include/chessMan.h
 
@@ -51,12 +51,14 @@ player.h
 ../include/player.h
 
 ../include/chessMan.h
-iostream
--
 using.h
 ../include/using.h
 moving.h
 ../include/moving.h
+array
+-
+vector
+-
 map
 -
 
@@ -72,10 +74,18 @@ chessBoard.h
 player.h
 ../include/player.h
 
+../include/id.h
+array
+-
+iostream
+-
+
 ../include/king.h
 chessMan.h
 ../include/chessMan.h
 iostream
+-
+array
 -
 using.h
 ../include/using.h
@@ -85,6 +95,10 @@ cell.h
 ../include/knight.h
 chessMan.h
 ../include/chessMan.h
+cell.h
+../include/cell.h
+array
+-
 iostream
 -
 using.h
@@ -99,6 +113,10 @@ chessMan.h
 ../include/chessMan.h
 using.h
 ../include/using.h
+array
+-
+cell.h
+../include/cell.h
 iostream
 -
 cell.h
@@ -113,6 +131,10 @@ stdexcept
 ../include/queen.h
 chessMan.h
 ../include/chessMan.h
+cell.h
+../include/cell.h
+array
+-
 iostream
 -
 using.h
@@ -121,20 +143,36 @@ using.h
 ../include/rook.h
 chessMan.h
 ../include/chessMan.h
+cell.h
+../include/cell.h
+array
+-
 iostream
 -
 using.h
 ../include/using.h
 
 ../include/using.h
-iostream
+string
 -
 
 ../include/util.h
 array
 -
+string
+-
 cell.h
 ../include/cell.h
+
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/cell.cpp
+cell.h
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/cell.h
+id.h
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/id.h
+
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/chessBoard.cpp
+chessBoard.h
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/chessBoard.h
 
 /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/game.cpp
 game.h

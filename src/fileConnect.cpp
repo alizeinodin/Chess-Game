@@ -8,6 +8,7 @@ FileConnect::FileConnect()
 void FileConnect::addFile(string name)
 {
     myFile.open(name, ios::out | ios::in);
+    myFile.open(name, ios::app);
     if (!myFile.is_open())
     {
         cerr << "ERROR" << endl;
