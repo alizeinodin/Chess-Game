@@ -1,7 +1,74 @@
 {
     "files.associations": {
+<<<<<<< HEAD
         "*.cpp": "cpp",
         "*.h": "cpp",
         "typeinfo": "cpp"
     }
+=======
+<<<<<<< HEAD
+=======
+        "*.cpp": "cpp",
+        "*.h": "cpp",
+>>>>>>> 534eac2a9fe7241af6bf8629b7c368f4b8fd42a4
+        "array": "cpp",
+        "atomic": "cpp",
+        "bit": "cpp",
+        "*.tcc": "cpp",
+        "cctype": "cpp",
+        "clocale": "cpp",
+        "cmath": "cpp",
+        "cstdarg": "cpp",
+        "cstddef": "cpp",
+        "cstdint": "cpp",
+        "cstdio": "cpp",
+        "cstdlib": "cpp",
+<<<<<<< HEAD
+=======
+        "cstring": "cpp",
+>>>>>>> 534eac2a9fe7241af6bf8629b7c368f4b8fd42a4
+        "cwchar": "cpp",
+        "cwctype": "cpp",
+        "deque": "cpp",
+        "map": "cpp",
+<<<<<<< HEAD
+=======
+        "set": "cpp",
+>>>>>>> 534eac2a9fe7241af6bf8629b7c368f4b8fd42a4
+        "unordered_map": "cpp",
+        "vector": "cpp",
+        "exception": "cpp",
+        "algorithm": "cpp",
+        "functional": "cpp",
+        "iterator": "cpp",
+        "memory": "cpp",
+        "memory_resource": "cpp",
+        "numeric": "cpp",
+        "optional": "cpp",
+        "random": "cpp",
+        "string": "cpp",
+        "string_view": "cpp",
+        "system_error": "cpp",
+        "tuple": "cpp",
+        "type_traits": "cpp",
+        "utility": "cpp",
+        "fstream": "cpp",
+        "initializer_list": "cpp",
+        "iosfwd": "cpp",
+        "iostream": "cpp",
+        "istream": "cpp",
+        "limits": "cpp",
+        "new": "cpp",
+        "ostream": "cpp",
+        "sstream": "cpp",
+        "stdexcept": "cpp",
+        "streambuf": "cpp",
+        "typeinfo": "cpp"
+<<<<<<< HEAD
+    }
+=======
+    },
+    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools"
+>>>>>>> 534eac2a9fe7241af6bf8629b7c368f4b8fd42a4
+>>>>>>> e27b167a37a44cb59626f5aa997aa7c10eb11ac3
 }
