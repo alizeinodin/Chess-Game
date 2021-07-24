@@ -47,3 +47,8 @@ int Player::getScore(size_t state)
     }
     return 0; // compiler never arrive to this line and this is for warning
 }
+
+COLOR Player::getcolor()
+{
+    return color;
+}

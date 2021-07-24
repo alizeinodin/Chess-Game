@@ -1,11 +1,15 @@
-#include "chessMan.h"
+#include "using.h"
+#include "moving.h"
+#include <array>
+#include <vector>
+#include <map>
 #ifndef CELL_H
 #define CELL_H
 
 
 using ID = std::string;
 using COLOR = std::string;
-
+class ChessMan;
 class Cell
 {
     private:
@@ -25,6 +29,7 @@ class Cell
     ChessMan * getPiece();
     void empty();
     bool operator==(Cell &);
+    operator std::string();
 };
 
 #endif /* CELL_H */

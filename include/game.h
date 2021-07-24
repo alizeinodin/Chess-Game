@@ -5,6 +5,7 @@
 
 class Game
 {
+    enum Color {BLACK, WITHE};
     private:
     ChessBoard gameBoard = ChessBoard::getInstance();
     Player * player1 = nullptr;
@@ -13,8 +14,8 @@ class Game
 
     public:
     ChessBoard & getBoard();
-    void setPlayer(size_t, std::string);
-    Player getPlayer();
+    void setPlayer(Color, std::string);
+    Player getPlayer(COLOR);
 };
 
 #endif /* _GAME_H */

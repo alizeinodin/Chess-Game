@@ -1,5 +1,6 @@
 #include "using.h"
 #include "moving.h"
+#include "cell.h"
 #include "kishexcept.h"
 #include <array>
 #include <vector>
@@ -9,7 +10,6 @@
 
 //#include <map>
 enum piece {KING, QUEEN, ROOK, BISHOP, KNIGHT, POWN};
-class Cell;
 class ChessMan
 {
 protected:

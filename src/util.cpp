@@ -1,5 +1,6 @@
 //#include "util.h"
 #include "cell.h"
+#include "chessMan.h"
 #include <cstring>
 #include <algorithm>
 #include <vector>
@@ -94,4 +95,5 @@ vector<ID> possible_move_king(COLOR color, std::array<std::array<Cell, 8>, 8> &b
             }
         }
     }
+    return temp;
 }
