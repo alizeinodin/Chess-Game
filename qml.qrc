@@ -3,5 +3,21 @@
         <file>main.qml</file>
         <file>backchess.jpg</file>
         <file>player.qml</file>
+        <file>ChessBoard.qml</file>
+        <file>media/White/Frame 16.png</file>
+        <file>media/White/Frame 17.png</file>
+        <file>media/White/Frame 18.png</file>
+        <file>media/White/Frame 19.png</file>
+        <file>media/White/Frame 20.png</file>
+        <file>media/White/Frame 21.png</file>
+        <file>main.cpp</file>
+        <file>media/Black/Frame 10.png</file>
+        <file>media/Black/Frame 11.png</file>
+        <file>media/Black/Frame 12.png</file>
+        <file>media/Black/Frame 13.png</file>
+        <file>media/Black/Frame 14.png</file>
+        <file>media/Black/Frame 15.png</file>
+        <file>media/bg.jpg</file>
+        <file>media/chessboard.png</file>
     </qresource>
 </RCC>
