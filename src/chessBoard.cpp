@@ -214,8 +214,7 @@ void ChessBoard::randommoves(COLOR color)
             }
         }
     }
-    cellid += origin.at(0);
-    cellid += origin.at(1);
-    cellid += Board.at(rndcell[0]).at(rndcell[1]);
+    cellid += origin.substr(0,1);
+    cellid += Board.at(rndcell[0]).at(rndcell[1]).getId();
     this->movePiece(cellid);
 }
