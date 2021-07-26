@@ -172,3 +172,50 @@ void ChessBoard::order(string order)
 void ChessBoard::saveData(string order)
 {
 }
+
+void ChessBoard::randommoves(COLOR color)
+{
+    ChessMan *temp;
+    vector<int> rndcell;
+    string cellid;
+    int rand = randomNoGenerator(6);
+    switch (rand)
+    {
+    case QUEEN:
+        cellid += 'Q';
+        break;
+    case KING:
+        cellid += 'K';
+        break;
+    case BISHOP:
+        cellid += 'B';
+        break;
+    case POWN:
+        cellid += 'P';
+        break;
+    case KNIGHT:
+        cellid += 'H';
+        break;
+    case ROOK:
+        cellid += 'R';
+        break;
+    }
+    rndcell.push_back(randomNoGenerator(8));
+    rndcell.push_back(randomNoGenerator(8));
+    string origin;
+    for (size_t i = 0; i < 8; i++)
+    {
+        for (size_t j = 0; j < 8; j++)
+        {
+            temp = Board.at(i).at(j).getPiece();
+            if (temp->get_color() == color && temp->get_type() == rand)
+            {
+                origin = Board.at(i).at(j).getId();
+            }
+        }
+    }
+    cellid += origin.at(0);
+    cellid += origin.at(1);
+    cellid += Board.at(rndcell[0]).at(rndcell[1]);
+    this->movePiece(cellid);
+}

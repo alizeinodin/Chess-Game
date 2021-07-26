@@ -32,6 +32,8 @@ class ChessBoard
     Cell & search(std::string);
     ChessMan * makePiece(char, std::string);
     void saveData(std::string);
+    void randommoves(COLOR);
+    void movePiece(std::string);
     
 };
 #endif /* _CHESSBOARD_H*/

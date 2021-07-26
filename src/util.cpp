@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <vector>
 #include <stdexcept>
+#include <random>
 #include <array>
 //#include <random>
 using namespace std;
@@ -95,5 +96,18 @@ vector<ID> possible_move_king(COLOR color, std::array<std::array<Cell, 8>, 8> &b
             }
         }
     }
+    return temp;
+}
+
+
+int randomNoGenerator(int set)
+{
+    static unsigned int rndm = 2;
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> dis(1);
+    unsigned int temp = dis(gen) * rndm;
+    rndm++;
+    temp = temp % set;
     return temp;
 }
