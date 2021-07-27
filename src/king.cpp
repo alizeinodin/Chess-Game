@@ -145,3 +145,107 @@ void king::attack(std::string move, Cell & cell)
         attackscore = 8;
     }
 }
+
+void king::castling(string str, std::array<std::array<Cell, 8>, 8> &board)
+{
+    auto temp = cut_str(str);
+    bool set = true;
+    string alf = "ABCDEFGH";
+    string cellid;
+    int i = 0;
+    Cell cells[2];
+
+    if (color == "#ffffff")
+    {
+        if (get_num(temp.first) == 1)
+        {
+            if (temp.second == "G1")
+            {
+                if (search_cell("G1",board).getState())
+                {
+                    bool f1 = search_cell("F1", board).getState();
+                    
+                    if (f1 && search_cell("H1",board).getPiece()->get_type() == ROOK)
+                    {
+                        cells[0] = search_cell(temp.first, board);
+                        cells[0].empty();
+                        cells[1] = search_cell("G1", board);
+                        cells[1].setPiece(this);
+                        cells[0] = search_cell("H1", board);
+                        ChessMan * chess = cells[0].getPiece();
+                        cells[0].empty();
+                        cells[1] = search_cell("F1", board);
+                        cells[1].setPiece(chess);
+                        return;
+                    }
+                }
+            } else if (temp.second == "C1")
+            {
+                if (search_cell("C1",board).getState())
+                {
+                    bool b1 = search_cell("B1", board).getState();
+                    bool d1 = search_cell("D1", board).getState();
+                    if (d1 && b1 && search_cell("A1",board).getPiece()->get_type() == ROOK)
+                    {
+                        cells[0] = search_cell(temp.first, board);
+                        cells[0].empty();
+                        cells[1] = search_cell("C1", board);
+                        cells[1].setPiece(this);
+                        cells[0] = search_cell("A1", board);
+                        ChessMan * chess = cells[0].getPiece();
+                        cells[0].empty();
+                        cells[1] = search_cell("D1", board);
+                        cells[1].setPiece(chess);
+                        return;
+                    }
+                }
+            }
+        }
+    } else if (color == "#000000")
+    {
+        if (get_num(temp.first) == 8)
+        {
+            if (temp.second == "G8")
+            {
+                if (search_cell("G8",board).getState())
+                {
+                    bool f8 = search_cell("F8", board).getState();
+                    
+                    if (f8 && search_cell("H8",board).getPiece()->get_type() == ROOK)
+                    {
+                        cells[0] = search_cell(temp.first, board);
+                        cells[0].empty();
+                        cells[1] = search_cell("G8", board);
+                        cells[1].setPiece(this);
+                        cells[0] = search_cell("H8", board);
+                        ChessMan * chess = cells[0].getPiece();
+                        cells[0].empty();
+                        cells[1] = search_cell("F8", board);
+                        cells[1].setPiece(chess);
+                        return;
+                    }
+                }
+            } else if (temp.second == "C8")
+            {
+                if (search_cell("C",board).getState())
+                {
+                    bool b8 = search_cell("B8", board).getState();
+                    bool d8 = search_cell("D8", board).getState();
+                    if (d8 && b8 && search_cell("A8",board).getPiece()->get_type() == ROOK)
+                    {
+                        cells[0] = search_cell(temp.first, board);
+                        cells[0].empty();
+                        cells[1] = search_cell("C8", board);
+                        cells[1].setPiece(this);
+                        cells[0] = search_cell("A8", board);
+                        ChessMan * chess = cells[0].getPiece();
+                        cells[0].empty();
+                        cells[1] = search_cell("D8", board);
+                        cells[1].setPiece(chess);
+                        return;
+                    }
+                }
+            }
+        }
+    }
+}
