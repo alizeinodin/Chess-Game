@@ -2,12 +2,29 @@ import QtQuick 2.13
 import QtQuick.Window 2.13
 import QtQuick.Controls 2.13
 import QtQuick.Controls.Styles 1.4
+import QtQuick.Controls.Material 2.3
 ApplicationWindow {
     id: root
     visible: true
-    width: 1500
-    height: 950
+    width: Screen.width
+    height: Screen.height
     title: qsTr("Chess")
+    Material.theme: Material.Light
+    Material.accent: Material.Purple
+    Material.background: "#EEEEEE"
+
+    FontLoader{
+        id: fontvazir
+        source: "media/Vazir-Bold.ttf"
+    }
+
+//    Text {
+//        id: name
+//        anchors.centerIn: parent
+//        font.pixelSize: 25
+//        text: qsTr("سلام بر تو ای دوست عزیز")
+//        font.family: fontvazir.name
+//    }
 
     ChessBoard{
 

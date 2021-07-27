@@ -19,5 +19,10 @@
         <file>media/Black/Frame 15.png</file>
         <file>media/bg.jpg</file>
         <file>media/chessboard.png</file>
+        <file>media/Group 35.jpg</file>
+        <file>media/Left Arrow 1.png</file>
+        <file>media/blackking.png</file>
+        <file>media/whiteking.png</file>
+        <file>media/Vazir-Bold.ttf</file>
     </qresource>
 </RCC>
