@@ -1,6 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQuickStyle>
+#include "connection.h"
 
 int main(int argc, char *argv[])
 {
@@ -9,6 +10,7 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QQuickStyle::setStyle("Material");
+    qmlRegisterType<connection>("connect", 1, 0, "Connect");
 
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));

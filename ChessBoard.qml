@@ -3,6 +3,8 @@ import QtQuick.Window 2.13
 import QtQuick.Controls 2.13
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Controls.Material 2.3
+import connect 1.0
+import "functions.js" as Func
 
 Item {
     id: mainBoard
@@ -10,19 +12,18 @@ Item {
 
     FontLoader{
         id: fontfarsi
-        source: "media/Vazir-Bold.ttf"
+        source: "media/Font/IRANSansWeb_Bold.ttf"
     }
 
     BorderImage{
         id: bg
-        anchors.rightMargin: -59
-        anchors.bottomMargin: 183
-        anchors.leftMargin: 59
-        anchors.topMargin: -183
         source: ""
         anchors.fill: parent
         border.left: 5; border.top: 5
         border.right: 5; border.bottom: 5
+    }
+    Connect{
+        id: connection
     }
 
     Item {
@@ -316,89 +317,14 @@ Item {
 
 
         Item {
-            id: one
+            id: eight
             width: 20
             height: 80
             Text{
-                text: "1"
+                text: "8"
                 font.pixelSize: 40
                 font.bold: true
-                anchors.horizontalCenter: one.horizontalCenter
-                font.family: fontfarsi.name
-                color: colorBoard
-                font.underline: true
-            }
-        }
-
-        Item {
-            id: two
-            width: 20
-            height: 80
-            Text{
-                text: "2"
-                font.pixelSize: 40
-                font.bold: true
-                anchors.horizontalCenter: two.horizontalCenter
-                font.family: fontfarsi.name
-                color: colorBoard
-                font.underline: true
-            }
-        }
-
-        Item {
-            id: three
-            width: 20
-            height: 80
-            Text{
-                text: "3"
-                font.pixelSize: 40
-                font.bold: true
-                anchors.horizontalCenter: three.horizontalCenter
-                font.family: fontfarsi.name
-                color: colorBoard
-                font.underline: true
-            }
-        }
-
-        Item {
-            id: four
-            width: 20
-            height: 80
-            Text{
-                text: "4"
-                font.pixelSize: 40
-                font.bold: true
-                anchors.horizontalCenter: four.horizontalCenter
-                font.family: fontfarsi.name
-                color: colorBoard
-                font.underline: true
-            }
-        }
-
-        Item {
-            id: five
-            width: 20
-            height: 80
-            Text{
-                text: "5"
-                font.pixelSize: 40
-                font.bold: true
-                anchors.horizontalCenter: five.horizontalCenter
-                font.family: fontfarsi.name
-                color: colorBoard
-                font.underline: true
-            }
-        }
-
-        Item {
-            id: six
-            width: 20
-            height: 80
-            Text{
-                text: "6"
-                font.pixelSize: 40
-                font.bold: true
-                anchors.horizontalCenter: six.horizontalCenter
+                anchors.horizontalCenter: eight.horizontalCenter
                 font.family: fontfarsi.name
                 color: colorBoard
                 font.underline: true
@@ -421,14 +347,89 @@ Item {
         }
 
         Item {
-            id: eight
+            id: six
             width: 20
             height: 80
             Text{
-                text: "8"
+                text: "6"
                 font.pixelSize: 40
                 font.bold: true
-                anchors.horizontalCenter: eight.horizontalCenter
+                anchors.horizontalCenter: six.horizontalCenter
+                font.family: fontfarsi.name
+                color: colorBoard
+                font.underline: true
+            }
+        }
+
+        Item {
+            id: five
+            width: 20
+            height: 80
+            Text{
+                text: "5"
+                font.pixelSize: 40
+                font.bold: true
+                anchors.horizontalCenter: five.horizontalCenter
+                font.family: fontfarsi.name
+                color: colorBoard
+                font.underline: true
+            }
+        }
+
+        Item {
+            id: four
+            width: 20
+            height: 80
+            Text{
+                text: "4"
+                font.pixelSize: 40
+                font.bold: true
+                anchors.horizontalCenter: four.horizontalCenter
+                font.family: fontfarsi.name
+                color: colorBoard
+                font.underline: true
+            }
+        }
+
+        Item {
+            id: three
+            width: 20
+            height: 80
+            Text{
+                text: "3"
+                font.pixelSize: 40
+                font.bold: true
+                anchors.horizontalCenter: three.horizontalCenter
+                font.family: fontfarsi.name
+                color: colorBoard
+                font.underline: true
+            }
+        }
+
+        Item {
+            id: two
+            width: 20
+            height: 80
+            Text{
+                text: "2"
+                font.pixelSize: 40
+                font.bold: true
+                anchors.horizontalCenter: two.horizontalCenter
+                font.family: fontfarsi.name
+                color: colorBoard
+                font.underline: true
+            }
+        }
+
+        Item {
+            id: one
+            width: 20
+            height: 80
+            Text{
+                text: "1"
+                font.pixelSize: 40
+                font.bold: true
+                anchors.horizontalCenter: one.horizontalCenter
                 font.family: fontfarsi.name
                 color: colorBoard
                 font.underline: true
@@ -444,6 +445,7 @@ Item {
         anchors.verticalCenter: mainBoard.verticalCenter
         anchors.left: mainBoard.left
         anchors.leftMargin: 560
+        property string move: ""
 
 
         BorderImage
@@ -458,241 +460,261 @@ Item {
 
         MouseArea{
             id:a1
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
+            property string id: "Ra1"
             x: 8
             y: 635
             width: 85
             height: 85
 
             Image {
-                id: rook1
-                source: "media/White/Frame 16.png"
+                id: a1Img
+                source: "media/White/R.png"
                 anchors.fill: parent
             }
+
+            onClicked: {
+                        board.move += id;
+                console.log(board.move);
+                    }
         }
 
         MouseArea{
             id:h1
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 665
             y: 631
             width: 85
             height: 85
-
+            property string id: "Rh1"
             Image {
-                id: rook2
-                source: "media/White/Frame 16.png"
+                id: h1Img
+                source: "media/White/R.png"
                 anchors.fill: parent
                 }
         }
 
         MouseArea{
             id:d1
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 287
             y: 631
             width: 85
             height: 85
+            property string id: "Qd1"
 
             Image {
-                id: queen
+                id: d1Img
                 anchors.fill: parent
-                source: "media/White/Frame 17.png"
+                source: "media/White/Q.png"
             }
         }
 
         MouseArea{
             id:e1
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 382
             y: 631
             width: 85
             height: 85
+            property string id: "Ke1"
             Image {
-                id: king
+                id: e1Img
                 anchors.fill: parent
-                source: "media/White/Frame 18.png"
+                source: "media/White/K.png"
             }
         }
 
         MouseArea{
             id:f1
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 473
             y: 631
             width: 85
             height: 85
+            property string id: "Bf1"
 
             Image {
-                id: bishop2
+                id: f1Img
                 anchors.fill: parent
-                source: "media/White/Frame 19.png"
+                source: "media/White/B.png"
                 }
         }
 
         MouseArea{
             id:c1
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 198
             y: 631
             width: 85
             height: 85
+            property string id: "Bc1"
             Image {
-                id: bishop1
+                id:c1Immg
                 anchors.fill: parent
-                source: "media/White/Frame 19.png"
+                source: "media/White/B.png"
             }
         }
 
         MouseArea{
             id:b1
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 98
             y: 631
             width: 85
             height: 85
+            property string id: "Hb1"
 
 
         Image {
-            id: knight1
+            id: b1Img
             anchors.fill: parent
-            source: "media/White/Frame 20.png"
+            source: "media/White/H.png"
             }
         }
 
         MouseArea{
             id:g1
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 570
             y: 631
             width: 85
             height: 85
+            property string id: "Hg1"
 
             Image {
-                id: knight2
+                id: g1Img
                 anchors.fill: parent
-                source: "media/White/Frame 20.png"
+                source: "media/White/H.png"
                 }
         }
 
         MouseArea{
             id:a2
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 7
             y: 538
             width: 85
             height: 85
+            property string id: "Pa2"
             Image {
-                id: pawn1
+                id: a2Img
                 anchors.fill: parent
-                source: "media/White/Frame 21.png"
+                source: "media/White/P.png"
                 }
         }
 
         MouseArea{
             id:b2
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 98
             y: 538
             width: 85
             height: 85
+            property string id: "Pb2"
 
             Image {
-                id: pawn2
+                id: b2Img
                 anchors.fill: parent
-                source: "media/White/Frame 21.png"
+                source: "media/White/P.png"
                 }
 
         }
 
         MouseArea{
             id:c2
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 193
             y: 539
             width: 85
             height: 85
+            property string id: "Pc2"
 
             Image {
-                id: pawn3
+                id: c2Img
                 anchors.fill: parent
-                source: "media/White/Frame 21.png"
+                source: "media/White/P.png"
                 }
         }
 
         MouseArea{
             id:d2
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 284
             y: 538
             width: 85
             height: 85
+            property string id: "Pd2"
 
             Image {
-                id: pawn4
+                id: d2Img
                 anchors.fill: parent
-                source: "media/White/Frame 21.png"
+                source: "media/White/P.png"
             }
         }
 
 
         MouseArea{
             id:e2
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 382
             y: 539
             width: 85
             height: 85
+            property string id: "Pe2"
 
             Image {
-                id: pawn5
+                id: e2Img
                 anchors.fill: parent
-                source: "media/White/Frame 21.png"
+                source: "media/White/P.png"
             }
         }
 
         MouseArea{
             id:f2
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 473
             y: 538
             width: 85
             height: 85
+            property string id: "Pf2"
 
             Image {
-                id: pawn6
+                id: f2Img
                 anchors.fill: parent
-                source: "media/White/Frame 21.png"
+                source: "media/White/P.png"
             }
         }
 
         MouseArea{
             id:g2
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 570
             y: 538
             width: 85
             height: 85
+            property string id: "Pg2"
 
             Image {
-                id: pawn7
+                id: g2Img
                 anchors.fill: parent
-                source: "media/White/Frame 21.png"
+                source: "media/White/P.png"
             }
         }
 
         MouseArea{
             id:h2
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 665
             y: 540
             width: 85
             height: 85
+            property string id: "Ph2"
 
             Image {
-                id: pawn8
+                id: h2Img
                 anchors.fill: parent
-                source: "media/White/Frame 21.png"
+                source: "media/White/P.png"
             }
         }
 
@@ -700,41 +722,44 @@ Item {
 
         MouseArea{
             id:a8
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 5
             y: 0
             width: 85
             height: 85
+            property string id: "Ra8"
 
             Image {
                 id: brook1
                 anchors.fill: parent
-                source: "media/Black/Frame 10.png"
+                source: "media/Black/R.png"
             }
         }
 
         MouseArea{
             id:h8
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 665
             y: 3
             width: 85
             height: 85
+            property string id: "Rh8"
 
             Image {
                 id: brook2
                 anchors.fill: parent
-                source: "media/Black/Frame 10.png"
+                source: "media/Black/R.png"
             }
         }
 
         MouseArea{
             id:d8
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 284
             y: 2
             width: 85
             height: 85
+            property string id: "Qd8"
 
             Image {
                 id: bqueen
@@ -743,47 +768,50 @@ Item {
                 anchors.leftMargin: 4
                 anchors.topMargin: 0
                 anchors.fill: parent
-                source: "media/Black/Frame 11.png"
+                source: "media/Black/Q.png"
             }
         }
 
         MouseArea{
             id:e8
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 382
             y: 0
             width: 85
             height: 85
+            property string id: "Ke8"
 
             Image {
                 id: bking
                 anchors.fill: parent
-                source: "media/Black/Frame 12.png"
+                source: "media/Black/K.png"
             }
         }
 
         MouseArea{
             id:f8
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 473
             y: 1
             width: 85
             height: 85
+            property string id: "Bf8"
 
             Image {
                 id: bbishop1
                 anchors.fill: parent
-                source: "media/Black/Frame 13.png"
+                source: "media/Black/B.png"
             }
         }
 
         MouseArea{
             id:c8
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 193
             y: 2
             width: 85
             height: 85
+            property string id: "Bc8"
 
             Image {
                 id: bbishop2
@@ -792,157 +820,167 @@ Item {
                 anchors.leftMargin: 1
                 anchors.topMargin: 0
                 anchors.fill: parent
-                source: "media/Black/Frame 13.png"
+                source: "media/Black/B.png"
             }
         }
 
         MouseArea{
             id:g8
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 570
             y: 0
             width: 85
             height: 85
+            property string id: "Hg8"
 
             Image {
                 id: bknight1
                 anchors.fill: parent
-                source: "media/Black/Frame 14.png"
+                source: "media/Black/H.png"
             }
         }
 
         MouseArea{
             id:b8
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 100
             y: 2
             width: 85
             height: 85
+            property string id: "Hb8"
 
             Image {
                 id: bknight2
                 anchors.fill: parent
-                source: "media/Black/Frame 14.png"
+                source: "media/Black/H.png"
             }
         }
 
         MouseArea{
             id:a7
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 5
             y: 90
             width: 85
             height: 85
+            property string id: "Pa7"
 
             Image {
                 id: bpawn1
                 anchors.fill: parent
-                source: "media/Black/Frame 15.png"
+                source: "media/Black/P.png"
             }
         }
 
         MouseArea{
             id:b7
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 100
             y: 90
             width: 85
             height: 85
+            property string id: "Pb7"
 
             Image {
                 id: bpawn2
                 anchors.fill: parent
-                source: "media/Black/Frame 15.png"
+                source: "media/Black/P.png"
             }
         }
 
         MouseArea{
             id:c7
-            cursorShape: Qt.OpenHandCursor
-            x: 198
+            cursorShape: Qt.ArrowCursor
+            x: 195
             y: 90
             width: 85
             height: 85
+            property string id: "Pc7"
 
             Image {
                 id: bpawn3
                 anchors.fill: parent
-                source: "media/Black/Frame 15.png"
+                source: "media/Black/P.png"
             }
         }
 
         MouseArea{
             id:d7
-            cursorShape: Qt.OpenHandCursor
-            x: 284
+            cursorShape: Qt.ArrowCursor
+            x: 289
             y: 90
             width: 85
             height: 85
+            property string id: "Pd7"
 
             Image {
                 id: bpawn4
                 anchors.fill: parent
-                source: "media/Black/Frame 15.png"
+                source: "media/Black/P.png"
             }
         }
 
         MouseArea{
             id:e7
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 382
             y: 90
             width: 85
             height: 85
+            property string id: "Pe7"
 
             Image {
                 id: bpawn5
                 anchors.fill: parent
-                source: "media/Black/Frame 15.png"
+                source: "media/Black/P.png"
             }
         }
 
         MouseArea{
             id:f7
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 473
             y: 90
             width: 85
             height: 85
+            property string id: "Pf7"
 
             Image {
                 id: bpawn6
                 anchors.fill: parent
-                source: "media/Black/Frame 15.png"
+                source: "media/Black/P.png"
             }
         }
 
         MouseArea{
             id:g7
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 570
             y: 90
             width: 85
             height: 85
+            property string id: "Pg7"
 
             Image {
                 id: bpawn7
                 anchors.fill: parent
-                source: "media/Black/Frame 15.png"
+                source: "media/Black/P.png"
             }
         }
 
         MouseArea{
             id:h7
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 665
             y: 90
             width: 85
             height: 85
+            property string id: "Ph7"
 
             Image {
                 id: bpawn8
                 anchors.fill: parent
-                source: "media/Black/Frame 15.png"
+                source: "media/Black/P.png"
             }
         }
 
@@ -957,6 +995,7 @@ Item {
             y: 185
             width: 85
             height: 85
+            property string id: "h6"
 
             Image {
                 id: h6img
@@ -967,11 +1006,12 @@ Item {
 
         MouseArea{
             id:h5
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 665
             y: 272
             width: 85
             height: 85
+            property string id: "h5"
 
             Image {
                 id: h5img
@@ -982,11 +1022,12 @@ Item {
 
         MouseArea{
             id:h4
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 665
             y: 360
             width: 85
             height: 85
+            property string id: "h4"
 
             Image {
                 id: h4img
@@ -997,11 +1038,12 @@ Item {
 
         MouseArea{
             id:h3
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 665
             y: 447
             width: 85
             height: 85
+            property string id: "h3"
 
             Image {
                 id: h3img
@@ -1016,11 +1058,12 @@ Item {
 
         MouseArea{
             id:g6
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 570
             y: 185
             width: 85
             height: 85
+            property string id: "g6"
 
             Image {
                 id: g6img
@@ -1031,11 +1074,12 @@ Item {
 
         MouseArea{
             id:g5
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 570
             y: 272
             width: 85
             height: 85
+            property string id: "g5"
 
             Image {
                 id: g5img
@@ -1046,11 +1090,12 @@ Item {
 
         MouseArea{
             id:g4
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 570
             y: 360
             width: 85
             height: 85
+            property string id: "g4"
 
             Image {
                 id: g4img
@@ -1061,11 +1106,12 @@ Item {
 
         MouseArea{
             id:g3
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 570
             y: 447
             width: 85
             height: 85
+            property string id: "g3"
 
             Image {
                 id: g3img
@@ -1080,11 +1126,12 @@ Item {
 
         MouseArea{
             id:f6
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 476
             y: 185
             width: 85
             height: 85
+            property string id: "f6"
 
             Image {
                 id: f6img
@@ -1095,11 +1142,12 @@ Item {
 
         MouseArea{
             id:f5
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 476
             y: 272
             width: 85
             height: 85
+            property string id: "f5"
 
             Image {
                 id: f5img
@@ -1110,11 +1158,12 @@ Item {
 
         MouseArea{
             id:f4
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 476
             y: 360
             width: 85
             height: 85
+            property string id: "f4"
 
             Image {
                 id: f4img
@@ -1125,11 +1174,12 @@ Item {
 
         MouseArea{
             id:f3
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 476
             y: 447
             width: 85
             height: 85
+            property string id: "f3"
 
             Image {
                 id: f3img
@@ -1144,11 +1194,12 @@ Item {
 
         MouseArea{
             id:e6
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 380
             y: 180
             width: 85
             height: 85
+            property string id: "e6"
 
             Image {
                 id: e6img
@@ -1159,11 +1210,12 @@ Item {
 
         MouseArea{
             id:e5
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 381
             y: 267
             width: 85
             height: 85
+            property string id: "e5"
 
             Image {
                 id: e5img
@@ -1178,11 +1230,12 @@ Item {
 
         MouseArea{
             id:e4
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 381
             y: 360
             width: 85
             height: 85
+            property string id: "e4"
 
             Image {
                 id: e4img
@@ -1193,16 +1246,17 @@ Item {
 
         MouseArea{
             id:e3
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 381
             y: 450
             width: 85
             height: 85
+            property string id: "e3"
 
             Image {
                 id: e3img
                 anchors.fill: parent
-                source: "media/White/Frame 16.png"
+                source: ""
             }
         }
 
@@ -1212,11 +1266,12 @@ Item {
 
         MouseArea{
             id:d6
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 288
             y: 185
             width: 85
             height: 85
+            property string id: "d6"
 
             Image {
                 id: d6img
@@ -1227,11 +1282,12 @@ Item {
 
         MouseArea{
             id:d5
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 288
             y: 267
             width: 85
             height: 85
+            property string id: "d5"
 
             Image {
                 id: d5img
@@ -1242,11 +1298,12 @@ Item {
 
         MouseArea{
             id:d4
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 288
             y: 360
             width: 85
             height: 85
+            property string id: "d4"
 
             Image {
                 id: d4img
@@ -1257,11 +1314,12 @@ Item {
 
         MouseArea{
             id:d3
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 288
             y: 450
             width: 85
             height: 85
+            property string id: "d3"
 
             Image {
                 id: d3img
@@ -1277,11 +1335,12 @@ Item {
 
         MouseArea{
             id:c6
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 288
             y: 185
             width: 85
             height: 85
+            property string id: "c6"
 
             Image {
                 id: c6img
@@ -1292,11 +1351,12 @@ Item {
 
         MouseArea{
             id:c5
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 288
             y: 267
             width: 85
             height: 85
+            property string id: "c5"
 
             Image {
                 id: c5img
@@ -1307,11 +1367,12 @@ Item {
 
         MouseArea{
             id:c4
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 288
             y: 360
             width: 85
             height: 85
+            property string id: "c4"
 
             Image {
                 id: c4img
@@ -1322,11 +1383,12 @@ Item {
 
         MouseArea{
             id:c3
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 288
             y: 450
             width: 85
             height: 85
+            property string id: "c3"
 
             Image {
                 id: c3img
@@ -1341,11 +1403,12 @@ Item {
 
         MouseArea{
             id:b6
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 100
             y: 185
             width: 85
             height: 85
+            property string id: "b6"
 
             Image {
                 id: b6img
@@ -1356,11 +1419,12 @@ Item {
 
         MouseArea{
             id:b5
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 100
             y: 267
             width: 85
             height: 85
+            property string id: "b5"
 
             Image {
                 id: b5img
@@ -1371,11 +1435,12 @@ Item {
 
         MouseArea{
             id:b4
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 100
             y: 360
             width: 85
             height: 85
+            property string id: "b4"
 
             Image {
                 id: b4img
@@ -1386,11 +1451,12 @@ Item {
 
         MouseArea{
             id:b3
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 100
             y: 450
             width: 85
             height: 85
+            property string id: "b3"
 
             Image {
                 id: b3img
@@ -1405,11 +1471,12 @@ Item {
 
         MouseArea{
             id:a6
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 5
             y: 185
             width: 85
             height: 85
+            property string id: "a6"
 
             Image {
                 id: a6img
@@ -1420,11 +1487,12 @@ Item {
 
         MouseArea{
             id:a5
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 5
             y: 267
             width: 85
             height: 85
+            property string id: "a5"
 
             Image {
                 id: a5img
@@ -1435,11 +1503,12 @@ Item {
 
         MouseArea{
             id:a4
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 5
             y: 360
             width: 85
             height: 85
+            property string id: "a4"
 
             Image {
                 id: a4img
@@ -1450,11 +1519,12 @@ Item {
 
         MouseArea{
             id:a3
-            cursorShape: Qt.OpenHandCursor
+            cursorShape: Qt.ArrowCursor
             x: 5
             y: 450
             width: 85
             height: 85
+            property string id: "a3"
 
             Image {
                 id: a3img
@@ -1693,3 +1763,10 @@ Item {
     }
 }
 }
+
+
+
+/*##^## Designer {
+    D{i:0;autoSize:true;height:480;width:640}
+}
+ ##^##*/

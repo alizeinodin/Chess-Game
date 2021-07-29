@@ -3,6 +3,7 @@ import QtQuick.Window 2.13
 import QtQuick.Controls 2.13
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Controls.Material 2.3
+
 ApplicationWindow {
     id: root
     visible: true
@@ -15,15 +16,20 @@ ApplicationWindow {
 
     FontLoader{
         id: fontvazir
-        source: "media/Vazir-Bold.ttf"
+        source: "media/Font/IRANSansWeb_Bold.ttf"
     }
 
-//    Text {
-//        id: name
-//        anchors.centerIn: parent
-//        font.pixelSize: 25
-//        text: qsTr("سلام بر تو ای دوست عزیز")
+//    Connect{
+//        id: connection
+//        onShow: btn.text = "کلیک"
+//    }
+
+//    Button{
+//        id: btn
+//        text: "کلیک کنید"
 //        font.family: fontvazir.name
+//        onClicked: connection.setOrder(qsTr("k"), qsTr("d2"), qsTr("d3"))
+
 //    }
 
     ChessBoard{
