@@ -6,6 +6,11 @@ Player::Player(Name name, COLOR color)
 {
     this->name = name;
     this->color = color;
+    if (color == "#ffffff")
+    {
+        Turn = true;
+    }
+    
 }
 
 void Player::addScore(size_t state, int score)
@@ -15,7 +20,7 @@ void Player::addScore(size_t state, int score)
     case 1:
         PScore += score;
         break;
-    case 2:
+    case -1:
         NScore += score;
         break;
 
@@ -35,7 +40,7 @@ int Player::getScore(size_t state)
 
         break;
 
-    case 2:
+    case -1:
         return NScore;
 
         break;
@@ -52,3 +57,6 @@ COLOR Player::getcolor()
 {
     return color;
 }
+
+
+

@@ -87,6 +87,22 @@ void ChessBoard::startboard()
 }
 
 
+Cell & ChessBoard::search(std::string str)
+{
+    char *character;
+    get_char(str, character);
+    string temp = "ABCDEFGH";
+    int x = temp.find(temp);
+    int y = get_num(str);
+    if (Board.at(x).at(y).getId() == str)
+    {
+        return Board.at(x).at(y);
+    }
+
+    throw out_of_range("cell not exist");
+}
+
+
 void ChessBoard::randommoves(COLOR color)
 {
     ChessMan *temp;

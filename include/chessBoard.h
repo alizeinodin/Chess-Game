@@ -24,16 +24,13 @@ class ChessBoard
 
     public:
     static ChessBoard & getInstance(); // sinleton pattern
-    std::array<std::array<Cell, 8>, 8> start();
+    void startboard();
     std::array<std::array<Cell, 8>, 8> remmeber(std::string);
     void order(std::string);
-    std::map<std::string, int> threats();
-    void updateBoard(std::string, std::string);
     Cell & search(std::string);
-    ChessMan * makePiece(char, std::string);
-    void saveData(std::string);
     void randommoves(COLOR);
     void movePiece(std::string);
-    
+    ChessMan * attack(MOVE);
+    int threat(COLOR);
 };
 #endif /* _CHESSBOARD_H*/

@@ -2,10 +2,8 @@
 #include "player.h"
 using namespace std;
 
-ChessBoard &Game::getBoard()
-{
-    return gameBoard;
-}
+Game::Game(Name name) : gamename(name) {}
+
 
 void Game::setPlayer(Color color, string name)
 {
@@ -36,4 +34,48 @@ Player Game::getPlayer(COLOR c)
         return * player2;
     }
     throw invalid_argument("invalid color");
+}
+
+void Game::order(MOVE move)
+{
+    Cell cell = gameBoard.search(cut_str(move).first);
+    if (Turn)
+    {
+        if (cell.getPiece()->get_color() == player1->getcolor())
+        {
+            cell = gameBoard.search(cut_str(move).second);
+            if (cell.getState())
+            {
+                gameBoard.movePiece(move);
+                Turn = false;
+            }
+            else
+            {
+                gameBoard.attack(move);
+            }
+        }
+        throw invalid_argument("can not move this piece");
+    }
+    else
+    {
+        if (cell.getPiece()->get_color() == player2->getcolor())
+        {
+            cell = gameBoard.search(cut_str(move).second);
+            if (cell.getState())
+            {
+                gameBoard.movePiece(move);
+                Turn = true;
+            }
+            else
+            {
+                gameBoard.attack(move);
+            }
+        }
+        throw invalid_argument("can not move this piece");
+    }
+}
+
+void Game::startgame()
+{
+    gameBoard.startboard();
 }

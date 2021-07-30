@@ -7,15 +7,18 @@ class Game
 {
     enum Color {BLACK, WITHE};
     private:
+    Name gamename;
     ChessBoard gameBoard = ChessBoard::getInstance();
     Player * player1 = nullptr;
     Player * player2 = nullptr;
-    bool Turn = false;
+    bool Turn = true;
 
     public:
-    ChessBoard & getBoard();
+    Game(Name);
+    void startgame();
     void setPlayer(Color, std::string);
     Player getPlayer(COLOR);
+    void order(MOVE);
 };
 
 #endif /* _GAME_H */
