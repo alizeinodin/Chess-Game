@@ -70,18 +70,18 @@ CMakeFiles/app.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/app.dir/src/main.cpp.s"
 	/bin/g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/main.cpp" -o CMakeFiles/app.dir/src/main.cpp.s
 
-CMakeFiles/app.dir/src/cell.cpp.o: CMakeFiles/app.dir/flags.make
-CMakeFiles/app.dir/src/cell.cpp.o: ../src/cell.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/app.dir/src/cell.cpp.o"
-	/bin/g++-9  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/app.dir/src/cell.cpp.o -c "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/cell.cpp"
+CMakeFiles/app.dir/src/Cell.cpp.o: CMakeFiles/app.dir/flags.make
+CMakeFiles/app.dir/src/Cell.cpp.o: ../src/Cell.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/app.dir/src/Cell.cpp.o"
+	/bin/g++-9  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/app.dir/src/Cell.cpp.o -c "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/Cell.cpp"
 
-CMakeFiles/app.dir/src/cell.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/app.dir/src/cell.cpp.i"
-	/bin/g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/cell.cpp" > CMakeFiles/app.dir/src/cell.cpp.i
+CMakeFiles/app.dir/src/Cell.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/app.dir/src/Cell.cpp.i"
+	/bin/g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/Cell.cpp" > CMakeFiles/app.dir/src/Cell.cpp.i
 
-CMakeFiles/app.dir/src/cell.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/app.dir/src/cell.cpp.s"
-	/bin/g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/cell.cpp" -o CMakeFiles/app.dir/src/cell.cpp.s
+CMakeFiles/app.dir/src/Cell.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/app.dir/src/Cell.cpp.s"
+	/bin/g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/Cell.cpp" -o CMakeFiles/app.dir/src/Cell.cpp.s
 
 CMakeFiles/app.dir/src/id.cpp.o: CMakeFiles/app.dir/flags.make
 CMakeFiles/app.dir/src/id.cpp.o: ../src/id.cpp
@@ -148,29 +148,149 @@ CMakeFiles/app.dir/src/game.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/app.dir/src/game.cpp.s"
 	/bin/g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/game.cpp" -o CMakeFiles/app.dir/src/game.cpp.s
 
+CMakeFiles/app.dir/src/pawn.cpp.o: CMakeFiles/app.dir/flags.make
+CMakeFiles/app.dir/src/pawn.cpp.o: ../src/pawn.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/app.dir/src/pawn.cpp.o"
+	/bin/g++-9  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/app.dir/src/pawn.cpp.o -c "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/pawn.cpp"
+
+CMakeFiles/app.dir/src/pawn.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/app.dir/src/pawn.cpp.i"
+	/bin/g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/pawn.cpp" > CMakeFiles/app.dir/src/pawn.cpp.i
+
+CMakeFiles/app.dir/src/pawn.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/app.dir/src/pawn.cpp.s"
+	/bin/g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/pawn.cpp" -o CMakeFiles/app.dir/src/pawn.cpp.s
+
+CMakeFiles/app.dir/src/util.cpp.o: CMakeFiles/app.dir/flags.make
+CMakeFiles/app.dir/src/util.cpp.o: ../src/util.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/app.dir/src/util.cpp.o"
+	/bin/g++-9  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/app.dir/src/util.cpp.o -c "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/util.cpp"
+
+CMakeFiles/app.dir/src/util.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/app.dir/src/util.cpp.i"
+	/bin/g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/util.cpp" > CMakeFiles/app.dir/src/util.cpp.i
+
+CMakeFiles/app.dir/src/util.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/app.dir/src/util.cpp.s"
+	/bin/g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/util.cpp" -o CMakeFiles/app.dir/src/util.cpp.s
+
+CMakeFiles/app.dir/src/king.cpp.o: CMakeFiles/app.dir/flags.make
+CMakeFiles/app.dir/src/king.cpp.o: ../src/king.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/app.dir/src/king.cpp.o"
+	/bin/g++-9  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/app.dir/src/king.cpp.o -c "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/king.cpp"
+
+CMakeFiles/app.dir/src/king.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/app.dir/src/king.cpp.i"
+	/bin/g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/king.cpp" > CMakeFiles/app.dir/src/king.cpp.i
+
+CMakeFiles/app.dir/src/king.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/app.dir/src/king.cpp.s"
+	/bin/g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/king.cpp" -o CMakeFiles/app.dir/src/king.cpp.s
+
+CMakeFiles/app.dir/src/rook.cpp.o: CMakeFiles/app.dir/flags.make
+CMakeFiles/app.dir/src/rook.cpp.o: ../src/rook.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/app.dir/src/rook.cpp.o"
+	/bin/g++-9  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/app.dir/src/rook.cpp.o -c "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/rook.cpp"
+
+CMakeFiles/app.dir/src/rook.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/app.dir/src/rook.cpp.i"
+	/bin/g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/rook.cpp" > CMakeFiles/app.dir/src/rook.cpp.i
+
+CMakeFiles/app.dir/src/rook.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/app.dir/src/rook.cpp.s"
+	/bin/g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/rook.cpp" -o CMakeFiles/app.dir/src/rook.cpp.s
+
+CMakeFiles/app.dir/src/knight.cpp.o: CMakeFiles/app.dir/flags.make
+CMakeFiles/app.dir/src/knight.cpp.o: ../src/knight.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/app.dir/src/knight.cpp.o"
+	/bin/g++-9  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/app.dir/src/knight.cpp.o -c "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/knight.cpp"
+
+CMakeFiles/app.dir/src/knight.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/app.dir/src/knight.cpp.i"
+	/bin/g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/knight.cpp" > CMakeFiles/app.dir/src/knight.cpp.i
+
+CMakeFiles/app.dir/src/knight.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/app.dir/src/knight.cpp.s"
+	/bin/g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/knight.cpp" -o CMakeFiles/app.dir/src/knight.cpp.s
+
+CMakeFiles/app.dir/src/bishop.cpp.o: CMakeFiles/app.dir/flags.make
+CMakeFiles/app.dir/src/bishop.cpp.o: ../src/bishop.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/app.dir/src/bishop.cpp.o"
+	/bin/g++-9  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/app.dir/src/bishop.cpp.o -c "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/bishop.cpp"
+
+CMakeFiles/app.dir/src/bishop.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/app.dir/src/bishop.cpp.i"
+	/bin/g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/bishop.cpp" > CMakeFiles/app.dir/src/bishop.cpp.i
+
+CMakeFiles/app.dir/src/bishop.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/app.dir/src/bishop.cpp.s"
+	/bin/g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/bishop.cpp" -o CMakeFiles/app.dir/src/bishop.cpp.s
+
+CMakeFiles/app.dir/src/queen.cpp.o: CMakeFiles/app.dir/flags.make
+CMakeFiles/app.dir/src/queen.cpp.o: ../src/queen.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/app.dir/src/queen.cpp.o"
+	/bin/g++-9  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/app.dir/src/queen.cpp.o -c "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/queen.cpp"
+
+CMakeFiles/app.dir/src/queen.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/app.dir/src/queen.cpp.i"
+	/bin/g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/queen.cpp" > CMakeFiles/app.dir/src/queen.cpp.i
+
+CMakeFiles/app.dir/src/queen.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/app.dir/src/queen.cpp.s"
+	/bin/g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/queen.cpp" -o CMakeFiles/app.dir/src/queen.cpp.s
+
+CMakeFiles/app.dir/src/chessman.cpp.o: CMakeFiles/app.dir/flags.make
+CMakeFiles/app.dir/src/chessman.cpp.o: ../src/chessman.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/app.dir/src/chessman.cpp.o"
+	/bin/g++-9  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/app.dir/src/chessman.cpp.o -c "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/chessman.cpp"
+
+CMakeFiles/app.dir/src/chessman.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/app.dir/src/chessman.cpp.i"
+	/bin/g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/chessman.cpp" > CMakeFiles/app.dir/src/chessman.cpp.i
+
+CMakeFiles/app.dir/src/chessman.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/app.dir/src/chessman.cpp.s"
+	/bin/g++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/chessman.cpp" -o CMakeFiles/app.dir/src/chessman.cpp.s
+
 # Object files for target app
 app_OBJECTS = \
 "CMakeFiles/app.dir/src/main.cpp.o" \
-"CMakeFiles/app.dir/src/cell.cpp.o" \
+"CMakeFiles/app.dir/src/Cell.cpp.o" \
 "CMakeFiles/app.dir/src/id.cpp.o" \
 "CMakeFiles/app.dir/src/chessBoard.cpp.o" \
 "CMakeFiles/app.dir/src/fileConnect.cpp.o" \
 "CMakeFiles/app.dir/src/player.cpp.o" \
-"CMakeFiles/app.dir/src/game.cpp.o"
+"CMakeFiles/app.dir/src/game.cpp.o" \
+"CMakeFiles/app.dir/src/pawn.cpp.o" \
+"CMakeFiles/app.dir/src/util.cpp.o" \
+"CMakeFiles/app.dir/src/king.cpp.o" \
+"CMakeFiles/app.dir/src/rook.cpp.o" \
+"CMakeFiles/app.dir/src/knight.cpp.o" \
+"CMakeFiles/app.dir/src/bishop.cpp.o" \
+"CMakeFiles/app.dir/src/queen.cpp.o" \
+"CMakeFiles/app.dir/src/chessman.cpp.o"
 
 # External object files for target app
 app_EXTERNAL_OBJECTS =
 
 app: CMakeFiles/app.dir/src/main.cpp.o
-app: CMakeFiles/app.dir/src/cell.cpp.o
+app: CMakeFiles/app.dir/src/Cell.cpp.o
 app: CMakeFiles/app.dir/src/id.cpp.o
 app: CMakeFiles/app.dir/src/chessBoard.cpp.o
 app: CMakeFiles/app.dir/src/fileConnect.cpp.o
 app: CMakeFiles/app.dir/src/player.cpp.o
 app: CMakeFiles/app.dir/src/game.cpp.o
+app: CMakeFiles/app.dir/src/pawn.cpp.o
+app: CMakeFiles/app.dir/src/util.cpp.o
+app: CMakeFiles/app.dir/src/king.cpp.o
+app: CMakeFiles/app.dir/src/rook.cpp.o
+app: CMakeFiles/app.dir/src/knight.cpp.o
+app: CMakeFiles/app.dir/src/bishop.cpp.o
+app: CMakeFiles/app.dir/src/queen.cpp.o
+app: CMakeFiles/app.dir/src/chessman.cpp.o
 app: CMakeFiles/app.dir/build.make
 app: CMakeFiles/app.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable app"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_16) "Linking CXX executable app"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/app.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

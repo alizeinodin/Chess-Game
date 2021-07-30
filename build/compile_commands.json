@@ -6,8 +6,8 @@
 },
 {
   "directory": "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build",
-  "command": "/bin/g++-9   -I\"/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/include\"  -g   -std=gnu++11 -o CMakeFiles/app.dir/src/cell.cpp.o -c \"/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/cell.cpp\"",
-  "file": "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/cell.cpp"
+  "command": "/bin/g++-9   -I\"/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/include\"  -g   -std=gnu++11 -o CMakeFiles/app.dir/src/Cell.cpp.o -c \"/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/Cell.cpp\"",
+  "file": "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/Cell.cpp"
 },
 {
   "directory": "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build",
@@ -33,5 +33,45 @@
   "directory": "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build",
   "command": "/bin/g++-9   -I\"/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/include\"  -g   -std=gnu++11 -o CMakeFiles/app.dir/src/game.cpp.o -c \"/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/game.cpp\"",
   "file": "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/game.cpp"
+},
+{
+  "directory": "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build",
+  "command": "/bin/g++-9   -I\"/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/include\"  -g   -std=gnu++11 -o CMakeFiles/app.dir/src/pawn.cpp.o -c \"/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/pawn.cpp\"",
+  "file": "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/pawn.cpp"
+},
+{
+  "directory": "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build",
+  "command": "/bin/g++-9   -I\"/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/include\"  -g   -std=gnu++11 -o CMakeFiles/app.dir/src/util.cpp.o -c \"/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/util.cpp\"",
+  "file": "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/util.cpp"
+},
+{
+  "directory": "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build",
+  "command": "/bin/g++-9   -I\"/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/include\"  -g   -std=gnu++11 -o CMakeFiles/app.dir/src/king.cpp.o -c \"/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/king.cpp\"",
+  "file": "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/king.cpp"
+},
+{
+  "directory": "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build",
+  "command": "/bin/g++-9   -I\"/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/include\"  -g   -std=gnu++11 -o CMakeFiles/app.dir/src/rook.cpp.o -c \"/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/rook.cpp\"",
+  "file": "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/rook.cpp"
+},
+{
+  "directory": "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build",
+  "command": "/bin/g++-9   -I\"/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/include\"  -g   -std=gnu++11 -o CMakeFiles/app.dir/src/knight.cpp.o -c \"/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/knight.cpp\"",
+  "file": "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/knight.cpp"
+},
+{
+  "directory": "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build",
+  "command": "/bin/g++-9   -I\"/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/include\"  -g   -std=gnu++11 -o CMakeFiles/app.dir/src/bishop.cpp.o -c \"/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/bishop.cpp\"",
+  "file": "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/bishop.cpp"
+},
+{
+  "directory": "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build",
+  "command": "/bin/g++-9   -I\"/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/include\"  -g   -std=gnu++11 -o CMakeFiles/app.dir/src/queen.cpp.o -c \"/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/queen.cpp\"",
+  "file": "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/queen.cpp"
+},
+{
+  "directory": "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build",
+  "command": "/bin/g++-9   -I\"/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/include\"  -g   -std=gnu++11 -o CMakeFiles/app.dir/src/chessman.cpp.o -c \"/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/chessman.cpp\"",
+  "file": "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/chessman.cpp"
 }
 ]

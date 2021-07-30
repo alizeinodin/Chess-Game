@@ -1,5 +1,7 @@
 #include "using.h"
 #include "moving.h"
+#include "cell.h"
+#include "kishexcept.h"
 #include <array>
 #include <vector>
 #include <map>
@@ -8,7 +10,6 @@
 
 //#include <map>
 enum piece {KING, QUEEN, ROOK, BISHOP, KNIGHT, POWN};
-class Cell;
 class ChessMan
 {
 protected:
@@ -17,16 +18,20 @@ protected:
     State TypeMove;
     COLOR color;
     std::vector<std::string> threat_id;
+    std::vector<Cell> possible;
     
 
 public:
     ChessMan(COLOR);
-    virtual bool access(std::string origin, std::string destination, std::array<std::array<Cell, 8>, 8> &board) = 0; // cheking access for cell's
+    virtual void access(std::string origin, std::array<std::array<Cell, 8>, 8> &board) = 0; // cheking access for cell's
     virtual std::map<std::string, int> threat(std::string, std::array<std::array<Cell, 8>, 8> &board) = 0; // threat with cell ID and score
-    virtual int attack(std::string, Cell &) = 0;
-    virtual void movePiece(std::string, std::array<std::array<Cell, 8>, 8> &board) = 0;
+    virtual ChessMan  * attack(std::string, Cell &) = 0;
+    virtual void move(std::string, std::array<std::array<Cell, 8>, 8> &board) = 0;
     COLOR get_color();
     piece get_type();
+    std::vector<Cell> get_possiblemoves();
+    ChessMan * get_attackpiece();
+    int get_attackscore();
 };
 
 #endif /* _CHESSMAN_H */

@@ -11,11 +11,10 @@ class pawn : public ChessMan
 {
 public:
     pawn(COLOR);
-    virtual void movePiece(MOVE, std::array<std::array<Cell, 8>, 8> &board);
-    virtual bool access(std::string origin, std::string destination, std::array<std::array<Cell, 8>, 8> &board); // cheking access for cell's
+    virtual void move(MOVE, std::array<std::array<Cell, 8>, 8> &board);
+    virtual void access(std::string origin, std::array<std::array<Cell, 8>, 8> &board); // cheking access for cell's
     virtual std::map<std::string, int> threat(std::string, std::array<std::array<Cell, 8>, 8> &board); // threat with cell ID and score
-    virtual int attack(std::string, Cell &);
-    ~pawn() {}
+    virtual ChessMan  * attack(std::string, Cell &);
 };
 
 #endif /* _PAWN_H */

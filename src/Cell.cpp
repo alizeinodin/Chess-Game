@@ -49,3 +49,13 @@ bool Cell::getState()
 {
     return isnull;
 }
+
+bool Cell::operator==(Cell & cell)
+{
+    return (this->getId() == cell.getId());
+}
+
+Cell::operator std::string()
+{
+    return id;
+}

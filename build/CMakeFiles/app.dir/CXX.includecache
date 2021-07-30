@@ -17,8 +17,16 @@ using.h
 ../include/using.h
 
 ../include/cell.h
-chessMan.h
-../include/chessMan.h
+using.h
+../include/using.h
+moving.h
+../include/moving.h
+array
+-
+vector
+-
+map
+-
 
 ../include/chessBoard.h
 util.h
@@ -55,6 +63,10 @@ using.h
 ../include/using.h
 moving.h
 ../include/moving.h
+cell.h
+../include/cell.h
+kishexcept.h
+../include/kishexcept.h
 array
 -
 vector
@@ -74,12 +86,6 @@ chessBoard.h
 player.h
 ../include/player.h
 
-../include/id.h
-array
--
-iostream
--
-
 ../include/king.h
 chessMan.h
 ../include/chessMan.h
@@ -91,6 +97,12 @@ using.h
 ../include/using.h
 cell.h
 ../include/cell.h
+
+../include/kishexcept.h
+stdexcept
+-
+exception
+-
 
 ../include/knight.h
 chessMan.h
@@ -164,17 +176,103 @@ string
 cell.h
 ../include/cell.h
 
-/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/cell.cpp
-cell.h
-/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/cell.h
-id.h
-/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/id.h
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/bishop.cpp
+bishop.h
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/bishop.h
+util.h
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/util.h
+vector
+-
+algorithm
+-
 
 /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/chessBoard.cpp
 chessBoard.h
 /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/chessBoard.h
+chessMan.h
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/chessMan.h
+
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/chessman.cpp
+chessMan.h
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/chessMan.h
 
 /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/game.cpp
 game.h
 /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/game.h
+player.h
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/player.h
+
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/king.cpp
+king.h
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/king.h
+util.h
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/util.h
+algorithm
+-
+vector
+-
+
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/knight.cpp
+knight.h
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/knight.h
+util.h
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/util.h
+vector
+-
+algorithm
+-
+
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/pawn.cpp
+pawn.h
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/pawn.h
+util.h
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/util.h
+cell.h
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/cell.h
+kishexcept.h
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/kishexcept.h
+vector
+-
+algorithm
+-
+
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/queen.cpp
+queen.h
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/queen.h
+util.h
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/util.h
+vector
+-
+algorithm
+-
+
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/rook.cpp
+rook.h
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/rook.h
+util.h
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/util.h
+vector
+-
+algorithm
+-
+iostream
+-
+
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/util.cpp
+cell.h
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/cell.h
+chessMan.h
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/chessMan.h
+cstring
+-
+algorithm
+-
+vector
+-
+stdexcept
+-
+random
+-
+array
+-
 

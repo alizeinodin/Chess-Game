@@ -7,22 +7,22 @@ using nameGame = std::string;
 
 class Game
 {
+    enum Color {BLACK, WITHE};
     private:
-    Game();
-    nameGame name;
+    Game(Name);
+    Name gamename;
     ChessBoard & gameBoard = ChessBoard::getInstance();
     Player * player1 = nullptr;
     Player * player2 = nullptr;
-    bool Turn = false;
+    bool Turn = true;
 
 
     public:
-    static Game & getInstance();
-    ChessBoard & getBoard();
-    void setPlayer(size_t, std::string);
-    Player getPlayer();
-
-
+    Game & getInstance(Name);
+    void startgame();
+    void setPlayer(Color, std::string);
+    Player getPlayer(COLOR);
+    void order(MOVE);
 };
 
 #endif /* _GAME_H */

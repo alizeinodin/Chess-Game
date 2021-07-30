@@ -19,12 +19,12 @@ class Player
     COLOR color;
 
 
+
     public:
     Player(Name, COLOR);
     void addScore(size_t state, int score); // add score to p of n score
     Score getScore(size_t); 
-    Name getName();
-    
+    COLOR getcolor();
 };
 
 #endif /* _PLAYER_H */

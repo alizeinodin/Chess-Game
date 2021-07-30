@@ -1,9 +1,11 @@
 //#include "util.h"
 #include "cell.h"
+#include "chessMan.h"
 #include <cstring>
 #include <algorithm>
 #include <vector>
 #include <stdexcept>
+#include <random>
 #include <array>
 //#include <random>
 using namespace std;
@@ -79,4 +81,33 @@ std::pair<std::string, std::string> cut_str(MOVE &move)
     move.copy(temp2, 2, 3);
     temp2[2] = '\0';
     return make_pair(temp1, temp2);
+}
+
+vector<ID> possible_move_king(COLOR color, std::array<std::array<Cell, 8>, 8> &board)
+{
+    vector<ID> temp;
+    for (auto &i : board)
+    {
+        for (auto &j : i)
+        {
+            if (j.getPiece()->get_color() != color)
+            {
+                temp.insert(temp.end(), j.getPiece()->get_possiblemoves().begin(), j.getPiece()->get_possiblemoves().end());
+            }
+        }
+    }
+    return temp;
+}
+
+
+int randomNoGenerator(int set)
+{
+    static unsigned int rndm = 2;
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> dis(1);
+    unsigned int temp = dis(gen) * rndm;
+    rndm++;
+    temp = temp % set;
+    return temp;
 }
