@@ -4,6 +4,7 @@ import QtQuick.Controls 2.13
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Controls.Material 2.3
 import connect 1.0
+import QtMultimedia 5.9
 import "functions.js" as Func
 
 Item {
@@ -25,7 +26,13 @@ Item {
     Connect{
         id: connection
         onSuccessMove: {
+            // set animation destination
+            moveAnimation.tox = board.destid.x;
+            moveAnimation.toy = board.destid.y;
+
             moveAnimation.running = true; // Animation for move
+            movePieceSound.play(); // sound of move piece2
+
             board.destid.piece = board.orgid.piece;
             board.move = "";
         }
@@ -492,10 +499,13 @@ Item {
             id: moveAnimation
             running: false
 
+            property int tox: 0
+            property int toy: 0
+
             NumberAnimation {
                 target: board.orgid
                 properties: "x"
-                to: board.destid.x
+                to: moveAnimation.tox
                 duration: 1200
                 easing.type: Easing.OutCubic
             }
@@ -503,7 +513,7 @@ Item {
             NumberAnimation {
                 target: board.orgid
                 property: "y"
-                to: board.destid.y
+                to: moveAnimation.toy
                 duration: 1200
                 easing.type: Easing.OutCubic
             }
@@ -524,6 +534,15 @@ Item {
                 }
             }
         }
+
+        // sound of move piece
+
+        Audio{
+            id: movePieceSound
+            source: "media/Sound/movePiece.WAV"
+            volume: 1.0
+        }
+
 
 
 
@@ -1414,6 +1433,10 @@ Item {
             height: 85
             property string id: "h4"
             property string piece: ""
+//            Rectangle{
+//                anchors.fill: parent
+//                color: "#000"
+//            }
 
             Image {
                 id: h4Img
@@ -1422,7 +1445,7 @@ Item {
             }
             onClicked: {
                 board.saveId(this, h4Img);
-                        board.move = F4unc.checkMove(board.move, id, piece);
+                        board.move = Func.checkMove(board.move, id, piece);
                         if(Func.validation(board.move))
                         {
                             connection.setOrder(board.move);
@@ -2212,6 +2235,71 @@ Item {
                 color: "#B0BEC5"
             }
         }
+        Column{
+            width: player1Piece.width / 2
+            anchors.left: player1Piece.left
+
+            Image {
+                source: "media/White/K.png"
+                width: 70
+                height: 70
+            }
+
+            Image {
+                source: "media/White/K.png"
+                width: 70
+                height: 70
+            }
+
+            Image {
+                source: "media/White/K.png"
+                width: 70
+                height: 70
+            }
+
+            Image {
+                source: "media/White/K.png"
+                width: 70
+                height: 70
+            }
+
+            Image {
+                source: "media/White/K.png"
+                width: 70
+                height: 70
+            }
+
+            Image {
+                source: "media/White/K.png"
+                width: 70
+                height: 70
+            }
+
+            Image {
+                source: "media/White/K.png"
+                width: 70
+                height: 70
+            }
+
+            Image {
+                source: "media/White/K.png"
+                width: 70
+                height: 70
+            }
+
+            Image {
+                source: "media/White/K.png"
+                width: 70
+                height: 70
+            }
+
+            Image {
+                source: "media/White/K.png"
+                width: 70
+                height: 70
+            }
+        }
+
     }
 
     Item {
