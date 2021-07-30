@@ -6,6 +6,11 @@ Player::Player(Name name, COLOR color)
 {
     this->name = name;
     this->color = color;
+    if (color == "#ffffff")
+    {
+        Turn = true;
+    }
+    
 }
 
 void Player::addScore(size_t state, int score)

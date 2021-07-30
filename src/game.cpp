@@ -2,6 +2,7 @@
 #include "player.h"
 using namespace std;
 
+<<<<<<< HEAD
 Game &Game::getInstance(Name name)
 {
     static Game game(name);
@@ -11,6 +12,11 @@ Game &Game::getInstance(Name name)
 Game::Game(Name name) : gamename(name) {}
 
 
+=======
+Game::Game(Name name) : gamename(name) {}
+
+
+>>>>>>> 87196fc2639f971ed2f33db757835bb516348ed2
 void Game::setPlayer(Color color, string name)
 {
     switch (color)
