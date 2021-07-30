@@ -17,14 +17,3 @@ std::vector<Cell> ChessMan::get_possiblemoves()
     return possible;
 }
 
-ChessMan * ChessMan:: get_attackpiece()
-{
-    ChessMan * temp = attackpiece;
-    attackpiece = nullptr;
-    return temp;
-}
-
-int ChessMan:: get_attackscore()
-{
-    return attackscore;
-}

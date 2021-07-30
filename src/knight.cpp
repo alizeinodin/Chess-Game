@@ -53,7 +53,7 @@ void knight::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
     }
 }
 
-void knight::movePiece(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
+void knight::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
 {
     Cell cells[2];
     if (move.at(0) == 'H')
@@ -124,22 +124,19 @@ std::map<std::string, int> knight::threat(std::string cellid, array<array<Cell, 
     return temp;
 }
 
-void knight::attack(std::string move, Cell & cell)
+ChessMan  * knight::attack(std::string move, Cell & cell)
 {
-    attackpiece = cell.getPiece();
-    cell.empty();
-    cell.setPiece(this);
-    switch (attackpiece->get_type())
+    ChessMan *attackpiece = cell.getPiece();
+    auto temp = cut_str(move);
+    if (!(attackpiece->get_color() == color) || !(attackpiece->get_color() == color))
     {
-    case QUEEN:
-        attackscore = 15;
-        break;
-    case POWN:
-        attackscore = 3;
-        break;
-    case ROOK:
-    case BISHOP:
-    case KNIGHT:
-        attackscore = 8;
+        if (binary_search(threat_id.cbegin(), threat_id.cend(), temp.second))
+        {
+            cell.empty();
+            cell.setPiece(this);
+            return attackpiece;
+        }
     }
+    throw invalid_argument("can not move!!!");
+    return attackpiece;
 }

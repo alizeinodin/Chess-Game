@@ -1,4 +1,5 @@
 #include "chessBoard.h"
+#include "chessMan.h"
 using namespace std;
 
 ChessBoard &ChessBoard::getInstance()
@@ -217,4 +218,23 @@ void ChessBoard::randommoves(COLOR color)
     cellid += origin.substr(0,1);
     cellid += Board.at(rndcell[0]).at(rndcell[1]).getId();
     this->movePiece(cellid);
+}
+
+void ChessBoard::movePiece(MOVE move)
+{
+    ChessMan * attack;
+    auto cellsid = cut_str(move);
+    Cell cells[2];
+    cells[0] = search_cell(cellsid.first, Board);
+    cells[1] = search_cell(cellsid.second, Board);
+    
+    if (!cells[0].getState() && cells[1].getState())
+    {
+        cells[0].getPiece()->move(move, Board);
+        
+    }
+    else if (!cells[0].getState() && !cells[1].getState())
+    {
+        attack = cells[0].getPiece()->attack(move, cells[1]);
+    }
 }
