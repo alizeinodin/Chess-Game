@@ -12,9 +12,9 @@ ChessBoard::ChessBoard()
 {
 }
 
-array<array<Cell, 8>, 8> ChessBoard::start()
+void ChessBoard::startboard()
 {
-    /*
+    
     for (auto &i : Board[1])
     {
         ChessMan *solider = new pawn("#ffffff");
@@ -29,150 +29,63 @@ array<array<Cell, 8>, 8> ChessBoard::start()
 
     for (auto &i : Board[0])
     {
-        if (i.getId().find("A") || i.getId().find("H"))
+        if (i.getId().at(0) == 'A' || i.getId().at(0) == 'H')
         {
             ChessMan *piece = new rook("#ffffff");
             i.setPiece(piece);
         }
-        if (i.getId().find("B") || i.getId().find("G"))
+        if (i.getId().at(0) == 'B' || i.getId().at(0) == 'G')
         {
             ChessMan *piece = new knight("#ffffff");
             i.setPiece(piece);
         }
-        if (i.getId().find("C") || i.getId().find("F"))
+        if (i.getId().at(0) == 'C' || i.getId().at(0) == 'F')
         {
             ChessMan *piece = new bishop("#ffffff");
             i.setPiece(piece);
         }
-        if (i.getId().find("D"))
+        if (i.getId().at(0) == 'D')
         {
             ChessMan *piece = new queen("#ffffff");
             i.setPiece(piece);
         }
-        if (i.getId().find("E"))
+        if (i.getId().at(0) == 'E')
         {
             ChessMan *piece = new king("#ffffff");
             i.setPiece(piece);
         }
     }
 
-    for (auto &i : Board[6])
+    for (auto &i : Board[7])
     {
-        if (i.getId().find("A") || i.getId().find("H"))
+        if (i.getId().at(0) == 'A' || i.getId().at(0) == 'H')
         {
-            ChessMan *piece = new rook("#ffffff");
+            ChessMan *piece = new rook("#000000");
+            i.setPiece(piece);
+        } else
+        if (i.getId().at(0) == 'B' || i.getId().at(0) == 'G')
+        {
+            ChessMan *piece = new knight("#000000");
+            i.setPiece(piece);
+        } else
+        if (i.getId().at(0) == 'C' || i.getId().at(0) == 'F')
+        {
+            ChessMan *piece = new bishop("#000000");
+            i.setPiece(piece);
+        } else
+        if (i.getId().at(0) == 'D')
+        {
+            ChessMan *piece = new queen("#000000");
+            i.setPiece(piece);
+        } else
+        if (i.getId().at(0) == 'E')
+        {
+            ChessMan *piece = new king("#000000");
             i.setPiece(piece);
         }
-        if (i.getId().find("B") || i.getId().find("G"))
-        {
-            ChessMan *piece = new knight("#ffffff");
-            i.setPiece(piece);
-        }
-        if (i.getId().find("C") || i.getId().find("F"))
-        {
-            ChessMan *piece = new bishop("#ffffff");
-            i.setPiece(piece);
-        }
-        if (i.getId().find("D"))
-        {
-            ChessMan *piece = new queen("#ffffff");
-            i.setPiece(piece);
-        }
-        if (i.getId().find("E"))
-        {
-            ChessMan *piece = new king("#ffffff");
-            i.setPiece(piece);
-        }
-    }
-    */
-
-    return Board;
-}
-
-array<array<Cell, 8>, 8> ChessBoard::remmeber(string fileName)
-{
-    start();
-    FileConnect File(fileName);
-    while (1)
-    {
-        if (File.getFile().eof())
-        {
-            break;
-        }
-        string chessRemmber = File.ReadFromFile();
-        updateBoard(chessRemmber.substr(2, 3), chessRemmber.substr(4, 5));
     }
 }
 
-Cell &ChessBoard::search(string ID)
-{
-    for (auto &i : Board)
-    {
-        for (auto &j : i)
-        {
-            if (j.getId() == ID)
-            {
-                return j;
-            }
-        }
-    }
-}
-
-void ChessBoard::updateBoard(string first, string second)
-{
-    Cell firstCell = search(first);
-    Cell secondCell = search(second);
-
-    ChessMan *tempPiece = nullptr;
-    tempPiece = firstCell.getPiece();
-
-    firstCell.empty();
-    secondCell.setPiece(tempPiece);
-}
-
-ChessMan *ChessBoard::makePiece(char selectPiece, string color)
-{
-    ChessMan *piece = nullptr;
-    if (selectPiece == 'K')
-    {
-        // piece = new king(color);
-    }
-    else if (selectPiece == 'Q')
-    {
-        // piece = new queen(color);
-    }
-    else if (selectPiece == 'R')
-    {
-        // piece = new rook(color);
-    }
-    else if (selectPiece == 'B')
-    {
-        // piece = new bishop(color);
-    }
-    else if (selectPiece == 'H')
-    {
-        // piece = new knight(color);
-    }
-    else if (selectPiece == 'P')
-    {
-        // piece = new pawn(color);
-    }
-    else
-    {
-        throw invalid_argument("ERROR: invalid order in make piece");
-    }
-    return piece;
-}
-
-void ChessBoard::order(string order)
-{
-    Cell cell = search(order.substr(1, 2));
-    cell.getPiece()->movePiece(order.substr(3, 4));
-}
-
-void ChessBoard::saveData(string order)
-{
-}
 
 void ChessBoard::randommoves(COLOR color)
 {
@@ -222,19 +135,51 @@ void ChessBoard::randommoves(COLOR color)
 
 void ChessBoard::movePiece(MOVE move)
 {
-    ChessMan * attack;
+    auto cellsid = cut_str(move);
+    Cell cells;
+    cells = search_cell(cellsid.first, Board);
+    
+    if (!cells.getState())
+    {
+        cells.getPiece()->move(move, Board);
+    }
+    throw invalid_argument("cell is empty");
+}
+
+ChessMan * ChessBoard::attack(MOVE move)
+{
+    ChessMan * temp;
     auto cellsid = cut_str(move);
     Cell cells[2];
     cells[0] = search_cell(cellsid.first, Board);
     cells[1] = search_cell(cellsid.second, Board);
-    
-    if (!cells[0].getState() && cells[1].getState())
+    temp = cells[0].getPiece();
+    if (!cells[0].getState() && !cells[1].getState())
     {
-        cells[0].getPiece()->move(move, Board);
-        
+        return temp->attack(move, cells[1]);
     }
-    else if (!cells[0].getState() && !cells[1].getState())
+    throw invalid_argument("can not attack");
+}
+
+int ChessBoard::threat(COLOR color)
+{
+    std::map<std::string, int> temp;
+    auto it = temp.begin();
+    int score = 0;
+    for (auto &i : Board)
     {
-        attack = cells[0].getPiece()->attack(move, cells[1]);
+        for (auto &j : i)
+        {
+            if (j.getPiece()->get_color() == color)
+            {
+                temp = j.getPiece()->threat(j.getId(), Board);
+                it = temp.begin();
+                for (size_t i = 0; i < temp.size(); i++)
+                {
+                    score += it->second;
+                }
+            }
+        }
     }
+    return score;
 }
