@@ -24,8 +24,23 @@ Item {
     }
     Connect{
         id: connection
+        onSuccessMove: {
+            moveAnimation.running = true; // Animation for move
+            board.destid.piece = board.orgid.piece;
+            board.move = "";
+        }
     }
 
+        Button{
+            id: btn
+            text: "کلیک کنید"
+            font.family: fontfarsi.name
+            onClicked: {
+                connection.setPlayer1Name("علی");
+                connection.setPlayer2Name("رضا");
+            }
+
+        }
     Item {
         id: settings
         width: 300
@@ -447,6 +462,70 @@ Item {
         anchors.leftMargin: 560
         property string move: ""
 
+        // access to id's with var
+        property var orgid: null
+        property var orgimg: null
+        property var destid: null
+        property var destimg: null
+        property int orgx: 0
+        property int orgy: 0
+
+
+        // function for save org and dest id cell's
+        function saveId(myid, imgid)
+        {
+            if(move === "")
+            {
+                orgid = myid;
+                orgimg = imgid;
+                board.orgx = myid.x;
+                board.orgy = myid.y;
+            } else
+            {
+                destid = myid;
+                destimg = imgid;
+            }
+        }
+
+        // animation for move pieces in board
+        ParallelAnimation{
+            id: moveAnimation
+            running: false
+
+            NumberAnimation {
+                target: board.orgid
+                properties: "x"
+                to: board.destid.x
+                duration: 1200
+                easing.type: Easing.OutCubic
+            }
+
+            NumberAnimation {
+                target: board.orgid
+                property: "y"
+                to: board.destid.y
+                duration: 1200
+                easing.type: Easing.OutCubic
+            }
+
+            onRunningChanged: {
+                if(running === false)
+                {
+                    // update destination piece
+                    board.destimg.source = board.orgimg.source;
+
+                    // update origin piece
+                    board.orgid.piece = "";
+                    board.orgimg.source = "";
+
+                    // return org cell to orginal place
+                    board.orgid.x = board.orgx;
+                    board.orgid.y = board.orgy;
+                }
+            }
+        }
+
+
 
         BorderImage
         {
@@ -461,7 +540,8 @@ Item {
         MouseArea{
             id:a1
             cursorShape: Qt.ArrowCursor
-            property string id: "Ra1"
+            property string id: "a1"
+            property string piece: "R"
             x: 8
             y: 635
             width: 85
@@ -474,10 +554,14 @@ Item {
             }
 
             onClicked: {
-                        board.move += id;
-                console.log(board.move);
+                board.saveId(this, a1Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
                     }
-        }
+            }
 
         MouseArea{
             id:h1
@@ -486,12 +570,21 @@ Item {
             y: 631
             width: 85
             height: 85
-            property string id: "Rh1"
+            property string id: "h1"
+            property string piece: "R"
             Image {
                 id: h1Img
                 source: "media/White/R.png"
                 anchors.fill: parent
                 }
+            onClicked: {
+                board.saveId(this, h1Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -501,13 +594,23 @@ Item {
             y: 631
             width: 85
             height: 85
-            property string id: "Qd1"
+            property string id: "d1"
+            property string piece: "Q"
 
             Image {
                 id: d1Img
                 anchors.fill: parent
                 source: "media/White/Q.png"
             }
+
+            onClicked: {
+                board.saveId(this, d1Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -517,12 +620,21 @@ Item {
             y: 631
             width: 85
             height: 85
-            property string id: "Ke1"
+            property string id: "e1"
+            property string piece: "K"
             Image {
                 id: e1Img
                 anchors.fill: parent
                 source: "media/White/K.png"
             }
+            onClicked: {
+                board.saveId(this, e1Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -532,13 +644,22 @@ Item {
             y: 631
             width: 85
             height: 85
-            property string id: "Bf1"
+            property string id: "f1"
+            property string piece: "B"
 
             Image {
                 id: f1Img
                 anchors.fill: parent
                 source: "media/White/B.png"
                 }
+            onClicked: {
+                board.saveId(this, f1Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -548,12 +669,21 @@ Item {
             y: 631
             width: 85
             height: 85
-            property string id: "Bc1"
+            property string id: "c1"
+            property string piece: "B"
             Image {
-                id:c1Immg
+                id:c1Img
                 anchors.fill: parent
                 source: "media/White/B.png"
             }
+            onClicked: {
+                board.saveId(this, c1Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -563,7 +693,8 @@ Item {
             y: 631
             width: 85
             height: 85
-            property string id: "Hb1"
+            property string id: "b1"
+            property string piece: "H"
 
 
         Image {
@@ -571,6 +702,14 @@ Item {
             anchors.fill: parent
             source: "media/White/H.png"
             }
+        onClicked: {
+            board.saveId(this, b1Img);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
         }
 
         MouseArea{
@@ -580,13 +719,22 @@ Item {
             y: 631
             width: 85
             height: 85
-            property string id: "Hg1"
+            property string id: "g1"
+            property string piece: "H"
 
             Image {
                 id: g1Img
                 anchors.fill: parent
                 source: "media/White/H.png"
                 }
+            onClicked: {
+                board.saveId(this, g1Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -596,12 +744,21 @@ Item {
             y: 538
             width: 85
             height: 85
-            property string id: "Pa2"
+            property string id: "a2"
+            property string piece: "P"
             Image {
                 id: a2Img
                 anchors.fill: parent
                 source: "media/White/P.png"
                 }
+            onClicked: {
+                board.saveId(this, a2Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -611,13 +768,22 @@ Item {
             y: 538
             width: 85
             height: 85
-            property string id: "Pb2"
+            property string id: "b2"
+            property string piece: "P"
 
             Image {
                 id: b2Img
                 anchors.fill: parent
                 source: "media/White/P.png"
                 }
+            onClicked: {
+                board.saveId(this, b2Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
 
         }
 
@@ -628,13 +794,22 @@ Item {
             y: 539
             width: 85
             height: 85
-            property string id: "Pc2"
+            property string id: "c2"
+            property string piece: "P"
 
             Image {
                 id: c2Img
                 anchors.fill: parent
                 source: "media/White/P.png"
                 }
+            onClicked: {
+                board.saveId(this, c2Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -644,13 +819,22 @@ Item {
             y: 538
             width: 85
             height: 85
-            property string id: "Pd2"
+            property string id: "d2"
+            property string piece: "P"
 
             Image {
                 id: d2Img
                 anchors.fill: parent
                 source: "media/White/P.png"
             }
+            onClicked: {
+                board.saveId(this, d2Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
 
@@ -661,13 +845,22 @@ Item {
             y: 539
             width: 85
             height: 85
-            property string id: "Pe2"
+            property string id: "e2"
+            property string piece: "P"
 
             Image {
                 id: e2Img
                 anchors.fill: parent
                 source: "media/White/P.png"
             }
+            onClicked: {
+                board.saveId(this, e2Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -677,13 +870,22 @@ Item {
             y: 538
             width: 85
             height: 85
-            property string id: "Pf2"
+            property string id: "f2"
+            property string piece: "P"
 
             Image {
                 id: f2Img
                 anchors.fill: parent
                 source: "media/White/P.png"
             }
+            onClicked: {
+                board.saveId(this, f2Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -693,13 +895,21 @@ Item {
             y: 538
             width: 85
             height: 85
-            property string id: "Pg2"
-
+            property string id: "g2"
+            property string piece: "P"
             Image {
                 id: g2Img
                 anchors.fill: parent
                 source: "media/White/P.png"
             }
+            onClicked: {
+                board.saveId(this, g2Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -709,13 +919,22 @@ Item {
             y: 540
             width: 85
             height: 85
-            property string id: "Ph2"
+            property string id: "h2"
+            property string piece: "P"
 
             Image {
                 id: h2Img
                 anchors.fill: parent
                 source: "media/White/P.png"
             }
+            onClicked: {
+                board.saveId(this, h2Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         // black piece start
@@ -727,13 +946,22 @@ Item {
             y: 0
             width: 85
             height: 85
-            property string id: "Ra8"
+            property string id: "a8"
+            property string piece: "R"
 
             Image {
-                id: brook1
+                id: a8Img
                 anchors.fill: parent
                 source: "media/Black/R.png"
             }
+            onClicked: {
+                board.saveId(this, a8Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -743,13 +971,22 @@ Item {
             y: 3
             width: 85
             height: 85
-            property string id: "Rh8"
+            property string id: "h8"
+            property string piece: "R"
 
             Image {
-                id: brook2
+                id: h8Img
                 anchors.fill: parent
                 source: "media/Black/R.png"
             }
+            onClicked: {
+                board.saveId(this, h8Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -759,10 +996,11 @@ Item {
             y: 2
             width: 85
             height: 85
-            property string id: "Qd8"
+            property string id: "d8"
+            property string piece: "Q"
 
             Image {
-                id: bqueen
+                id: d8Img
                 anchors.rightMargin: -4
                 anchors.bottomMargin: 0
                 anchors.leftMargin: 4
@@ -770,6 +1008,14 @@ Item {
                 anchors.fill: parent
                 source: "media/Black/Q.png"
             }
+            onClicked: {
+                board.saveId(this, d8Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -779,13 +1025,22 @@ Item {
             y: 0
             width: 85
             height: 85
-            property string id: "Ke8"
+            property string id: "e8"
+            property string piece: "K"
 
             Image {
-                id: bking
+                id: e8Img
                 anchors.fill: parent
                 source: "media/Black/K.png"
             }
+            onClicked: {
+                board.saveId(this, e8Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -795,13 +1050,22 @@ Item {
             y: 1
             width: 85
             height: 85
-            property string id: "Bf8"
+            property string id: "f8"
+            property string piece: "B"
 
             Image {
-                id: bbishop1
+                id: f8Img
                 anchors.fill: parent
                 source: "media/Black/B.png"
             }
+            onClicked: {
+                board.saveId(this, f8Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -811,10 +1075,11 @@ Item {
             y: 2
             width: 85
             height: 85
-            property string id: "Bc8"
+            property string id: "c8"
+            property string piece: "B"
 
             Image {
-                id: bbishop2
+                id: c8Img
                 anchors.rightMargin: -1
                 anchors.bottomMargin: 0
                 anchors.leftMargin: 1
@@ -822,6 +1087,14 @@ Item {
                 anchors.fill: parent
                 source: "media/Black/B.png"
             }
+            onClicked: {
+                board.saveId(this, c8Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -831,13 +1104,22 @@ Item {
             y: 0
             width: 85
             height: 85
-            property string id: "Hg8"
+            property string id: "g8"
+            property string piece: "H"
 
             Image {
-                id: bknight1
+                id: g8Img
                 anchors.fill: parent
                 source: "media/Black/H.png"
             }
+            onClicked: {
+                board.saveId(this, g8Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -847,13 +1129,22 @@ Item {
             y: 2
             width: 85
             height: 85
-            property string id: "Hb8"
+            property string id: "b8"
+            property string piece: "H"
 
             Image {
-                id: bknight2
+                id: b8Img
                 anchors.fill: parent
                 source: "media/Black/H.png"
             }
+            onClicked: {
+                board.saveId(this, b8Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -863,13 +1154,22 @@ Item {
             y: 90
             width: 85
             height: 85
-            property string id: "Pa7"
+            property string id: "a7"
+            property string piece: "P"
 
             Image {
-                id: bpawn1
+                id: a7Img
                 anchors.fill: parent
                 source: "media/Black/P.png"
             }
+            onClicked: {
+                board.saveId(this, a7Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -879,13 +1179,22 @@ Item {
             y: 90
             width: 85
             height: 85
-            property string id: "Pb7"
+            property string id: "b7"
+            property string piece: "P"
 
             Image {
-                id: bpawn2
+                id: b7Img
                 anchors.fill: parent
                 source: "media/Black/P.png"
             }
+            onClicked: {
+                board.saveId(this, b7Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -895,13 +1204,22 @@ Item {
             y: 90
             width: 85
             height: 85
-            property string id: "Pc7"
+            property string id: "c7"
+            property string piece: "P"
 
             Image {
-                id: bpawn3
+                id: c7Img
                 anchors.fill: parent
                 source: "media/Black/P.png"
             }
+            onClicked: {
+                board.saveId(this, c7Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -911,13 +1229,23 @@ Item {
             y: 90
             width: 85
             height: 85
-            property string id: "Pd7"
+            property string id: "d7"
+            property string piece: "P"
 
             Image {
-                id: bpawn4
+                id: d7Img
                 anchors.fill: parent
                 source: "media/Black/P.png"
             }
+
+            onClicked: {
+                board.saveId(this, d7Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -927,13 +1255,23 @@ Item {
             y: 90
             width: 85
             height: 85
-            property string id: "Pe7"
+            property string id: "e7"
+            property string piece: "P"
 
             Image {
-                id: bpawn5
+                id: e7Img
                 anchors.fill: parent
                 source: "media/Black/P.png"
             }
+
+            onClicked: {
+                board.saveId(this, e7Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -943,13 +1281,22 @@ Item {
             y: 90
             width: 85
             height: 85
-            property string id: "Pf7"
+            property string id: "f7"
+            property string piece: "P"
 
             Image {
-                id: bpawn6
+                id: f7Img
                 anchors.fill: parent
                 source: "media/Black/P.png"
             }
+            onClicked: {
+                board.saveId(this, f7Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -959,13 +1306,22 @@ Item {
             y: 90
             width: 85
             height: 85
-            property string id: "Pg7"
+            property string id: "g7"
+            property string piece: "P"
 
             Image {
-                id: bpawn7
+                id: g7Img
                 anchors.fill: parent
                 source: "media/Black/P.png"
             }
+            onClicked: {
+                board.saveId(this, g7Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -975,13 +1331,23 @@ Item {
             y: 90
             width: 85
             height: 85
-            property string id: "Ph7"
+            property string id: "h7"
+            property string piece: "P"
 
             Image {
-                id: bpawn8
+                id: h7Img
                 anchors.fill: parent
                 source: "media/Black/P.png"
             }
+
+            onClicked: {
+                board.saveId(this, h7Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         // another cell's
@@ -996,12 +1362,21 @@ Item {
             width: 85
             height: 85
             property string id: "h6"
+            property string piece: ""
 
             Image {
-                id: h6img
+                id: h6Img
                 anchors.fill: parent
                 source: ""
             }
+            onClicked: {
+                board.saveId(this, h6Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -1012,12 +1387,22 @@ Item {
             width: 85
             height: 85
             property string id: "h5"
+            property string piece: ""
 
             Image {
-                id: h5img
+                id: h5Img
                 anchors.fill: parent
                 source: ""
             }
+
+            onClicked: {
+                board.saveId(this, h5Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -1028,12 +1413,21 @@ Item {
             width: 85
             height: 85
             property string id: "h4"
+            property string piece: ""
 
             Image {
-                id: h4img
+                id: h4Img
                 anchors.fill: parent
                 source: ""
             }
+            onClicked: {
+                board.saveId(this, h4Img);
+                        board.move = F4unc.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -1044,12 +1438,21 @@ Item {
             width: 85
             height: 85
             property string id: "h3"
+            property string piece: ""
 
             Image {
-                id: h3img
+                id: h3Img
                 anchors.fill: parent
                 source: ""
             }
+            onClicked: {
+                board.saveId(this, h3Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         // end
@@ -1064,12 +1467,21 @@ Item {
             width: 85
             height: 85
             property string id: "g6"
+            property string piece: ""
 
             Image {
-                id: g6img
+                id: g6Img
                 anchors.fill: parent
                 source: ""
             }
+            onClicked: {
+                board.saveId(this, g6Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -1080,12 +1492,21 @@ Item {
             width: 85
             height: 85
             property string id: "g5"
+            property string piece: ""
 
             Image {
-                id: g5img
+                id: g5Img
                 anchors.fill: parent
                 source: ""
             }
+            onClicked: {
+                board.saveId(this, g5Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -1096,12 +1517,21 @@ Item {
             width: 85
             height: 85
             property string id: "g4"
+            property string piece: ""
 
             Image {
-                id: g4img
+                id: g4Img
                 anchors.fill: parent
                 source: ""
             }
+            onClicked: {
+                board.saveId(this, g4Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -1112,12 +1542,21 @@ Item {
             width: 85
             height: 85
             property string id: "g3"
+            property string piece: ""
 
             Image {
-                id: g3img
+                id: g3Img
                 anchors.fill: parent
                 source: ""
             }
+            onClicked: {
+                board.saveId(this, g3Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         // end
@@ -1132,12 +1571,21 @@ Item {
             width: 85
             height: 85
             property string id: "f6"
+            property string piece: ""
 
             Image {
-                id: f6img
+                id: f6Img
                 anchors.fill: parent
                 source: ""
             }
+            onClicked: {
+                board.saveId(this, f6Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -1148,12 +1596,21 @@ Item {
             width: 85
             height: 85
             property string id: "f5"
+            property string piece: ""
 
             Image {
-                id: f5img
+                id: f5Img
                 anchors.fill: parent
                 source: ""
             }
+            onClicked: {
+                board.saveId(this, f5Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -1164,12 +1621,21 @@ Item {
             width: 85
             height: 85
             property string id: "f4"
+            property string piece: ""
 
             Image {
-                id: f4img
+                id: f4Img
                 anchors.fill: parent
                 source: ""
             }
+            onClicked: {
+                board.saveId(this, f4Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -1180,12 +1646,21 @@ Item {
             width: 85
             height: 85
             property string id: "f3"
+            property string piece: ""
 
             Image {
-                id: f3img
+                id: f3Img
                 anchors.fill: parent
                 source: ""
             }
+            onClicked: {
+                board.saveId(this, f3Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         // end
@@ -1200,12 +1675,21 @@ Item {
             width: 85
             height: 85
             property string id: "e6"
+            property string piece: ""
 
             Image {
-                id: e6img
+                id: e6Img
                 anchors.fill: parent
                 source: ""
             }
+            onClicked: {
+                board.saveId(this, e6Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -1216,9 +1700,10 @@ Item {
             width: 85
             height: 85
             property string id: "e5"
+            property string piece: ""
 
             Image {
-                id: e5img
+                id: e5Img
                 anchors.rightMargin: 0
                 anchors.bottomMargin: -3
                 anchors.leftMargin: 0
@@ -1226,6 +1711,14 @@ Item {
                 anchors.fill: parent
                 source: ""
             }
+            onClicked: {
+                board.saveId(this, e5Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -1236,12 +1729,21 @@ Item {
             width: 85
             height: 85
             property string id: "e4"
+            property string piece: ""
 
             Image {
-                id: e4img
+                id: e4Img
                 anchors.fill: parent
                 source: ""
             }
+            onClicked: {
+                board.saveId(this, e4Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -1252,12 +1754,21 @@ Item {
             width: 85
             height: 85
             property string id: "e3"
+            property string piece: ""
 
             Image {
-                id: e3img
+                id: e3Img
                 anchors.fill: parent
                 source: ""
             }
+            onClicked: {
+                board.saveId(this, e3Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         // end
@@ -1272,12 +1783,21 @@ Item {
             width: 85
             height: 85
             property string id: "d6"
+            property string piece: ""
 
             Image {
-                id: d6img
+                id: d6Img
                 anchors.fill: parent
                 source: ""
             }
+            onClicked: {
+                board.saveId(this, d6Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -1288,12 +1808,21 @@ Item {
             width: 85
             height: 85
             property string id: "d5"
+            property string piece: ""
 
             Image {
-                id: d5img
+                id: d5Img
                 anchors.fill: parent
                 source: ""
             }
+            onClicked: {
+                board.saveId(this, d5Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -1304,12 +1833,21 @@ Item {
             width: 85
             height: 85
             property string id: "d4"
+            property string piece: ""
 
             Image {
-                id: d4img
+                id: d4Img
                 anchors.fill: parent
                 source: ""
             }
+            onClicked: {
+                board.saveId(this, d4Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -1320,12 +1858,22 @@ Item {
             width: 85
             height: 85
             property string id: "d3"
+            property string piece: ""
+
 
             Image {
-                id: d3img
+                id: d3Img
                 anchors.fill: parent
                 source: ""
             }
+            onClicked: {
+                board.saveId(this, d3Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         // end
@@ -1336,65 +1884,101 @@ Item {
         MouseArea{
             id:c6
             cursorShape: Qt.ArrowCursor
-            x: 288
+            x: 193
             y: 185
             width: 85
             height: 85
             property string id: "c6"
+            property string piece: ""
 
             Image {
-                id: c6img
+                id: c6Img
                 anchors.fill: parent
                 source: ""
             }
+            onClicked: {
+                board.saveId(this, c6Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
             id:c5
             cursorShape: Qt.ArrowCursor
-            x: 288
+            x: 193
             y: 267
             width: 85
             height: 85
             property string id: "c5"
+            property string piece: ""
 
             Image {
-                id: c5img
+                id: c5Img
                 anchors.fill: parent
                 source: ""
             }
+            onClicked: {
+                board.saveId(this, c5Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
             id:c4
             cursorShape: Qt.ArrowCursor
-            x: 288
+            x: 193
             y: 360
             width: 85
             height: 85
             property string id: "c4"
+            property string piece: ""
 
             Image {
-                id: c4img
+                id: c4Img
                 anchors.fill: parent
                 source: ""
             }
+            onClicked: {
+                board.saveId(this, c4Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
             id:c3
             cursorShape: Qt.ArrowCursor
-            x: 288
+            x: 193
             y: 450
             width: 85
             height: 85
             property string id: "c3"
+            property string piece: ""
 
             Image {
-                id: c3img
+                id: c3Img
                 anchors.fill: parent
                 source: ""
             }
+            onClicked: {
+                board.saveId(this, c3Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         // end
@@ -1409,12 +1993,21 @@ Item {
             width: 85
             height: 85
             property string id: "b6"
+            property string piece: ""
 
             Image {
-                id: b6img
+                id: b6Img
                 anchors.fill: parent
                 source: ""
             }
+            onClicked: {
+                board.saveId(this, b6Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -1425,12 +2018,21 @@ Item {
             width: 85
             height: 85
             property string id: "b5"
+            property string piece: ""
 
             Image {
-                id: b5img
+                id: b5Img
                 anchors.fill: parent
                 source: ""
             }
+            onClicked: {
+                board.saveId(this, b5Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -1441,12 +2043,21 @@ Item {
             width: 85
             height: 85
             property string id: "b4"
+            property string piece: ""
 
             Image {
-                id: b4img
+                id: b4Img
                 anchors.fill: parent
                 source: ""
             }
+            onClicked: {
+                board.saveId(this, b4Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -1457,12 +2068,21 @@ Item {
             width: 85
             height: 85
             property string id: "b3"
+            property string piece: ""
 
             Image {
-                id: b3img
+                id: b3Img
                 anchors.fill: parent
                 source: ""
             }
+            onClicked: {
+                board.saveId(this, b3Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         // end
@@ -1477,12 +2097,21 @@ Item {
             width: 85
             height: 85
             property string id: "a6"
+            property string piece: ""
 
             Image {
-                id: a6img
+                id: a6Img
                 anchors.fill: parent
                 source: ""
             }
+            onClicked: {
+                board.saveId(this, a6Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -1493,12 +2122,21 @@ Item {
             width: 85
             height: 85
             property string id: "a5"
+            property string piece: ""
 
             Image {
-                id: a5img
+                id: a5Img
                 anchors.fill: parent
                 source: ""
             }
+            onClicked: {
+                board.saveId(this, a5Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -1509,12 +2147,21 @@ Item {
             width: 85
             height: 85
             property string id: "a4"
+            property string piece: ""
 
             Image {
-                id: a4img
+                id: a4Img
                 anchors.fill: parent
                 source: ""
             }
+            onClicked: {
+                board.saveId(this, a4Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         MouseArea{
@@ -1525,12 +2172,21 @@ Item {
             width: 85
             height: 85
             property string id: "a3"
+            property string piece: ""
 
             Image {
-                id: a3img
+                id: a3Img
                 anchors.fill: parent
                 source: ""
             }
+            onClicked: {
+                board.saveId(this, a3Img);
+                        board.move = Func.checkMove(board.move, id, piece);
+                        if(Func.validation(board.move))
+                        {
+                            connection.setOrder(board.move);
+                        }
+                    }
         }
 
         // end
@@ -1647,7 +2303,7 @@ Item {
             Text {
                 id: element
                 anchors.horizontalCenter: player1scores.horizontalCenter
-                text: qsTr("امتیاز علی:")
+                text: qsTr("امتیاز ") + qsTr(connection.player1Name) + qsTr(":")
                 font.pixelSize: 20
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
@@ -1655,9 +2311,9 @@ Item {
             }
 
             Text {
-                id: element2
+                id: pscoreplayer1
                 anchors.horizontalCenter: player1scores.horizontalCenter
-                text: qsTr("2982")
+                text: connection.player1PScore
                 font.pixelSize: 20
                 font.family: fontfarsi.name
                 verticalAlignment: Text.AlignVCenter
@@ -1667,7 +2323,7 @@ Item {
             Text {
                 id: element1
                 anchors.horizontalCenter: player1scores.horizontalCenter
-                text: qsTr("امتیاز منفی علی:")
+                text: qsTr("امتیاز منفی ") + qsTr(connection.player1Name) + qsTr(":")
                 font.pixelSize: 20
                 font.family: fontfarsi.name
                 verticalAlignment: Text.AlignVCenter
@@ -1677,7 +2333,7 @@ Item {
             Text {
                 id: element3
                 anchors.horizontalCenter: player1scores.horizontalCenter
-                text: qsTr("12")
+                text: connection.player1NScore
                 font.pixelSize: 20
                 font.family: fontfarsi.name
                 verticalAlignment: Text.AlignVCenter
@@ -1716,7 +2372,7 @@ Item {
         Text {
             id: element4
             anchors.horizontalCenter: player2scores.horizontalCenter
-            text: qsTr("امتیاز رضا:")
+            text: qsTr("امتیاز ") + qsTr(connection.player2Name) + qsTr(":")
             font.family: fontfarsi.name
             font.pixelSize: 20
             verticalAlignment: Text.AlignVCenter
@@ -1726,7 +2382,7 @@ Item {
         Text {
             id: element5
             anchors.horizontalCenter: player2scores.horizontalCenter
-            text: qsTr("2982")
+            text: connection.player2PScore
             font.pixelSize: 20
             font.family: fontfarsi.name
             verticalAlignment: Text.AlignVCenter
@@ -1736,7 +2392,7 @@ Item {
         Text {
             id: element6
             anchors.horizontalCenter: player2scores.horizontalCenter
-            text: qsTr("امتیاز منفی رضا:")
+            text: qsTr("امتیاز منفی ") + qsTr(connection.player2Name) + qsTr(":")
             font.pixelSize: 20
             font.family: fontfarsi.name
             verticalAlignment: Text.AlignVCenter
@@ -1746,7 +2402,7 @@ Item {
         Text {
             id: element7
             anchors.horizontalCenter: player2scores.horizontalCenter
-            text: qsTr("12")
+            text: connection.player2NScore
             font.pixelSize: 20
             font.family: fontfarsi.name
             verticalAlignment: Text.AlignVCenter

@@ -3,6 +3,7 @@ import QtQuick.Window 2.13
 import QtQuick.Controls 2.13
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Controls.Material 2.3
+import connect 1.0
 
 ApplicationWindow {
     id: root
@@ -21,14 +22,17 @@ ApplicationWindow {
 
 //    Connect{
 //        id: connection
-//        onShow: btn.text = "کلیک"
+
 //    }
 
 //    Button{
 //        id: btn
 //        text: "کلیک کنید"
 //        font.family: fontvazir.name
-//        onClicked: connection.setOrder(qsTr("k"), qsTr("d2"), qsTr("d3"))
+//        onClicked: {
+//            connection.setOrder(20);
+//            m.visible = true;
+//        }
 
 //    }
 

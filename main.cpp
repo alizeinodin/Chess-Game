@@ -1,7 +1,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQuickStyle>
-#include "connection.h"
+#include "include/connection.h"
+#include <QDebug>
 
 int main(int argc, char *argv[])
 {

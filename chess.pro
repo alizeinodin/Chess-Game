@@ -15,8 +15,22 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    connection.cpp \
-    main.cpp
+    main.cpp \
+#    src/bishop.cpp \
+#    src/cell.cpp \
+#    src/chessBoard.cpp \
+#    src/chessman.cpp \
+    src/connection.cpp \
+#    src/fileConnect.cpp \
+    src/game.cpp \
+#    src/id.cpp \
+#    src/king.cpp \
+#    src/knight.cpp \
+#    src/pawn.cpp \
+#    src/player.cpp \
+#    src/queen.cpp \
+#    src/rook.cpp \
+#    src/util.cpp
 
 RESOURCES += qml.qrc
 
@@ -32,4 +46,22 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    connection.h
+#    include/bishop.h \
+#    include/cell.h \
+#    include/chessBoard.h \
+#    include/chessMan.h \
+    include/connection.h \
+#    include/fileConnect.h \
+    include/game.h \
+#    include/id.h \
+#    include/king.h \
+#    include/knight.h \
+#    include/moving.h \
+#    include/pawn.h \
+#    include/player.h \
+#    include/queen.h \
+#    include/rook.h \
+#    include/using.h \
+#    include/util.h
+
+DISTFILES +=
