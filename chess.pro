@@ -20,8 +20,14 @@ SOURCES += \
 #    src/cell.cpp \
 #    src/chessBoard.cpp \
 #    src/chessman.cpp \
+    src/Cell.cpp \
+    src/bishop.cpp \
+    src/cell.cpp \
+    src/chessBoard.cpp \
+    src/chessman.cpp \
     src/connection.cpp \
 #    src/fileConnect.cpp \
+    src/fileConnect.cpp \
     src/game.cpp \
 #    src/id.cpp \
 #    src/king.cpp \
@@ -30,7 +36,16 @@ SOURCES += \
 #    src/player.cpp \
 #    src/queen.cpp \
 #    src/rook.cpp \
-#    src/util.cpp
+ \#    src/util.cpp
+    src/id.cpp \
+    src/king.cpp \
+    src/knight.cpp \
+    src/main.cpp \
+    src/pawn.cpp \
+    src/player.cpp \
+    src/queen.cpp \
+    src/rook.cpp \
+    src/util.cpp
 
 RESOURCES += qml.qrc
 
@@ -50,8 +65,13 @@ HEADERS += \
 #    include/cell.h \
 #    include/chessBoard.h \
 #    include/chessMan.h \
+    include/bishop.h \
+    include/cell.h \
+    include/chessBoard.h \
+    include/chessMan.h \
     include/connection.h \
 #    include/fileConnect.h \
+    include/fileConnect.h \
     include/game.h \
 #    include/id.h \
 #    include/king.h \
@@ -62,6 +82,18 @@ HEADERS += \
 #    include/queen.h \
 #    include/rook.h \
 #    include/using.h \
-#    include/util.h
+ \#    include/util.h
+    include/id.h \
+    include/king.h \
+    include/kishexcept.h \
+    include/knight.h \
+    include/matexcept.h \
+    include/moving.h \
+    include/pawn.h \
+    include/player.h \
+    include/queen.h \
+    include/rook.h \
+    include/using.h \
+    include/util.h
 
 DISTFILES +=

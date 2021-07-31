@@ -1,4 +1,5 @@
 #include "include/player.h"
+#include "include/chessMan.h"
 #include <stdexcept>
 using namespace std;
 
@@ -6,6 +7,7 @@ Player::Player(Name name, COLOR color)
 {
     this->name = name;
     this->color = color;
+    
 }
 
 void Player::addScore(size_t state, int score)
@@ -15,7 +17,7 @@ void Player::addScore(size_t state, int score)
     case 1:
         PScore += score;
         break;
-    case 2:
+    case -1:
         NScore += score;
         break;
 
@@ -35,7 +37,7 @@ int Player::getScore(size_t state)
 
         break;
 
-    case 2:
+    case -1:
         return NScore;
 
         break;
@@ -48,7 +50,13 @@ int Player::getScore(size_t state)
     return 0; // compiler never arrive to this line and this is for warning
 }
 
-Name Player::getName()
+COLOR Player::getcolor()
 {
-    return name;
+    return color;
+}
+
+
+void Player::add_attack_piece(ChessMan * attack)
+{
+    attackpiece.push_back(attack);
 }

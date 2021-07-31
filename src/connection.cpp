@@ -2,10 +2,10 @@
 #include <QDebug>
 using namespace std;
 
-connection::connection(QObject *parent) : QObject(parent)
+connection::connection(QObject *parent, std::string name) : QObject(parent)
 {
 //    connect(this, &connection::setOrder, this, &connection::show);
-    game = &Game::getInstance();
+    game = &Game::getInstance(name);
 }
 // score update player1 postive
 // ------------

@@ -8,12 +8,10 @@ class FileConnect
     private:
         std::fstream myFile;
     public:
-        FileConnect();
-        void addFile(std::string);
+        FileConnect(std::string);
         void WriteToFile(std::string);
         std::string ReadFromFile();
         std::fstream & getFile();
-        std::string undo();
         ~FileConnect();
 };
 

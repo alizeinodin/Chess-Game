@@ -5,37 +5,46 @@
 #include <iostream>
 using namespace std;
 
-rook::rook(COLOR c) : ChessMan(c) 
+rook::rook(COLOR c) : ChessMan(c)
 {
     piecetype = ROOK;
 }
 
-void rook::movePiece(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
+void rook::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
 {
     Cell cells[2];
     if (move.at(0) == 'R')
     {
         auto cellsid = cut_str(move);
-        if (this->access(cellsid.first, cellsid.second, board))
+        this->access(cellsid.first, board);
+        for (size_t i = 0; i < possible.size(); i++)
         {
-            cells[0] = search_cell(cellsid.first, board);
-            cells[0].empty();
-            cells[1] = search_cell(cellsid.second, board);
-            cells[1].setPiece(this);
-        }
-        else
-        {
-            if (!cells[1].getState())
+            if (possible.at(i).getId() == cellsid.second)
             {
-                //attack(move, cells[1]);
+                cells[0] = search_cell(cellsid.first, board);
+                cells[0].empty();
+                cells[1] = search_cell(cellsid.second, board);
+                cells[1].setPiece(this);
+                return;
             }
-            throw invalid_argument("can not move!!!");
+            else
+            {
+                cells[0] = search_cell(cellsid.first, board);
+                cells[1] = search_cell(cellsid.second, board);
+                if (!cells[1].getState())
+                {
+                    cells[0].empty();
+                    this->attack(move, cells[1]);
+                    return;
+                }
+                throw invalid_argument("can not move!!!");
+            }
         }
     }
     throw invalid_argument("piece is not true");
 }
 
-bool rook::access(string origin, string destination, array<array<Cell, 8>, 8> &board)
+void rook::access(string origin, array<array<Cell, 8>, 8> &board)
 {
     threat_id.clear();
     Cell celltemp;
@@ -47,23 +56,21 @@ bool rook::access(string origin, string destination, array<array<Cell, 8>, 8> &b
     {
         temp += origin.at(0);
         temp += to_string(temp_num);
-        if (temp == destination)
+        if (iscell(temp))
         {
-            if (iscell(temp))
+            celltemp = search_cell(temp, board);
+            if (!celltemp.getState())
             {
-                celltemp = search_cell(temp, board);
-                if (!celltemp.getState())
-                {
-                    return true;
-                }
-                else
-                {
-                    threat_id.push_back(temp);
-                    temp.clear();
-                    break;
-                }
+                possible.push_back(celltemp);
+            }
+            else
+            {
+                threat_id.push_back(temp);
+                temp.clear();
+                break;
             }
         }
+
         temp.clear();
         temp_num--;
     }
@@ -74,23 +81,21 @@ bool rook::access(string origin, string destination, array<array<Cell, 8>, 8> &b
     {
         temp += origin.at(0);
         temp += to_string(temp_num);
-        if (temp == destination)
+        if (iscell(temp))
         {
-            if (iscell(temp))
+            celltemp = search_cell(temp, board);
+            if (!celltemp.getState())
             {
-                celltemp = search_cell(temp, board);
-                if (!celltemp.getState())
-                {
-                    return true;
-                }
-                else
-                {
-                    threat_id.push_back(temp);
-                    temp.clear();
-                    break;
-                }
+                possible.push_back(celltemp);
+            }
+            else
+            {
+                threat_id.push_back(temp);
+                temp.clear();
+                break;
             }
         }
+
         temp.clear();
         temp_num++;
     }
@@ -103,23 +108,21 @@ bool rook::access(string origin, string destination, array<array<Cell, 8>, 8> &b
     {
         temp += (it)->at(0);
         temp += to_string(num);
-        if (temp == destination)
+        if (iscell(temp))
         {
-            if (iscell(temp))
+            celltemp = search_cell(temp, board);
+            if (!celltemp.getState())
             {
-                celltemp = search_cell(temp, board);
-                if (!celltemp.getState())
-                {
-                    return true;
-                }
-                else
-                {
-                    threat_id.push_back(temp);
-                    temp.clear();
-                    break;
-                }
+                possible.push_back(celltemp);
+            }
+            else
+            {
+                threat_id.push_back(temp);
+                temp.clear();
+                break;
             }
         }
+
         temp.clear();
         it--;
     }
@@ -129,31 +132,30 @@ bool rook::access(string origin, string destination, array<array<Cell, 8>, 8> &b
     {
         temp += (it)->at(0);
         temp += to_string(num);
-            if (iscell(temp))
+        if (iscell(temp))
+        {
+            celltemp = search_cell(temp, board);
+            if (!celltemp.getState())
             {
-                celltemp = search_cell(temp, board);
-                if (!celltemp.getState())
-                {
-                    if (temp == destination)
-                        return true;
-                }
-                else
-                {
-                    threat_id.push_back(temp);
-                    temp.clear();
-                    break;
-                }
+                possible.push_back(celltemp);
             }
+            else
+            {
+                threat_id.push_back(temp);
+                temp.clear();
+                break;
+            }
+        }
         temp.clear();
         it++;
     }
-    return false;
 }
-/*
+
 std::map<std::string, int> rook::threat(std::string cellid, array<array<Cell, 8>, 8> &board)
 {
+    bool kish;
     map<string, int> temp;
-    this->access(cellid, "F5", board);
+    this->access(cellid, board);
     for (size_t i = 0; i < threat_id.size(); i++)
     {
         if (threat_id.at(i) != this->get_color())
@@ -171,8 +173,32 @@ std::map<std::string, int> rook::threat(std::string cellid, array<array<Cell, 8>
             case POWN:
                 temp.insert(make_pair(threat_id.at(i), 1));
                 break;
+            case KING:
+                kish = true;
+                break;
             }
         }
     }
+    if (kish)
+    {
+        throw kishexcept();
+    }
+    return temp;
 }
-*/
+
+ChessMan  * rook:: attack(std::string move, Cell & cell)
+{
+    ChessMan *attackpiece = cell.getPiece();
+    auto temp = cut_str(move);
+    if (!(attackpiece->get_color() == color) || !(attackpiece->get_color() == color))
+    {
+        if (binary_search(threat_id.cbegin(), threat_id.cend(), temp.second))
+        {
+            cell.empty();
+            cell.setPiece(this);
+            return attackpiece;
+        }
+    }
+    throw invalid_argument("can not move!!!");
+    return attackpiece;
+}

@@ -1,29 +1,27 @@
 #ifndef _GAME_H
 #define _GAME_H
-//#include "chessBoard.h"
-//#include "player.h"
-#include<iostream>
-
-using nameGame = std::string;
+#include "chessBoard.h"
+#include "player.h"
 
 class Game
 {
+    enum Color {BLACK, WITHE};
     private:
-    Game();
-    nameGame name;
-    //ChessBoard & gameBoard = ChessBoard::getInstance();
-    //Player * player1 = nullptr;
-    //Player * player2 = nullptr;
-    bool Turn = false;
-
+    Game(Name);
+    Name gamename;
+    ChessBoard gameBoard = ChessBoard::getInstance();
+    Player * player1 = nullptr;
+    Player * player2 = nullptr;
+    bool Turn = true;
+    std::vector<MOVE> moves;
 
     public:
-    static Game & getInstance();
-    //ChessBoard & getBoard();
-    //void setPlayer(size_t, std::string);
-    //Player getPlayer();
-
-
+    Game & getInstance(Name);
+    void startgame();
+    void setPlayer(Color, std::string);
+    Player getPlayer(COLOR);
+    void order(MOVE);
+    void undo();
 };
 
 #endif /* _GAME_H */
