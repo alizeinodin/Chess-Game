@@ -7,6 +7,7 @@ class Game
 {
     enum Color {BLACK, WITHE};
     private:
+    Game(Name);
     Name gamename;
     ChessBoard gameBoard = ChessBoard::getInstance();
     Player * player1 = nullptr;
@@ -15,7 +16,6 @@ class Game
     std::vector<MOVE> moves;
 
     public:
-    Game(Name);
     Game & getInstance(Name);
     void startgame();
     void setPlayer(Color, std::string);

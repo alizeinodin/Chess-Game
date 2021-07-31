@@ -149,35 +149,67 @@ void ChessBoard::randommoves(COLOR color)
     this->movePiece(cellid);
 }
 
-array<array<Cell, 8>, 8> ChessBoard::remmeber(string fileName)
+
+Cell & ChessBoard::search(std::string str)
 {
-    this->startboard();
-    FileConnect File(fileName);
-    while (1)
+    char *character;
+    get_char(str, character);
+    string temp = "ABCDEFGH";
+    int x = temp.find(temp);
+    int y = get_num(str);
+    if (Board.at(x).at(y).getId() == str)
     {
-        if (File.getFile().eof())
+        return Board.at(x).at(y);
+    }
+
+    throw out_of_range("cell not exist");
+}
+
+
+void ChessBoard::randommoves(COLOR color)
+{
+    ChessMan *temp;
+    vector<int> rndcell;
+    string cellid;
+    int rand = randomNoGenerator(6);
+    switch (rand)
+    {
+    case QUEEN:
+        cellid += 'Q';
+        break;
+    case KING:
+        cellid += 'K';
+        break;
+    case BISHOP:
+        cellid += 'B';
+        break;
+    case POWN:
+        cellid += 'P';
+        break;
+    case KNIGHT:
+        cellid += 'H';
+        break;
+    case ROOK:
+        cellid += 'R';
+        break;
+    }
+    rndcell.push_back(randomNoGenerator(8));
+    rndcell.push_back(randomNoGenerator(8));
+    string origin;
+    for (size_t i = 0; i < 8; i++)
+    {
+        for (size_t j = 0; j < 8; j++)
         {
-            break;
+            temp = Board.at(i).at(j).getPiece();
+            if (temp->get_color() == color && temp->get_type() == rand)
+            {
+                origin = Board.at(i).at(j).getId();
+            }
         }
-        string chessRemmber = File.ReadFromFile();
-        this->updateBoard(chessRemmber.substr(2, 3), chessRemmber.substr(4, 5));
     }
     cellid += origin.substr(0,1);
     cellid += Board.at(rndcell[0]).at(rndcell[1]).getId();
     this->movePiece(cellid);
-}
-
-void ChessBoard::movePiece(MOVE move)
-{
-    auto cellsid = cut_str(move);
-    Cell cells;
-    cells = search_cell(cellsid.first, Board);
-    
-    if (!cells.getState())
-    {
-        cells.getPiece()->move(move, Board);
-    }
-    throw invalid_argument("cell is empty");
 }
 
 void ChessBoard::movePiece(MOVE move)
