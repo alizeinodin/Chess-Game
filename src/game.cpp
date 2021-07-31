@@ -4,7 +4,6 @@ using namespace std;
 
 Game::Game(Name name) : gamename(name) {}
 
-
 void Game::setPlayer(Color color, string name)
 {
     switch (color)
@@ -31,7 +30,7 @@ Player Game::getPlayer(COLOR c)
     }
     else if (player2->getcolor() == c)
     {
-        return * player2;
+        return *player2;
     }
     throw invalid_argument("invalid color");
 }
@@ -39,6 +38,8 @@ Player Game::getPlayer(COLOR c)
 void Game::order(MOVE move)
 {
     Cell cell = gameBoard.search(cut_str(move).first);
+    ChessMan *attackpiece = nullptr;
+    int score = 0;
     if (Turn)
     {
         if (cell.getPiece()->get_color() == player1->getcolor())
@@ -47,11 +48,37 @@ void Game::order(MOVE move)
             if (cell.getState())
             {
                 gameBoard.movePiece(move);
+                move += "0";
+                moves.push_back(move);
                 Turn = false;
             }
             else
             {
-                gameBoard.attack(move);
+                attackpiece = gameBoard.attack(move);
+            }
+            player1->addScore(1, gameBoard.threat(player1->getcolor()));
+            if (attackpiece != nullptr)
+            {
+                switch (attackpiece->get_type())
+                {
+                case QUEEN:
+                    score += 15;
+                    move += "1";
+                    break;
+                case ROOK:
+                case BISHOP:
+                case KNIGHT:
+                    score += 8;
+                    move += "1";
+                    break;
+                case POWN:
+                    score += 3;
+                    move += "1";
+                    break;
+                }
+                moves.push_back(move);
+                player1->addScore(1, score);
+                player1->add_attack_piece(attackpiece);
             }
         }
         throw invalid_argument("can not move this piece");
@@ -64,11 +91,38 @@ void Game::order(MOVE move)
             if (cell.getState())
             {
                 gameBoard.movePiece(move);
+                move += "0";
+                moves.push_back(move);
                 Turn = true;
             }
             else
             {
-                gameBoard.attack(move);
+                attackpiece = gameBoard.attack(move);
+            }
+            player2->addScore(1, gameBoard.threat(player2->getcolor()));
+
+            if (attackpiece != nullptr)
+            {
+                switch (attackpiece->get_type())
+                {
+                case QUEEN:
+                    score += 15;
+                    move += "1";
+                    break;
+                case ROOK:
+                case BISHOP:
+                case KNIGHT:
+                    score += 8;
+                    move += "1";
+                    break;
+                case POWN:
+                    score += 3;
+                    move += "1";
+                    break;
+                }
+                moves.push_back(move);
+                player2->addScore(1, score);
+                player2->add_attack_piece(attackpiece);
             }
         }
         throw invalid_argument("can not move this piece");
@@ -78,4 +132,9 @@ void Game::order(MOVE move)
 void Game::startgame()
 {
     gameBoard.startboard();
+}
+
+void Game::undo()
+{
+    
 }

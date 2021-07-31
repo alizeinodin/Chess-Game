@@ -1,4 +1,5 @@
 #include "player.h"
+#include "chessMan.h"
 #include <stdexcept>
 using namespace std;
 
@@ -6,10 +7,6 @@ Player::Player(Name name, COLOR color)
 {
     this->name = name;
     this->color = color;
-    if (color == "#ffffff")
-    {
-        Turn = true;
-    }
     
 }
 
@@ -59,4 +56,7 @@ COLOR Player::getcolor()
 }
 
 
-
+void Player::add_attack_piece(ChessMan * attack)
+{
+    attackpiece.push_back(attack);
+}

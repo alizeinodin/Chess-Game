@@ -199,3 +199,4 @@ ChessMan  * pawn:: attack(std::string move, Cell & cell)
     }
     throw invalid_argument("can not move!!!");
     return attackpiece;
+}

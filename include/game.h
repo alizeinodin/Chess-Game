@@ -12,6 +12,7 @@ class Game
     Player * player1 = nullptr;
     Player * player2 = nullptr;
     bool Turn = true;
+    std::vector<MOVE> moves;
 
     public:
     Game(Name);
@@ -19,6 +20,7 @@ class Game
     void setPlayer(Color, std::string);
     Player getPlayer(COLOR);
     void order(MOVE);
+    void undo();
 };
 
 #endif /* _GAME_H */
