@@ -4,7 +4,6 @@
 #include <QObject>
 #include <QString>
 #include "include/game.h"
-#include <QChar>
 #include <stdexcept>
 
 class connection : public QObject
@@ -12,7 +11,7 @@ class connection : public QObject
     Q_OBJECT
 
     // game name smart variable
-    Q_PROPERTY(QStirng GName READ GName WRITE setGName NOTIFY GNameChanged)
+    Q_PROPERTY(QString GName READ GName WRITE setGName NOTIFY GNameChanged)
 
     // player1 socre smart variable
     Q_PROPERTY(int player1PScore READ player1PScore WRITE setPlayer1PScore NOTIFY player1PScoreChanged)

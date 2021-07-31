@@ -19,6 +19,7 @@ connection::~connection()
 void connection::setGName(QString name)
 {
     gameName = name;
+    emit GNameChanged();
 }
 
 QString connection::GName()
@@ -119,7 +120,15 @@ void connection::setOrder(QString order)
         throw invalid_argument("دستور نامعتبر است");
     }
     qDebug() << order;
-    emit successMove();
+    QString test = "test";
+    startGame(test);
+    game->startgame();
+    try {
+        game->order(order.toStdString());
+        emit successMove();
+    } catch (invalid_argument & errorOrder) {
+        std::cerr << errorOrder.what() << std::endl;
+    }
 }
 
 // ------------
@@ -129,7 +138,7 @@ void connection::setOrder(QString order)
 void connection::startGame(QString name)
 {
     setGName(name);
-    this->game = new Game(gameName);
+    this->game = new Game(gameName.toStdString());
 }
 // ------------
 

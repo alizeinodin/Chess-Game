@@ -40,6 +40,8 @@ int get_num(std::string str)
 {
     char temp2[2];
     str.copy(temp2, 1, 1);
+//    cout << "get_num str: " << str << endl;
+//    cout << "get_num Y: " << temp2[0] << endl;
     temp2[1] = '\0';
     int num = stoi(temp2);
     return num;

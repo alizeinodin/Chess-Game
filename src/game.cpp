@@ -1,5 +1,6 @@
 #include "include/game.h"
 #include "include/player.h"
+#include <QDebug>
 using namespace std;
 
 Game::Game(Name name) : gamename(name) {}
@@ -42,7 +43,9 @@ Player Game::getPlayer(COLOR c)
 
 void Game::order(MOVE move)
 {
+//    cout << cut_str(move).first << endl;
     Cell cell = gameBoard.search(cut_str(move).first);
+    std::cerr << cell.getId() << std::endl;
     ChessMan *attackpiece = nullptr;
     int score = 0;
     if (Turn)

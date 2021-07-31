@@ -1,9 +1,10 @@
 #include "include/id.h"
+#include <QDebug>
 using namespace std;
 
 ID CellID()
 {
-    array<string, 8> alphabet = {"A", "B", "C", "D", "E", "F", "G", "H"};
+    array<string, 8> alphabet = {"a", "b", "c", "d", "e", "f", "g", "h"};
     static unsigned int number = 0;
 
     while (number < 9)
