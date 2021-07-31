@@ -1,5 +1,5 @@
-#include "chessBoard.h"
-#include "chessMan.h"
+#include "include/chessBoard.h"
+#include "include/chessMan.h"
 using namespace std;
 
 ChessBoard &ChessBoard::getInstance()

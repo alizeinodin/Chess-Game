@@ -1,5 +1,5 @@
-#include "player.h"
-#include "chessMan.h"
+#include "include/player.h"
+#include "include/chessMan.h"
 #include <stdexcept>
 using namespace std;
 

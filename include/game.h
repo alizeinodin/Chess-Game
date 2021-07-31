@@ -15,6 +15,7 @@ class Game
     std::vector<MOVE> moves;
 
     public:
+    //Game & getInstance(Name);
     Game(Name);
     void startgame();
     void setPlayer(Color, std::string);

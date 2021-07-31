@@ -1,5 +1,5 @@
-#include "queen.h"
-#include "util.h"
+#include "include/queen.h"
+#include "include/util.h"
 #include <vector>
 #include <algorithm>
 using namespace std;

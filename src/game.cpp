@@ -1,9 +1,14 @@
-#include "game.h"
-#include "player.h"
+#include "include/game.h"
+#include "include/player.h"
 using namespace std;
 
 Game::Game(Name name) : gamename(name) {}
 
+//Game &Game::getInstance(Name name)
+//{
+//    static Game game(name);
+//    return game;
+//}
 void Game::setPlayer(Color color, string name)
 {
     switch (color)
