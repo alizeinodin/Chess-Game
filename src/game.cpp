@@ -49,6 +49,7 @@ void Game::order(MOVE move)
             {
                 gameBoard.movePiece(move);
                 move += "0";
+                move += "P1";
                 moves.push_back(move);
                 Turn = false;
             }
@@ -76,6 +77,7 @@ void Game::order(MOVE move)
                     move += "1";
                     break;
                 }
+                move += "P1";
                 moves.push_back(move);
                 player1->addScore(1, score);
                 player1->add_attack_piece(attackpiece);
@@ -92,6 +94,7 @@ void Game::order(MOVE move)
             {
                 gameBoard.movePiece(move);
                 move += "0";
+                move += "P2";
                 moves.push_back(move);
                 Turn = true;
             }
@@ -120,6 +123,7 @@ void Game::order(MOVE move)
                     move += "1";
                     break;
                 }
+                move += "P2";
                 moves.push_back(move);
                 player2->addScore(1, score);
                 player2->add_attack_piece(attackpiece);
@@ -136,5 +140,64 @@ void Game::startgame()
 
 void Game::undo()
 {
-    
+    string move;
+    Cell cells[2];
+    ChessMan * temp;
+    if (Turn)
+    {
+        move = moves.back();
+        if (move.at(7) == '2')
+        {
+            cells[0] = gameBoard.search(cut_str(move).second);
+            cells[1] = gameBoard.search(cut_str(move).first);
+            if (move.at(5) == '0')
+            {
+                temp = cells[0].getPiece();
+                cells[0].empty();
+                cells[1].setPiece(temp);
+                moves.pop_back();
+                Turn = false;
+                return;
+            }
+            else
+            {
+                temp = cells[0].getPiece();
+                cells[0].empty();
+                cells[1].setPiece(temp);
+                cells[1].setPiece(player2->last_piece());
+                moves.pop_back();
+                Turn = false;
+                return;
+            }
+             
+        }
+    }
+    else
+    {
+        move = moves.back();
+        if (move.at(7) == '1')
+        {
+            cells[0] = gameBoard.search(cut_str(move).second);
+            cells[1] = gameBoard.search(cut_str(move).first);
+            if (move.at(5) == '0')
+            {
+                temp = cells[0].getPiece();
+                cells[0].empty();
+                cells[1].setPiece(temp);
+                moves.pop_back();
+                Turn = true;
+                return;
+            }
+            else
+            {
+                temp = cells[0].getPiece();
+                cells[0].empty();
+                cells[1].setPiece(temp);
+                cells[1].setPiece(player1->last_piece());
+                moves.pop_back();
+                Turn = true;
+                return;
+            }
+        }
+    }
 }

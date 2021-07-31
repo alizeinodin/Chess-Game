@@ -151,7 +151,7 @@ void ChessBoard::randommoves(COLOR color)
 
 array<array<Cell, 8>, 8> ChessBoard::remmeber(string fileName)
 {
-    start();
+    this->startboard();
     FileConnect File(fileName);
     while (1)
     {
@@ -160,8 +160,20 @@ array<array<Cell, 8>, 8> ChessBoard::remmeber(string fileName)
             break;
         }
         string chessRemmber = File.ReadFromFile();
-        updateBoard(chessRemmber.substr(2, 3), chessRemmber.substr(4, 5));
+        this->updateBoard(chessRemmber.substr(2, 3), chessRemmber.substr(4, 5));
     }
+}
+
+void ChessBoard::updateBoard(string first, string second)
+{
+    Cell firstCell = search(first);
+    Cell secondCell = search(second);
+
+    ChessMan *tempPiece = nullptr;
+    tempPiece = firstCell.getPiece();
+
+    firstCell.empty();
+    secondCell.setPiece(tempPiece);
 }
 
 void ChessBoard::movePiece(MOVE move)
