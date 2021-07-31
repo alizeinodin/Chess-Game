@@ -6,9 +6,8 @@
 class matexcept : public std::runtime_error
 {
 public:
-    matexcept();
+    matexcept() : std::runtime_error("you hgave mat") {}
 };
 
-matexcept::matexcept() : std::runtime_error("you hgave mat") {}
 
 #endif
