@@ -21,6 +21,7 @@ class Game
     Player getPlayer(COLOR);
     void order(MOVE);
     void undo();
+    void savegame();
 };
 
 #endif /* _GAME_H */

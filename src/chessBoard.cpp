@@ -149,6 +149,21 @@ void ChessBoard::randommoves(COLOR color)
     this->movePiece(cellid);
 }
 
+array<array<Cell, 8>, 8> ChessBoard::remmeber(string fileName)
+{
+    start();
+    FileConnect File(fileName);
+    while (1)
+    {
+        if (File.getFile().eof())
+        {
+            break;
+        }
+        string chessRemmber = File.ReadFromFile();
+        updateBoard(chessRemmber.substr(2, 3), chessRemmber.substr(4, 5));
+    }
+}
+
 void ChessBoard::movePiece(MOVE move)
 {
     auto cellsid = cut_str(move);
