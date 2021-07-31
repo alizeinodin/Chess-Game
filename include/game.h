@@ -5,7 +5,7 @@
 
 class Game
 {
-    enum Color {BLACK, WITHE};
+    enum Color {BLACK, WHITE};
     private:
     Name gamename;
     ChessBoard gameBoard = ChessBoard::getInstance();

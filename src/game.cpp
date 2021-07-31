@@ -14,7 +14,7 @@ void Game::setPlayer(Color color, string name)
 {
     switch (color)
     {
-    case WITHE:
+    case WHITE:
         player1 = new Player(name, "#ffffff");
         break;
     case BLACK:

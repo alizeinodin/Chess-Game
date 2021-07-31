@@ -119,9 +119,13 @@ void connection::setOrder(QString order)
     {
         throw invalid_argument("دستور نامعتبر است");
     }
+
     qDebug() << order;
     QString test = "test";
     startGame(test);
+    game->setPlayer(0, test.toStdString());
+
+
     game->startgame();
     try {
         game->order(order.toStdString());
