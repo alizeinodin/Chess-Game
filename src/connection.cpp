@@ -13,6 +13,20 @@ connection::~connection()
     if(game != nullptr)
         delete game;
 }
+
+// game name variable
+// ------------
+void connection::setGName(QString name)
+{
+    gameName = name;
+}
+
+QString connection::GName()
+{
+    return gameName;
+}
+// ------------
+
 // score update player1 postive
 // ------------
 int connection::player1PScore()
@@ -114,7 +128,8 @@ void connection::setOrder(QString order)
 // ------------
 void connection::startGame(QString name)
 {
-    this->game = new Game(name.toStdString());
+    setGName(name);
+    this->game = new Game(gameName);
 }
 // ------------
 

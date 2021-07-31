@@ -11,6 +11,9 @@ class connection : public QObject
 {
     Q_OBJECT
 
+    // game name smart variable
+    Q_PROPERTY(QStirng GName READ GName WRITE setGName NOTIFY GNameChanged)
+
     // player1 socre smart variable
     Q_PROPERTY(int player1PScore READ player1PScore WRITE setPlayer1PScore NOTIFY player1PScoreChanged)
     Q_PROPERTY(int player1NScore READ player1NScore WRITE setPlayer1NScore NOTIFY player1NScoreChanged)
@@ -27,6 +30,9 @@ public:
     ~connection();
 
 signals:
+    // name of game
+    void GNameChanged();
+
     // score's of players
     void player1PScoreChanged();
     void player1NScoreChanged();
@@ -43,6 +49,13 @@ signals:
     QString showName();
 
 public slots:
+
+    // game name
+
+    void setGName(QString);
+    QString GName();
+
+    // end
 
     // scores smart update
 
@@ -84,6 +97,7 @@ public slots:
 private:
 
     Game * game = nullptr;
+    QString gameName;
 
 
     // player's score
