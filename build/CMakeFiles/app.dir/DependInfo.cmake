@@ -4,21 +4,19 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/Cell.cpp" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles/app.dir/src/Cell.cpp.o"
-  "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/bishop.cpp" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles/app.dir/src/bishop.cpp.o"
-  "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/chessBoard.cpp" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles/app.dir/src/chessBoard.cpp.o"
-  "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/chessman.cpp" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles/app.dir/src/chessman.cpp.o"
-  "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/fileConnect.cpp" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles/app.dir/src/fileConnect.cpp.o"
-  "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/game.cpp" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles/app.dir/src/game.cpp.o"
-  "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/id.cpp" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles/app.dir/src/id.cpp.o"
-  "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/king.cpp" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles/app.dir/src/king.cpp.o"
-  "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/knight.cpp" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles/app.dir/src/knight.cpp.o"
-  "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/main.cpp" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles/app.dir/src/main.cpp.o"
-  "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/pawn.cpp" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles/app.dir/src/pawn.cpp.o"
-  "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/player.cpp" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles/app.dir/src/player.cpp.o"
-  "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/queen.cpp" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles/app.dir/src/queen.cpp.o"
-  "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/rook.cpp" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles/app.dir/src/rook.cpp.o"
-  "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/util.cpp" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles/app.dir/src/util.cpp.o"
+  "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/src/Cell.cpp" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/build/CMakeFiles/app.dir/src/Cell.cpp.o"
+  "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/src/bishop.cpp" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/build/CMakeFiles/app.dir/src/bishop.cpp.o"
+  "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/src/chessman.cpp" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/build/CMakeFiles/app.dir/src/chessman.cpp.o"
+  "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/src/fileConnect.cpp" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/build/CMakeFiles/app.dir/src/fileConnect.cpp.o"
+  "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/src/id.cpp" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/build/CMakeFiles/app.dir/src/id.cpp.o"
+  "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/src/king.cpp" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/build/CMakeFiles/app.dir/src/king.cpp.o"
+  "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/src/knight.cpp" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/build/CMakeFiles/app.dir/src/knight.cpp.o"
+  "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/src/main.cpp" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/build/CMakeFiles/app.dir/src/main.cpp.o"
+  "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/src/pawn.cpp" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/build/CMakeFiles/app.dir/src/pawn.cpp.o"
+  "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/src/player.cpp" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/build/CMakeFiles/app.dir/src/player.cpp.o"
+  "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/src/queen.cpp" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/build/CMakeFiles/app.dir/src/queen.cpp.o"
+  "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/src/rook.cpp" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/build/CMakeFiles/app.dir/src/rook.cpp.o"
+  "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/src/util.cpp" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/build/CMakeFiles/app.dir/src/util.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

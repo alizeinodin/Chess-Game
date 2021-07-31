@@ -16,23 +16,6 @@ CMakeFiles/app.dir/src/bishop.cpp.o: ../include/using.h
 CMakeFiles/app.dir/src/bishop.cpp.o: ../include/util.h
 CMakeFiles/app.dir/src/bishop.cpp.o: ../src/bishop.cpp
 
-CMakeFiles/app.dir/src/chessBoard.cpp.o: ../include/bishop.h
-CMakeFiles/app.dir/src/chessBoard.cpp.o: ../include/cell.h
-CMakeFiles/app.dir/src/chessBoard.cpp.o: ../include/chessBoard.h
-CMakeFiles/app.dir/src/chessBoard.cpp.o: ../include/chessMan.h
-CMakeFiles/app.dir/src/chessBoard.cpp.o: ../include/fileConnect.h
-CMakeFiles/app.dir/src/chessBoard.cpp.o: ../include/king.h
-CMakeFiles/app.dir/src/chessBoard.cpp.o: ../include/kishexcept.h
-CMakeFiles/app.dir/src/chessBoard.cpp.o: ../include/knight.h
-CMakeFiles/app.dir/src/chessBoard.cpp.o: ../include/moving.h
-CMakeFiles/app.dir/src/chessBoard.cpp.o: ../include/pawn.h
-CMakeFiles/app.dir/src/chessBoard.cpp.o: ../include/player.h
-CMakeFiles/app.dir/src/chessBoard.cpp.o: ../include/queen.h
-CMakeFiles/app.dir/src/chessBoard.cpp.o: ../include/rook.h
-CMakeFiles/app.dir/src/chessBoard.cpp.o: ../include/using.h
-CMakeFiles/app.dir/src/chessBoard.cpp.o: ../include/util.h
-CMakeFiles/app.dir/src/chessBoard.cpp.o: ../src/chessBoard.cpp
-
 CMakeFiles/app.dir/src/chessman.cpp.o: ../include/cell.h
 CMakeFiles/app.dir/src/chessman.cpp.o: ../include/chessMan.h
 CMakeFiles/app.dir/src/chessman.cpp.o: ../include/kishexcept.h
@@ -42,24 +25,6 @@ CMakeFiles/app.dir/src/chessman.cpp.o: ../src/chessman.cpp
 
 CMakeFiles/app.dir/src/fileConnect.cpp.o: ../include/fileConnect.h
 CMakeFiles/app.dir/src/fileConnect.cpp.o: ../src/fileConnect.cpp
-
-CMakeFiles/app.dir/src/game.cpp.o: ../include/bishop.h
-CMakeFiles/app.dir/src/game.cpp.o: ../include/cell.h
-CMakeFiles/app.dir/src/game.cpp.o: ../include/chessBoard.h
-CMakeFiles/app.dir/src/game.cpp.o: ../include/chessMan.h
-CMakeFiles/app.dir/src/game.cpp.o: ../include/fileConnect.h
-CMakeFiles/app.dir/src/game.cpp.o: ../include/game.h
-CMakeFiles/app.dir/src/game.cpp.o: ../include/king.h
-CMakeFiles/app.dir/src/game.cpp.o: ../include/kishexcept.h
-CMakeFiles/app.dir/src/game.cpp.o: ../include/knight.h
-CMakeFiles/app.dir/src/game.cpp.o: ../include/moving.h
-CMakeFiles/app.dir/src/game.cpp.o: ../include/pawn.h
-CMakeFiles/app.dir/src/game.cpp.o: ../include/player.h
-CMakeFiles/app.dir/src/game.cpp.o: ../include/queen.h
-CMakeFiles/app.dir/src/game.cpp.o: ../include/rook.h
-CMakeFiles/app.dir/src/game.cpp.o: ../include/using.h
-CMakeFiles/app.dir/src/game.cpp.o: ../include/util.h
-CMakeFiles/app.dir/src/game.cpp.o: ../src/game.cpp
 
 CMakeFiles/app.dir/src/id.cpp.o: ../include/id.h
 CMakeFiles/app.dir/src/id.cpp.o: ../src/id.cpp
@@ -82,7 +47,17 @@ CMakeFiles/app.dir/src/knight.cpp.o: ../include/using.h
 CMakeFiles/app.dir/src/knight.cpp.o: ../include/util.h
 CMakeFiles/app.dir/src/knight.cpp.o: ../src/knight.cpp
 
-CMakeFiles/app.dir/src/main.cpp.o: ../include/fileConnect.h
+CMakeFiles/app.dir/src/main.cpp.o: ../include/bishop.h
+CMakeFiles/app.dir/src/main.cpp.o: ../include/cell.h
+CMakeFiles/app.dir/src/main.cpp.o: ../include/chessMan.h
+CMakeFiles/app.dir/src/main.cpp.o: ../include/king.h
+CMakeFiles/app.dir/src/main.cpp.o: ../include/kishexcept.h
+CMakeFiles/app.dir/src/main.cpp.o: ../include/knight.h
+CMakeFiles/app.dir/src/main.cpp.o: ../include/moving.h
+CMakeFiles/app.dir/src/main.cpp.o: ../include/pawn.h
+CMakeFiles/app.dir/src/main.cpp.o: ../include/rook.h
+CMakeFiles/app.dir/src/main.cpp.o: ../include/using.h
+CMakeFiles/app.dir/src/main.cpp.o: ../include/util.h
 CMakeFiles/app.dir/src/main.cpp.o: ../src/main.cpp
 
 CMakeFiles/app.dir/src/pawn.cpp.o: ../include/cell.h
@@ -94,7 +69,12 @@ CMakeFiles/app.dir/src/pawn.cpp.o: ../include/using.h
 CMakeFiles/app.dir/src/pawn.cpp.o: ../include/util.h
 CMakeFiles/app.dir/src/pawn.cpp.o: ../src/pawn.cpp
 
+CMakeFiles/app.dir/src/player.cpp.o: ../include/cell.h
+CMakeFiles/app.dir/src/player.cpp.o: ../include/chessMan.h
+CMakeFiles/app.dir/src/player.cpp.o: ../include/kishexcept.h
+CMakeFiles/app.dir/src/player.cpp.o: ../include/moving.h
 CMakeFiles/app.dir/src/player.cpp.o: ../include/player.h
+CMakeFiles/app.dir/src/player.cpp.o: ../include/using.h
 CMakeFiles/app.dir/src/player.cpp.o: ../src/player.cpp
 
 CMakeFiles/app.dir/src/queen.cpp.o: ../include/cell.h

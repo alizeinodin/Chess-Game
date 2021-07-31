@@ -1,10 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/app.dir/src/Cell.cpp.o"
   "CMakeFiles/app.dir/src/bishop.cpp.o"
-  "CMakeFiles/app.dir/src/chessBoard.cpp.o"
   "CMakeFiles/app.dir/src/chessman.cpp.o"
   "CMakeFiles/app.dir/src/fileConnect.cpp.o"
-  "CMakeFiles/app.dir/src/game.cpp.o"
   "CMakeFiles/app.dir/src/id.cpp.o"
   "CMakeFiles/app.dir/src/king.cpp.o"
   "CMakeFiles/app.dir/src/knight.cpp.o"

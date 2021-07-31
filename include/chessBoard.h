@@ -14,14 +14,12 @@
 #include "cell.h"
 #include "fileConnect.h"
 #include "player.h"
-// #include "game.h"
 
 class ChessBoard
 {
     private:
     ChessBoard(); // singleton pattern
     std::array<std::array<Cell, 8>, 8> Board;
-    FileConnect File;
 
 
     public:
@@ -35,6 +33,4 @@ class ChessBoard
     ChessMan * attack(MOVE);
     int threat(COLOR);
 };
-
-
 #endif /* _CHESSBOARD_H*/

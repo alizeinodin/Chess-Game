@@ -18,7 +18,7 @@
 					]
 				}
 			],
-			"name" : "Debug",
+			"name" : "",
 			"projects" : 
 			[
 				{
@@ -38,7 +38,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "app::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-app-Debug-0e249c5c3c4a8c47f7dc.json",
+					"jsonFile" : "target-app-f2bf3a2e44abd4b3a163.json",
 					"name" : "app",
 					"projectIndex" : 0
 				}
@@ -48,8 +48,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build",
-		"source" : "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project"
+		"build" : "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/build",
+		"source" : "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj"
 	},
 	"version" : 
 	{

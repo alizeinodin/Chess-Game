@@ -5,7 +5,6 @@
 #include <array>
 #include "cell.h"
 #include <iostream>
-#include "cell.h"
 
 class pawn : public ChessMan
 {

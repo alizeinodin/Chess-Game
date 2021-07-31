@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project"
+CMAKE_SOURCE_DIR = "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build"
+CMAKE_BINARY_DIR = "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/build"
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles/progress.marks"
+	$(CMAKE_COMMAND) -E cmake_progress_start "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/build/CMakeFiles" "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/build/CMakeFiles/progress.marks"
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build/CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/build/CMakeFiles" 0
 .PHONY : all
 
 # The main clean target
@@ -177,33 +177,6 @@ src/bishop.cpp.s:
 	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/bishop.cpp.s
 .PHONY : src/bishop.cpp.s
 
-src/chessBoard.o: src/chessBoard.cpp.o
-
-.PHONY : src/chessBoard.o
-
-# target to build an object file
-src/chessBoard.cpp.o:
-	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/chessBoard.cpp.o
-.PHONY : src/chessBoard.cpp.o
-
-src/chessBoard.i: src/chessBoard.cpp.i
-
-.PHONY : src/chessBoard.i
-
-# target to preprocess a source file
-src/chessBoard.cpp.i:
-	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/chessBoard.cpp.i
-.PHONY : src/chessBoard.cpp.i
-
-src/chessBoard.s: src/chessBoard.cpp.s
-
-.PHONY : src/chessBoard.s
-
-# target to generate assembly for a file
-src/chessBoard.cpp.s:
-	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/chessBoard.cpp.s
-.PHONY : src/chessBoard.cpp.s
-
 src/chessman.o: src/chessman.cpp.o
 
 .PHONY : src/chessman.o
@@ -257,33 +230,6 @@ src/fileConnect.s: src/fileConnect.cpp.s
 src/fileConnect.cpp.s:
 	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/fileConnect.cpp.s
 .PHONY : src/fileConnect.cpp.s
-
-src/game.o: src/game.cpp.o
-
-.PHONY : src/game.o
-
-# target to build an object file
-src/game.cpp.o:
-	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/game.cpp.o
-.PHONY : src/game.cpp.o
-
-src/game.i: src/game.cpp.i
-
-.PHONY : src/game.i
-
-# target to preprocess a source file
-src/game.cpp.i:
-	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/game.cpp.i
-.PHONY : src/game.cpp.i
-
-src/game.s: src/game.cpp.s
-
-.PHONY : src/game.s
-
-# target to generate assembly for a file
-src/game.cpp.s:
-	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/game.cpp.s
-.PHONY : src/game.cpp.s
 
 src/id.o: src/id.cpp.o
 
@@ -543,18 +489,12 @@ help:
 	@echo "... src/bishop.o"
 	@echo "... src/bishop.i"
 	@echo "... src/bishop.s"
-	@echo "... src/chessBoard.o"
-	@echo "... src/chessBoard.i"
-	@echo "... src/chessBoard.s"
 	@echo "... src/chessman.o"
 	@echo "... src/chessman.i"
 	@echo "... src/chessman.s"
 	@echo "... src/fileConnect.o"
 	@echo "... src/fileConnect.i"
 	@echo "... src/fileConnect.s"
-	@echo "... src/game.o"
-	@echo "... src/game.i"
-	@echo "... src/game.s"
 	@echo "... src/id.o"
 	@echo "... src/id.i"
 	@echo "... src/id.s"

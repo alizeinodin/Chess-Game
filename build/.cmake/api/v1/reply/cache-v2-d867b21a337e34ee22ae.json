@@ -11,7 +11,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build"
+			"value" : "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/build"
 		},
 		{
 			"name" : "CHESS_SOURCE_DIR",
@@ -23,7 +23,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project"
+			"value" : "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj"
 		},
 		{
 			"name" : "CMAKE_ADDR2LINE",
@@ -39,7 +39,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/bin/addr2line"
+			"value" : "/usr/bin/addr2line"
 		},
 		{
 			"name" : "CMAKE_AR",
@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/bin/ar"
+			"value" : "/usr/bin/ar"
 		},
 		{
 			"name" : "CMAKE_BUILD_TYPE",
@@ -63,11 +63,11 @@
 			[
 				{
 					"name" : "HELPSTRING",
-					"value" : "No help, variable specified on the command line."
+					"value" : "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel ..."
 				}
 			],
 			"type" : "STRING",
-			"value" : "Debug"
+			"value" : ""
 		},
 		{
 			"name" : "CMAKE_CACHEFILE_DIR",
@@ -79,7 +79,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/build"
+			"value" : "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/build"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -179,11 +179,11 @@
 				},
 				{
 					"name" : "HELPSTRING",
-					"value" : "No help, variable specified on the command line."
+					"value" : "CXX compiler"
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/bin/g++-9"
+			"value" : "/usr/bin/c++"
 		},
 		{
 			"name" : "CMAKE_CXX_COMPILER_AR",
@@ -199,7 +199,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/bin/gcc-ar-9"
+			"value" : "/usr/bin/gcc-ar-9"
 		},
 		{
 			"name" : "CMAKE_CXX_COMPILER_RANLIB",
@@ -215,7 +215,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/bin/gcc-ranlib-9"
+			"value" : "/usr/bin/gcc-ranlib-9"
 		},
 		{
 			"name" : "CMAKE_CXX_FLAGS",
@@ -307,11 +307,11 @@
 				},
 				{
 					"name" : "HELPSTRING",
-					"value" : "No help, variable specified on the command line."
+					"value" : "C compiler"
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/bin/gcc-9"
+			"value" : "/usr/bin/cc"
 		},
 		{
 			"name" : "CMAKE_C_COMPILER_AR",
@@ -327,7 +327,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/bin/gcc-ar-9"
+			"value" : "/usr/bin/gcc-ar-9"
 		},
 		{
 			"name" : "CMAKE_C_COMPILER_RANLIB",
@@ -343,7 +343,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/bin/gcc-ranlib-9"
+			"value" : "/usr/bin/gcc-ranlib-9"
 		},
 		{
 			"name" : "CMAKE_C_FLAGS",
@@ -555,11 +555,11 @@
 				},
 				{
 					"name" : "HELPSTRING",
-					"value" : "No help, variable specified on the command line."
+					"value" : "Enable/Disable output of compile commands during generation."
 				}
 			],
 			"type" : "BOOL",
-			"value" : "TRUE"
+			"value" : "OFF"
 		},
 		{
 			"name" : "CMAKE_EXTRA_GENERATOR",
@@ -631,7 +631,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project"
+			"value" : "/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -671,7 +671,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/bin/ld"
+			"value" : "/usr/bin/ld"
 		},
 		{
 			"name" : "CMAKE_MAKE_PROGRAM",
@@ -783,7 +783,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/bin/nm"
+			"value" : "/usr/bin/nm"
 		},
 		{
 			"name" : "CMAKE_NUMBER_OF_MAKEFILES",
@@ -811,7 +811,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/bin/objcopy"
+			"value" : "/usr/bin/objcopy"
 		},
 		{
 			"name" : "CMAKE_OBJDUMP",
@@ -827,7 +827,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/bin/objdump"
+			"value" : "/usr/bin/objdump"
 		},
 		{
 			"name" : "CMAKE_PLATFORM_INFO_INITIALIZED",
@@ -891,7 +891,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/bin/ranlib"
+			"value" : "/usr/bin/ranlib"
 		},
 		{
 			"name" : "CMAKE_READELF",
@@ -907,7 +907,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/bin/readelf"
+			"value" : "/usr/bin/readelf"
 		},
 		{
 			"name" : "CMAKE_ROOT",
@@ -1127,7 +1127,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/bin/strip"
+			"value" : "/usr/bin/strip"
 		},
 		{
 			"name" : "CMAKE_UNAME",

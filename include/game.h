@@ -3,26 +3,24 @@
 #include "chessBoard.h"
 #include "player.h"
 
-using nameGame = std::string;
-
 class Game
 {
     enum Color {BLACK, WITHE};
     private:
-    Game(Name);
     Name gamename;
-    ChessBoard & gameBoard = ChessBoard::getInstance();
+    ChessBoard gameBoard = ChessBoard::getInstance();
     Player * player1 = nullptr;
     Player * player2 = nullptr;
     bool Turn = true;
-
+    std::vector<MOVE> moves;
 
     public:
-    Game & getInstance(Name);
+    Game(Name);
     void startgame();
     void setPlayer(Color, std::string);
     Player getPlayer(COLOR);
     void order(MOVE);
+    void undo();
 };
 
 #endif /* _GAME_H */

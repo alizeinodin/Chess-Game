@@ -63,6 +63,7 @@ void king::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
         {
             continue;
         }
+        if (iscell(temp))
         {
             celltemp = search_cell(temp, board);
             if (!celltemp.getState())

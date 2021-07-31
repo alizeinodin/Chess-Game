@@ -6,7 +6,7 @@ CMakeFiles/app.dir/src/Cell.cpp.o
  ../include/id.h
  ../include/moving.h
  ../include/using.h
- /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/Cell.cpp
+ /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/src/Cell.cpp
 CMakeFiles/app.dir/src/bishop.cpp.o
  ../include/bishop.h
  ../include/cell.h
@@ -15,55 +15,20 @@ CMakeFiles/app.dir/src/bishop.cpp.o
  ../include/moving.h
  ../include/using.h
  ../include/util.h
- /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/bishop.cpp
-CMakeFiles/app.dir/src/chessBoard.cpp.o
- ../include/bishop.h
- ../include/cell.h
- ../include/chessBoard.h
- ../include/chessMan.h
- ../include/fileConnect.h
- ../include/king.h
- ../include/kishexcept.h
- ../include/knight.h
- ../include/moving.h
- ../include/pawn.h
- ../include/player.h
- ../include/queen.h
- ../include/rook.h
- ../include/using.h
- ../include/util.h
- /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/chessBoard.cpp
+ /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/src/bishop.cpp
 CMakeFiles/app.dir/src/chessman.cpp.o
  ../include/cell.h
  ../include/chessMan.h
  ../include/kishexcept.h
  ../include/moving.h
  ../include/using.h
- /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/chessman.cpp
+ /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/src/chessman.cpp
 CMakeFiles/app.dir/src/fileConnect.cpp.o
  ../include/fileConnect.h
- /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/fileConnect.cpp
-CMakeFiles/app.dir/src/game.cpp.o
- ../include/bishop.h
- ../include/cell.h
- ../include/chessBoard.h
- ../include/chessMan.h
- ../include/fileConnect.h
- ../include/game.h
- ../include/king.h
- ../include/kishexcept.h
- ../include/knight.h
- ../include/moving.h
- ../include/pawn.h
- ../include/player.h
- ../include/queen.h
- ../include/rook.h
- ../include/using.h
- ../include/util.h
- /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/game.cpp
+ /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/src/fileConnect.cpp
 CMakeFiles/app.dir/src/id.cpp.o
  ../include/id.h
- /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/id.cpp
+ /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/src/id.cpp
 CMakeFiles/app.dir/src/king.cpp.o
  ../include/cell.h
  ../include/chessMan.h
@@ -72,7 +37,7 @@ CMakeFiles/app.dir/src/king.cpp.o
  ../include/moving.h
  ../include/using.h
  ../include/util.h
- /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/king.cpp
+ /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/src/king.cpp
 CMakeFiles/app.dir/src/knight.cpp.o
  ../include/cell.h
  ../include/chessMan.h
@@ -81,10 +46,20 @@ CMakeFiles/app.dir/src/knight.cpp.o
  ../include/moving.h
  ../include/using.h
  ../include/util.h
- /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/knight.cpp
+ /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/src/knight.cpp
 CMakeFiles/app.dir/src/main.cpp.o
- ../include/fileConnect.h
- /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/main.cpp
+ ../include/bishop.h
+ ../include/cell.h
+ ../include/chessMan.h
+ ../include/king.h
+ ../include/kishexcept.h
+ ../include/knight.h
+ ../include/moving.h
+ ../include/pawn.h
+ ../include/rook.h
+ ../include/using.h
+ ../include/util.h
+ /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/src/main.cpp
 CMakeFiles/app.dir/src/pawn.cpp.o
  ../include/cell.h
  ../include/chessMan.h
@@ -93,10 +68,15 @@ CMakeFiles/app.dir/src/pawn.cpp.o
  ../include/pawn.h
  ../include/using.h
  ../include/util.h
- /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/pawn.cpp
+ /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/src/pawn.cpp
 CMakeFiles/app.dir/src/player.cpp.o
+ ../include/cell.h
+ ../include/chessMan.h
+ ../include/kishexcept.h
+ ../include/moving.h
  ../include/player.h
- /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/player.cpp
+ ../include/using.h
+ /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/src/player.cpp
 CMakeFiles/app.dir/src/queen.cpp.o
  ../include/cell.h
  ../include/chessMan.h
@@ -105,7 +85,7 @@ CMakeFiles/app.dir/src/queen.cpp.o
  ../include/queen.h
  ../include/using.h
  ../include/util.h
- /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/queen.cpp
+ /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/src/queen.cpp
 CMakeFiles/app.dir/src/rook.cpp.o
  ../include/cell.h
  ../include/chessMan.h
@@ -114,11 +94,11 @@ CMakeFiles/app.dir/src/rook.cpp.o
  ../include/rook.h
  ../include/using.h
  ../include/util.h
- /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/rook.cpp
+ /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/src/rook.cpp
 CMakeFiles/app.dir/src/util.cpp.o
  ../include/cell.h
  ../include/chessMan.h
  ../include/kishexcept.h
  ../include/moving.h
  ../include/using.h
- /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/Project/src/util.cpp
+ /media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/src/util.cpp

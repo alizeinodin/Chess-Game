@@ -7,10 +7,9 @@ add_executable(app
 src/main.cpp 
 src/Cell.cpp 
 src/id.cpp
-src/chessBoard.cpp
+#src/chessBoard.cpp
 src/fileConnect.cpp
 src/player.cpp
-src/game.cpp
 src/pawn.cpp
 src/util.cpp
 src/king.cpp
