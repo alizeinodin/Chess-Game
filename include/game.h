@@ -16,6 +16,7 @@ class Game
 
     public:
     Game(Name);
+    Game & getInstance(Name);
     void startgame();
     void setPlayer(Color, std::string);
     Player getPlayer(COLOR);

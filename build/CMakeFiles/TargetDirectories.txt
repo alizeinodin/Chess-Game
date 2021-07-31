@@ -1,3 +1,0 @@
-/home/erfa/project/build/CMakeFiles/rebuild_cache.dir
-/home/erfa/project/build/CMakeFiles/edit_cache.dir
-/home/erfa/project/build/CMakeFiles/app.dir

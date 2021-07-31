@@ -1,5 +1,5 @@
-#include "bishop.h"
-#include "util.h"
+#include "include/bishop.h"
+#include "include/util.h"
 #include <vector>
 #include <algorithm>
 using namespace std;

@@ -1,5 +1,5 @@
-#include "knight.h"
-#include "util.h"
+#include "include/knight.h"
+#include "include/util.h"
 #include <vector>
 #include <algorithm>
 using namespace std;

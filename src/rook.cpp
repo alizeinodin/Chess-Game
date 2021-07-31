@@ -1,5 +1,5 @@
-#include "rook.h"
-#include "util.h"
+#include "include/rook.h"
+#include "include/util.h"
 #include <vector>
 #include <algorithm>
 #include <iostream>

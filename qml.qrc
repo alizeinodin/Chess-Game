@@ -1,0 +1,31 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>backchess.jpg</file>
+        <file>player.qml</file>
+        <file>ChessBoard.qml</file>
+        <file>main.cpp</file>
+        <file>media/bg.jpg</file>
+        <file>media/chessboard.png</file>
+        <file>media/Group 35.jpg</file>
+        <file>media/Left Arrow 1.png</file>
+        <file>media/blackking.png</file>
+        <file>media/whiteking.png</file>
+        <file>media/background.jpg</file>
+        <file>media/White/B.png</file>
+        <file>media/White/H.png</file>
+        <file>media/White/K.png</file>
+        <file>media/White/P.png</file>
+        <file>media/White/Q.png</file>
+        <file>media/White/R.png</file>
+        <file>functions.js</file>
+        <file>media/Font/IRANSansWeb_Bold.ttf</file>
+        <file>media/Black/B.png</file>
+        <file>media/Black/H.png</file>
+        <file>media/Black/K.png</file>
+        <file>media/Black/P.png</file>
+        <file>media/Black/Q.png</file>
+        <file>media/Black/R.png</file>
+        <file>media/Sound/movePiece.WAV</file>
+    </qresource>
+</RCC>

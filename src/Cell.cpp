@@ -1,5 +1,5 @@
-#include "cell.h"
-#include "id.h"
+#include "include/cell.h"
+#include "include/id.h"
 
 using namespace std;
 
@@ -49,6 +49,10 @@ bool Cell::getState()
 {
     return isnull;
 }
+<<<<<<< HEAD
+<<<<<<<< HEAD:src/Cell.cpp
+=======
+>>>>>>> fc4b8900e83455a568326eecb3cde3a9353e980f
 
 bool Cell::operator==(Cell & cell)
 {
@@ -59,3 +63,8 @@ Cell::operator std::string()
 {
     return id;
 }
+<<<<<<< HEAD
+========
+>>>>>>>> fc4b8900e83455a568326eecb3cde3a9353e980f:src/cell.cpp
+=======
+>>>>>>> fc4b8900e83455a568326eecb3cde3a9353e980f

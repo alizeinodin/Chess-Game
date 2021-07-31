@@ -1,7 +1,7 @@
-#include "pawn.h"
-#include "util.h"
-#include "cell.h"
-#include "kishexcept.h"
+#include "include/pawn.h"
+#include "include/util.h"
+#include "include/cell.h"
+#include "include/kishexcept.h"
 #include <vector>
 #include <algorithm>
 using namespace std;

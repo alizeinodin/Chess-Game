@@ -1,6 +1,12 @@
 {
     "files.associations": {
 <<<<<<< HEAD
+        "*.cpp": "cpp",
+        "*.h": "cpp",
+        "typeinfo": "cpp"
+    }
+=======
+<<<<<<< HEAD
 =======
         "*.cpp": "cpp",
         "*.h": "cpp",
@@ -64,4 +70,5 @@
     },
     "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools"
 >>>>>>> 534eac2a9fe7241af6bf8629b7c368f4b8fd42a4
+>>>>>>> e27b167a37a44cb59626f5aa997aa7c10eb11ac3
 }

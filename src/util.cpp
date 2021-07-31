@@ -1,6 +1,6 @@
 //#include "util.h"
-#include "cell.h"
-#include "chessMan.h"
+#include "include/cell.h"
+#include "include/chessMan.h"
 #include <cstring>
 #include <algorithm>
 #include <vector>

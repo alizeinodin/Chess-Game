@@ -1,10 +1,10 @@
 #include <iostream>
-#include "king.h"
-#include "util.h"
-#include "pawn.h"
-#include "rook.h"
-#include "bishop.h"
-#include "knight.h"
+#include "include/king.h"
+#include "include/util.h"
+#include "include/pawn.h"
+#include "include/rook.h"
+#include "include/bishop.h"
+#include "include/knight.h"
 #include <array>
 using namespace std;
 

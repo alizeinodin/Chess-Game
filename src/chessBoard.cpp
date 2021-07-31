@@ -1,5 +1,5 @@
-#include "chessBoard.h"
-#include "chessMan.h"
+#include "include/chessBoard.h"
+#include "include/chessMan.h"
 using namespace std;
 
 ChessBoard &ChessBoard::getInstance()
@@ -162,18 +162,22 @@ array<array<Cell, 8>, 8> ChessBoard::remmeber(string fileName)
         string chessRemmber = File.ReadFromFile();
         this->updateBoard(chessRemmber.substr(2, 3), chessRemmber.substr(4, 5));
     }
+    cellid += origin.substr(0,1);
+    cellid += Board.at(rndcell[0]).at(rndcell[1]).getId();
+    this->movePiece(cellid);
 }
 
-void ChessBoard::updateBoard(string first, string second)
+void ChessBoard::movePiece(MOVE move)
 {
-    Cell firstCell = search(first);
-    Cell secondCell = search(second);
-
-    ChessMan *tempPiece = nullptr;
-    tempPiece = firstCell.getPiece();
-
-    firstCell.empty();
-    secondCell.setPiece(tempPiece);
+    auto cellsid = cut_str(move);
+    Cell cells;
+    cells = search_cell(cellsid.first, Board);
+    
+    if (!cells.getState())
+    {
+        cells.getPiece()->move(move, Board);
+    }
+    throw invalid_argument("cell is empty");
 }
 
 void ChessBoard::movePiece(MOVE move)
