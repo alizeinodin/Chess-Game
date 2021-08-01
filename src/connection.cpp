@@ -122,11 +122,15 @@ void connection::setOrder(QString order)
 
     qDebug() << order;
     QString test = "test";
+    QString test1 = "test1";
+    QString test2 = "test2";
     startGame(test);
-    game->setPlayer(0, test.toStdString());
 
+    game->setPlayer(Game::Color::WHITE, test1.toStdString());
+    game->setPlayer(Game::Color::BLACK, test2.toStdString());
 
     game->startgame();
+
     try {
         game->order(order.toStdString());
         emit successMove();

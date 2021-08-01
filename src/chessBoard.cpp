@@ -29,27 +29,27 @@ void ChessBoard::startboard()
 
     for (auto &i : Board[0])
     {
-        if (i.getId().at(0) == 'A' || i.getId().at(0) == 'H')
+        if (i.getId().at(0) == 'a' || i.getId().at(0) == 'h')
         {
             ChessMan *piece = new rook("#ffffff");
             i.setPiece(piece);
         }
-        if (i.getId().at(0) == 'B' || i.getId().at(0) == 'G')
+        if (i.getId().at(0) == 'b' || i.getId().at(0) == 'g')
         {
             ChessMan *piece = new knight("#ffffff");
             i.setPiece(piece);
         }
-        if (i.getId().at(0) == 'C' || i.getId().at(0) == 'F')
+        if (i.getId().at(0) == 'c' || i.getId().at(0) == 'f')
         {
             ChessMan *piece = new bishop("#ffffff");
             i.setPiece(piece);
         }
-        if (i.getId().at(0) == 'D')
+        if (i.getId().at(0) == 'd')
         {
             ChessMan *piece = new queen("#ffffff");
             i.setPiece(piece);
         }
-        if (i.getId().at(0) == 'E')
+        if (i.getId().at(0) == 'e')
         {
             ChessMan *piece = new king("#ffffff");
             i.setPiece(piece);
@@ -58,22 +58,22 @@ void ChessBoard::startboard()
 
     for (auto &i : Board[7])
     {
-        if (i.getId().at(0) == 'A' || i.getId().at(0) == 'H')
+        if (i.getId().at(0) == 'a' || i.getId().at(0) == 'h')
         {
             ChessMan *piece = new rook("#000000");
             i.setPiece(piece);
         } else
-        if (i.getId().at(0) == 'B' || i.getId().at(0) == 'G')
+        if (i.getId().at(0) == 'b' || i.getId().at(0) == 'g')
         {
             ChessMan *piece = new knight("#000000");
             i.setPiece(piece);
         } else
-        if (i.getId().at(0) == 'C' || i.getId().at(0) == 'F')
+        if (i.getId().at(0) == 'c' || i.getId().at(0) == 'f')
         {
             ChessMan *piece = new bishop("#000000");
             i.setPiece(piece);
         } else
-        if (i.getId().at(0) == 'D')
+        if (i.getId().at(0) == 'd')
         {
             ChessMan *piece = new queen("#000000");
             i.setPiece(piece);
@@ -94,6 +94,7 @@ Cell & ChessBoard::search(std::string str)
     string temp = "abcdefgh";
     int y = temp.find(temp);
     int x = get_num(str) - 1;
+    std::cerr << "X: " << x << " Y: " << y << " CELL: " <<  Board.at(x).at(y).getId() << std::endl;
     if (Board.at(x).at(y).getId() == str)
     {
         return Board.at(x).at(y);
