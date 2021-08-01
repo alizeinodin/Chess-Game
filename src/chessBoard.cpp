@@ -89,7 +89,7 @@ void ChessBoard::startboard()
 
 Cell & ChessBoard::search(std::string str)
 {
-    char *character;
+    char character[] = "a";
     get_char(str, character);
     string temp = "abcdefgh";
     int y = temp.find(temp);
