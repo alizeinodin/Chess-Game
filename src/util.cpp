@@ -20,7 +20,7 @@ bool iscell(string cell)
     char temp[2];
     cell.copy(temp, 1, 1);
     temp[1] = '\0';
-    vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
+    vector<string> alfa = {"a", "b", "c", "d", "e", "f", "g", "h"};
     int num = stoi(temp);
     cell.copy(temp, 1, 0);
     temp[1] = '\0';
@@ -43,6 +43,7 @@ int get_num(std::string str)
     temp2[1] = '\0';
     int num = stoi(temp2);
     return num;
+//    return stoi(str);
 }
 
 void get_char(std::string str, char character[])
@@ -57,7 +58,7 @@ bool celltostr(Cell &cell, string &str)
     return (cell.getId() == str);
 }
 
-Cell &search_cell(string str, array<array<Cell, 8>, 8> &board)
+Cell &search_cell(string str, array<array<Cell, 8>, 8> &Board)
 {
     char character[] = "a";
     get_char(str, character);

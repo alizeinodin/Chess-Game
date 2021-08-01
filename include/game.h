@@ -6,7 +6,6 @@
 
 class Game
 {
-    enum Color {BLACK, WHITE};
     private:
     Name gamename;
     ChessBoard gameBoard = ChessBoard::getInstance();
@@ -16,10 +15,11 @@ class Game
     std::vector<MOVE> moves;
 
     public:
+    enum Color {BLACK, WHITE};
     //Game & getInstance(Name);
     Game(Name);
     void startgame();
-    void setPlayer(Color, std::string);
+    void setPlayer(Color, QString);
     Player getPlayer(COLOR);
     void order(MOVE);
     void undo();

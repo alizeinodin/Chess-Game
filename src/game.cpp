@@ -10,15 +10,15 @@ Game::Game(Name name) : gamename(name) {}
 //    static Game game(name);
 //    return game;
 //}
-void Game::setPlayer(Color color, string name)
+void Game::setPlayer(Color color, QString name)
 {
     switch (color)
     {
     case WHITE:
-        player1 = new Player(name, "#ffffff");
+        player1 = new Player(name, string("White"));
         break;
     case BLACK:
-        player2 = new Player(name, "#000000");
+        player2 = new Player(name, string("Black"));
 
         break;
 
@@ -43,14 +43,19 @@ Player Game::getPlayer(COLOR c)
 
 void Game::order(MOVE move)
 {
+
     transform(move.begin(), move.end(), move.begin(), ::toupper);
 //    cout << cut_str(move).first << endl;
+    cout << "cut_str: " << cut_str(move).first << endl;
     Cell cell = gameBoard.search(cut_str(move).first);
-    std::cerr << cell.getId() << std::endl;
+//    std::cerr << cell.getId() << std::endl;
     ChessMan *attackpiece = nullptr;
     int score = 0;
     if (Turn)
     {
+        std::cerr << "TURN" << std::endl;
+
+        /*
         if (cell.getPiece()->get_color() == player1->getcolor())
         {
             cell = gameBoard.search(cut_str(move).second);
@@ -135,6 +140,7 @@ void Game::order(MOVE move)
             }
         }
         throw invalid_argument("can not move this piece");
+        */
     }
 }
 
