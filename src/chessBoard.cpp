@@ -91,8 +91,8 @@ Cell & ChessBoard::search(std::string str)
 {
     char character[] = "a";
     get_char(str, character);
-    string temp = "abcdefgh";
-    int y = temp.find(temp);
+    string temp = "ABCDEFGH";
+    int y = temp.find(character);
     int x = get_num(str) - 1;
     std::cerr << "X: " << x << " Y: " << y << " CELL: " <<  Board.at(x).at(y).getId() << std::endl;
     if (Board.at(x).at(y).getId() == str)

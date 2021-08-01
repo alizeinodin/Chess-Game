@@ -43,6 +43,9 @@ Player Game::getPlayer(COLOR c)
 
 void Game::order(MOVE move)
 {
+
+    transform(move.begin(), move.end(), move.begin(), ::toupper);
+//    cout << cut_str(move).first << endl;
     cout << "cut_str: " << cut_str(move).first << endl;
     Cell cell = gameBoard.search(cut_str(move).first);
 //    std::cerr << cell.getId() << std::endl;
