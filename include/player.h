@@ -1,3 +1,4 @@
+#include <QString>
 #ifndef _PLAYER_H
 #define _PLAYER_H
 #include <iostream>
@@ -6,7 +7,7 @@
 #include "chessMan.h"
 
 using PID = std::string;
-using Name = std::string;
+using Name = QString;
 using Score = int;
 using COLOR = std::string;
 
