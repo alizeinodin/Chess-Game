@@ -36,13 +36,13 @@ ApplicationWindow {
 
 //    }
 
-    Welcome{
-
-    }
-
-//    ChessBoard{
+//    Welcome{
 
 //    }
+
+    ChessBoard{
+
+    }
 
 //        background: BorderImage
 //        {

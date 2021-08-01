@@ -126,8 +126,8 @@ void connection::setOrder(QString order)
     QString test2 = "test2";
     startGame(test);
 
-    game->setPlayer(Game::Color::WHITE, test1.toStdString());
-    game->setPlayer(Game::Color::BLACK, test2.toStdString());
+    game->setPlayer(Game::Color::WHITE, test1);
+    game->setPlayer(Game::Color::BLACK, test2);
 
     game->startgame();
 
@@ -146,7 +146,7 @@ void connection::setOrder(QString order)
 void connection::startGame(QString name)
 {
     setGName(name);
-    this->game = new Game(gameName.toStdString());
+    this->game = new Game(gameName);
 }
 // ------------
 

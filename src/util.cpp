@@ -58,7 +58,7 @@ bool celltostr(Cell &cell, string &str)
     return (cell.getId() == str);
 }
 
-Cell &search_cell(string str, array<array<Cell, 8>, 8> &board)
+Cell &search_cell(string str, array<array<Cell, 8>, 8> &Board)
 {
     char character[] = "a";
     get_char(str, character);

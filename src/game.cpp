@@ -10,15 +10,15 @@ Game::Game(Name name) : gamename(name) {}
 //    static Game game(name);
 //    return game;
 //}
-void Game::setPlayer(Color color, string name)
+void Game::setPlayer(Color color, QString name)
 {
     switch (color)
     {
     case WHITE:
-        player1 = new Player(name, "#ffffff");
+        player1 = new Player(name, string("White"));
         break;
     case BLACK:
-        player2 = new Player(name, "#000000");
+        player2 = new Player(name, string("Black"));
 
         break;
 

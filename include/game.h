@@ -19,7 +19,7 @@ class Game
     //Game & getInstance(Name);
     Game(Name);
     void startgame();
-    void setPlayer(Color, std::string);
+    void setPlayer(Color, QString);
     Player getPlayer(COLOR);
     void order(MOVE);
     void undo();
