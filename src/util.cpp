@@ -59,16 +59,15 @@ bool celltostr(Cell &cell, string &str)
 
 Cell &search_cell(string str, array<array<Cell, 8>, 8> &board)
 {
-    char *character;
+    char character[] = "a";
     get_char(str, character);
     string temp = "ABCDEFGH";
-    int x = temp.find(temp);
-    int y = get_num(str);
-    if (board.at(x).at(y).getId() == str)
+    int y = temp.find(character);
+    int x = get_num(str) - 1;
+    if (Board.at(x).at(y).getId() == str)
     {
-        return board.at(x).at(y);
+        return Board.at(x).at(y);
     }
-
     throw out_of_range("cell not exist");
 }
 
