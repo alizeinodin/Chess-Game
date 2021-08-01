@@ -3,6 +3,7 @@ import QtQuick.Window 2.13
 import QtQuick.Controls 2.13
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Controls.Material 2.3
+import QtMultimedia 5.9
 import connect 1.0
 
 ApplicationWindow {
@@ -15,10 +16,31 @@ ApplicationWindow {
     Material.accent: Material.Purple
     Material.background: "#EEEEEE"
 
+    property var viewID: view
+
+    StackView{
+        id: view
+        initialItem: welcomePageID
+        width: root.width
+        height: root.height
+
+    }
+
+    property var fontID: fontfarsi
     FontLoader{
-        id: fontvazir
+        id: fontfarsi
         source: "media/Font/IRANSansWeb_Bold.ttf"
     }
+
+    property var mainAudioID: mainAudio
+
+    Audio{
+        id:mainAudio
+        source: "media/Sound/main music.mp3"
+        autoPlay: true
+        onPlaybackStateChanged: mainAudio.play()
+    }
+
 
 //    Connect{
 //        id: connection
@@ -35,14 +57,23 @@ ApplicationWindow {
 //        }
 
 //    }
-
-//    Welcome{
-
-//    }
-
-    ChessBoard{
-
+    property var welcomePageID: welcomePage
+    Welcome{
+        visible: false
+        id:welcomePage
     }
+
+    property var chessBoardPageID: chessBoardPage
+    ChessBoard{
+        visible: false
+        id: chessBoardPage
+    }
+    property var playerPageID: playerPage
+    Player{
+        visible: false
+        id: playerPage
+    }
+
 
 //        background: BorderImage
 //        {

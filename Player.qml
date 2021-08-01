@@ -1,27 +1,39 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.13
 
-Page {
-    width: 640
-    height: 480
-    title: qsTr("player name")
+Item {
+    id:playerItem
+    anchors.fill: parent
+
+    Text {
+        id: playertxt
+        text: qsTr("بازیکن شماره ۱ نام خود را وارد کنید:")
+        font.family: fontID.name
+        anchors.horizontalCenter: playerItem.horizontalCenter
+        font.pixelSize: 20
+    }
 
     TextField {
         id: textField
-        x: 64
-        y: 293
-        width: 150
-        height: 40
+        anchors.top: playerItem.top
+        anchors.topMargin: playerItem.height / 1.5
+        anchors.horizontalCenter: playerItem.horizontalCenter
+        width: playerItem.width / 3
+        height: playerItem.height / 10
         text: qsTr("Player 1")
+        anchors.horizontalCenterOffset: 0
     }
-
-    TextField {
-        id: textField1
-        x: 490
-        y: 293
-        width: 150
-        height: 40
-        text: qsTr("Player 2")
-    }
-
 }
+
+
+
+
+
+
+
+
+
+/*##^## Designer {
+    D{i:0;autoSize:true;height:480;width:640}
+}
+ ##^##*/

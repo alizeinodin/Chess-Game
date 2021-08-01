@@ -47,6 +47,10 @@ signals:
 
     QString showName();
 
+    // player signals
+    void importPlayerOne();
+    void importPlayerTwo();
+
 public slots:
 
     // game name
@@ -88,7 +92,14 @@ public slots:
     // set order and run program
     void setOrder(QString);
 
+    // set name of game and start game
     void startGame(QString);
+
+    // set player name
+    void setPlayer(QString);
+
+    // check player exist
+    void checkPlayerExist();
 
 
 

@@ -150,5 +150,28 @@ void connection::startGame(QString name)
 }
 // ------------
 
+// player slots
+// ------------
+void connection::setPlayer(QString name)
+{
+    if(P1Name == QString(""))
+    {
+        P1Name = name;
+    } else {
+        P2Name = name;
+    }
+}
+
+void connection::checkPlayerExist()
+{
+    if(P1Name == QString(""))
+    {
+        emit importPlayerOne();
+    } else {
+        emit importPlayerTwo();
+    }
+}
+// ------------
+
 
 
