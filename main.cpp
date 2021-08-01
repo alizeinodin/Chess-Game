@@ -1,8 +1,17 @@
+#include <iostream>
+#include "include/king.h"
+#include "include/util.h"
+#include "include/pawn.h"
+#include "include/rook.h"
+#include "include/bishop.h"
+#include "include/knight.h"
+#include <array>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQuickStyle>
 #include "include/connection.h"
 #include <QDebug>
+using namespace std;
 
 int main(int argc, char *argv[])
 {

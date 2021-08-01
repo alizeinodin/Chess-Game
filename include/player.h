@@ -27,7 +27,6 @@ class Player
     Score getScore(size_t); 
     COLOR getcolor();
     void add_attack_piece(ChessMan *);
-    ChessMan * last_piece();
 };
 
 #endif /* _PLAYER_H */

@@ -36,6 +36,10 @@ ApplicationWindow {
 
 //    }
 
+//    Welcome{
+
+//    }
+
     ChessBoard{
 
     }

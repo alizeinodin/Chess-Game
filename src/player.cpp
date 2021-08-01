@@ -60,10 +60,3 @@ void Player::add_attack_piece(ChessMan * attack)
 {
     attackpiece.push_back(attack);
 }
-
-ChessMan * Player::last_piece()
-{
-    ChessMan * t = attackpiece.back();
-    attackpiece.pop_back();
-    return t;
-}

@@ -91,71 +91,9 @@ Cell & ChessBoard::search(std::string str)
 {
     char character[] = "a";
     get_char(str, character);
-    string temp = "ABCDEFGH";
-    int y = temp.find(character);
+    string temp = "abcdefgh";
+    int y = temp.find(temp);
     int x = get_num(str) - 1;
-    if (Board.at(x).at(y).getId() == str)
-    {
-        return Board.at(x).at(y);
-    }
-    throw out_of_range("cell not exist");
-}
-
-
-void ChessBoard::randommoves(COLOR color)
-{
-    ChessMan *temp;
-    vector<int> rndcell;
-    string cellid;
-    int rand = randomNoGenerator(6);
-    switch (rand)
-    {
-    case QUEEN:
-        cellid += 'Q';
-        break;
-    case KING:
-        cellid += 'K';
-        break;
-    case BISHOP:
-        cellid += 'B';
-        break;
-    case POWN:
-        cellid += 'P';
-        break;
-    case KNIGHT:
-        cellid += 'H';
-        break;
-    case ROOK:
-        cellid += 'R';
-        break;
-    }
-    rndcell.push_back(randomNoGenerator(8));
-    rndcell.push_back(randomNoGenerator(8));
-    string origin;
-    for (size_t i = 0; i < 8; i++)
-    {
-        for (size_t j = 0; j < 8; j++)
-        {
-            temp = Board.at(i).at(j).getPiece();
-            if (temp->get_color() == color && temp->get_type() == rand)
-            {
-                origin = Board.at(i).at(j).getId();
-            }
-        }
-    }
-    cellid += origin.substr(0,1);
-    cellid += Board.at(rndcell[0]).at(rndcell[1]).getId();
-    this->movePiece(cellid);
-}
-
-
-Cell & ChessBoard::search(std::string str)
-{
-    char *character;
-    get_char(str, character);
-    string temp = "ABCDEFGH";
-    int x = temp.find(temp);
-    int y = get_num(str);
     if (Board.at(x).at(y).getId() == str)
     {
         return Board.at(x).at(y);

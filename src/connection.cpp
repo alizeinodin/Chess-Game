@@ -1,12 +1,33 @@
 #include "include/connection.h"
+#include <iostream>
 #include <QDebug>
 using namespace std;
 
-connection::connection(QObject *parent, std::string name) : QObject(parent)
+connection::connection(QObject *parent) : QObject(parent)
 {
-//    connect(this, &connection::setOrder, this, &connection::show);
-    game = &Game::getInstance(name);
+    //    connect(this, &connection::setOrder, this, &connection::successMove);
 }
+
+connection::~connection()
+{
+    if(game != nullptr)
+        delete game;
+}
+
+// game name variable
+// ------------
+void connection::setGName(QString name)
+{
+    gameName = name;
+    emit GNameChanged();
+}
+
+QString connection::GName()
+{
+    return gameName;
+}
+// ------------
+
 // score update player1 postive
 // ------------
 int connection::player1PScore()
@@ -98,9 +119,32 @@ void connection::setOrder(QString order)
     {
         throw invalid_argument("دستور نامعتبر است");
     }
+
     qDebug() << order;
-    emit successMove();
+    QString test = "test";
+    startGame(test);
+    game->setPlayer(0, test.toStdString());
+
+
+    game->startgame();
+    try {
+        game->order(order.toStdString());
+        emit successMove();
+    } catch (invalid_argument & errorOrder) {
+        std::cerr << errorOrder.what() << std::endl;
+    }
+}
+
+// ------------
+
+// start game
+// ------------
+void connection::startGame(QString name)
+{
+    setGName(name);
+    this->game = new Game(gameName.toStdString());
 }
 // ------------
+
 
 

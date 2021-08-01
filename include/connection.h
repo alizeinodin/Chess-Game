@@ -4,12 +4,14 @@
 #include <QObject>
 #include <QString>
 #include "include/game.h"
-#include <QChar>
 #include <stdexcept>
 
 class connection : public QObject
 {
     Q_OBJECT
+
+    // game name smart variable
+    Q_PROPERTY(QString GName READ GName WRITE setGName NOTIFY GNameChanged)
 
     // player1 socre smart variable
     Q_PROPERTY(int player1PScore READ player1PScore WRITE setPlayer1PScore NOTIFY player1PScoreChanged)
@@ -24,8 +26,12 @@ class connection : public QObject
     Q_PROPERTY(QString player2Name READ player2Name WRITE setPlayer2Name NOTIFY player2NameChanged)
 public:
     explicit connection(QObject *parent = nullptr);
+    ~connection();
 
 signals:
+    // name of game
+    void GNameChanged();
+
     // score's of players
     void player1PScoreChanged();
     void player1NScoreChanged();
@@ -39,7 +45,16 @@ signals:
     // move piece in chessBoard signals
     void successMove();
 
+    QString showName();
+
 public slots:
+
+    // game name
+
+    void setGName(QString);
+    QString GName();
+
+    // end
 
     // scores smart update
 
@@ -73,12 +88,16 @@ public slots:
     // set order and run program
     void setOrder(QString);
 
+    void startGame(QString);
+
 
 
 
 private:
 
     Game * game = nullptr;
+    QString gameName;
+
 
     // player's score
     int P1ScoreP = 0; // positive score of player1

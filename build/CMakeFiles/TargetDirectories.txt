@@ -1,0 +1,3 @@
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/build/CMakeFiles/rebuild_cache.dir
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/build/CMakeFiles/edit_cache.dir
+/media/alizeinodin/18FCC3D7FCC3ACF6/College/Advanced Programming/code/proj/build/CMakeFiles/app.dir
