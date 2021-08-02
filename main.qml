@@ -32,20 +32,20 @@ ApplicationWindow {
         source: "media/Font/IRANSansWeb_Bold.ttf"
     }
 
-    property var mainAudioID: mainAudio
+//    property var mainAudioID: mainAudio
 
     Audio{
         id:mainAudio
         source: "media/Sound/main music.mp3"
         autoPlay: true
-        onPlaybackStateChanged: mainAudio.play()
+        loops: -1
     }
 
 
-//    Connect{
-//        id: connection
+    Connect{
+        id: connection
 
-//    }
+    }
 
 //    Button{
 //        id: btn
@@ -68,10 +68,18 @@ ApplicationWindow {
         visible: false
         id: chessBoardPage
     }
-    property var playerPageID: playerPage
-    Player{
+//    property var playerPageID: playerPage
+    Player1{
         visible: false
-        id: playerPage
+        id: player1Page
+    }
+    Player2{
+        visible: false
+        id: player2page
+    }
+    Gamename{
+        visible: false
+        id: nameGamePage
     }
 
 

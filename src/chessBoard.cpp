@@ -17,13 +17,13 @@ void ChessBoard::startboard()
     
     for (auto &i : Board[1])
     {
-        ChessMan *solider = new pawn("#ffffff");
+        ChessMan *solider = new pawn("White");
         i.setPiece(solider);
     }
 
     for (auto &i : Board[6])
     {
-        ChessMan *solider = new pawn("#000000");
+        ChessMan *solider = new pawn("Black");
         i.setPiece(solider);
     }
 
@@ -31,27 +31,27 @@ void ChessBoard::startboard()
     {
         if (i.getId().at(0) == 'a' || i.getId().at(0) == 'h')
         {
-            ChessMan *piece = new rook("#ffffff");
+            ChessMan *piece = new rook("White");
             i.setPiece(piece);
         }
         if (i.getId().at(0) == 'b' || i.getId().at(0) == 'g')
         {
-            ChessMan *piece = new knight("#ffffff");
+            ChessMan *piece = new knight("White");
             i.setPiece(piece);
         }
         if (i.getId().at(0) == 'c' || i.getId().at(0) == 'f')
         {
-            ChessMan *piece = new bishop("#ffffff");
+            ChessMan *piece = new bishop("White");
             i.setPiece(piece);
         }
         if (i.getId().at(0) == 'd')
         {
-            ChessMan *piece = new queen("#ffffff");
+            ChessMan *piece = new queen("White");
             i.setPiece(piece);
         }
         if (i.getId().at(0) == 'e')
         {
-            ChessMan *piece = new king("#ffffff");
+            ChessMan *piece = new king("White");
             i.setPiece(piece);
         }
     }
@@ -60,27 +60,27 @@ void ChessBoard::startboard()
     {
         if (i.getId().at(0) == 'a' || i.getId().at(0) == 'h')
         {
-            ChessMan *piece = new rook("#000000");
+            ChessMan *piece = new rook("Black");
             i.setPiece(piece);
         } else
         if (i.getId().at(0) == 'b' || i.getId().at(0) == 'g')
         {
-            ChessMan *piece = new knight("#000000");
+            ChessMan *piece = new knight("Black");
             i.setPiece(piece);
         } else
         if (i.getId().at(0) == 'c' || i.getId().at(0) == 'f')
         {
-            ChessMan *piece = new bishop("#000000");
+            ChessMan *piece = new bishop("Black");
             i.setPiece(piece);
         } else
         if (i.getId().at(0) == 'd')
         {
-            ChessMan *piece = new queen("#000000");
+            ChessMan *piece = new queen("Black");
             i.setPiece(piece);
         } else
         if (i.getId().at(0) == 'E')
         {
-            ChessMan *piece = new king("#000000");
+            ChessMan *piece = new king("Black");
             i.setPiece(piece);
         }
     }
@@ -94,7 +94,6 @@ Cell & ChessBoard::search(std::string str)
     string temp = "ABCDEFGH";
     int y = temp.find(character);
     int x = get_num(str) - 1;
-    std::cerr << "X: " << x << " Y: " << y << " CELL: " <<  Board.at(x).at(y).getId() << std::endl;
     if (Board.at(x).at(y).getId() == str)
     {
         return Board.at(x).at(y);

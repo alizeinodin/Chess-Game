@@ -90,7 +90,7 @@ import connect 1.0
             font.pixelSize: 20
             font.family: fontfarsi.name
             onClicked: {
-                view.replace(chessBoardPage);
+                view.push(player1Page);
 
 //                viewID.replace(playerPageID);
 //                playerPageID.visible = true;

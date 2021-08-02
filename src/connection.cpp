@@ -121,16 +121,6 @@ void connection::setOrder(QString order)
     }
 
     qDebug() << order;
-    QString test = "test";
-    QString test1 = "test1";
-    QString test2 = "test2";
-    startGame(test);
-
-    game->setPlayer(Game::Color::WHITE, test1);
-    game->setPlayer(Game::Color::BLACK, test2);
-
-    game->startgame();
-
     try {
         game->order(order.toStdString());
         emit successMove();
@@ -147,31 +137,9 @@ void connection::startGame(QString name)
 {
     setGName(name);
     this->game = new Game(gameName);
+    game->setPlayer(Game::Color::WHITE, P1Name);
+    game->setPlayer(Game::Color::BLACK, P2Name);
 }
 // ------------
-
-// player slots
-// ------------
-void connection::setPlayer(QString name)
-{
-    if(P1Name == QString(""))
-    {
-        P1Name = name;
-    } else {
-        P2Name = name;
-    }
-}
-
-void connection::checkPlayerExist()
-{
-    if(P1Name == QString(""))
-    {
-        emit importPlayerOne();
-    } else {
-        emit importPlayerTwo();
-    }
-}
-// ------------
-
 
 
