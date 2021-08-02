@@ -501,8 +501,9 @@ Item {
         width: pixel * 81
         height: pixel * 72
         anchors.verticalCenter: mainBoard.verticalCenter
-        anchors.left: mainBoard.left
-        anchors.leftMargin: pixel * 51
+//        anchors.left: mainBoard.left
+//        anchors.leftMargin: pixel * 51
+        anchors.horizontalCenter: mainBoard.horizontalCenter
         property string move: ""
 
         // access to id's with var
@@ -597,11 +598,11 @@ Item {
         Row{
             id : row1
             anchors.verticalCenter: board.verticalCenter
-    anchors.left: board.left
-    anchors.leftMargin: 5
-    anchors.top : row2.top 
-    spacing : pixel * 1.45
-    anchors.topMargin: pixel * 9.3
+            anchors.left: board.left
+            anchors.leftMargin: 5
+            anchors.top : row2.top
+            spacing : pixel * 1.45
+            anchors.topMargin: pixel * 9.3
 
 
             MouseArea{

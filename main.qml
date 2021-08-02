@@ -9,6 +9,8 @@ import connect 1.0
 ApplicationWindow {
     id: root
     visible: true
+    minimumWidth: 700
+    minimumHeight: 500
     width: Screen.width
     height: Screen.height
     title: qsTr("Chess")

@@ -17,13 +17,16 @@ using namespace std;
 
 bool iscell(string cell)
 {
+    cerr << "cell: " << cell << endl;
     char temp[2];
     cell.copy(temp, 1, 1);
+    cerr << "temp: " << temp << endl;
     temp[1] = '\0';
-    vector<string> alfa = {"a", "b", "c", "d", "e", "f", "g", "h"};
+    vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
     int num = stoi(temp);
     cell.copy(temp, 1, 0);
     temp[1] = '\0';
+    cerr << "temp: " << num << endl;
 
     if (binary_search(alfa.cbegin(), alfa.cend(), temp))
     {
