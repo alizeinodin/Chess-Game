@@ -22,7 +22,7 @@ class Game
     void setPlayer(Color, QString);
     Player getPlayer(COLOR);
     void order(MOVE);
-    void undo();
+    QString undo();
 };
 
 #endif /* _GAME_H */

@@ -142,4 +142,12 @@ void connection::startGame(QString name)
 }
 // ------------
 
+// undo btn slot
+// ------------
+void connection::undo()
+{
+    QString order = game->undo();
+    setOrder(order);
+}
+// ------------
 

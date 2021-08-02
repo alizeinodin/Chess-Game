@@ -116,12 +116,41 @@ Item {
             anchors.horizontalCenter: settings.horizontalCenter
             anchors.bottom: btns.top
             anchors.bottomMargin: 90
+            cursorShape: Qt.PointingHandCursor
+            onClicked: {
+                connection.undo();
+            }
+            onHoveredChanged: {
+                if(hoverEnabled == true)
+                {
+                    colorAnimationUndoBtnShow.running = true
+                }
+                if(hoverEnabled == false)
+                {
+                    colorAnimationUndoBtnShow.running = ture
+                }
+            }
 
             Rectangle{
                 anchors.fill: parent
                 radius: 15
                 color: "#B0BEC5"
                 Material.elevation: 6
+
+
+                ColorAnimation on color {
+                    id: colorAnimationUndoBtnShow
+                    running: false
+                    to: "black"
+                    duration: 400
+                }
+
+                ColorAnimation on color {
+                    id: colorAnimationUndoBtnDisplay
+                    running: false
+                    to: "#B0BEC5"
+                    duration: 400
+                }
 
                 Image {
                     id: undoimg

@@ -143,7 +143,7 @@ void Game::startgame()
     gameBoard.startboard();
 }
 
-void Game::undo()
+QString Game::undo()
 {
     
 }
