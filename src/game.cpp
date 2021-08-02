@@ -93,6 +93,7 @@ void Game::order(MOVE move)
                     player1->addScore(1, score);
                     player1->add_attack_piece(attackpiece);
                 }
+                return;
             }
             throw invalid_argument("can not move this piece");
         }
@@ -100,47 +101,52 @@ void Game::order(MOVE move)
     }
     else
     {
-        if (cell.getPiece()->get_color() == player2->getcolor())
+        if (cell.getPiece() != nullptr)
         {
-            cell = gameBoard.search(cut_str(move).second);
-            if (cell.getState())
+            if (cell.getPiece()->get_color() == player2->getcolor())
             {
-                gameBoard.movePiece(move);
-                move += "0";
-                moves.push_back(move);
-                Turn = true;
-            }
-            else
-            {
-                attackpiece = gameBoard.attack(move);
-            }
-            player2->addScore(1, gameBoard.threat(player2->getcolor()));
-
-            if (attackpiece != nullptr)
-            {
-                switch (attackpiece->get_type())
+                cell = gameBoard.search(cut_str(move).second);
+                if (cell.getState())
                 {
-                case QUEEN:
-                    score += 15;
-                    move += "1";
-                    break;
-                case ROOK:
-                case BISHOP:
-                case KNIGHT:
-                    score += 8;
-                    move += "1";
-                    break;
-                case POWN:
-                    score += 3;
-                    move += "1";
-                    break;
+                    gameBoard.movePiece(move);
+                    move += "0";
+                    moves.push_back(move);
+                    Turn = true;
                 }
-                moves.push_back(move);
-                player2->addScore(1, score);
-                player2->add_attack_piece(attackpiece);
+                else
+                {
+                    attackpiece = gameBoard.attack(move);
+                }
+                player2->addScore(1, gameBoard.threat(player2->getcolor()));
+
+                if (attackpiece != nullptr)
+                {
+                    switch (attackpiece->get_type())
+                    {
+                    case QUEEN:
+                        score += 15;
+                        move += "1";
+                        break;
+                    case ROOK:
+                    case BISHOP:
+                    case KNIGHT:
+                        score += 8;
+                        move += "1";
+                        break;
+                    case POWN:
+                        score += 3;
+                        move += "1";
+                        break;
+                    }
+                    moves.push_back(move);
+                    player2->addScore(1, score);
+                    player2->add_attack_piece(attackpiece);
+                }
+                return;
             }
+            throw invalid_argument("can not move this piece");
         }
-        throw invalid_argument("can not move this piece");
+        throw invalid_argument("piece not exist");
     }
 }
 
