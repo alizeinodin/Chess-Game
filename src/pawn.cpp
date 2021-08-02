@@ -17,7 +17,7 @@ void pawn::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
 
     if (move.at(0) == 'P')
     {
-        cout << move.at(0) << endl;
+        //cout << move.at(0) << endl;
         auto cellsid = cut_str(move);
         //cout << cellsid.first << endl;
         //cout << cellsid.second << endl;
@@ -25,7 +25,6 @@ void pawn::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
         cout << boolalpha << possible.empty() << endl;
         for (size_t i = 0; i < possible.size(); i++)
         {
-            //cout << possible.at(i).getId() << "\t" << cellsid.second <<endl;
             if (possible.at(i).getId() == cellsid.second)
             {
                 cells[0] = search_cell(cellsid.first, board);
@@ -34,19 +33,8 @@ void pawn::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
                 cells[1].setPiece(this);
                 return;
             }
-            else
-            {
-                cells[0] = search_cell(cellsid.first, board);
-                cells[1] = search_cell(cellsid.second, board);
-                if (!cells[1].getState())
-                {
-                    cells[0].empty();
-                    this->attack(move, cells[1]);
-                    return;
-                }
-                throw invalid_argument("can not move!!!");
-            }
         }
+        throw invalid_argument("can not move!!!");
     }
     throw invalid_argument("piece is not true");
 }

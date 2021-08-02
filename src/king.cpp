@@ -66,7 +66,7 @@ void king::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
         if (iscell(temp))
         {
             celltemp = search_cell(temp, board);
-            if (!celltemp.getState())
+            if (celltemp.getState())
             {
                 if (!binary_search(kingimpossible.cbegin(), kingimpossible.cend(), temp))
                 {

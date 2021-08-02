@@ -46,51 +46,57 @@ void Game::order(MOVE move)
     transform(move.begin(), move.end(), move.begin(), ::toupper);
     Cell cell = gameBoard.search(cut_str(move).first);
     ChessMan *attackpiece = nullptr;
+    cerr << move << endl;
     int score = 0;
     if (Turn)
     {
-        if (cell.getPiece()->get_color() == player1->getcolor())
+        if (cell.getPiece() != nullptr)
         {
-            cell = gameBoard.search(cut_str(move).second);
-            if (cell.getState())
+            cout << "heh\n";
+            if (cell.getPiece()->get_color() == player1->getcolor())
             {
-                cerr << "start move piece" << endl;
-                gameBoard.movePiece(move);
-                cout << "end move piece" << endl;
-                move += "0";
-                moves.push_back(move);
-                Turn = false;
-            }
-            else
-            {
-                attackpiece = gameBoard.attack(move);
-            }
-            player1->addScore(1, gameBoard.threat(player1->getcolor()));
-            if (attackpiece != nullptr)
-            {
-                switch (attackpiece->get_type())
+                cell = gameBoard.search(cut_str(move).second);
+                if (cell.getState())
                 {
-                case QUEEN:
-                    score += 15;
-                    move += "1";
-                    break;
-                case ROOK:
-                case BISHOP:
-                case KNIGHT:
-                    score += 8;
-                    move += "1";
-                    break;
-                case POWN:
-                    score += 3;
-                    move += "1";
-                    break;
+                    cerr << "start move piece" << endl;
+                    gameBoard.movePiece(move);
+                    cout << "end move piece" << endl;
+                    move += "0";
+                    moves.push_back(move);
+                    Turn = false;
                 }
-                moves.push_back(move);
-                player1->addScore(1, score);
-                player1->add_attack_piece(attackpiece);
+                else
+                {
+                    attackpiece = gameBoard.attack(move);
+                }
+                player1->addScore(1, gameBoard.threat(player1->getcolor()));
+                if (attackpiece != nullptr)
+                {
+                    switch (attackpiece->get_type())
+                    {
+                    case QUEEN:
+                        score += 15;
+                        move += "1";
+                        break;
+                    case ROOK:
+                    case BISHOP:
+                    case KNIGHT:
+                        score += 8;
+                        move += "1";
+                        break;
+                    case POWN:
+                        score += 3;
+                        move += "1";
+                        break;
+                    }
+                    moves.push_back(move);
+                    player1->addScore(1, score);
+                    player1->add_attack_piece(attackpiece);
+                }
             }
+            throw invalid_argument("can not move this piece");
         }
-        throw invalid_argument("can not move this piece");
+        throw invalid_argument("piece not exist");
     }
     else
     {
@@ -145,5 +151,4 @@ void Game::startgame()
 
 QString Game::undo()
 {
-    
 }

@@ -14,7 +14,7 @@ ChessBoard::ChessBoard()
 
 void ChessBoard::startboard()
 {
-    
+
     for (auto &i : Board[1])
     {
         ChessMan *solider = new pawn("White");
@@ -62,23 +62,23 @@ void ChessBoard::startboard()
         {
             ChessMan *piece = new rook("Black");
             i.setPiece(piece);
-        } else
-        if (i.getId().at(0) == 'b' || i.getId().at(0) == 'g')
+        }
+        else if (i.getId().at(0) == 'b' || i.getId().at(0) == 'g')
         {
             ChessMan *piece = new knight("Black");
             i.setPiece(piece);
-        } else
-        if (i.getId().at(0) == 'c' || i.getId().at(0) == 'f')
+        }
+        else if (i.getId().at(0) == 'c' || i.getId().at(0) == 'f')
         {
             ChessMan *piece = new bishop("Black");
             i.setPiece(piece);
-        } else
-        if (i.getId().at(0) == 'd')
+        }
+        else if (i.getId().at(0) == 'd')
         {
             ChessMan *piece = new queen("Black");
             i.setPiece(piece);
-        } else
-        if (i.getId().at(0) == 'E')
+        }
+        else if (i.getId().at(0) == 'E')
         {
             ChessMan *piece = new king("Black");
             i.setPiece(piece);
@@ -86,8 +86,7 @@ void ChessBoard::startboard()
     }
 }
 
-
-Cell & ChessBoard::search(std::string str)
+Cell &ChessBoard::search(std::string str)
 {
     char character[] = "a";
     get_char(str, character);
@@ -101,7 +100,6 @@ Cell & ChessBoard::search(std::string str)
 
     throw out_of_range("cell not exist");
 }
-
 
 void ChessBoard::randommoves(COLOR color)
 {
@@ -144,7 +142,7 @@ void ChessBoard::randommoves(COLOR color)
             }
         }
     }
-    cellid += origin.substr(0,1);
+    cellid += origin.substr(0, 1);
     cellid += Board.at(rndcell[0]).at(rndcell[1]).getId();
     this->movePiece(cellid);
 }
@@ -154,17 +152,18 @@ void ChessBoard::movePiece(MOVE move)
     auto cellsid = cut_str(move);
     Cell cells;
     cells = search_cell(cellsid.first, Board);
-    
+    cout << cells.getId();
     if (!cells.getState())
     {
         cells.getPiece()->move(move, Board);
+        return;
     }
-    throw invalid_argument("cell is empty");
+    throw invalid_argument("3cell is empty");
 }
 
-ChessMan * ChessBoard::attack(MOVE move)
+ChessMan *ChessBoard::attack(MOVE move)
 {
-    ChessMan * temp;
+    ChessMan *temp;
     auto cellsid = cut_str(move);
     Cell cells[2];
     cells[0] = search_cell(cellsid.first, Board);
@@ -186,13 +185,16 @@ int ChessBoard::threat(COLOR color)
     {
         for (auto &j : i)
         {
-            if (j.getPiece()->get_color() == color)
+            if (j.getPiece() != nullptr)
             {
-                temp = j.getPiece()->threat(j.getId(), Board);
-                it = temp.begin();
-                for (size_t i = 0; i < temp.size(); i++)
+                if (j.getPiece()->get_color() == color)
                 {
-                    score += it->second;
+                    temp = j.getPiece()->threat(j.getId(), Board);
+                    it = temp.begin();
+                    for (size_t i = 0; i < temp.size(); i++)
+                    {
+                        score += it->second;
+                    }
                 }
             }
         }
