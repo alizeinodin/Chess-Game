@@ -147,24 +147,27 @@ std::map<std::string, int> rook::threat(std::string cellid, array<array<Cell, 8>
     this->access(cellid, board);
     for (size_t i = 0; i < threat_id.size(); i++)
     {
-        if (threat_id.at(i) != this->get_color())
+        if (search_cell(threat_id.at(i), board).getPiece() != nullptr)
         {
-            switch (search_cell(threat_id.at(i), board).getPiece()->get_type())
+            if (search_cell(threat_id.at(i), board).getPiece()->get_color() != this->get_color())
             {
-            case QUEEN:
-                temp.insert(make_pair(threat_id.at(i), 5));
-                break;
-            case ROOK:
-            case BISHOP:
-            case KNIGHT:
-                temp.insert(make_pair(threat_id.at(i), 2));
-                break;
-            case POWN:
-                temp.insert(make_pair(threat_id.at(i), 1));
-                break;
-            case KING:
-                kish = true;
-                break;
+                switch (search_cell(threat_id.at(i), board).getPiece()->get_type())
+                {
+                case QUEEN:
+                    temp.insert(make_pair(threat_id.at(i), 5));
+                    break;
+                case ROOK:
+                case BISHOP:
+                case KNIGHT:
+                    temp.insert(make_pair(threat_id.at(i), 2));
+                    break;
+                case POWN:
+                    temp.insert(make_pair(threat_id.at(i), 1));
+                    break;
+                case KING:
+                    kish = true;
+                    break;
+                }
             }
         }
     }
@@ -175,7 +178,7 @@ std::map<std::string, int> rook::threat(std::string cellid, array<array<Cell, 8>
     return temp;
 }
 
-ChessMan  * rook:: attack(std::string move, Cell & cell)
+ChessMan *rook::attack(std::string move, Cell &cell)
 {
     ChessMan *attackpiece = cell.getPiece();
     auto temp = cut_str(move);

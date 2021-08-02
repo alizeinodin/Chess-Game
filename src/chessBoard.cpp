@@ -26,61 +26,60 @@ void ChessBoard::startboard()
         ChessMan *solider = new pawn("Black");
         i.setPiece(solider);
     }
-
-    for (auto &i : Board[0])
+for (auto &i : Board[0])
     {
-        if (i.getId().at(0) == 'a' || i.getId().at(0) == 'h')
+        if (i.getId().at(0) == 'A' || i.getId().at(0) == 'H')
         {
-            ChessMan *piece = new rook("White");
+            ChessMan *piece = new rook("‌Black");
             i.setPiece(piece);
         }
-        if (i.getId().at(0) == 'b' || i.getId().at(0) == 'g')
+        if (i.getId().at(0) == 'B' || i.getId().at(0) == 'G')
         {
-            ChessMan *piece = new knight("White");
+            ChessMan *piece = new knight("‌Black");
             i.setPiece(piece);
         }
-        if (i.getId().at(0) == 'c' || i.getId().at(0) == 'f')
+        if (i.getId().at(0) == 'C' || i.getId().at(0) == 'F')
         {
-            ChessMan *piece = new bishop("White");
+            ChessMan *piece = new bishop("‌Black");
             i.setPiece(piece);
         }
-        if (i.getId().at(0) == 'd')
+        if (i.getId().at(0) == 'D')
         {
-            ChessMan *piece = new queen("White");
+            ChessMan *piece = new queen("‌Black");
             i.setPiece(piece);
         }
-        if (i.getId().at(0) == 'e')
+        if (i.getId().at(0) == 'E')
         {
-            ChessMan *piece = new king("White");
+            ChessMan *piece = new king("‌Black");
             i.setPiece(piece);
         }
     }
 
     for (auto &i : Board[7])
     {
-        if (i.getId().at(0) == 'a' || i.getId().at(0) == 'h')
+        if (i.getId().at(0) == 'A' || i.getId().at(0) == 'H')
         {
-            ChessMan *piece = new rook("Black");
+            ChessMan *piece = new rook("Withe");
             i.setPiece(piece);
-        }
-        else if (i.getId().at(0) == 'b' || i.getId().at(0) == 'g')
+        } else
+        if (i.getId().at(0) == 'B' || i.getId().at(0) == 'G')
         {
-            ChessMan *piece = new knight("Black");
+            ChessMan *piece = new knight("Withe");
             i.setPiece(piece);
-        }
-        else if (i.getId().at(0) == 'c' || i.getId().at(0) == 'f')
+        } else
+        if (i.getId().at(0) == 'C' || i.getId().at(0) == 'F')
         {
-            ChessMan *piece = new bishop("Black");
+            ChessMan *piece = new bishop("Withe");
             i.setPiece(piece);
-        }
-        else if (i.getId().at(0) == 'd')
+        } else
+        if (i.getId().at(0) == 'D')
         {
-            ChessMan *piece = new queen("Black");
+            ChessMan *piece = new queen("Withe");
             i.setPiece(piece);
-        }
-        else if (i.getId().at(0) == 'E')
+        } else
+        if (i.getId().at(0) == 'E')
         {
-            ChessMan *piece = new king("Black");
+            ChessMan *piece = new king("Withe");
             i.setPiece(piece);
         }
     }
@@ -152,7 +151,7 @@ void ChessBoard::movePiece(MOVE move)
     auto cellsid = cut_str(move);
     Cell cells;
     cells = search_cell(cellsid.first, Board);
-    cout << cells.getId();
+    //cout << cells.getId();
     if (!cells.getState())
     {
         cells.getPiece()->move(move, Board);
@@ -187,6 +186,8 @@ int ChessBoard::threat(COLOR color)
         {
             if (j.getPiece() != nullptr)
             {
+                cout << j.getPiece()->get_type() << "\t";
+                cout << j.getPiece()->get_color() << endl;
                 if (j.getPiece()->get_color() == color)
                 {
                     temp = j.getPiece()->threat(j.getId(), Board);
@@ -194,6 +195,7 @@ int ChessBoard::threat(COLOR color)
                     for (size_t i = 0; i < temp.size(); i++)
                     {
                         score += it->second;
+                        it++;
                     }
                 }
             }

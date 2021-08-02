@@ -126,8 +126,8 @@ void connection::setOrder(QString order)
         emit successMove();
     } catch (invalid_argument & errorOrder) {
         std::cerr << errorOrder.what() << std::endl;
-    } catch (...){
-        std::cerr << "Error" << std::endl;
+    } catch (exception & error){
+        std::cerr << error.what() << std::endl;
     }
     order.clear();
 }
