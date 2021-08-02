@@ -103,7 +103,6 @@ void Game::order(MOVE move)
     {
         if (cell.getPiece() != nullptr)
         {
-            cout << "heh\n";
             if (cell.getPiece()->get_color() == player2->getcolor())
             {
                 cell = gameBoard.search(cut_str(move).second);
@@ -113,19 +112,14 @@ void Game::order(MOVE move)
                     gameBoard.movePiece(move);
                     cout << "end move piece" << endl;
                     move += "0";
-                    cout << "heh3\n";
                     moves.push_back(move);
-                    cout << "heh3\n";
                     Turn = true;
-                    cout << "heh3\n";
                 }
                 else
                 {
                     attackpiece = gameBoard.attack(move);
                 }
-                cout << "heh2\n";
                 player2->addScore(1, gameBoard.threat(player2->getcolor()));
-                cout << "heh3\n";
                 if (attackpiece != nullptr)
                 {
                     switch (attackpiece->get_type())

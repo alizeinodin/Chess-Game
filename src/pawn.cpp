@@ -17,15 +17,10 @@ void pawn::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
 
     if (move.at(0) == 'P')
     {
-        //cout << move.at(0) << endl;
         auto cellsid = cut_str(move);
-        //cout << cellsid.first << endl;
-        cout << cellsid.second << endl;
         this->access(cellsid.first, board);
-        cout << boolalpha << possible.empty() << endl;
         for (size_t i = 0; i < possible.size(); i++)
         {
-            cout << "pos" << possible.at(i).getId() << endl;
             if (possible.at(i).getId() == cellsid.second)
             {
                 cells[0] = search_cell(cellsid.first, board);
@@ -46,27 +41,37 @@ void pawn::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
     Cell celltemp;
     int num = get_num(origin);
     string temp;
-
-    if (num == 7)
+    if (this->color == "Black")
     {
-        int dy[] = {-1, -2};
-        for (size_t i = 0; i < 2; i++)
+        if (num == 7)
+        {
+            int dy[] = {-1, -2};
+            for (size_t i = 0; i < 2; i++)
+            {
+                temp += origin.at(0);
+                temp += to_string(num + dy[i]);
+                if (iscell(temp))
+                {
+                    celltemp = search_cell(temp, board);
+                    if (celltemp.getState())
+                    {
+                        possible.push_back(celltemp);
+                    }
+                }
+
+                temp.clear();
+            }
+        }
+        else
         {
             temp += origin.at(0);
-            temp += to_string(num + dy[i]);
+            temp += to_string(num - 1);
             if (iscell(temp))
             {
                 celltemp = search_cell(temp, board);
-                //cout << celltemp.getState();
                 if (celltemp.getState())
                 {
                     possible.push_back(celltemp);
-                }
-                else
-                {
-                    threat_id.push_back(temp);
-                    temp.clear();
-                    break;
                 }
             }
 
@@ -75,77 +80,46 @@ void pawn::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
     }
     else
     {
-        temp += origin.at(0);
-        temp += to_string(num - 1);
-        cout << temp << endl;
-        if (iscell(temp))
+        if (num == 2)
         {
-            celltemp = search_cell(temp, board);
-            //cout << celltemp.getState();
-            if (celltemp.getState())
+            int dy[] = {1, 2};
+            for (size_t i = 0; i < 2; i++)
             {
-                possible.push_back(celltemp);
-            }
-            else
-            {
-                threat_id.push_back(temp);
+                temp += origin.at(0);
+                temp += to_string(num + dy[i]);
+                //cout << "temp" << temp << endl;
+                //cout << "get" << iscell(temp);
+                if (iscell(temp))
+                {
+
+                    celltemp = search_cell(temp, board);
+                    //cout << "get" << celltemp.getState();
+                    if (celltemp.getState())
+                    {
+                        possible.push_back(celltemp);
+                    }
+                }
+
                 temp.clear();
             }
         }
-
-        temp.clear();
-    }
-
-    //cout << num << endl;
-    if (num == 2)
-    {
-        int dy[] = {1, 2};
-        for (size_t i = 0; i < 2; i++)
+        else
         {
             temp += origin.at(0);
-            temp += to_string(num + dy[i]);
-            //cout << "temp" << temp << endl;
-            //cout << "get" << iscell(temp);
+            temp += to_string(num + 1);
+            //cout << temp << endl;
             if (iscell(temp))
             {
-
                 celltemp = search_cell(temp, board);
                 //cout << "get" << celltemp.getState();
                 if (celltemp.getState())
                 {
                     possible.push_back(celltemp);
                 }
-                else
-                {
-                    threat_id.push_back(temp);
-                    temp.clear();
-                    break;
-                }
+            
             }
-
             temp.clear();
         }
-    }
-    else
-    {
-        temp += origin.at(0);
-        temp += to_string(num + 1);
-        //cout << temp << endl;
-        if (iscell(temp))
-        {
-            celltemp = search_cell(temp, board);
-            //cout << "get" << celltemp.getState();
-            if (celltemp.getState())
-            {
-                possible.push_back(celltemp);
-            }
-            else
-            {
-                threat_id.push_back(temp);
-                temp.clear();
-            }
-        }
-        temp.clear();
     }
 }
 
@@ -160,6 +134,7 @@ std::map<std::string, int> pawn::threat(std::string cellid, array<array<Cell, 8>
         {
             if (search_cell(threat_id.at(i), board).getPiece()->get_color() != this->get_color())
             {
+
                 switch (search_cell(threat_id.at(i), board).getPiece()->get_type())
                 {
                 case QUEEN:
@@ -182,7 +157,7 @@ std::map<std::string, int> pawn::threat(std::string cellid, array<array<Cell, 8>
     }
     if (kish)
     {
-        throw kishexcept();
+        throw kishexcept("P");
     }
     return temp;
 }

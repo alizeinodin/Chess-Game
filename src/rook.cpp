@@ -142,7 +142,7 @@ void rook::access(string origin, array<array<Cell, 8>, 8> &board)
 
 std::map<std::string, int> rook::threat(std::string cellid, array<array<Cell, 8>, 8> &board)
 {
-    bool kish;
+    bool kish = false;
     map<string, int> temp;
     this->access(cellid, board);
     for (size_t i = 0; i < threat_id.size(); i++)
@@ -173,7 +173,7 @@ std::map<std::string, int> rook::threat(std::string cellid, array<array<Cell, 8>
     }
     if (kish)
     {
-        throw kishexcept();
+        throw kishexcept("R");
     }
     return temp;
 }

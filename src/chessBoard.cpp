@@ -186,8 +186,8 @@ int ChessBoard::threat(COLOR color)
         {
             if (j.getPiece() != nullptr)
             {
-                cout << j.getPiece()->get_type() << "\t";
-                cout << j.getPiece()->get_color() << endl;
+                //cout << j.getPiece()->get_type() << "\t";
+                //cout << j.getPiece()->get_color() << endl;
                 if (j.getPiece()->get_color() == color)
                 {
                     temp = j.getPiece()->threat(j.getId(), Board);

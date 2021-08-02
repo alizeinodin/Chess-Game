@@ -5,7 +5,7 @@
 class kishexcept : public std::runtime_error
 {
 public:
-    kishexcept() : std::runtime_error("you have a kish") {}
+    kishexcept(std::string s) : std::runtime_error("you have a kish" + s) {}
 };
 
 

@@ -250,7 +250,7 @@ void queen::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board
 
 std::map<std::string, int> queen::threat(std::string cellid, array<array<Cell, 8>, 8> &board)
 {
-    bool kish;
+    bool kish = false;
     map<string, int> temp;
     this->access(cellid, board);
     for (size_t i = 0; i < threat_id.size(); i++)
@@ -259,6 +259,7 @@ std::map<std::string, int> queen::threat(std::string cellid, array<array<Cell, 8
         {
             if (search_cell(threat_id.at(i), board).getPiece()->get_color() != this->get_color())
             {
+                
                 switch (search_cell(threat_id.at(i), board).getPiece()->get_type())
                 {
                 case QUEEN:
@@ -281,7 +282,7 @@ std::map<std::string, int> queen::threat(std::string cellid, array<array<Cell, 8
     }
     if (kish)
     {
-        throw kishexcept();
+        throw kishexcept("Q");
     }
     return temp;
 }
