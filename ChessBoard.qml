@@ -117,12 +117,41 @@ Item {
             anchors.horizontalCenter: settings.horizontalCenter
             anchors.bottom: btns.top
             anchors.bottomMargin: pixel * 9
+            cursorShape: Qt.PointingHandCursor
+            onClicked: {
+                connection.undo();
+            }
+            onHoveredChanged: {
+                if(hoverEnabled == true)
+                {
+                    colorAnimationUndoBtnShow.running = true
+                }
+                if(hoverEnabled == false)
+                {
+                    colorAnimationUndoBtnShow.running = ture
+                }
+            }
 
             Rectangle{
                 anchors.fill: parent
                 radius: 15
                 color: "#B0BEC5"
                 Material.elevation: 6
+
+
+                ColorAnimation on color {
+                    id: colorAnimationUndoBtnShow
+                    running: false
+                    to: "black"
+                    duration: 400
+                }
+
+                ColorAnimation on color {
+                    id: colorAnimationUndoBtnDisplay
+                    running: false
+                    to: "#B0BEC5"
+                    duration: 400
+                }
 
                 Image {
                     id: undoimg
@@ -472,9 +501,9 @@ Item {
         width: pixel * 81
         height: pixel * 72
         anchors.verticalCenter: mainBoard.verticalCenter
-        anchors.horizontalCenter: mainBoard.horizontalCenter
 //        anchors.left: mainBoard.left
 //        anchors.leftMargin: pixel * 51
+        anchors.horizontalCenter: mainBoard.horizontalCenter
         property string move: ""
 
         // access to id's with var
@@ -569,11 +598,11 @@ Item {
         Row{
             id : row1
             anchors.verticalCenter: board.verticalCenter
-    anchors.left: board.left
-    anchors.leftMargin: 5
-    anchors.top : row2.top 
-    spacing : pixel * 1.45
-    anchors.topMargin: pixel * 9.3
+            anchors.left: board.left
+            anchors.leftMargin: 5
+            anchors.top : row2.top
+            spacing : pixel * 1.45
+            anchors.topMargin: pixel * 9.3
 
 
             MouseArea{

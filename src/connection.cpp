@@ -126,6 +126,8 @@ void connection::setOrder(QString order)
         emit successMove();
     } catch (invalid_argument & errorOrder) {
         std::cerr << errorOrder.what() << std::endl;
+    } catch (...){
+        std::cerr << "Error" << std::endl;
     }
     order.clear();
 }
@@ -144,4 +146,12 @@ void connection::startGame(QString name)
 }
 // ------------
 
+// undo btn slot
+// ------------
+void connection::undo()
+{
+    QString order = game->undo();
+    setOrder(order);
+}
+// ------------
 

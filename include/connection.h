@@ -92,6 +92,9 @@ public slots:
     // set name of game and start game
     void startGame(QString);
 
+    // undo btn slot
+    void undo();
+
 
 
 
