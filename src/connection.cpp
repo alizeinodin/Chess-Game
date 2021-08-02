@@ -127,6 +127,7 @@ void connection::setOrder(QString order)
     } catch (invalid_argument & errorOrder) {
         std::cerr << errorOrder.what() << std::endl;
     }
+    order.clear();
 }
 
 // ------------
@@ -139,6 +140,7 @@ void connection::startGame(QString name)
     this->game = new Game(gameName);
     game->setPlayer(Game::Color::WHITE, P1Name);
     game->setPlayer(Game::Color::BLACK, P2Name);
+    game->startgame();
 }
 // ------------
 

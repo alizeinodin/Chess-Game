@@ -20,7 +20,7 @@ bool iscell(string cell)
     char temp[2];
     cell.copy(temp, 1, 1);
     temp[1] = '\0';
-    vector<string> alfa = {"a", "b", "c", "d", "e", "f", "g", "h"};
+    array<string, 8> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
     int num = stoi(temp);
     cell.copy(temp, 1, 0);
     temp[1] = '\0';

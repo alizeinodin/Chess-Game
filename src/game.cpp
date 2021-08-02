@@ -54,7 +54,7 @@ void Game::order(MOVE move)
             cell = gameBoard.search(cut_str(move).second);
             if (cell.getState())
             {
-                cout << "start move piece" << endl;
+                cerr << "start move piece" << endl;
                 gameBoard.movePiece(move);
                 cout << "end move piece" << endl;
                 move += "0";

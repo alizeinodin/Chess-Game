@@ -472,8 +472,9 @@ Item {
         width: pixel * 81
         height: pixel * 72
         anchors.verticalCenter: mainBoard.verticalCenter
-        anchors.left: mainBoard.left
-        anchors.leftMargin: pixel * 51
+        anchors.horizontalCenter: mainBoard.horizontalCenter
+//        anchors.left: mainBoard.left
+//        anchors.leftMargin: pixel * 51
         property string move: ""
 
         // access to id's with var
