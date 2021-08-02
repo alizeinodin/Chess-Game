@@ -22,7 +22,7 @@ COLOR Cell::getColor()
 void Cell::setColor()
 {
     static unsigned int counter = 0, selectColor = 0;
-    array<string, 2> colors = {"#000000", "#ffffff"};
+    array<string, 2> colors = {"‌Black", "White"};
     counter++;
     color = colors[counter % 8 == 0 ? selectColor % 2 : (selectColor++) % 2];
     // if counter == 8 and color was black in next line first element must be black in chess

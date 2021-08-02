@@ -47,6 +47,7 @@ signals:
 
     QString showName();
 
+
 public slots:
 
     // game name
@@ -88,6 +89,7 @@ public slots:
     // set order and run program
     void setOrder(QString);
 
+    // set name of game and start game
     void startGame(QString);
 
 

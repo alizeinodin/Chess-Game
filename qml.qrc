@@ -2,7 +2,7 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>backchess.jpg</file>
-        <file>Player.qml</file>
+        <file>Player1.qml</file>
         <file>ChessBoard.qml</file>
         <file>main.cpp</file>
         <file>media/bg.jpg</file>
@@ -29,5 +29,11 @@
         <file>media/Sound/movePiece.WAV</file>
         <file>Welcome.qml</file>
         <file>media/welcomeBG.jpg</file>
+        <file>media/chess logo.png</file>
+        <file>media/Sound/main music.mp3</file>
+        <file>media/backbtn.png</file>
+        <file>Player2.qml</file>
+        <file>Gamename.qml</file>
+        <file>media/bgGameName.jpg</file>
     </qresource>
 </RCC>

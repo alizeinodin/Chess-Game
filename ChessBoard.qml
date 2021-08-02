@@ -24,31 +24,37 @@ Item {
         border.left: 5; border.top: 5
         border.right: 5; border.bottom: 5
     }
-    Connect{
-        id: connection
-        onSuccessMove: {
-            // set animation destination
-            moveAnimation.tox = board.destid.x;
-            moveAnimation.toy = board.destid.y;
 
-            moveAnimation.running = true; // Animation for move
-            movePieceSound.play(); // sound of move piece2
+    Connections{
+        target: connection
+        onSuccessMove:{
+             //set animation destination
+             moveAnimation.tox = board.destid.x;
+             moveAnimation.toy = board.destid.y;
 
-            board.destid.piece = board.orgid.piece;
-            board.move = "";
+             moveAnimation.running = true; // Animation for move
+             movePieceSound.play(); // sound of move piece2
+
+             board.destid.piece = board.orgid.piece;
+             board.move = "";
         }
     }
 
-        Button{
-            id: btn
-            text: "کلیک کنید"
-            font.family: fontfarsi.name
-            onClicked: {
-                connection.setPlayer1Name("علی");
-                connection.setPlayer2Name("رضا");
-            }
+//    Connect{
+//        id: connection
+//        onSuccessMove: {
+//            // set animation destination
+//            moveAnimation.tox = board.destid.x;
+//            moveAnimation.toy = board.destid.y;
 
-        }
+//            moveAnimation.running = true; // Animation for move
+//            movePieceSound.play(); // sound of move piece2
+
+//            board.destid.piece = board.orgid.piece;
+//            board.move = "";
+//        }
+//    }
+
     Item {
         id: settings
         width: pixel * 30
@@ -84,7 +90,7 @@ Item {
 
             Text {
                 id: namesec2
-                text: qsTr("رو کم کنی")
+                text: connection.GName
                 font.bold: true
                 anchors.horizontalCenter: nameSection.horizontalCenter
                 font.pixelSize: pixel *3
