@@ -66,4 +66,5 @@ HEADERS += \
     include/using.h \
     include/util.h
 
-DISTFILES +=
+DISTFILES += \
+    media/Sound/attackPiece.WAV

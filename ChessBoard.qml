@@ -32,12 +32,22 @@ Item {
             var indesDest = Func.indexCell(board.destid.id);
              moveAnimation.tox = (indesDest) * (board.orgid.width + board.rowOrg.spacing);
              moveAnimation.toy = (board.rowDest.index - board.rowOrg.index) * -(board.destid.height + (pixel * 1.35));
-            console.log("X: ", moveAnimation.tox, "  Y: ", moveAnimation.toy);
              moveAnimation.running = true; // Animation for move
              movePieceSound.play(); // sound of move piece2
 
+            if(board.destid.piece !== "")
+            {
+
+            }
+
              board.destid.piece = board.orgid.piece;
              board.move = "";
+        }
+        onLoseMove:{
+            losePieceSound.play();
+            board.destid.col
+            board.move = ""
+
         }
     }
 
@@ -138,12 +148,19 @@ Item {
                 radius: 15
                 color: "#B0BEC5"
                 Material.elevation: 6
-
+                MouseArea{
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    onEntered: colorAnimationUndoBtnShow.running = true
+                    onExited: colorAnimationUndoBtnDisplay.running = true
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: connection.undo();
+                }
 
                 ColorAnimation on color {
                     id: colorAnimationUndoBtnShow
                     running: false
-                    to: "black"
+                    to: "#c9bcb6"
                     duration: 400
                 }
 
@@ -580,6 +597,22 @@ Item {
         Audio{
             id: movePieceSound
             source: "media/Sound/movePiece.WAV"
+            volume: 1.0
+        }
+
+        // sound of lose move
+
+        Audio{
+            id: losePieceSound
+            source: "media/Sound/Lose.wav"
+            volume: 1.0
+        }
+
+        // sound of attack move
+
+        Audio{
+            id: attackPieceSound
+            source: "media/Sound/attackPiece.WAV"
             volume: 1.0
         }
 

@@ -44,6 +44,7 @@ signals:
 
     // move piece in chessBoard signals
     void successMove();
+    void loseMove();
 
     QString showName();
 
