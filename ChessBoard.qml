@@ -35,11 +35,18 @@ Item {
              moveAnimation.running = true; // Animation for move
              movePieceSound.play(); // sound of move piece2
 
+            // add piece to lose piece's of player
             if(board.destid.piece !== "")
             {
-
+                if(board.turn)
+                {
+                    // func.recognizeImg used for convert QUrl to address that can read from js
+                    listModel2.append({"myImg": Func.recognizeImg(board.img)});
+                } else {
+                    listModel1.append({"myImg": Func.recognizeImg(board.img)});
+                }
             }
-
+             board.turn = !board.turn;
              board.destid.piece = board.orgid.piece;
              board.move = "";
         }
@@ -50,21 +57,6 @@ Item {
 
         }
     }
-
-//    Connect{
-//        id: connection
-//        onSuccessMove: {
-//            // set animation destination
-//            moveAnimation.tox = board.destid.x;
-//            moveAnimation.toy = board.destid.y;
-
-//            moveAnimation.running = true; // Animation for move
-//            movePieceSound.play(); // sound of move piece2
-
-//            board.destid.piece = board.orgid.piece;
-//            board.move = "";
-//        }
-//    }
 
     Item {
         id: settings
@@ -132,16 +124,6 @@ Item {
             onClicked: {
                 connection.undo();
             }
-//            onHoveredChanged: {
-//                if(hoverEnabled == true)
-//                {
-//                    colorAnimationUndoBtnShow.running = true
-//                }
-//                if(hoverEnabled == false)
-//                {
-//                    colorAnimationUndoBtnShow.running = ture
-//                }
-//            }
 
             Rectangle{
                 anchors.fill: parent
@@ -160,7 +142,7 @@ Item {
                 ColorAnimation on color {
                     id: colorAnimationUndoBtnShow
                     running: false
-                    to: "#c9bcb6"
+                    to: "#c9aaa0"
                     duration: 400
                 }
 
@@ -521,6 +503,8 @@ Item {
         anchors.verticalCenter: mainBoard.verticalCenter
         anchors.horizontalCenter: mainBoard.horizontalCenter
         property string move: ""
+        property bool turn: true
+        property var img: null
 
         // access to id's with var
         property var rowOrg: null
@@ -548,6 +532,7 @@ Item {
                 rowDest = rowid;
                 destid = myid;
                 destimg = imgid;
+                img = board.destimg.source.toString();
             }
         }
 
@@ -593,7 +578,6 @@ Item {
         }
 
         // sound of move piece
-
         Audio{
             id: movePieceSound
             source: "media/Sound/movePiece.WAV"
@@ -601,7 +585,6 @@ Item {
         }
 
         // sound of lose move
-
         Audio{
             id: losePieceSound
             source: "media/Sound/Lose.wav"
@@ -609,7 +592,6 @@ Item {
         }
 
         // sound of attack move
-
         Audio{
             id: attackPieceSound
             source: "media/Sound/attackPiece.WAV"
@@ -1843,8 +1825,6 @@ Row{
                         {
                             connection.setOrder(board.move);
                         }
-
-            
                 }
 
     }
@@ -2296,71 +2276,20 @@ Row{
                 color: "#B0BEC5"
             }
         }
-        Column{
-            width: player1Piece.width / 2
-            anchors.left: player1Piece.left
 
-            Image {
-                source: "media/White/K.png"
-                width: pixel * 8
-                height: pixel * 8
-            }
-
-            Image {
-                source: "media/White/K.png"
-                width: pixel * 8
-                height: pixel * 8
-            }
-
-            Image {
-                source: "media/White/K.png"
-                width: pixel * 8
-                height: pixel * 8
-            }
-
-            Image {
-                source: "media/White/K.png"
-                width: pixel * 8
-                height: pixel * 8
-            }
-
-            Image {
-                source: "media/White/K.png"
-                width: pixel * 8
-                height: pixel * 8
-            }
-
-            Image {
-                source: "media/White/K.png"
-                width: pixel * 8
-                height: pixel * 8
-            }
-
-            Image {
-                source: "media/White/K.png"
-                width: pixel * 8
-                height: pixel * 8
-            }
-
-            Image {
-                source: "media/White/K.png"
-                width: pixel * 8
-                height: pixel * 8
-            }
-
-            Image {
-                source: "media/White/K.png"
-                width: pixel * 8
-                height: pixel * 8
-            }
-
-            Image {
-                source: "media/White/K.png"
-                width: pixel * 8
-                height: pixel * 8
-            }
+        ListModel{
+            id:listModel1
         }
 
+        ListView{
+            id: tookenPiecePlayer1
+            width: player1Piece.width / 2
+            height: pixel * 75
+            anchors.verticalCenter: player1Piece.verticalCenter
+            anchors.left: player1Piece.left
+            model: listModel1
+            delegate: DelegatePlayer{}
+        }
     }
 
     Item {
@@ -2372,6 +2301,7 @@ Row{
         height: pixel * 70
 
         ToolSeparator{
+            id: player2Seperator
             width: 1
             height: settings.height / 1.2
             anchors.horizontalCenter: player2Piece.horizontalCenter
@@ -2381,6 +2311,22 @@ Row{
                 anchors.fill: parent
                 color: "#B0BEC5"
             }
+        }
+
+        ListModel{
+            id:listModel2
+        }
+
+        ListView{
+            id: tookenPiecePlayer2
+            width: player2Piece.width / 2
+            height: pixel * 75
+            anchors.verticalCenter: player2Piece.verticalCenter
+            anchors.right: player2Piece.right
+            anchors.left: player2Seperator.left
+            anchors.leftMargin: pixel * 3
+            model: listModel2
+            delegate: DelegatePlayer{}
         }
     }
 

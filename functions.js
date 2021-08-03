@@ -1,4 +1,4 @@
-function recognizePiece(str) {
+function recognize(str) {
     str = str.toString();
 
     if(str === "")
@@ -8,8 +8,18 @@ function recognizePiece(str) {
 //    console.log(typeof(str));
 
     var array = str.split("/");
-    var dataStr = array[3].split(".");
-    return dataStr[0];
+    return array;
+}
+// this function return address of image
+// in this program this function convert QUrl to string that can read with qml
+function recognizeImg(str)
+{
+    var myLocation = "media/";
+    var array = str.split("/");
+    myLocation += array[2] + "/";
+    myLocation += array[3];
+    return myLocation;
+
 }
 
 function validation(str)

@@ -36,5 +36,7 @@
         <file>Gamename.qml</file>
         <file>media/bgGameName.jpg</file>
         <file>media/Sound/Lose.wav</file>
+        <file>delplayer1.cpp</file>
+        <file>DelegatePlayer.qml</file>
     </qresource>
 </RCC>
