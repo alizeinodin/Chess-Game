@@ -59,27 +59,27 @@ for (auto &i : Board[0])
     {
         if (i.getId().at(0) == 'A' || i.getId().at(0) == 'H')
         {
-            ChessMan *piece = new rook("Withe");
+            ChessMan *piece = new rook("White");
             i.setPiece(piece);
         } else
         if (i.getId().at(0) == 'B' || i.getId().at(0) == 'G')
         {
-            ChessMan *piece = new knight("Withe");
+            ChessMan *piece = new knight("White");
             i.setPiece(piece);
         } else
         if (i.getId().at(0) == 'C' || i.getId().at(0) == 'F')
         {
-            ChessMan *piece = new bishop("Withe");
+            ChessMan *piece = new bishop("White");
             i.setPiece(piece);
         } else
         if (i.getId().at(0) == 'D')
         {
-            ChessMan *piece = new queen("Withe");
+            ChessMan *piece = new queen("White");
             i.setPiece(piece);
         } else
         if (i.getId().at(0) == 'E')
         {
-            ChessMan *piece = new king("Withe");
+            ChessMan *piece = new king("White");
             i.setPiece(piece);
         }
     }

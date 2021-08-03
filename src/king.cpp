@@ -198,7 +198,7 @@ void king::castling(string str, std::array<std::array<Cell, 8>, 8> &board)
             }
         }
     }
-    else if (color == "Withe")
+    else if (color == "White")
     {
         if (get_num(temp.first) == 8)
         {
