@@ -121,15 +121,16 @@ void connection::setOrder(QString order)
     }
 
     qDebug() << order;
-    try {
-        game->order(order.toStdString());
-        emit successMove();
-    } catch (invalid_argument & errorOrder) {
-        std::cerr << errorOrder.what() << std::endl;
-    } catch (exception & error){
-        std::cerr << error.what() << std::endl;
-    }
-    order.clear();
+    emit successMove();
+//        try {
+//            game->order(order.toStdString());
+//            emit successMove();
+//        } catch (invalid_argument & errorOrder) {
+//            std::cerr << errorOrder.what() << std::endl;
+//        } catch (exception & error){
+//            std::cerr << error.what() << std::endl;
+//        }
+//        order.clear();
 }
 
 // ------------

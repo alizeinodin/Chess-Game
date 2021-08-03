@@ -14,7 +14,7 @@ function recognizePiece(str) {
 
 function validation(str)
 {
-    if(str.length < 5)
+    if(str.length < 4)
     {
         return false;
     }
@@ -32,4 +32,15 @@ function checkMove(move, id, piece)
         move += id;
     }
     return move;
+}
+
+function indexCell(id)
+{
+    const array = ["a", "b", "c", "d", "e", "f", "g", "h"];
+    for(var i = 0; i < array.length; i++) {
+        if(id.includes(array[i]))
+        {
+            return i;
+        }
+    }
 }

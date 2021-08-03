@@ -18,6 +18,10 @@ ApplicationWindow {
     Material.accent: Material.Purple
     Material.background: "#EEEEEE"
 
+//    Test{
+
+//    }
+
     property var viewID: view
 
     StackView{

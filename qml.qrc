@@ -35,5 +35,6 @@
         <file>Player2.qml</file>
         <file>Gamename.qml</file>
         <file>media/bgGameName.jpg</file>
+        <file>Test.qml</file>
     </qresource>
 </RCC>
