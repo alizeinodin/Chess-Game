@@ -65,7 +65,7 @@ bool celltostr(Cell &cell, string &str)
     return (cell.getId() == str);
 }
 
-Cell &search_cell(string str, array<array<Cell, 8>, 8> &Board)
+Cell *search_cell(string str, array<array<Cell, 8>, 8> &Board)
 {
     char character[] = "a";
     get_char(str, character);
@@ -74,7 +74,7 @@ Cell &search_cell(string str, array<array<Cell, 8>, 8> &Board)
     int x = get_num(str) - 1;
     if (Board.at(x).at(y).getId() == str)
     {
-        return Board.at(x).at(y);
+        return &Board.at(x).at(y);
     }
     throw out_of_range("cell not exist");
 }
