@@ -161,12 +161,29 @@ void Game::startgame()
 
 QString Game::undo()
 {
-    string move = moves.back();
-    if(Turn)
+    int i = 0;
+    string move;
+    // find last move of player
+    // this code is for exist two move option in program
+    for(i = moves.size() - 1; i >= 0; i--)
     {
-//        if ()
+        move = moves[i];
+        if(Turn)
+        {
+            if (move.substr(0, 1) == string("P1"))
+            {
+                continue;
+            }
+        } else {
+            if (move.substr(0, 1) == string("P2"))
+            {
+                continue;
+            }
+        }
     }
-    moves.pop_back();
+    cout << "i: " << i << endl;
+    move = move.substr(2, 6);
+    moves.erase(moves.begin() + i);
     move = move[0] + move.substr(3, 4) + move.substr(1, 2);
     cout << "move: " << move << endl;
     QString result = QString::fromStdString(move);
