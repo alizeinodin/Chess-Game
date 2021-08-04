@@ -112,6 +112,7 @@ void Game::order(MOVE move)
                     gameBoard.movePiece(move);
                     cout << "end move piece" << endl;
                     move += "0";
+                    cout << "move" << move<< endl;
                     moves.push_back(move);
                     Turn = true;
                 }

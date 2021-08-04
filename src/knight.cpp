@@ -23,7 +23,7 @@ void knight::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
     int dy[8] = {1, -1, 1, -1, 2, -2, 2, -2}; // all possible moves.
     auto it = find(alfa.cbegin(), alfa.cend(), character);
     string temp;
-    Cell celltemp;
+    Cell *celltemp;
     int num = get_num(origin);
     for (size_t i = 0; i < 8; i++)
     {
@@ -50,9 +50,9 @@ void knight::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
         {
             celltemp = search_cell(temp, board);
             //cout << "get" << temp <<endl;
-            if (celltemp.getState())
+            if (celltemp->getState())
             {
-                possible.push_back(celltemp);
+                possible.push_back(*celltemp);
                 //cout << temp <<endl;
             }
             else
@@ -72,7 +72,7 @@ void knight::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
     {
         throw invalid_argument("move command invalid");
     }
-    Cell cells[2];
+    Cell *cells[2];
     if (move.at(0) == 'H')
     {
         auto cellsid = cut_str(move);
@@ -83,9 +83,9 @@ void knight::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
             if (possible.at(i).getId() == cellsid.second)
             {
                 cells[0] = search_cell(cellsid.first, board);
-                cells[0].empty();
+                cells[0]->empty();
                 cells[1] = search_cell(cellsid.second, board);
-                cells[1].setPiece(this);
+                cells[1]->setPiece(this);
                 return;
             }
         }
@@ -101,12 +101,12 @@ std::map<std::string, int> knight::threat(std::string cellid, array<array<Cell, 
     this->access(cellid, board);
     for (size_t i = 0; i < threat_id.size(); i++)
     {
-        if (search_cell(threat_id.at(i), board).getPiece() != nullptr)
+        if (search_cell(threat_id.at(i), board)->getPiece() != nullptr)
         {
             
-            if (search_cell(threat_id.at(i), board).getPiece()->get_color() != this->get_color())
+            if (search_cell(threat_id.at(i), board)->getPiece()->get_color() != this->get_color())
             {
-                switch (search_cell(threat_id.at(i), board).getPiece()->get_type())
+                switch (search_cell(threat_id.at(i), board)->getPiece()->get_type())
                 {
                 case QUEEN:
                     temp.insert(make_pair(threat_id.at(i), 5));

@@ -11,7 +11,7 @@ bishop::bishop(COLOR c) : ChessMan(c)
 
 void bishop::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
 {
-    Cell cells[2];
+    Cell *cells[2];
     if (move.size() == 0)
     {
         throw invalid_argument("move command invalid");
@@ -25,9 +25,9 @@ void bishop::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
             if (possible.at(i).getId() == cellsid.second)
             {
                 cells[0] = search_cell(cellsid.first, board);
-                cells[0].empty();
+                cells[0]->empty();
                 cells[1] = search_cell(cellsid.second, board);
-                cells[1].setPiece(this);
+                cells[1]->setPiece(this);
                 return;
             }
         }
@@ -44,24 +44,24 @@ void bishop::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
     }
     threat_id.clear();
     vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
-    Cell celltemp;
+    Cell *celltemp;
     int num = get_num(origin);
     string temp;
     int temp_num = num - 1;
     char character[] = "a";
     get_char(origin, character);
     auto it = (find(alfa.cbegin(), alfa.cend(), character) - 1);
-    while ((it >= alfa.cbegin()) && (temp_num >= 0))
+    while ((it >= alfa.cbegin()) && (temp_num > 0))
     {
         temp += (it)->at(0);
         temp += to_string(temp_num);
         if (iscell(temp))
         {
-            cout << "cell: " << temp <<endl;
+            cout << "cell1: " << temp <<endl;
             celltemp = search_cell(temp, board);
-            if (celltemp.getState())
+            if (celltemp->getState())
             {
-                possible.push_back(celltemp);
+                possible.push_back(*celltemp);
             }
             else
             {
@@ -78,17 +78,17 @@ void bishop::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
 
     temp_num = num + 1;
     it = (find(alfa.cbegin(), alfa.cend(), character) + 1);
-    while ((it <= alfa.cend() - 1) && (temp_num <= 8))
+    while ((it < alfa.cend()) && (temp_num <= 8))
     {
         temp += (it)->at(0);
         temp += to_string(temp_num);
         if (iscell(temp))
         {
-            cout << "cell: " << temp <<endl;
+            cout << "cell2: " << temp <<endl;
             celltemp = search_cell(temp, board);
-            if (celltemp.getState())
+            if (celltemp->getState())
             {
-                possible.push_back(celltemp);
+                possible.push_back(*celltemp);
             }
             else
             {
@@ -105,17 +105,17 @@ void bishop::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
 
     temp_num = num - 1;
     it = (find(alfa.cbegin(), alfa.cend(), character) + 1);
-    while ((it <= alfa.cend() - 1) && (temp_num >= 0))
+    while ((it < alfa.cend()) && (temp_num > 0))
     {
         temp += (it)->at(0);
         temp += to_string(temp_num);
         if (iscell(temp))
         {
-            cout << "cell: " << temp <<endl;
+            cout << "cell3: " << temp <<endl;
             celltemp = search_cell(temp, board);
-            if (celltemp.getState())
+            if (celltemp->getState())
             {
-                possible.push_back(celltemp);
+                possible.push_back(*celltemp);
             }
             else
             {
@@ -136,13 +136,14 @@ void bishop::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
     {
         temp += (it)->at(0);
         temp += to_string(temp_num);
+        cout << "cell4: " << temp <<endl;
         if (iscell(temp))
         {
-            cout << "cell: " << temp <<endl;
             celltemp = search_cell(temp, board);
-            if (celltemp.getState())
+            cout << boolalpha << celltemp->getState();
+            if (celltemp->getState())
             {
-                possible.push_back(celltemp);
+                possible.push_back(*celltemp);
             }
             else
             {
@@ -154,6 +155,7 @@ void bishop::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
 
         temp.clear();
         it--;
+        //cout << "it: " << *it <<endl;
         temp_num++;
     }
 }
@@ -165,12 +167,12 @@ std::map<std::string, int> bishop::threat(std::string cellid, array<array<Cell, 
     this->access(cellid, board);
     for (size_t i = 0; i < threat_id.size(); i++)
     {
-        if (search_cell(threat_id.at(i), board).getPiece() != nullptr)
+        if (search_cell(threat_id.at(i), board)->getPiece() != nullptr)
         {
             
-            if (search_cell(threat_id.at(i), board).getPiece()->get_color() != this->get_color())
+            if (search_cell(threat_id.at(i), board)->getPiece()->get_color() != this->get_color())
             {
-                switch (search_cell(threat_id.at(i), board).getPiece()->get_type())
+                switch (search_cell(threat_id.at(i), board)->getPiece()->get_type())
                 {
                 case QUEEN:
                     temp.insert(make_pair(threat_id.at(i), 5));

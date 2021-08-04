@@ -149,12 +149,12 @@ void ChessBoard::randommoves(COLOR color)
 void ChessBoard::movePiece(MOVE move)
 {
     auto cellsid = cut_str(move);
-    Cell cells;
+    Cell *cells;
     cells = search_cell(cellsid.first, Board);
     //cout << cells.getId();
-    if (!cells.getState())
+    if (!cells->getState())
     {
-        cells.getPiece()->move(move, Board);
+        cells->getPiece()->move(move, Board);
         return;
     }
     throw invalid_argument("3cell is empty");
@@ -164,13 +164,13 @@ ChessMan *ChessBoard::attack(MOVE move)
 {
     ChessMan *temp;
     auto cellsid = cut_str(move);
-    Cell cells[2];
+    Cell *cells[2];
     cells[0] = search_cell(cellsid.first, Board);
     cells[1] = search_cell(cellsid.second, Board);
-    temp = cells[0].getPiece();
-    if (!cells[0].getState() && !cells[1].getState())
+    temp = cells[0]->getPiece();
+    if (!cells[0]->getState() && !cells[1]->getState())
     {
-        return temp->attack(move, cells[1]);
+        return temp->attack(move, *cells[1]);
     }
     throw invalid_argument("can not attack");
 }
