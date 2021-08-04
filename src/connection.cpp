@@ -131,7 +131,7 @@ void connection::setOrder(QString order)
             std::cerr << error.what() << std::endl;
             emit loseMove();
         }
-        order.clear();
+//        order.clear();
 }
 
 // ------------
@@ -154,6 +154,16 @@ void connection::undo()
 {
     QString order = game->undo();
     setOrder(order);
+}
+// ------------
+
+// restart game slot
+// ------------
+void connection::restart()
+{
+    for (size_t i = 0; i < game->movesUndo().size(); i++) {
+        undo();
+    }
 }
 // ------------
 

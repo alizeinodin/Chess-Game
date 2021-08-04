@@ -9,6 +9,14 @@ Cell::Cell()
     setColor();
 }
 
+Cell::~Cell()
+{
+//    if(piece != nullptr)
+//    {
+//        delete piece;
+//    }
+}
+
 ID Cell::getId()
 {
     return id;

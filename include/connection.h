@@ -96,6 +96,9 @@ public slots:
     // undo btn slot
     void undo();
 
+    // restart game
+    void restart();
+
 
 
 

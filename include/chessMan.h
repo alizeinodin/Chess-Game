@@ -7,8 +7,6 @@
 #include <map>
 #ifndef _CHESSMAN_H
 #define _CHESSMAN_H
-
-//#include <map>
 enum piece {KING, QUEEN, ROOK, BISHOP, KNIGHT, POWN};
 class ChessMan
 {

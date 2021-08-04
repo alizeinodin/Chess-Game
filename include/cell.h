@@ -21,6 +21,7 @@ class Cell
 
     public:
     Cell(); // fill id, color in make
+    ~Cell();
     ID getId();
     COLOR getColor();
     bool getState();

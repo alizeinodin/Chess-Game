@@ -23,6 +23,8 @@ class Game
     Player getPlayer(COLOR);
     void order(MOVE);
     QString undo();
+    std::vector<MOVE> movesUndo();
+    void restart();
 };
 
 #endif /* _GAME_H */
