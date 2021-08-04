@@ -43,6 +43,7 @@ Player Game::getPlayer(COLOR c)
 
 void Game::order(MOVE move)
 {
+    string saveMove = move;
     transform(move.begin(), move.end(), move.begin(), ::toupper);
     Cell cell = gameBoard.search(cut_str(move).first);
     ChessMan *attackpiece = nullptr;
@@ -55,6 +56,7 @@ void Game::order(MOVE move)
             cout << cell.getPiece()->get_color();
             if (cell.getPiece()->get_color() == player1->getcolor())
             {
+                saveMove = string("P1") + saveMove; // player1 moved piece
                 cell = gameBoard.search(cut_str(move).second);
                 if (cell.getState())
                 {
@@ -62,7 +64,7 @@ void Game::order(MOVE move)
                     gameBoard.movePiece(move);
                     cout << "end move piece" << endl;
                     move += "0";
-                    moves.push_back(move);
+                    moves.push_back(saveMove);
                     Turn = false;
                 }
                 else
@@ -89,8 +91,12 @@ void Game::order(MOVE move)
                         move += "1";
                         break;
                     }
+<<<<<<< HEAD
+                    moves.push_back(saveMove);
+=======
                     moves.push_back(move);
                     Turn = false;
+>>>>>>> 661aaf879f80ed53ebe9738b6c2f6ff8198775ce
                     player1->addScore(1, score);
                     player1->add_attack_piece(attackpiece);
                 }
@@ -106,6 +112,7 @@ void Game::order(MOVE move)
         {
             if (cell.getPiece()->get_color() == player2->getcolor())
             {
+                saveMove = string("P2") + saveMove; // player2 moved piece
                 cell = gameBoard.search(cut_str(move).second);
                 if (cell.getState())
                 {
@@ -113,8 +120,7 @@ void Game::order(MOVE move)
                     gameBoard.movePiece(move);
                     cout << "end move piece" << endl;
                     move += "0";
-                    cout << "move" << move<< endl;
-                    moves.push_back(move);
+                    moves.push_back(saveMove);
                     Turn = true;
                 }
                 else
@@ -141,8 +147,12 @@ void Game::order(MOVE move)
                         move += "1";
                         break;
                     }
+<<<<<<< HEAD
+                    moves.push_back(saveMove);
+=======
                     moves.push_back(move);
                     Turn = true;
+>>>>>>> 661aaf879f80ed53ebe9738b6c2f6ff8198775ce
                     player2->addScore(1, score);
                     player2->add_attack_piece(attackpiece);
                 }
@@ -161,9 +171,30 @@ void Game::startgame()
 
 QString Game::undo()
 {
-    string move = moves.back();
-    moves.pop_back();
-    move = move[0] + move.substr(3, 4) + move.substr(2, 3);
+    int i = 0;
+    string move;
+    // find last move of player
+    // this code is for exist two move option in program
+    for(i = moves.size() - 1; i >= 0; i--)
+    {
+        move = moves[i];
+        if(Turn)
+        {
+            if (move.substr(0, 1) == string("P1"))
+            {
+                continue;
+            }
+        } else {
+            if (move.substr(0, 1) == string("P2"))
+            {
+                continue;
+            }
+        }
+    }
+    cout << "i: " << i << endl;
+    move = move.substr(2, 6);
+    moves.erase(moves.begin() + i);
+    move = move[0] + move.substr(3, 4) + move.substr(1, 2);
     cout << "move: " << move << endl;
     QString result = QString::fromStdString(move);
     return result;

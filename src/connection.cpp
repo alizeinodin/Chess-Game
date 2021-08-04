@@ -117,7 +117,7 @@ void connection::setOrder(QString order)
 {
     if(!order[0].isUpper())
     {
-        throw invalid_argument("دستور نامعتبر است");
+        emit loseMove();
     }
 
     qDebug() << order;
@@ -131,6 +131,7 @@ void connection::setOrder(QString order)
             std::cerr << error.what() << std::endl;
             emit loseMove();
         }
+    order.clear();
 }
 
 // ------------
