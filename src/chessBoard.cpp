@@ -206,3 +206,19 @@ int ChessBoard::threat(COLOR color)
     }
     return score;
 }
+
+
+void ChessBoard::undo(MOVE move, ChessMan * attackp)
+{
+    auto cellid = cut_str(move); 
+    Cell * cells[2];
+    cells[0] = search_cell(cellsid.second, Board);
+    cells[1] = search_cell(cellsid.first, Board);
+    ChessMan * temp = cells[1]->getPiece();
+    cells[0]->empty();
+    cells[1]->setPiece(temp);
+    if (move.at(5) == '1')
+    {
+        cells[0]->setPiece(attackp);
+    }
+}

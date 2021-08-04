@@ -32,5 +32,6 @@ class ChessBoard
     void movePiece(std::string);
     ChessMan * attack(MOVE);
     int threat(COLOR);
+    void undo(MOVE move, ChessMan *);
 };
 #endif /* _CHESSBOARD_H*/
