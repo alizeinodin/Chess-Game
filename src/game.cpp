@@ -91,7 +91,12 @@ void Game::order(MOVE move)
                         move += "1";
                         break;
                     }
+<<<<<<< HEAD
                     moves.push_back(saveMove);
+=======
+                    moves.push_back(move);
+                    Turn = false;
+>>>>>>> 661aaf879f80ed53ebe9738b6c2f6ff8198775ce
                     player1->addScore(1, score);
                     player1->add_attack_piece(attackpiece);
                 }
@@ -142,7 +147,12 @@ void Game::order(MOVE move)
                         move += "1";
                         break;
                     }
+<<<<<<< HEAD
                     moves.push_back(saveMove);
+=======
+                    moves.push_back(move);
+                    Turn = true;
+>>>>>>> 661aaf879f80ed53ebe9738b6c2f6ff8198775ce
                     player2->addScore(1, score);
                     player2->add_attack_piece(attackpiece);
                 }
