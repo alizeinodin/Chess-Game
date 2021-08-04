@@ -1,5 +1,5 @@
-#include "include/king.h"
-#include "include/util.h"
+#include "../include/king.h"
+#include "../include/util.h"
 #include <algorithm>
 #include <vector>
 using namespace std;
@@ -12,7 +12,10 @@ king::king(COLOR c) : ChessMan(c)
 void king::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
 {
     Cell cells[2];
-
+    if (move.size() == 0)
+    {
+        throw invalid_argument("move command invalid");
+    }
     if (move.at(0) == 'K')
     {
         auto cellsid = cut_str(move);
@@ -40,6 +43,10 @@ void king::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
 
 void king::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
 {
+    if (origin.size() == 0)
+    {
+        throw invalid_argument("move command invalid");
+    }
     auto kingimpossible = possible_move_king(this->get_color(), board);
     threat_id.clear();
     char character[] = "a";
@@ -53,16 +60,24 @@ void king::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
     int num = get_num(origin);
     for (size_t i = 0; i < 8; i++)
     {
-        temp += (it + dx[i])->at(0);
-        temp += to_string(num + dy[i]);
-        if (it + dx[i] == alfa.cend())
+        
+        if (it + dy[i] == alfa.cend())
         {
             continue;
         }
-        if (num + dy[i] > 9)
+        if (num + dx[i] > 9 && num + dx[i] < 0)
         {
             continue;
         }
+        if ((it + dy[i]) < alfa.cend() && (it + dy[i]) > alfa.cbegin())
+        {
+            temp += (it + dy[i])->at(0);
+        }
+        else
+        {
+            continue;
+        }
+        temp += to_string(num + dx[i]);
         if (iscell(temp))
         {
             celltemp = search_cell(temp, board);

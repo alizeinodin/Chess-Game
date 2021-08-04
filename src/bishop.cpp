@@ -1,5 +1,5 @@
-#include "include/bishop.h"
-#include "include/util.h"
+#include "../include/bishop.h"
+#include "../include/util.h"
 #include <vector>
 #include <algorithm>
 using namespace std;
@@ -12,6 +12,10 @@ bishop::bishop(COLOR c) : ChessMan(c)
 void bishop::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
 {
     Cell cells[2];
+    if (move.size() == 0)
+    {
+        throw invalid_argument("move command invalid");
+    }
     if (move.at(0) == 'B')
     {
         auto cellsid = cut_str(move);
@@ -34,6 +38,10 @@ void bishop::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
 
 void bishop::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
 {
+    if (origin.size() == 0)
+    {
+        throw invalid_argument("move command invalid");
+    }
     threat_id.clear();
     vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
     Cell celltemp;
@@ -49,6 +57,7 @@ void bishop::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
         temp += to_string(temp_num);
         if (iscell(temp))
         {
+            cout << "cell: " << temp <<endl;
             celltemp = search_cell(temp, board);
             if (celltemp.getState())
             {
@@ -75,6 +84,7 @@ void bishop::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
         temp += to_string(temp_num);
         if (iscell(temp))
         {
+            cout << "cell: " << temp <<endl;
             celltemp = search_cell(temp, board);
             if (celltemp.getState())
             {
@@ -101,6 +111,7 @@ void bishop::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
         temp += to_string(temp_num);
         if (iscell(temp))
         {
+            cout << "cell: " << temp <<endl;
             celltemp = search_cell(temp, board);
             if (celltemp.getState())
             {
@@ -127,6 +138,7 @@ void bishop::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
         temp += to_string(temp_num);
         if (iscell(temp))
         {
+            cout << "cell: " << temp <<endl;
             celltemp = search_cell(temp, board);
             if (celltemp.getState())
             {

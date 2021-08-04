@@ -1,6 +1,6 @@
 //#include "util.h"
-#include "include/cell.h"
-#include "include/chessMan.h"
+#include "../include/cell.h"
+#include "../include/chessMan.h"
 #include <cstring>
 #include <algorithm>
 #include <vector>
@@ -17,22 +17,26 @@ using namespace std;
 
 bool iscell(string cell)
 {
-    //cerr << "cell: " << cell << endl;
-    char temp[2];
-    cell.copy(temp, 1, 1);
-    //cerr << "temp: " << temp << endl;
-    temp[1] = '\0';
-    array<string, 8> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
-    int num = stoi(temp);
-    cell.copy(temp, 1, 0);
-    temp[1] = '\0';
-    //cerr << "temp: " << num << endl;
-
-    if (binary_search(alfa.cbegin(), alfa.cend(), temp))
+    if (cell.size() == 2)
     {
-        if (num < 9 && num > 0)
+        //cerr << "cell: " << cell << endl;
+        char temp[2];
+        cell.copy(temp, 2, 1);
+        //cerr << "temp: " << temp << endl;
+        temp[1] = '\0';
+        array<string, 8> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
+        //cout << temp << endl;
+        int num = stoi(temp);
+        cell.copy(temp, 1, 0);
+        temp[1] = '\0';
+        //cerr << "temp: " << num << endl;
+
+        if (binary_search(alfa.cbegin(), alfa.cend(), temp))
         {
-            return true;
+            if (num < 9 && num > 0)
+            {
+                return true;
+            }
         }
     }
 
@@ -46,7 +50,7 @@ int get_num(std::string str)
     temp2[1] = '\0';
     int num = stoi(temp2);
     return num;
-//    return stoi(str);
+    //    return stoi(str);
 }
 
 void get_char(std::string str, char character[])
@@ -89,19 +93,26 @@ std::pair<std::string, std::string> cut_str(MOVE &move)
 vector<ID> possible_move_king(COLOR color, std::array<std::array<Cell, 8>, 8> &board)
 {
     vector<ID> temp;
+    vector<Cell> c;
     for (auto &i : board)
     {
         for (auto &j : i)
         {
-            if (j.getPiece()->get_color() != color)
+            if (j.getPiece() != nullptr)
             {
-                temp.insert(temp.end(), j.getPiece()->get_possiblemoves().begin(), j.getPiece()->get_possiblemoves().end());
+                if (j.getPiece()->get_color() != color)
+                {
+                    c = j.getPiece()->get_possiblemoves();
+                    if (c.size() != 0)
+                    {
+                        temp.insert(temp.end(), c.begin(), c.end());
+                    }
+                }
             }
         }
     }
     return temp;
 }
-
 
 int randomNoGenerator(int set)
 {

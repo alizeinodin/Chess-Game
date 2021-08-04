@@ -1,5 +1,5 @@
-#include "include/chessBoard.h"
-#include "include/chessMan.h"
+#include "../include/chessBoard.h"
+#include "../include/chessMan.h"
 using namespace std;
 
 ChessBoard &ChessBoard::getInstance()
@@ -30,27 +30,27 @@ for (auto &i : Board[0])
     {
         if (i.getId().at(0) == 'A' || i.getId().at(0) == 'H')
         {
-            ChessMan *piece = new rook("‌Black");
+            ChessMan *piece = new rook("White");
             i.setPiece(piece);
         }
         if (i.getId().at(0) == 'B' || i.getId().at(0) == 'G')
         {
-            ChessMan *piece = new knight("‌Black");
+            ChessMan *piece = new knight("White");
             i.setPiece(piece);
         }
         if (i.getId().at(0) == 'C' || i.getId().at(0) == 'F')
         {
-            ChessMan *piece = new bishop("‌Black");
+            ChessMan *piece = new bishop("White");
             i.setPiece(piece);
         }
         if (i.getId().at(0) == 'D')
         {
-            ChessMan *piece = new queen("‌Black");
+            ChessMan *piece = new queen("White");
             i.setPiece(piece);
         }
         if (i.getId().at(0) == 'E')
         {
-            ChessMan *piece = new king("‌Black");
+            ChessMan *piece = new king("White");
             i.setPiece(piece);
         }
     }
@@ -59,27 +59,27 @@ for (auto &i : Board[0])
     {
         if (i.getId().at(0) == 'A' || i.getId().at(0) == 'H')
         {
-            ChessMan *piece = new rook("White");
+            ChessMan *piece = new rook("Black");
             i.setPiece(piece);
         } else
         if (i.getId().at(0) == 'B' || i.getId().at(0) == 'G')
         {
-            ChessMan *piece = new knight("White");
+            ChessMan *piece = new knight("Black");
             i.setPiece(piece);
         } else
         if (i.getId().at(0) == 'C' || i.getId().at(0) == 'F')
         {
-            ChessMan *piece = new bishop("White");
+            ChessMan *piece = new bishop("Black");
             i.setPiece(piece);
         } else
         if (i.getId().at(0) == 'D')
         {
-            ChessMan *piece = new queen("White");
+            ChessMan *piece = new queen("Black");
             i.setPiece(piece);
         } else
         if (i.getId().at(0) == 'E')
         {
-            ChessMan *piece = new king("White");
+            ChessMan *piece = new king("Black");
             i.setPiece(piece);
         }
     }
@@ -180,16 +180,19 @@ int ChessBoard::threat(COLOR color)
     std::map<std::string, int> temp;
     auto it = temp.begin();
     int score = 0;
+    cout << "len:  " << Board.size() << endl;
     for (auto &i : Board)
     {
+        cout << "len 2:  " << i.size() << endl;
         for (auto &j : i)
         {
             if (j.getPiece() != nullptr)
             {
                 //cout << j.getPiece()->get_type() << "\t";
-                //cout << j.getPiece()->get_color() << endl;
+                //cout << j.getPiece()->get_type() << "\t" << j.getPiece()->get_color() << endl;
                 if (j.getPiece()->get_color() == color)
                 {
+                    //cerr << "id: " << j.getId() << endl;
                     temp = j.getPiece()->threat(j.getId(), Board);
                     it = temp.begin();
                     for (size_t i = 0; i < temp.size(); i++)

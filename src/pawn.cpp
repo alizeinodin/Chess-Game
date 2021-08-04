@@ -1,7 +1,7 @@
 #include "../include/pawn.h"
-#include "include/util.h"
-#include "include/cell.h"
-#include "include/kishexcept.h"
+#include "../include/util.h"
+#include "../include/cell.h"
+#include "../include/kishexcept.h"
 #include <vector>
 #include <algorithm>
 using namespace std;
@@ -14,7 +14,10 @@ pawn::pawn(COLOR c) : ChessMan(c)
 void pawn::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
 {
     Cell cells[2];
-
+    if (move.size() == 0)
+    {
+        throw invalid_argument("move command invalid");
+    }
     if (move.at(0) == 'P')
     {
         auto cellsid = cut_str(move);
@@ -37,6 +40,10 @@ void pawn::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
 
 void pawn::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
 {
+    if (origin.size() == 0)
+    {
+        throw invalid_argument("move command invalid");
+    }
     threat_id.clear();
     Cell celltemp;
     int num = get_num(origin);

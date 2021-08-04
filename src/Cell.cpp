@@ -1,5 +1,5 @@
-#include "include/cell.h"
-#include "include/id.h"
+#include "../include/cell.h"
+#include "../include/id.h"
 
 using namespace std;
 
@@ -7,14 +7,6 @@ Cell::Cell()
 {
     id = CellID();
     setColor();
-}
-
-Cell::~Cell()
-{
-//    if(piece != nullptr)
-//    {
-//        delete piece;
-//    }
 }
 
 ID Cell::getId()

@@ -1,5 +1,5 @@
-#include "include/knight.h"
-#include "include/util.h"
+#include "../include/knight.h"
+#include "../include/util.h"
 #include <vector>
 #include <algorithm>
 using namespace std;
@@ -11,6 +11,10 @@ knight::knight(COLOR c) : ChessMan(c)
 
 void knight::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
 {
+    if (origin.size() == 0)
+    {
+        throw invalid_argument("move command invalid");
+    }
     threat_id.clear();
     char character[] = "a";
     get_char(origin, character);
@@ -23,20 +27,29 @@ void knight::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
     int num = get_num(origin);
     for (size_t i = 0; i < 8; i++)
     {
-        if (it + dx[i] == alfa.cend())
+        if (it + dy[i] == alfa.cend())
         {
             continue;
         }
-        if (num + dy[i] > 9)
+        if (num + dx[i] > 9 && num + dx[i] < 0)
         {
             continue;
         }
-        temp += (it + dx[i])->at(0);
-        temp += to_string(num + dy[i]);
+        if ((it + dy[i]) < alfa.cend() && (it + dy[i]) > alfa.cbegin())
+        {
+            temp += (it + dy[i])->at(0);
+        }
+        else
+        {
+            continue;
+        }
+        
+        temp += to_string(num + dx[i]);
         //cout << temp <<endl;
         if (iscell(temp))
         {
             celltemp = search_cell(temp, board);
+            //cout << "get" << temp <<endl;
             if (celltemp.getState())
             {
                 possible.push_back(celltemp);
@@ -55,6 +68,10 @@ void knight::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
 
 void knight::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
 {
+    if (move.size() == 0)
+    {
+        throw invalid_argument("move command invalid");
+    }
     Cell cells[2];
     if (move.at(0) == 'H')
     {
@@ -62,6 +79,7 @@ void knight::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
         this->access(cellsid.first, board);
         for (size_t i = 0; i < possible.size(); i++)
         {
+            cout << possible.at(i).getId();
             if (possible.at(i).getId() == cellsid.second)
             {
                 cells[0] = search_cell(cellsid.first, board);

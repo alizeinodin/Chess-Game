@@ -1,4 +1,4 @@
-#include "include/connection.h"
+#include "../include/connection.h"
 #include <iostream>
 #include <QDebug>
 using namespace std;
@@ -127,11 +127,10 @@ void connection::setOrder(QString order)
         } catch (invalid_argument & errorOrder) {
             std::cerr << errorOrder.what() << std::endl;
             emit loseMove();
-        } catch (exception & error){
-            std::cerr << error.what() << std::endl;
-            emit loseMove();
-        }
-//        order.clear();
+        } //catch (exception & error){
+            //std::cerr << error.what() << std::endl;
+            //emit loseMove();
+        //}
 }
 
 // ------------
@@ -154,16 +153,6 @@ void connection::undo()
 {
     QString order = game->undo();
     setOrder(order);
-}
-// ------------
-
-// restart game slot
-// ------------
-void connection::restart()
-{
-    for (size_t i = 0; i < game->movesUndo().size(); i++) {
-        undo();
-    }
 }
 // ------------
 

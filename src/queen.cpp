@@ -1,5 +1,5 @@
-#include "include/queen.h"
-#include "include/util.h"
+#include "../include/queen.h"
+#include "../include/util.h"
 #include <vector>
 #include <algorithm>
 using namespace std;
@@ -12,6 +12,11 @@ queen::queen(COLOR c) : ChessMan(c)
 void queen::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
 {
     Cell cells[2];
+    if (move.size() == 0)
+    {
+        throw invalid_argument("move command invalid");
+    }
+    
     if (move.at(0) == 'Q')
     {
         auto cellsid = cut_str(move);
@@ -34,6 +39,10 @@ void queen::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
 
 void queen::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
 {
+    if (origin.size() == 0)
+    {
+        throw invalid_argument("move command invalid");
+    }
     threat_id.clear();
     Cell celltemp;
     vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};

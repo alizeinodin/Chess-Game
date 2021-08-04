@@ -1,5 +1,5 @@
-#include "include/game.h"
-#include "include/player.h"
+#include "../include/game.h"
+#include "../include/player.h"
 #include <QDebug>
 using namespace std;
 
@@ -52,7 +52,7 @@ void Game::order(MOVE move)
     {
         if (cell.getPiece() != nullptr)
         {
-            //cout << "heh\n";
+            cout << cell.getPiece()->get_color();
             if (cell.getPiece()->get_color() == player1->getcolor())
             {
                 cell = gameBoard.search(cut_str(move).second);
@@ -158,22 +158,4 @@ void Game::startgame()
 
 QString Game::undo()
 {
-    string move = moves.back();
-    moves.pop_back();
-    move = move[0] + move.substr(3, 4) + move.substr(2, 3);
-    cout << "move: " << move << endl;
-    QString result = QString::fromStdString(move);
-    return result;
 }
-
-std::vector<MOVE> Game::movesUndo()
-{
-    return moves;
-}
-
-//void Game::restart()
-//{
-//    gameBoard.~ChessBoard();
-//    gameBoard = ChessBoard::getInstance();
-//    gameBoard.startboard();
-//}
