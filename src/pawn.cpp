@@ -89,10 +89,12 @@ void pawn::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
         }
         vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
         auto it = (find(alfa.cbegin(), alfa.cend(), character) - 1);
-        if ((--it >= alfa.cbegin()) && (--temp_num > 0))
+        it++;
+        temp_num++;
+        if ((it >= alfa.cbegin()) && (temp_num > 0))
         {
-            temp += (--it)->at(0);
-            temp += to_string(--temp_num);
+            temp += (it)->at(0);
+            temp += to_string(temp_num);
             if (iscell(temp))
             {
                 celltemp = search_cell(temp, board);
@@ -106,10 +108,12 @@ void pawn::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
         temp.clear();
         temp_num = num - 1;
         it = (find(alfa.cbegin(), alfa.cend(), character) + 1);
-        if ((++it < alfa.cend()) && (--temp_num > 0))
+        it++;
+        temp_num--;
+        if ((it < alfa.cend()) && (temp_num > 0))
         {
-            temp += (++it)->at(0);
-            temp += to_string(--temp_num);
+            temp += (it)->at(0);
+            temp += to_string(temp_num);
             if (iscell(temp))
             {
                 celltemp = search_cell(temp, board);
@@ -166,10 +170,12 @@ void pawn::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
         vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
         temp_num = num + 1;
         auto it = (find(alfa.cbegin(), alfa.cend(), character) + 1);
-        if ((--it >= alfa.cbegin()) && (++temp_num > 0))
+        it--;
+        temp_num++;
+        if ((it >= alfa.cbegin()) && (temp_num > 0))
         {
-            temp += (--it)->at(0);
-            temp += to_string(--temp_num);
+            temp += (it)->at(0);
+            temp += to_string(temp_num);
             if (iscell(temp))
             {
                 celltemp = search_cell(temp, board);
@@ -183,9 +189,11 @@ void pawn::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
         temp.clear();
         temp_num = num + 1;
         it = (find(alfa.cbegin(), alfa.cend(), character) + 1);
+        it++;
+        temp_num++;
         if ((++it < alfa.cend()) && (++temp_num <= 8))
         {
-            temp += (++it)->at(0);
+            temp += (it++)->at(0);
             temp += to_string(++temp_num);
             if (iscell(temp))
             {

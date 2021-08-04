@@ -180,10 +180,10 @@ int ChessBoard::threat(COLOR color)
     std::map<std::string, int> temp;
     auto it = temp.begin();
     int score = 0;
-    cout << "len:  " << Board.size() << endl;
+    //cout << "len:  " << Board.size() << endl;
     for (auto &i : Board)
     {
-        cout << "len 2:  " << i.size() << endl;
+        //cout << "len 2:  " << i.size() << endl;
         for (auto &j : i)
         {
             if (j.getPiece() != nullptr)
@@ -210,7 +210,7 @@ int ChessBoard::threat(COLOR color)
 
 void ChessBoard::undo(MOVE move, ChessMan * attackp)
 {
-    auto cellid = cut_str(move); 
+    auto cellsid = cut_str(move);
     Cell * cells[2];
     cells[0] = search_cell(cellsid.second, Board);
     cells[1] = search_cell(cellsid.first, Board);

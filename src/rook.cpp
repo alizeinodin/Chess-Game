@@ -41,7 +41,7 @@ void rook::access(string origin, array<array<Cell, 8>, 8> &board)
     int num = get_num(origin);
     string temp;
     int temp_num = num - 1;
-    while (temp_num >= 0)
+    while (temp_num > 0)
     {
         temp += origin.at(0);
         temp += to_string(temp_num);

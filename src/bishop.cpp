@@ -57,7 +57,7 @@ void bishop::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
         temp += to_string(temp_num);
         if (iscell(temp))
         {
-            cout << "cell1: " << temp <<endl;
+            //cout << "cell1: " << temp <<endl;
             celltemp = search_cell(temp, board);
             if (celltemp->getState())
             {
@@ -84,7 +84,7 @@ void bishop::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
         temp += to_string(temp_num);
         if (iscell(temp))
         {
-            cout << "cell2: " << temp <<endl;
+            //cout << "cell2: " << temp <<endl;
             celltemp = search_cell(temp, board);
             if (celltemp->getState())
             {
@@ -111,7 +111,7 @@ void bishop::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
         temp += to_string(temp_num);
         if (iscell(temp))
         {
-            cout << "cell3: " << temp <<endl;
+            //cout << "cell3: " << temp <<endl;
             celltemp = search_cell(temp, board);
             if (celltemp->getState())
             {
@@ -136,11 +136,11 @@ void bishop::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
     {
         temp += (it)->at(0);
         temp += to_string(temp_num);
-        cout << "cell4: " << temp <<endl;
+        //cout << "cell4: " << temp <<endl;
         if (iscell(temp))
         {
             celltemp = search_cell(temp, board);
-            cout << boolalpha << celltemp->getState();
+            //cout << boolalpha << celltemp->getState();
             if (celltemp->getState())
             {
                 possible.push_back(*celltemp);

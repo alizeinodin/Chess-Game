@@ -49,7 +49,7 @@ void queen::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board
     int num = get_num(origin);
     string temp;
     int temp_num = num - 1;
-    while (temp_num >= 0)
+    while (temp_num > 0)
     {
         temp += origin.at(0);
         temp += to_string(temp_num);
@@ -153,7 +153,7 @@ void queen::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board
     it = (find(alfa.cbegin(), alfa.cend(), character) - 1);
     temp_num = num - 1;
 
-    while ((it >= alfa.cbegin()) && (temp_num >= 0))
+    while ((it >= alfa.cbegin()) && (temp_num > 0))
     {
         temp += (it)->at(0);
         temp += to_string(temp_num);
@@ -205,7 +205,7 @@ void queen::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board
 
     temp_num = num - 1;
     it = (find(alfa.cbegin(), alfa.cend(), character) + 1);
-    while ((it <= alfa.cend() - 1) && (temp_num >= 0))
+    while ((it <= alfa.cend() - 1) && (temp_num > 0))
     {
         temp += (it)->at(0);
         temp += to_string(temp_num);

@@ -27,25 +27,15 @@ void knight::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
     int num = get_num(origin);
     for (size_t i = 0; i < 8; i++)
     {
-        if (it + dy[i] == alfa.cend())
+        if (!(((num + dx[i]) > 9) && ((num + dx[i]) < 0)))
         {
-            continue;
+            if (((it + dy[i]) < alfa.cend()) && ((it + dy[i]) >= alfa.cbegin()))
+            {
+                temp += (it + dy[i])->at(0);
+                temp += to_string(num + dx[i]);
+                //cout << temp << endl;
+            }
         }
-        if (num + dx[i] > 9 && num + dx[i] < 0)
-        {
-            continue;
-        }
-        if ((it + dy[i]) < alfa.cend() && (it + dy[i]) > alfa.cbegin())
-        {
-            temp += (it + dy[i])->at(0);
-        }
-        else
-        {
-            continue;
-        }
-        
-        temp += to_string(num + dx[i]);
-        //cout << temp <<endl;
         if (iscell(temp))
         {
             celltemp = search_cell(temp, board);
@@ -59,7 +49,6 @@ void knight::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
             {
                 threat_id.push_back(temp);
                 temp.clear();
-                break;
             }
         }
         temp.clear();
@@ -79,7 +68,7 @@ void knight::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
         this->access(cellsid.first, board);
         for (size_t i = 0; i < possible.size(); i++)
         {
-            cout << possible.at(i).getId();
+            //cout << possible.at(i).getId();
             if (possible.at(i).getId() == cellsid.second)
             {
                 cells[0] = search_cell(cellsid.first, board);
@@ -103,7 +92,7 @@ std::map<std::string, int> knight::threat(std::string cellid, array<array<Cell, 
     {
         if (search_cell(threat_id.at(i), board)->getPiece() != nullptr)
         {
-            
+
             if (search_cell(threat_id.at(i), board)->getPiece()->get_color() != this->get_color())
             {
                 switch (search_cell(threat_id.at(i), board)->getPiece()->get_type())

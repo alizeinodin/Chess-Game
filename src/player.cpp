@@ -60,3 +60,15 @@ void Player::add_attack_piece(ChessMan * attack)
 {
     attackpiece.push_back(attack);
 }
+
+
+ChessMan * Player::get_last_attack()
+{
+    if (attackpiece.size() != 0)
+    {
+        ChessMan *temp = attackpiece.back();
+        attackpiece.pop_back();
+        return temp;
+    }
+    return nullptr;
+}
