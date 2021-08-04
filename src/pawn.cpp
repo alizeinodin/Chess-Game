@@ -47,6 +47,9 @@ void pawn::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
     threat_id.clear();
     Cell *celltemp;
     int num = get_num(origin);
+    int temp_num = num - 1;
+    char character[] = "a";
+    get_char(origin, character);
     string temp;
     if (this->color == "Black")
     {
@@ -84,6 +87,40 @@ void pawn::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
 
             temp.clear();
         }
+        vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
+        auto it = (find(alfa.cbegin(), alfa.cend(), character) - 1);
+        if ((--it >= alfa.cbegin()) && (--temp_num > 0))
+        {
+            temp += (--it)->at(0);
+            temp += to_string(--temp_num);
+            if (iscell(temp))
+            {
+                celltemp = search_cell(temp, board);
+                if (!celltemp->getState())
+                {
+                    threat_id.push_back(temp);
+                    temp.clear();
+                }
+            }
+        }
+        temp.clear();
+        temp_num = num - 1;
+        it = (find(alfa.cbegin(), alfa.cend(), character) + 1);
+        if ((++it < alfa.cend()) && (--temp_num > 0))
+        {
+            temp += (++it)->at(0);
+            temp += to_string(--temp_num);
+            if (iscell(temp))
+            {
+                celltemp = search_cell(temp, board);
+                if (!celltemp->getState())
+                {
+                    threat_id.push_back(temp);
+                    temp.clear();
+                }
+            }
+        }
+        
     }
     else
     {
@@ -123,9 +160,42 @@ void pawn::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
                 {
                     possible.push_back(*celltemp);
                 }
-            
             }
             temp.clear();
+        }
+        vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
+        temp_num = num + 1;
+        auto it = (find(alfa.cbegin(), alfa.cend(), character) + 1);
+        if ((--it >= alfa.cbegin()) && (++temp_num > 0))
+        {
+            temp += (--it)->at(0);
+            temp += to_string(--temp_num);
+            if (iscell(temp))
+            {
+                celltemp = search_cell(temp, board);
+                if (!celltemp->getState())
+                {
+                    threat_id.push_back(temp);
+                    temp.clear();
+                }
+            }
+        }
+        temp.clear();
+        temp_num = num + 1;
+        it = (find(alfa.cbegin(), alfa.cend(), character) + 1);
+        if ((++it < alfa.cend()) && (++temp_num <= 8))
+        {
+            temp += (++it)->at(0);
+            temp += to_string(++temp_num);
+            if (iscell(temp))
+            {
+                celltemp = search_cell(temp, board);
+                if (!celltemp->getState())
+                {
+                    threat_id.push_back(temp);
+                    temp.clear();
+                }
+            }
         }
     }
 }

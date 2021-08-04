@@ -90,6 +90,7 @@ void Game::order(MOVE move)
                         break;
                     }
                     moves.push_back(move);
+                    Turn = false;
                     player1->addScore(1, score);
                     player1->add_attack_piece(attackpiece);
                 }
@@ -141,6 +142,7 @@ void Game::order(MOVE move)
                         break;
                     }
                     moves.push_back(move);
+                    Turn = true;
                     player2->addScore(1, score);
                     player2->add_attack_piece(attackpiece);
                 }

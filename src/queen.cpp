@@ -308,6 +308,6 @@ ChessMan *queen::attack(std::string move, Cell &cell)
             return attackpiece;
         }
     }
-    throw invalid_argument("can not move!!!");
+    throw invalid_argument("can not attack!!!");
     return attackpiece;
 }
