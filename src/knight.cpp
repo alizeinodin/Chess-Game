@@ -128,6 +128,7 @@ ChessMan *knight::attack(std::string move, Cell &cell)
     auto temp = cut_str(move);
     if (!(attackpiece->get_color() == color) || !(attackpiece->get_color() == color))
     {
+        sort(threat_id.begin(),threat_id.end());
         if (binary_search(threat_id.cbegin(), threat_id.cend(), temp.second))
         {
             cell.empty();
