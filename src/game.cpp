@@ -158,4 +158,15 @@ void Game::startgame()
 
 QString Game::undo()
 {
+    string move = moves.back();
+    moves.pop_back();
+    move = move[0] + move.substr(3, 4) + move.substr(2, 3);
+    cout << "move: " << move << endl;
+    QString result = QString::fromStdString(move);
+    return result;
+}
+
+std::vector<MOVE> Game::movesUndo()
+{
+    return moves;
 }

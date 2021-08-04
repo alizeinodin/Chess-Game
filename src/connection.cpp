@@ -127,10 +127,10 @@ void connection::setOrder(QString order)
         } catch (invalid_argument & errorOrder) {
             std::cerr << errorOrder.what() << std::endl;
             emit loseMove();
-        } //catch (exception & error){
-            //std::cerr << error.what() << std::endl;
-            //emit loseMove();
-        //}
+        } catch (exception & error){
+            std::cerr << error.what() << std::endl;
+            emit loseMove();
+        }
 }
 
 // ------------
@@ -156,3 +156,12 @@ void connection::undo()
 }
 // ------------
 
+// restart game slot
+// ------------
+void connection::restart()
+{
+    for (size_t i = 0; i < game->movesUndo().size(); i++) {
+        undo();
+    }
+}
+// ------------

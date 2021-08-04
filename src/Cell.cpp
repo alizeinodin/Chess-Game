@@ -9,6 +9,11 @@ Cell::Cell()
     setColor();
 }
 
+Cell::~Cell()
+{
+
+}
+
 ID Cell::getId()
 {
     return id;
