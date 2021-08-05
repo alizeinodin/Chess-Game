@@ -46,7 +46,6 @@ void Game::order(MOVE move)
     string saveMove = move;
     transform(move.begin(), move.end(), move.begin(), ::toupper);
     Cell cell = gameBoard.search(cut_str(move).first);
-    ChessMan *attackpiece = nullptr;
     cerr << move << endl;
     int score = 0;
     if (Turn)
@@ -71,31 +70,8 @@ void Game::order(MOVE move)
                 {
                     attackpiece = gameBoard.attack(move);
                 }
-                player1->addScore(1, gameBoard.threat(player1->getcolor()));
-                if (attackpiece != nullptr)
-                {
-                    switch (attackpiece->get_type())
-                    {
-                    case QUEEN:
-                        score += 15;
-                        saveMove += "1";
-                        break;
-                    case ROOK:
-                    case BISHOP:
-                    case KNIGHT:
-                        score += 8;
-                        saveMove += "1";
-                        break;
-                    case POWN:
-                        score += 3;
-                        saveMove += "1";
-                        break;
-                    }
-                    moves.push_back(saveMove);
-                    Turn = false;
-                    player1->addScore(1, score);
-                    player1->add_attack_piece(attackpiece);
-                }
+                moves.push_back(saveMove);
+                Turn = false;
                 return;
             }
             throw invalid_argument("can not move this piece");
@@ -123,31 +99,8 @@ void Game::order(MOVE move)
                 {
                     attackpiece = gameBoard.attack(move);
                 }
-                player2->addScore(1, gameBoard.threat(player2->getcolor()));
-                if (attackpiece != nullptr)
-                {
-                    switch (attackpiece->get_type())
-                    {
-                    case QUEEN:
-                        score += 15;
-                        saveMove += "1";
-                        break;
-                    case ROOK:
-                    case BISHOP:
-                    case KNIGHT:
-                        score += 8;
-                        saveMove += "1";
-                        break;
-                    case POWN:
-                        score += 3;
-                        saveMove += "1";
-                        break;
-                    }
-                    moves.push_back(saveMove);
-                    Turn = true;
-                    player2->addScore(1, score);
-                    player2->add_attack_piece(attackpiece);
-                }
+                moves.push_back(saveMove);
+                Turn = true;
                 return;
             }
             throw invalid_argument("can not move this piece");
@@ -193,4 +146,61 @@ QString Game::undo()
 std::vector<MOVE> Game::movesUndo()
 {
     return moves;
+}
+
+void Game::update_score()
+{
+    if (Turn)
+    {
+        player2->addScore(1, gameBoard.threat(player2->getcolor()));
+        if (attackpiece != nullptr)
+        {
+            switch (attackpiece->get_type())
+            {
+            case QUEEN:
+                score += 15;
+                saveMove += "1";
+                break;
+            case ROOK:
+            case BISHOP:
+            case KNIGHT:
+                score += 8;
+                saveMove += "1";
+                break;
+            case POWN:
+                score += 3;
+                saveMove += "1";
+                break;
+            }
+
+            player2->addScore(1, score);
+            player2->add_attack_piece(attackpiece);
+        }
+    }
+    else
+    {
+        player1->addScore(1, gameBoard.threat(player1->getcolor()));
+        if (attackpiece != nullptr)
+        {
+            switch (attackpiece->get_type())
+            {
+            case QUEEN:
+                score += 15;
+                saveMove += "1";
+                break;
+            case ROOK:
+            case BISHOP:
+            case KNIGHT:
+                score += 8;
+                saveMove += "1";
+                break;
+            case POWN:
+                score += 3;
+                saveMove += "1";
+                break;
+            }
+            player1->addScore(1, score);
+            player1->add_attack_piece(attackpiece);
+        }
+    }
 }

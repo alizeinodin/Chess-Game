@@ -13,6 +13,7 @@ class Game
     Player * player2 = nullptr;
     bool Turn = true;
     std::vector<MOVE> moves;
+    ChessMan *attackpiece = nullptr;
 
     public:
     enum Color {BLACK, WHITE};
@@ -25,6 +26,7 @@ class Game
     QString undo();
     std::vector<MOVE> movesUndo();
     void restart();
+    void update_score();
 };
 
 #endif /* _GAME_H */
