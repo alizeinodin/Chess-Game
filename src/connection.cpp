@@ -124,6 +124,7 @@ void connection::setOrder(QString order)
         try {
             game->order(order.toStdString());
             emit successMove();
+            game->update_score();
         } catch (invalid_argument & errorOrder) {
             std::cerr << errorOrder.what() << std::endl;
             emit loseMove();

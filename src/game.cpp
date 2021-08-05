@@ -47,7 +47,7 @@ void Game::order(MOVE move)
     transform(move.begin(), move.end(), move.begin(), ::toupper);
     Cell cell = gameBoard.search(cut_str(move).first);
     cerr << move << endl;
-    int score = 0;
+
     if (Turn)
     {
         if (cell.getPiece() != nullptr)
@@ -69,6 +69,7 @@ void Game::order(MOVE move)
                 else
                 {
                     attackpiece = gameBoard.attack(move);
+                    saveMove += "1";
                 }
                 moves.push_back(saveMove);
                 Turn = false;
@@ -98,6 +99,7 @@ void Game::order(MOVE move)
                 else
                 {
                     attackpiece = gameBoard.attack(move);
+                    saveMove += "1";
                 }
                 moves.push_back(saveMove);
                 Turn = true;
@@ -150,6 +152,7 @@ std::vector<MOVE> Game::movesUndo()
 
 void Game::update_score()
 {
+    int score = 0;
     if (Turn)
     {
         player2->addScore(1, gameBoard.threat(player2->getcolor()));
@@ -159,17 +162,14 @@ void Game::update_score()
             {
             case QUEEN:
                 score += 15;
-                saveMove += "1";
                 break;
             case ROOK:
             case BISHOP:
             case KNIGHT:
                 score += 8;
-                saveMove += "1";
                 break;
             case POWN:
                 score += 3;
-                saveMove += "1";
                 break;
             }
 
@@ -186,17 +186,14 @@ void Game::update_score()
             {
             case QUEEN:
                 score += 15;
-                saveMove += "1";
                 break;
             case ROOK:
             case BISHOP:
             case KNIGHT:
                 score += 8;
-                saveMove += "1";
                 break;
             case POWN:
                 score += 3;
-                saveMove += "1";
                 break;
             }
             player1->addScore(1, score);
