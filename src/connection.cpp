@@ -153,7 +153,13 @@ void connection::startGame(QString name)
 void connection::undo()
 {
     QString order = game->undo();
-    setOrder(order);
+
+
+    QQuickView * view;
+    view->setSource(QUrl::fromLocalFile("ChessBoard.qml"));
+    QQuickItem * object;
+
+    emit undoMove();
 }
 // ------------
 

@@ -54,7 +54,28 @@ Item {
             losePieceSound.play();
             board.destid.col
             board.move = ""
+        }
+        onUndoMove:{
+            board.move = "";
+             //set animation destination
+            var indesDest = Func.indexCell(board.destid.id);
+             moveAnimation.tox = (indesDest) * (board.orgid.width + board.rowOrg.spacing);
+             moveAnimation.toy = (board.rowDest.index - board.rowOrg.index) * -(board.destid.height + (pixel * 1.35));
+             moveAnimation.running = true; // Animation for move
+             movePieceSound.play(); // sound of move piece2
 
+            // add piece to lose piece's of player
+            if(board.destid.piece !== "")
+            {
+                if(board.turn)
+                {
+                    // func.recognizeImg used for convert QUrl to address that can read from js
+                    listModel2.append({"myImg": Func.recognizeImg(board.img)});
+                } else {
+                    listModel1.append({"myImg": Func.recognizeImg(board.img)});
+                }
+            }
+            board.destid.piece = board.orgid.piece;
         }
     }
 

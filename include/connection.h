@@ -5,6 +5,8 @@
 #include <QString>
 #include "include/game.h"
 #include <stdexcept>
+#include <QQuickView>
+#include <QObject>
 
 class connection : public QObject
 {
@@ -47,6 +49,7 @@ signals:
     void loseMove();
 
     QString showName();
+    void undoMove();
 
 
 public slots:
