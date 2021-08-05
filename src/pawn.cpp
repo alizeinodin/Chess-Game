@@ -27,9 +27,9 @@ void pawn::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
             if (possible.at(i).getId() == cellsid.second)
             {
                 cells[0] = search_cell(cellsid.first, board);
-                cells[0]->empty();
                 cells[1] = search_cell(cellsid.second, board);
-                cells[1]->setPiece(this);
+                cells[1]->setPiece(cells[0]->getPiece());
+                cells[0]->empty();
                 return;
             }
         }
@@ -89,7 +89,9 @@ void pawn::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
         }
         vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
         auto it = (find(alfa.cbegin(), alfa.cend(), character) - 1);
+//        cout << "IT: " << *it << endl;
         it++;
+//        cout << "IT: " << *it << endl;
         temp_num++;
         if ((it >= alfa.cbegin()) && (temp_num > 0))
         {
@@ -124,7 +126,6 @@ void pawn::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
                 }
             }
         }
-        
     }
     else
     {

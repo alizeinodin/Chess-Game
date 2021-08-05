@@ -19,20 +19,19 @@ bool iscell(string cell)
 {
     if (cell.size() == 2)
     {
-        //cerr << "cell: " << cell << endl;
         char temp[2];
         cell.copy(temp, 2, 1);
-        //cerr << "temp: " << temp << endl;
         temp[1] = '\0';
         array<string, 8> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
-        //cout << temp << endl;
+        //cout << "temp۱: " << temp << endl;
         int num = stoi(temp);
         cell.copy(temp, 1, 0);
         temp[1] = '\0';
-        //cerr << "temp: " << num << endl;
+        //cout << "temp۲: " << temp << endl;
 
         if (binary_search(alfa.cbegin(), alfa.cend(), temp))
         {
+            //cout << "open" << endl;
             if (num < 9 && num > 0)
             {
                 return true;
