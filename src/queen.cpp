@@ -302,6 +302,12 @@ ChessMan *queen::attack(std::string move, Cell &cell)
     if (!(attackpiece->get_color() == color) || !(attackpiece->get_color() == color))
     {
         sort(threat_id.begin(),threat_id.end());
+        for (size_t i = 0; i < threat_id.size(); i++)
+        {
+            cout << threat_id.at(i) << endl;
+        }
+        
+        
         if (binary_search(threat_id.cbegin(), threat_id.cend(), temp.second))
         {
             cell.empty();

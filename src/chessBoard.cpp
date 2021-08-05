@@ -168,6 +168,7 @@ ChessMan *ChessBoard::attack(MOVE move)
     cells[0] = search_cell(cellsid.first, Board);
     cells[1] = search_cell(cellsid.second, Board);
     temp = cells[0]->getPiece();
+    temp->access(cells[0]->getId(), Board);
     if (!cells[0]->getState() && !cells[1]->getState())
     {
         return temp->attack(move, *cells[1]);
