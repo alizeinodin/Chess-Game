@@ -72,3 +72,12 @@ ChessMan * Player::get_last_attack()
     }
     return nullptr;
 }
+
+void Player:: setkish(bool k)
+{
+    kish = k;
+}
+bool Player::iskish()
+{
+    return kish;
+}

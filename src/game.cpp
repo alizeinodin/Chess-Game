@@ -47,7 +47,7 @@ void Game::order(MOVE move)
     transform(move.begin(), move.end(), move.begin(), ::toupper);
     Cell cell = gameBoard.search(cut_str(move).first);
     cerr << move << endl;
-
+    cout << "w:" << boolalpha << player1->iskish() << "\tb:" << player2->iskish() <<endl;
     if (Turn)
     {
         if (cell.getPiece() != nullptr)
@@ -55,25 +55,74 @@ void Game::order(MOVE move)
             //cout << cell.getPiece()->get_color();
             if (cell.getPiece()->get_color() == player1->getcolor())
             {
-                saveMove = string("P1") + saveMove; // player1 moved piece
-                cell = gameBoard.search(cut_str(move).second);
-                if (cell.getState())
+                if (!player1->iskish())
                 {
-                    cerr << "start move piece" << endl;
-                    gameBoard.movePiece(move);
-                    cout << "end move piece" << endl;
-                    saveMove += "0";
+                    saveMove = string("P1") + saveMove; // player1 moved piece
+                    cell = gameBoard.search(cut_str(move).second);
+                    if (cell.getState())
+                    {
+                        cerr << "start move piece" << endl;
+                        gameBoard.movePiece(move);
+                        cout << "end move piece" << endl;
+                        saveMove += "0";
+                        moves.push_back(saveMove);
+                        Turn = false;
+                        return;
+                    }
+                    else
+                    {
+                        attackpiece = gameBoard.attack(move);
+                        saveMove += "1";
+                    }
                     moves.push_back(saveMove);
                     Turn = false;
+                    return;
                 }
                 else
                 {
-                    attackpiece = gameBoard.attack(move);
-                    saveMove += "1";
+                    saveMove = string("P1") + saveMove; // player1 moved piece
+                    cell = gameBoard.search(cut_str(move).second);
+                    if (cell.getState())
+                    {
+                        cerr << "start move piece" << endl;
+                        gameBoard.movePiece(move);
+                        move += "0";
+                        try
+                        {
+                            gameBoard.threat(player2->getcolor());
+                        }
+                        catch (const kishexcept &e)
+                        {
+                            gameBoard.undo(move, nullptr);
+                            throw invalid_argument("you have kish can't this move!");
+                        }
+
+                        cout << "end move piece" << endl;
+                        saveMove += "0";
+                        moves.push_back(saveMove);
+                        Turn = false;
+                        return;
+                    }
+                    else
+                    {
+                        attackpiece = gameBoard.attack(move);
+                        move += "1";
+                        try
+                        {
+                            gameBoard.threat(player2->getcolor());
+                        }
+                        catch (const kishexcept &e)
+                        {
+                            gameBoard.undo(move, attackpiece);
+                            attackpiece = nullptr;
+                            throw invalid_argument("you have kish can't this move!");
+                        }
+                        saveMove += "1";
+                    }
+                    moves.push_back(saveMove);
+                    Turn = false;
+                    return;
                 }
-                moves.push_back(saveMove);
-                Turn = false;
-                return;
             }
             throw invalid_argument("can not move this piece");
         }
@@ -85,25 +134,77 @@ void Game::order(MOVE move)
         {
             if (cell.getPiece()->get_color() == player2->getcolor())
             {
-                saveMove = string("P2") + saveMove; // player2 moved piece
-                cell = gameBoard.search(cut_str(move).second);
-                if (cell.getState())
+                if (!player2->iskish())
                 {
-                    cerr << "start move piece" << endl;
-                    gameBoard.movePiece(move);
-                    cout << "end move piece" << endl;
-                    saveMove += "0";
+                    saveMove = string("P2") + saveMove; // player2 moved piece
+                    cell = gameBoard.search(cut_str(move).second);
+                    if (cell.getState())
+                    {
+                        cerr << "start move piece" << endl;
+                        gameBoard.movePiece(move);
+                        cout << "end move piece" << endl;
+                        saveMove += "0";
+                        moves.push_back(saveMove);
+                        Turn = true;
+                        return;
+                    }
+                    else
+                    {
+                        attackpiece = gameBoard.attack(move);
+                        saveMove += "1";
+                    }
                     moves.push_back(saveMove);
                     Turn = true;
+                    return;
                 }
                 else
                 {
-                    attackpiece = gameBoard.attack(move);
-                    saveMove += "1";
+                    saveMove = string("P2") + saveMove; // player1 moved piece
+                    cell = gameBoard.search(cut_str(move).second);
+                    if (cell.getState())
+                    {
+                        cerr << "start move piece" << endl;
+                        gameBoard.movePiece(move);
+                        move += "0";
+                        try
+                        {
+                            gameBoard.threat(player1->getcolor());
+                            cout << "try\n";
+                        }
+                        catch (const kishexcept &e)
+                        {
+                            cout << "catch\n";
+                            gameBoard.undo(move, nullptr);
+                            throw invalid_argument("you have kish can't this move!");
+                        }
+
+                        cout << "end move piece" << endl;
+                        saveMove += "0";
+                        moves.push_back(saveMove);
+                        Turn = true;
+                        return;
+                    }
+                    else
+                    {
+                        attackpiece = gameBoard.attack(move);
+                        move += "1";
+                        try
+                        {
+                            gameBoard.threat(player1->getcolor());
+                        }
+                        catch (const kishexcept &e)
+                        {
+                            gameBoard.undo(move, attackpiece);
+                            attackpiece = nullptr;
+                            throw invalid_argument("you have kish can't this move!");
+                        }
+                        saveMove += "1";
+                    }
+                    moves.push_back(saveMove);
+                    Turn = true;
+                    return;
                 }
-                moves.push_back(saveMove);
-                Turn = true;
-                return;
+                
             }
             throw invalid_argument("can not move this piece");
         }
@@ -152,10 +253,10 @@ std::vector<MOVE> Game::movesUndo()
 
 void Game::update_score()
 {
+    cout << "update\t" << Turn <<endl;
     int score = 0;
     if (Turn)
     {
-        player2->addScore(1, gameBoard.threat(player2->getcolor()));
         if (attackpiece != nullptr)
         {
             switch (attackpiece->get_type())
@@ -172,14 +273,26 @@ void Game::update_score()
                 score += 3;
                 break;
             }
-
             player2->addScore(1, score);
             player2->add_attack_piece(attackpiece);
+        }
+        try
+        {
+            player2->addScore(1, gameBoard.threat(player2->getcolor()));
+        }
+        catch (const kishexcept &e)
+        {
+            cout << "kish catch b\n";
+            player1->setkish(true);
+            throw e;
+        }
+        if (player1->iskish())
+        {
+            player1->setkish(false);
         }
     }
     else
     {
-        player1->addScore(1, gameBoard.threat(player1->getcolor()));
         if (attackpiece != nullptr)
         {
             switch (attackpiece->get_type())
@@ -198,6 +311,20 @@ void Game::update_score()
             }
             player1->addScore(1, score);
             player1->add_attack_piece(attackpiece);
+        }
+        try
+        {
+            player1->addScore(1, gameBoard.threat(player1->getcolor()));
+        }
+        catch (const kishexcept &e)
+        {
+            cout << "kish catch w\n";
+            player2->setkish(true);
+            throw e;
+        }
+        if (player2->iskish())
+        {
+            player2->setkish(false);
         }
     }
 }

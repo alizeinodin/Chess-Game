@@ -14,6 +14,7 @@ using COLOR = std::string;
 class Player
 {
     private:
+    bool kish = false;
     PID id;
     Name name;
     Score PScore = 0; // positive socre
@@ -29,6 +30,8 @@ class Player
     COLOR getcolor();
     void add_attack_piece(ChessMan *);
     ChessMan * get_last_attack();
+    void setkish(bool);
+    bool iskish();
 };
 
 #endif /* _PLAYER_H */
