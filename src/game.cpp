@@ -63,6 +63,16 @@ void Game::order(MOVE move)
                     {
                         cerr << "start move piece" << endl;
                         gameBoard.movePiece(move);
+                        move += "0";
+                        try
+                        {
+                            gameBoard.threat(player2->getcolor());
+                        }
+                        catch (const kishexcept &e)
+                        {
+                            gameBoard.undo(move, nullptr);
+                            throw invalid_argument("this piece is pinned!");
+                        }
                         cout << "end move piece" << endl;
                         saveMove += "0";
                         moves.push_back(saveMove);
@@ -72,6 +82,17 @@ void Game::order(MOVE move)
                     else
                     {
                         attackpiece = gameBoard.attack(move);
+                        move += "1";
+                        try
+                        {
+                            gameBoard.threat(player2->getcolor());
+                        }
+                        catch (const kishexcept &e)
+                        {
+                            gameBoard.undo(move, attackpiece);
+                            attackpiece = nullptr;
+                            throw invalid_argument("this piece is pinned!");
+                        }
                         saveMove += "1";
                     }
                     moves.push_back(saveMove);
@@ -142,6 +163,17 @@ void Game::order(MOVE move)
                     {
                         cerr << "start move piece" << endl;
                         gameBoard.movePiece(move);
+                        move += "0";
+                        try
+                        {
+                            cout << "try pin\n";
+                            gameBoard.threat(player1->getcolor());
+                        }
+                        catch (const kishexcept &e)
+                        {
+                            gameBoard.undo(move, nullptr);
+                            throw invalid_argument("this piece is pinned!");
+                        }
                         cout << "end move piece" << endl;
                         saveMove += "0";
                         moves.push_back(saveMove);
@@ -151,6 +183,18 @@ void Game::order(MOVE move)
                     else
                     {
                         attackpiece = gameBoard.attack(move);
+                        move += "1";
+                        try
+                        {
+                            gameBoard.threat(player2->getcolor());
+                        }
+                        catch (const kishexcept &e)
+                        {
+                            gameBoard.undo(move, attackpiece);
+                            attackpiece = nullptr;
+                            throw invalid_argument("this piece is pinned!");
+
+                        }
                         saveMove += "1";
                     }
                     moves.push_back(saveMove);
