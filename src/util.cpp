@@ -56,7 +56,7 @@ void get_char(std::string str, char character[])
 {
 
     str.copy(character, 1, 0);
-    character[2] = '\0';
+    character[1] = '\0';
 }
 
 bool celltostr(Cell &cell, string &str)

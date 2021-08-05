@@ -28,6 +28,8 @@ Item {
     Connections{
         target: connection
         onSuccessMove:{
+            board.move = "";
+            board.turn = !board.turn;
              //set animation destination
             var indesDest = Func.indexCell(board.destid.id);
              moveAnimation.tox = (indesDest) * (board.orgid.width + board.rowOrg.spacing);
@@ -46,9 +48,7 @@ Item {
                     listModel1.append({"myImg": Func.recognizeImg(board.img)});
                 }
             }
-             board.turn = !board.turn;
-             board.destid.piece = board.orgid.piece;
-             board.move = "";
+            board.destid.piece = board.orgid.piece;
         }
         onLoseMove:{
             losePieceSound.play();
@@ -548,7 +548,7 @@ Item {
                 target: board.orgid
                 property: "x"
                 to: moveAnimation.tox
-                duration: 1200
+                duration: 1000
                 easing.type: Easing.OutCubic
             }
 
@@ -556,7 +556,7 @@ Item {
                 target: board.orgid
                 property: "y"
                 to: moveAnimation.toy
-                duration: 1200
+                duration: 1000
                 easing.type: Easing.OutCubic
             }
 

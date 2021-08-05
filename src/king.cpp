@@ -16,7 +16,8 @@ void king::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
     {
         throw invalid_argument("move command invalid");
     }
-    if (move.at(0) == 'K')
+    cout << "Move King: " << move.at(0) << endl;
+    if(move.at(0) == 'K')
     {
         auto cellsid = cut_str(move);
         this->access(cellsid.first, board);
