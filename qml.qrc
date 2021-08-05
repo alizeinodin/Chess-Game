@@ -38,5 +38,8 @@
         <file>media/Sound/Lose.wav</file>
         <file>delplayer1.cpp</file>
         <file>DelegatePlayer.qml</file>
+        <file>media/background_player.jpg</file>
+        <file>media/knight1.png</file>
+        <file>media/knight2.png</file>
     </qresource>
 </RCC>

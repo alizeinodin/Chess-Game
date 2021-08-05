@@ -1,6 +1,5 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.13
-import connect 1.0
 Page {
     id:page2Player
     anchors.fill: parent
@@ -9,21 +8,31 @@ Page {
         id: playerItem
         anchors.fill: parent
 
+        Image {
+                id: background
+                source: "media/background_player.jpg"
+                anchors.fill: parent
+                fillMode: Image.PreserveAspectCrop
+       }
 
-//        Connect{
-//            id:connect
-//        }
+        Image {
+            id: player2Img
+            source: "media/knight2.png"
+            anchors.horizontalCenter: playerItem.horizontalCenter
+            anchors.top: playerItem.top
+            anchors.topMargin: playerItem.height / 4
+        }
 
 
         Text {
             id: player2txt
             text: qsTr("بازیکن شماره 2 نام خود را وارد کنید:")
             font.family: fontID.name
-            anchors.horizontalCenter: playerItem.horizontalCenter
+            anchors.horizontalCenter: player2Img.horizontalCenter
             font.pixelSize: 20
             font.letterSpacing: 1.2
-            anchors.top: playerItem.top
-            anchors.topMargin: playerItem.height / 2.5
+            anchors.top: player2Img.bottom
+            anchors.topMargin: playerItem.height / 30
             color: "#2e2e2e"
         }
 
