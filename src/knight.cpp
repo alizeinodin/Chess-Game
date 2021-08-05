@@ -72,9 +72,9 @@ void knight::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
             if (possible.at(i).getId() == cellsid.second)
             {
                 cells[0] = search_cell(cellsid.first, board);
-                cells[0]->empty();
                 cells[1] = search_cell(cellsid.second, board);
-                cells[1]->setPiece(this);
+                cells[1]->setPiece(cells[0]->getPiece());
+                cells[0]->empty();
                 return;
             }
         }
