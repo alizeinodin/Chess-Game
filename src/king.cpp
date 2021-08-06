@@ -198,7 +198,7 @@ void king::castling(string str, std::array<std::array<Cell, 8>, 8> &board)
     int i = 0;
     Cell *cells[2];
 
-    if (color == "Black")
+    if (color == "White")
     {
         if (get_num(temp.first) == 1)
         {
@@ -246,7 +246,7 @@ void king::castling(string str, std::array<std::array<Cell, 8>, 8> &board)
             }
         }
     }
-    else if (color == "White")
+    else if (color == "Black")
     {
         if (get_num(temp.first) == 8)
         {
