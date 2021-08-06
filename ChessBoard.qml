@@ -54,7 +54,40 @@ Item {
             losePieceSound.play();
             board.destid.col
             board.move = ""
+        }
+        onUndoMove:{
+            console.log("orgx: ", board.orgx);
+            /*
+            board.move = "";
+             //set animation destination
+            var indesDest = Func.indexCell(board.destid.id);
+             moveAnimation.tox = (indesDest) * (board.orgid.width + board.rowOrg.spacing);
+             moveAnimation.toy = (board.rowDest.index - board.rowOrg.index) * -(board.destid.height + (pixel * 1.35));
+             moveAnimation.running = true; // Animation for move
+             movePieceSound.play(); // sound of move piece2
 
+            // add piece to lose piece's of player
+            if(board.destid.piece !== "")
+            {
+                if(board.turn)
+                {
+                    // func.recognizeImg used for convert QUrl to address that can read from js
+                    console.log("index", listModel1.count);
+                    listModel1.remove(listModel1.count);
+//                    console.log(listModel2.get(0).myImg);
+                } else {
+                    console.log(listModel2.get(listModel2.count));
+//                    listModel1.append({"myImg": Func.recognizeImg(board.img)});
+                }
+            }
+            board.destid.piece = board.orgid.piece;
+            */
+        }
+        onExit:{
+            view.pop();
+            view.pop();
+            view.pop();
+            view.pop();
         }
     }
 
@@ -226,6 +259,7 @@ Item {
                 height: pixel * 8
                 font.family: fontfarsi.name
                 font.pixelSize: pixel*2
+                onClicked: connection.exitGame()
             }
         }
     }
@@ -502,6 +536,7 @@ Item {
         height: pixel * 72
         anchors.verticalCenter: mainBoard.verticalCenter
         anchors.horizontalCenter: mainBoard.horizontalCenter
+        objectName: "board"
         property string move: ""
         property bool turn: true
         property var img: null
@@ -897,6 +932,7 @@ Item {
             height: pixel * 8
             property string id: "d2"
             property string piece: "P"
+            objectName: "d2"
 
             Image {
                 id: d2Img
@@ -1070,6 +1106,7 @@ Item {
             height: pixel * 8
             property string id: "c3"
             property string piece: ""
+            objectName: "d3"
 
             Image {
                 id: c3Img
@@ -1103,6 +1140,7 @@ MouseArea{
                 source: ""
             }
             onClicked: {
+                console.log("OPEN");
                 board.saveId(this, d3Img, parent);
                         board.move = Func.checkMove(board.move, id, piece);
                         if(Func.validation(board.move))
