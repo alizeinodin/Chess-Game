@@ -37,7 +37,7 @@ int Player::getScore(size_t state)
 
         break;
 
-    case -1:
+    case 0:
         return NScore;
 
         break;

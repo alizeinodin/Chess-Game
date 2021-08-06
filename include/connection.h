@@ -32,6 +32,7 @@ class connection : public QObject
     //Q_PROPERTY(QObject * orgId READ orgId WRITE setOrgId NOTIFY orgIdChanged)
 public:
     explicit connection(QObject *parent = nullptr);
+    void updateScore();
     ~connection();
 
 signals:

@@ -5,7 +5,6 @@ using namespace std;
 
 connection::connection(QObject *parent) : QObject(parent)
 {
-    //    connect(this, &connection::setOrder, this, &connection::successMove);
 }
 connection::~connection()
 {
@@ -120,17 +119,18 @@ void connection::setOrder(QString order)
     }
 
     qDebug() << order;
-        try {
-            game->order(order.toStdString());
-            emit successMove();
-            game->update_score();
-        } catch (invalid_argument & errorOrder) {
-            std::cerr << errorOrder.what() << std::endl;
-            emit loseMove();
-        } catch (exception & error){
-            std::cerr << error.what() << std::endl;
-            emit loseMove();
-        }
+    try {
+        game->order(order.toStdString());
+        game->update_score();
+        updateScore();
+        emit successMove();
+    } catch (invalid_argument & errorOrder) {
+        std::cerr << errorOrder.what() << std::endl;
+        emit loseMove();
+    } catch (exception & error){
+        std::cerr << error.what() << std::endl;
+        emit loseMove();
+    }
     order.clear();
 }
 
@@ -155,6 +155,7 @@ void connection::undo()
     QString order = game->undo(), firstCell = order.mid(1, 2), secondCell = order.mid(3, 2);
     orgIdVal = firstCell;
     destIdVal = secondCell;
+    updateScore();
     emit undoMove();
 }
 // ------------
@@ -189,5 +190,19 @@ QString connection::orgId()
 QString connection::destId()
 {
     return destIdVal;
+}
+// ------------
+
+// update score
+// ------------
+void connection::updateScore()
+{
+    // player 1 update score
+    setPlayer1NScore(game->getPlayer(std::string("White")).getScore(0));
+    setPlayer1PScore(game->getPlayer(std::string("White")).getScore(1));
+
+    // player2 update score
+    setPlayer2NScore(game->getPlayer(std::string("Black")).getScore(0));
+    setPlayer2PScore(game->getPlayer(std::string("Black")).getScore(1));
 }
 // ------------

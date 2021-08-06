@@ -955,7 +955,6 @@ Item {
             height: pixel * 8
             property string id: "d2"
             property string piece: "P"
-            objectName: "d2"
 
             Image {
                 id: d2Img
