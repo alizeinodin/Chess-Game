@@ -7,6 +7,7 @@
 #include <stdexcept>
 #include <random>
 #include <array>
+#include "../include/pawn.h"
 //#include <random>
 using namespace std;
 
@@ -89,10 +90,11 @@ std::pair<std::string, std::string> cut_str(MOVE &move)
     return make_pair(temp1, temp2);
 }
 
-vector<ID> possible_move_king(COLOR color, std::array<std::array<Cell, 8>, 8> &board)
+bool possible_move_king(ID id, COLOR color, std::array<std::array<Cell, 8>, 8> &board)
 {
     vector<ID> temp;
-    vector<Cell> c;
+    ChessMan *c;
+    pawn *pawntemp;
     for (auto &i : board)
     {
         for (auto &j : i)
@@ -101,16 +103,32 @@ vector<ID> possible_move_king(COLOR color, std::array<std::array<Cell, 8>, 8> &b
             {
                 if (j.getPiece()->get_color() != color)
                 {
-                    c = j.getPiece()->get_possiblemoves();
-                    if (c.size() != 0)
+                    //j.getPiece()->access(j.getId(), board);
+                    if (j.getPiece()->get_type() == PAWN)
                     {
-                        temp.insert(temp.end(), c.begin(), c.end());
+                        c = j.getPiece();
+                        pawntemp = dynamic_cast<pawn *>(c);
+                        temp = pawntemp->get_threat();
+                        sort(temp.begin(), temp.end());
+                        if (binary_search(temp.cbegin(), temp.cend(), id))
+                        {
+                            return true;
+                        }
+                    }
+                    else
+                    {
+                        temp = j.getPiece()->get_possiblemoves();
+                        sort(temp.begin(), temp.end());
+                        if (binary_search(temp.cbegin(), temp.cend(), id))
+                        {
+                            return true;
+                        }
                     }
                 }
             }
         }
     }
-    return temp;
+    return false;
 }
 
 int randomNoGenerator(int set)

@@ -1,5 +1,6 @@
 #include "../include/king.h"
 #include "../include/util.h"
+#include "../include/matexcept.h"
 #include <algorithm>
 #include <vector>
 using namespace std;
@@ -16,14 +17,16 @@ void king::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
     {
         throw invalid_argument("move command invalid");
     }
-    cout << "Move King: " << move.at(0) << endl;
+    //cout << "Move King: " << boolalpha << (move.at(0) == 'K') << endl;
     if(move.at(0) == 'K')
     {
         auto cellsid = cut_str(move);
         this->access(cellsid.first, board);
-        for (size_t i = 0; i < possible.size(); i++)
+        size_t i = 0;
+        for (; i < possible.size(); i++)
         {
-            if (possible.at(i).getId() == cellsid.second)
+            cout << possible.at(i) << " King: " << boolalpha << (possible.at(i) == cellsid.second) <<endl;
+            if (possible.at(i) == cellsid.second)
             {
                 cells[0] = search_cell(cellsid.first, board);
                 cells[1] = search_cell(cellsid.second, board);
@@ -36,19 +39,24 @@ void king::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
                 this->castling(move, board);
                 return;
             }
+        }
+        if (!(i < possible.size()))
+        {
             throw invalid_argument("can not move!!!");
         }
+        
+        throw matexcept();
     }
     throw invalid_argument("piece is not true");
 }
 
 void king::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
 {
+    static bool startgame = true;
     if (origin.size() == 0)
     {
         throw invalid_argument("move command invalid");
     }
-    auto kingimpossible = possible_move_king(this->get_color(), board);
     threat_id.clear();
     char character[] = "a";
     get_char(origin, character);
@@ -61,44 +69,46 @@ void king::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
     int num = get_num(origin);
     for (size_t i = 0; i < 8; i++)
     {
-        
-        if (it + dy[i] == alfa.cend())
+        if (((num + dx[i]) <= 8) && ((num + dx[i]) > 0))
         {
-            continue;
+            if (((it + dy[i]) < alfa.cend()) && ((it + dy[i]) >= alfa.cbegin()))
+            {
+                temp += (it + dy[i])->at(0);
+                temp += to_string(num + dx[i]);
+                //cout << origin << "\tking" << temp << endl;
+            }
         }
-        if (num + dx[i] > 9 && num + dx[i] < 0)
-        {
-            continue;
-        }
-        if ((it + dy[i]) < alfa.cend() && (it + dy[i]) > alfa.cbegin())
-        {
-            temp += (it + dy[i])->at(0);
-        }
-        else
-        {
-            continue;
-        }
-        temp += to_string(num + dx[i]);
         if (iscell(temp))
         {
             celltemp = search_cell(temp, board);
             if (celltemp->getState())
             {
-                if (!binary_search(kingimpossible.cbegin(), kingimpossible.cend(), temp))
+                if (!possible_move_king(origin, this->color, board))
                 {
-                    possible.push_back(*celltemp);
+                    possible.push_back(temp);
                 }
             }
             else
             {
                 threat_id.push_back(temp);
+                
                 temp.clear();
-                break;
             }
-
+            
             temp.clear();
         }
+        temp.clear();
     }
+    if (!possible.empty() && startgame)
+    {
+        startgame = false;
+    }
+    if (possible.empty() && !startgame)
+    {
+        throw matexcept();
+    }
+    
+    
 }
 
 std::map<std::string, int> king::threat(std::string cellid, array<array<Cell, 8>, 8> &board)
@@ -123,7 +133,7 @@ std::map<std::string, int> king::threat(std::string cellid, array<array<Cell, 8>
                 case KNIGHT:
                     temp.insert(make_pair(threat_id.at(i), 2));
                     break;
-                case POWN:
+                case PAWN:
                     temp.insert(make_pair(threat_id.at(i), 1));
                     break;
                 case KING:

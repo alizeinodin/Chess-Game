@@ -7,7 +7,7 @@
 #include <map>
 #ifndef _CHESSMAN_H
 #define _CHESSMAN_H
-enum piece {KING, QUEEN, ROOK, BISHOP, KNIGHT, POWN};
+enum piece {KING, QUEEN, ROOK, BISHOP, KNIGHT, PAWN};
 class ChessMan
 {
 protected:
@@ -16,7 +16,7 @@ protected:
     State TypeMove;
     COLOR color;
     std::vector<std::string> threat_id;
-    std::vector<Cell> possible;
+    std::vector<ID> possible;
     
 
 public:
@@ -27,7 +27,7 @@ public:
     virtual void move(std::string, std::array<std::array<Cell, 8>, 8> &board) = 0;
     COLOR get_color();
     piece get_type();
-    std::vector<Cell> get_possiblemoves();
+    std::vector<ID> &get_possiblemoves();
 };
 
 #endif /* _CHESSMAN_H */

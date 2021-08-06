@@ -82,17 +82,6 @@ void Game::order(MOVE move)
                     else
                     {
                         attackpiece = gameBoard.attack(move);
-                        move += "1";
-                        try
-                        {
-                            gameBoard.threat(player2->getcolor());
-                        }
-                        catch (const kishexcept &e)
-                        {
-                            gameBoard.undo(move, attackpiece);
-                            attackpiece = nullptr;
-                            throw invalid_argument("this piece is pinned!");
-                        }
                         saveMove += "1";
                     }
                     moves.push_back(saveMove);
@@ -183,18 +172,6 @@ void Game::order(MOVE move)
                     else
                     {
                         attackpiece = gameBoard.attack(move);
-                        move += "1";
-                        try
-                        {
-                            gameBoard.threat(player2->getcolor());
-                        }
-                        catch (const kishexcept &e)
-                        {
-                            gameBoard.undo(move, attackpiece);
-                            attackpiece = nullptr;
-                            throw invalid_argument("this piece is pinned!");
-
-                        }
                         saveMove += "1";
                     }
                     moves.push_back(saveMove);
@@ -313,7 +290,7 @@ void Game::update_score()
             case KNIGHT:
                 score += 8;
                 break;
-            case POWN:
+            case PAWN:
                 score += 3;
                 break;
             }
@@ -349,7 +326,7 @@ void Game::update_score()
             case KNIGHT:
                 score += 8;
                 break;
-            case POWN:
+            case PAWN:
                 score += 3;
                 break;
             }

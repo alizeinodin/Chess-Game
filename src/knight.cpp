@@ -42,7 +42,7 @@ void knight::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
             //cout << "get" << temp <<endl;
             if (celltemp->getState())
             {
-                possible.push_back(*celltemp);
+                possible.push_back(temp);
                 //cout << temp <<endl;
             }
             else
@@ -69,7 +69,7 @@ void knight::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
         for (size_t i = 0; i < possible.size(); i++)
         {
             //cout << possible.at(i).getId();
-            if (possible.at(i).getId() == cellsid.second)
+            if (possible.at(i) == cellsid.second)
             {
                 cells[0] = search_cell(cellsid.first, board);
                 cells[1] = search_cell(cellsid.second, board);
@@ -105,7 +105,7 @@ std::map<std::string, int> knight::threat(std::string cellid, array<array<Cell, 
                 case KNIGHT:
                     temp.insert(make_pair(threat_id.at(i), 2));
                     break;
-                case POWN:
+                case PAWN:
                     temp.insert(make_pair(threat_id.at(i), 1));
                     break;
                 case KING:

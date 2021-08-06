@@ -8,7 +8,7 @@ using namespace std;
 
 pawn::pawn(COLOR c) : ChessMan(c)
 {
-    piecetype = POWN;
+    piecetype = PAWN;
 }
 
 void pawn::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
@@ -24,7 +24,7 @@ void pawn::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
         this->access(cellsid.first, board);
         for (size_t i = 0; i < possible.size(); i++)
         {
-            if (possible.at(i).getId() == cellsid.second)
+            if (possible.at(i) == cellsid.second)
             {
                 cells[0] = search_cell(cellsid.first, board);
                 cells[1] = search_cell(cellsid.second, board);
@@ -65,7 +65,7 @@ void pawn::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
                     celltemp = search_cell(temp, board);
                     if (celltemp->getState())
                     {
-                        possible.push_back(*celltemp);
+                        possible.push_back(temp);
                     }
                 }
 
@@ -81,7 +81,7 @@ void pawn::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
                 celltemp = search_cell(temp, board);
                 if (celltemp->getState())
                 {
-                    possible.push_back(*celltemp);
+                    possible.push_back(temp);
                 }
             }
 
@@ -95,6 +95,7 @@ void pawn::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
             temp += to_string(temp_num);
             if (iscell(temp))
             {
+                cout << "pawn " << temp << endl;
                 celltemp = search_cell(temp, board);
                 if (!celltemp->getState())
                 {
@@ -112,6 +113,7 @@ void pawn::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
             temp += to_string(temp_num);
             if (iscell(temp))
             {
+                cout << "pawn " << temp << endl;
                 celltemp = search_cell(temp, board);
                 if (!celltemp->getState())
                 {
@@ -139,7 +141,7 @@ void pawn::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
                     //cout << "get" << celltemp.getState();
                     if (celltemp->getState())
                     {
-                        possible.push_back(*celltemp);
+                        possible.push_back(temp);
                     }
                 }
 
@@ -157,20 +159,21 @@ void pawn::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
                 //cout << "get" << celltemp.getState();
                 if (celltemp->getState())
                 {
-                    possible.push_back(*celltemp);
+                    possible.push_back(temp);
                 }
             }
             temp.clear();
         }
         vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
-        temp_num = num - 1;
-        auto it = (find(alfa.cbegin(), alfa.cend(), character) + 1);
+        temp_num = num + 1;
+        auto it = (find(alfa.cbegin(), alfa.cend(), character) - 1);
         if ((it >= alfa.cbegin()) && (temp_num > 0) && (it <alfa.cend()))
         {
             temp += (it)->at(0);
             temp += to_string(temp_num);
             if (iscell(temp))
             {
+                cout << "pawn " << temp << endl;
                 celltemp = search_cell(temp, board);
                 if (!celltemp->getState())
                 {
@@ -188,6 +191,7 @@ void pawn::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
             temp += to_string(temp_num);
             if (iscell(temp))
             {
+                cout << "pawn " << temp << endl;
                 celltemp = search_cell(temp, board);
                 if (!celltemp->getState())
                 {
@@ -221,7 +225,7 @@ std::map<std::string, int> pawn::threat(std::string cellid, array<array<Cell, 8>
                 case KNIGHT:
                     temp.insert(make_pair(threat_id.at(i), 2));
                     break;
-                case POWN:
+                case PAWN:
                     temp.insert(make_pair(threat_id.at(i), 1));
                     break;
                 case KING:
@@ -254,4 +258,10 @@ ChessMan *pawn::attack(std::string move, Cell &cell)
     }
     throw invalid_argument("can not attack!!!");
     return attackpiece;
+}
+
+
+std::vector<ID> pawn::get_threat()
+{
+    return threat_id;
 }

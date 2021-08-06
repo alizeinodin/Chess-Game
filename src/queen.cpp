@@ -23,7 +23,7 @@ void queen::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
         this->access(cellsid.first, board);
         for (size_t i = 0; i < possible.size(); i++)
         {
-            if (possible.at(i).getId() == cellsid.second)
+            if (possible.at(i) == cellsid.second)
             {
                 cells[0] = search_cell(cellsid.first, board);
                 cells[1] = search_cell(cellsid.second, board);
@@ -59,7 +59,7 @@ void queen::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board
             celltemp = search_cell(temp, board);
             if (celltemp->getState())
             {
-                possible.push_back(*celltemp);
+                possible.push_back(temp);
             }
             else
             {
@@ -84,7 +84,7 @@ void queen::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board
             celltemp = search_cell(temp, board);
             if (celltemp->getState())
             {
-                possible.push_back(*celltemp);
+                possible.push_back(temp);
             }
             else
             {
@@ -111,7 +111,7 @@ void queen::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board
             celltemp = search_cell(temp, board);
             if (celltemp->getState())
             {
-                possible.push_back(*celltemp);
+                possible.push_back(temp);
             }
             else
             {
@@ -135,7 +135,7 @@ void queen::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board
             celltemp = search_cell(temp, board);
             if (celltemp->getState())
             {
-                possible.push_back(*celltemp);
+                possible.push_back(temp);
             }
             else
             {
@@ -162,7 +162,7 @@ void queen::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board
             celltemp = search_cell(temp, board);
             if (celltemp->getState())
             {
-                possible.push_back(*celltemp);
+                possible.push_back(temp);
             }
             else
             {
@@ -188,7 +188,7 @@ void queen::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board
             celltemp = search_cell(temp, board);
             if (celltemp->getState())
             {
-                possible.push_back(*celltemp);
+                possible.push_back(temp);
             }
             else
             {
@@ -214,7 +214,7 @@ void queen::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board
             celltemp = search_cell(temp, board);
             if (celltemp->getState())
             {
-                possible.push_back(*celltemp);
+                possible.push_back(temp);
             }
             else
             {
@@ -240,7 +240,7 @@ void queen::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board
             celltemp = search_cell(temp, board);
             if (celltemp->getState())
             {
-                possible.push_back(*celltemp);
+                possible.push_back(temp);
             }
             else
             {
@@ -278,7 +278,7 @@ std::map<std::string, int> queen::threat(std::string cellid, array<array<Cell, 8
                 case KNIGHT:
                     temp.insert(make_pair(threat_id.at(i), 2));
                     break;
-                case POWN:
+                case PAWN:
                     temp.insert(make_pair(threat_id.at(i), 1));
                     break;
                 case KING:
