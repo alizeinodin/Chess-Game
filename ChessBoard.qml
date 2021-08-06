@@ -52,13 +52,19 @@ Item {
         }
         onLoseMove:{
             losePieceSound.play();
-            board.destid.col
             board.move = ""
         }
         onUndoMove:{
-            console.log("orgx: ", board.orgx);
-            /*
-            board.move = "";
+            board.orgid = board.idMap[connection.orgId()];
+            board.destid = board.idMap[connection.destId()];
+            board.rowOrg = board.orgid.parent;
+            board.rowDest = board.destid.parent;
+            board.orgimg = board.idMap[connection.orgId()+'Img'];
+            board.destimg = board.idMap[connection.destId()+'Img'];
+            board.orgx = board.orgid.x;
+            board.orgy = board.orgid.y;
+            //console.log(board.orgid.id, "   ", board.destid.id, "   ", board.rowOrg.index, "   ", board.rowDest.index,  "   ", board.orgimg.source, "   ", board.destimg.source);
+
              //set animation destination
             var indesDest = Func.indexCell(board.destid.id);
              moveAnimation.tox = (indesDest) * (board.orgid.width + board.rowOrg.spacing);
@@ -67,21 +73,20 @@ Item {
              movePieceSound.play(); // sound of move piece2
 
             // add piece to lose piece's of player
-            if(board.destid.piece !== "")
-            {
-                if(board.turn)
-                {
-                    // func.recognizeImg used for convert QUrl to address that can read from js
-                    console.log("index", listModel1.count);
-                    listModel1.remove(listModel1.count);
-//                    console.log(listModel2.get(0).myImg);
-                } else {
-                    console.log(listModel2.get(listModel2.count));
-//                    listModel1.append({"myImg": Func.recognizeImg(board.img)});
-                }
-            }
+//            if(board.destid.piece !== "")
+//            {
+//                if(board.turn)
+//                {
+//                    // func.recognizeImg used for convert QUrl to address that can read from js
+//                    console.log("index", listModel1.count);
+//                    listModel1.remove(listModel1.count);
+////                    console.log(listModel2.get(0).myImg);
+//                } else {
+//                    console.log(listModel2.get(listModel2.count));
+////                    listModel1.append({"myImg": Func.recognizeImg(board.img)});
+//                }
+//            }
             board.destid.piece = board.orgid.piece;
-            */
         }
         onExit:{
             view.pop();
@@ -550,6 +555,24 @@ Item {
         property var destimg: null
         property int orgx: 0
         property int orgy: 0 
+        property var idMap: ({a1:a1, a2:a2, a3:a3, a4:a4, a5:a5, a6:a6, a7:a7, a8:a8,
+                                 b1: b1, b2:b2, b3:b3, b4:b4, b5:b5, b6:b6, b7:b7, b8:b8,
+                                 c1: c1, c2:c2, c3:c3, c4:c4, c5:c5, c6:c6, c7:c7, c8:c8,
+                                 d1: d1, d2:d2, d3:d3, d4:d4, d5:d5, d6:d6, d7:d7, d8:d8,
+                                 e1: e1, e2:e2, e3:e3, e4:e4, e5:e5, e6:e6, e7:e7, e8:e8,
+                                 f1: f1, f2:f2, f3:f3, f4:f4, f5:f5, f6:f6, f7:f7, f8:f8,
+                                 g1: g1, g2:g2, g3:g3, g4:g4, g5:g5, g6:g6, g7:g7, g8:g8,
+                                 h1: h1, h2:h2, h3:h3, h4:h4, h5:h5, h6:h6, h7:h7, h8:h8,
+                                 row1: row1, row2:row2, row3:row3, row4:row4, row5:row5, row6:row6, row7:row7, row8:row8,
+                                 a1Img:a1Img, a2Img:a2Img, a3Img:a3Img, a4Img:a4Img, a5Img:a5Img, a6Img:a6Img, a7Img:a7Img, a8Img:a8Img,
+                                 b1Img: b1Img, b2Img:b2Img, b3Img:b3Img, b4Img:b4Img, b5Img:b5Img, b6Img:b6Img, b7Img:b7Img, b8Img:b8Img,
+                                 c1Img: c1Img, c2Img:c2Img, c3Img:c3Img, c4Img:c4Img, c5Img:c5Img, c6Img:c6Img, c7Img:c7Img, c8Img:c8Img,
+                                 d1Img: d1Img, d2Img:d2Img, d3Img:d3Img, d4Img:d4Img, d5Img:d5Img, d6Img:d6Img, d7Img:d7Img, d8Img:d8Img,
+                                 e1Img: e1Img, e2Img:e2Img, e3Img:e3Img, e4Img:e4Img, e5Img:e5Img, e6Img:e6Img, e7Img:e7Img, e8Img:e8Img,
+                                 f1Img: f1Img, f2Img:f2Img, f3Img:f3Img, f4Img:f4Img, f5Img:f5Img, f6Img:f6Img, f7Img:f7Img, f8Img:f8Img,
+                                 g1Img: g1Img, g2Img:g2Img, g3Img:g3Img, g4Img:g4Img, g5Img:g5Img, g6Img:g6Img, g7Img:g7Img, g8Img:g8Img,
+                                 h1Img: h1Img, h2Img:h2Img, h3Img:h3Img, h4Img:h4Img, h5Img:h5Img, h6Img:h6Img, h7Img:h7Img, h8Img:h8Img
+                            })
 
 
         // function for save org and dest id cell's
@@ -1106,7 +1129,7 @@ Item {
             height: pixel * 8
             property string id: "c3"
             property string piece: ""
-            objectName: "d3"
+            objectName: "c3"
 
             Image {
                 id: c3Img
@@ -1132,6 +1155,7 @@ MouseArea{
             height: pixel * 8
             property string id: "d3"
             property string piece: ""
+            objectName: "d3"
 
 
             Image {
