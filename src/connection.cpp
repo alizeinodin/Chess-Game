@@ -153,18 +153,8 @@ void connection::startGame(QString name)
 void connection::undo()
 {
     QString order = game->undo(), firstCell = order.mid(1, 2), secondCell = order.mid(3, 2);
-    QString firstImg = firstCell + QString("Img");
-    /*
-    QQuickItem * board = obj->findChild<QQuickItem *>("board");
-    QQuickItem * orgid = obj->findChild<QQuickItem *>(firstCell); // org cell
-    QQuickItem * rowOrg = orgid->parentItem(); // org cell
-    QQuickItem * orgImg = orgid->findChild<QQuickItem *>(firstImg);
-    QQuickItem * destid = obj->findChild<QQuickItem *>(secondCell); // org cell
-    qDebug() << firstImg;
-    qDebug() << secondCell;
-    qDebug() << orgImg;
-    board->property("orgid").setValue(orgid);
-    */
+    orgIdVal = firstCell;
+    destIdVal = secondCell;
     emit undoMove();
 }
 // ------------
@@ -186,5 +176,18 @@ void connection::exitGame()
     delete game;
     restart();
     emit exit();
+}
+// ------------
+
+// QML id's
+// ------------
+QString connection::orgId()
+{
+    return orgIdVal;
+}
+
+QString connection::destId()
+{
+    return destIdVal;
 }
 // ------------

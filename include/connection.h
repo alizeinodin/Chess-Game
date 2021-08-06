@@ -29,7 +29,7 @@ class connection : public QObject
     Q_PROPERTY(QString player1Name READ player1Name WRITE setPlayer1Name NOTIFY player1NameChanged)
     Q_PROPERTY(QString player2Name READ player2Name WRITE setPlayer2Name NOTIFY player2NameChanged)
 
-    Q_PROPERTY(QObject orgId READ orgId WRITE setOrgId NOTIFY orgIdChanged)
+    //Q_PROPERTY(QObject * orgId READ orgId WRITE setOrgId NOTIFY orgIdChanged)
 public:
     explicit connection(QObject *parent = nullptr);
     ~connection();
@@ -59,7 +59,7 @@ signals:
     void exit();
 
     // signal object
-    void orgIdChanged();
+//    void orgIdChanged();
 
 
 public slots:
@@ -115,9 +115,11 @@ public slots:
     // exit game
     void exitGame();
 
-    // object smart value
-    void orgId(QObject);
-    QObject orgId();
+    //     id's in qml
+    //     org
+    QString orgId();
+    // dest
+    QString destId();
 
 
 
@@ -138,6 +140,10 @@ private:
     // player's name
     QString P1Name;
     QString P2Name;
+
+    // org and dest id
+    QString orgIdVal;
+    QString destIdVal;
 };
 
 #endif // CONNECTION_H
