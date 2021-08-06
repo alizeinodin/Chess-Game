@@ -7,6 +7,8 @@
 #include <stdexcept>
 #include <QQuickView>
 #include <QObject>
+#include <QQuickItem>
+#include <QQmlEngine>
 
 class connection : public QObject
 {
@@ -26,6 +28,8 @@ class connection : public QObject
     // name's of player's
     Q_PROPERTY(QString player1Name READ player1Name WRITE setPlayer1Name NOTIFY player1NameChanged)
     Q_PROPERTY(QString player2Name READ player2Name WRITE setPlayer2Name NOTIFY player2NameChanged)
+
+    Q_PROPERTY(QObject orgId READ orgId WRITE setOrgId NOTIFY orgIdChanged)
 public:
     explicit connection(QObject *parent = nullptr);
     ~connection();
@@ -50,6 +54,12 @@ signals:
 
     QString showName();
     void undoMove();
+
+    // exit game
+    void exit();
+
+    // signal object
+    void orgIdChanged();
 
 
 public slots:
@@ -102,6 +112,14 @@ public slots:
     // restart game
     void restart();
 
+    // exit game
+    void exitGame();
+
+    // object smart value
+    void orgId(QObject);
+    QObject orgId();
+
+
 
 
 
@@ -120,7 +138,6 @@ private:
     // player's name
     QString P1Name;
     QString P2Name;
-
 };
 
 #endif // CONNECTION_H

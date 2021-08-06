@@ -7,7 +7,6 @@ connection::connection(QObject *parent) : QObject(parent)
 {
     //    connect(this, &connection::setOrder, this, &connection::successMove);
 }
-
 connection::~connection()
 {
     if(game != nullptr)
@@ -153,13 +152,19 @@ void connection::startGame(QString name)
 // ------------
 void connection::undo()
 {
-    QString order = game->undo();
-
-
-    QQuickView * view;
-    view->setSource(QUrl::fromLocalFile("ChessBoard.qml"));
-    QQuickItem * object;
-
+    QString order = game->undo(), firstCell = order.mid(1, 2), secondCell = order.mid(3, 2);
+    QString firstImg = firstCell + QString("Img");
+    /*
+    QQuickItem * board = obj->findChild<QQuickItem *>("board");
+    QQuickItem * orgid = obj->findChild<QQuickItem *>(firstCell); // org cell
+    QQuickItem * rowOrg = orgid->parentItem(); // org cell
+    QQuickItem * orgImg = orgid->findChild<QQuickItem *>(firstImg);
+    QQuickItem * destid = obj->findChild<QQuickItem *>(secondCell); // org cell
+    qDebug() << firstImg;
+    qDebug() << secondCell;
+    qDebug() << orgImg;
+    board->property("orgid").setValue(orgid);
+    */
     emit undoMove();
 }
 // ------------
@@ -171,5 +176,15 @@ void connection::restart()
     for (size_t i = 0; i < game->movesUndo().size(); i++) {
         undo();
     }
+}
+// ------------
+
+// exit game
+// ------------
+void connection::exitGame()
+{
+    delete game;
+    restart();
+    emit exit();
 }
 // ------------
