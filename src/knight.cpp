@@ -16,6 +16,7 @@ void knight::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
         throw invalid_argument("move command invalid");
     }
     threat_id.clear();
+    possible.clear();
     char character[] = "a";
     get_char(origin, character);
     vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};

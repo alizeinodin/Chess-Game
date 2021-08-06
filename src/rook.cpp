@@ -36,6 +36,7 @@ void rook::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
 void rook::access(string origin, array<array<Cell, 8>, 8> &board)
 {
     threat_id.clear();
+    possible.clear();
     Cell *celltemp;
     vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
     int num = get_num(origin);

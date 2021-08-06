@@ -45,19 +45,21 @@ void king::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
             throw invalid_argument("can not move!!!");
         }
         
-        throw matexcept();
+        //throw matexcept(color);
     }
     throw invalid_argument("piece is not true");
 }
 
 void king::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
 {
-    static bool startgame = true;
+    static bool startgame_white = true;
+    static bool startgame_black = true;
     if (origin.size() == 0)
     {
         throw invalid_argument("move command invalid");
     }
     threat_id.clear();
+    possible.clear();
     char character[] = "a";
     get_char(origin, character);
     vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
@@ -83,10 +85,17 @@ void king::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
             celltemp = search_cell(temp, board);
             if (celltemp->getState())
             {
-                if (!possible_move_king(origin, this->color, board))
+                cout << !possible_move_king(temp, this->color, board) <<endl;
+                if (!possible_move_king(temp, this->color, board))
                 {
+                    cout << temp;
                     possible.push_back(temp);
                 }
+                else
+                {
+                    cout << "ajab  " << temp << endl;
+                }
+                
             }
             else
             {
@@ -99,14 +108,26 @@ void king::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
         }
         temp.clear();
     }
-    if (!possible.empty() && startgame)
+    if (!possible.empty() && startgame_white && color == "White")
     {
-        startgame = false;
+        startgame_white = false;
     }
-    if (possible.empty() && !startgame)
+    cout << "black "<< (!possible.empty() && startgame_black && color == "Black") << endl;
+    if (!possible.empty() && startgame_black && color == "Black")
     {
-        throw matexcept();
+        startgame_black = false;
     }
+    
+    if (possible.empty() && !startgame_white && color == "White")
+    {
+        throw matexcept(color);
+    }
+    if (possible.empty() && !startgame_black && color == "Black")
+    {
+        throw matexcept(color);
+    }
+    
+
     
     
 }

@@ -108,8 +108,13 @@ bool possible_move_king(ID id, COLOR color, std::array<std::array<Cell, 8>, 8> &
                     {
                         c = j.getPiece();
                         pawntemp = dynamic_cast<pawn *>(c);
-                        temp = pawntemp->get_threat();
+                        temp = pawntemp->get_kingcantmove();
                         sort(temp.begin(), temp.end());
+                        for (size_t i = 0; i < temp.size(); i++)
+                        {
+                            //cout << j.getId() << "  pawn king " << temp.at(i) << endl;
+                        }
+                        
                         if (binary_search(temp.cbegin(), temp.cend(), id))
                         {
                             return true;
@@ -119,6 +124,15 @@ bool possible_move_king(ID id, COLOR color, std::array<std::array<Cell, 8>, 8> &
                     {
                         temp = j.getPiece()->get_possiblemoves();
                         sort(temp.begin(), temp.end());
+                        if (j.getPiece()->get_type() == QUEEN)
+                        {
+                            for (size_t i = 0; i < temp.size(); i++)
+                            {
+                                //cout << temp[i] << "\t";
+                            }
+                            
+                        }
+                        //cout<< boolalpha << binary_search(temp.cbegin(), temp.cend(), id) <<endl;
                         if (binary_search(temp.cbegin(), temp.cend(), id))
                         {
                             return true;

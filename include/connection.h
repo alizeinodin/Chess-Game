@@ -1,7 +1,7 @@
 #ifndef CONNECTION_H
 #define CONNECTION_H
 
-#include <QObject>
+//#include <QObject>
 #include <QString>
 #include "include/game.h"
 #include <stdexcept>
@@ -116,8 +116,8 @@ public slots:
     void exitGame();
 
     // object smart value
-    void orgId(QObject);
-    QObject orgId();
+    //void orgId(QObject);
+    //QObject orgId();
 
 
 

@@ -45,6 +45,7 @@ void pawn::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
         throw invalid_argument("move command invalid");
     }
     threat_id.clear();
+    possible.clear();
     Cell *celltemp;
     int num = get_num(origin);
     int temp_num = num - 1;
@@ -95,12 +96,15 @@ void pawn::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
             temp += to_string(temp_num);
             if (iscell(temp))
             {
-                cout << "pawn " << temp << endl;
                 celltemp = search_cell(temp, board);
                 if (!celltemp->getState())
                 {
                     threat_id.push_back(temp);
                     temp.clear();
+                }
+                else
+                {
+                    kingcantmove.push_back(temp);
                 }
             }
         }
@@ -113,12 +117,15 @@ void pawn::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
             temp += to_string(temp_num);
             if (iscell(temp))
             {
-                cout << "pawn " << temp << endl;
                 celltemp = search_cell(temp, board);
                 if (!celltemp->getState())
                 {
                     threat_id.push_back(temp);
                     temp.clear();
+                }
+                else
+                {
+                    kingcantmove.push_back(temp);
                 }
             }
         }
@@ -173,13 +180,17 @@ void pawn::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
             temp += to_string(temp_num);
             if (iscell(temp))
             {
-                cout << "pawn " << temp << endl;
                 celltemp = search_cell(temp, board);
                 if (!celltemp->getState())
                 {
                     threat_id.push_back(temp);
                     temp.clear();
                 }
+                else
+                {
+                    kingcantmove.push_back(temp);
+                }
+                
             }
         }
         temp.clear();
@@ -191,7 +202,6 @@ void pawn::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
             temp += to_string(temp_num);
             if (iscell(temp))
             {
-                cout << "pawn " << temp << endl;
                 celltemp = search_cell(temp, board);
                 if (!celltemp->getState())
                 {
@@ -261,7 +271,7 @@ ChessMan *pawn::attack(std::string move, Cell &cell)
 }
 
 
-std::vector<ID> pawn::get_threat()
+std::vector<ID> pawn::get_kingcantmove()
 {
-    return threat_id;
+    return kingcantmove;
 }

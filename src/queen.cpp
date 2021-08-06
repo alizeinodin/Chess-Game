@@ -44,6 +44,7 @@ void queen::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board
         throw invalid_argument("move command invalid");
     }
     threat_id.clear();
+    possible.clear();
     Cell *celltemp;
     vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
     int num = get_num(origin);
