@@ -2,6 +2,7 @@
 #include "../include/util.h"
 #include "../include/cell.h"
 #include "../include/kishexcept.h"
+#include "../include/enpassantexcept.h"
 #include <vector>
 #include <algorithm>
 using namespace std;
@@ -21,7 +22,54 @@ void pawn::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
     if (move.at(0) == 'P')
     {
         auto cellsid = cut_str(move);
+        cells[0] = search_cell(cellsid.first, board);
         this->access(cellsid.first, board);
+        vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
+        char character[] = "a";
+        get_char(cellsid.first, character);
+        auto it = find(alfa.cbegin(), alfa.cend(), character);
+        string temp;
+        pawn *pawntemp;
+        Cell *celltemp;
+        it += 1;
+        if ((it) < alfa.cend())
+        {
+            temp += *(it);
+            temp += cellsid.first.at(1);
+            celltemp = search_cell(temp, board);
+            if (!celltemp->getState())
+            {
+                if (celltemp->getPiece()->get_type() == PAWN)
+                {
+                    pawntemp = dynamic_cast<pawn *>(celltemp->getPiece());
+                    if (pawntemp->enpassant)
+                    {
+                        cells[1] = celltemp;
+                        this->enpassantattack(cells);
+                    }
+                }
+            }
+        }
+        it -= 2;
+        temp.clear();
+        if ((it) >= alfa.begin())
+        {
+            temp += *(it);
+            temp += cellsid.first.at(1);
+            celltemp = search_cell(temp, board);
+            if (!celltemp->getState())
+            {
+                if (celltemp->getPiece()->get_type() == PAWN)
+                {
+                    pawntemp = dynamic_cast<pawn *>(celltemp->getPiece());
+                    if (pawntemp->enpassant)
+                    {
+                        cells[1] = celltemp;
+                        this->enpassantattack(cells);
+                    }
+                }
+            }
+        }
         for (size_t i = 0; i < possible.size(); i++)
         {
             if (possible.at(i) == cellsid.second)
@@ -30,6 +78,14 @@ void pawn::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
                 cells[1] = search_cell(cellsid.second, board);
                 cells[1]->setPiece(cells[0]->getPiece());
                 cells[0]->empty();
+                if (i == 1)
+                {
+                    enpassant = true;
+                }
+                else if (enpassant)
+                {
+                    enpassant = false;
+                }
                 return;
             }
         }
@@ -69,6 +125,10 @@ void pawn::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
                     {
                         possible.push_back(temp);
                     }
+                    else
+                    {
+                        break;
+                    }
                 }
 
                 temp.clear();
@@ -92,10 +152,10 @@ void pawn::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
         vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
         auto it = (find(alfa.cbegin(), alfa.cend(), character) - 1);
         if (possible.size() != 0)
-    {
-        id = possible.back();
-    }
-        if ((it >= alfa.cbegin()) && (temp_num > 0) && (it <alfa.cend()))
+        {
+            id = possible.back();
+        }
+        if ((it >= alfa.cbegin()) && (temp_num > 0) && (it < alfa.cend()))
         {
             temp += (it)->at(0);
             temp += to_string(temp_num);
@@ -106,14 +166,14 @@ void pawn::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
                 {
                     threat_id.push_back(temp);
                     vector<ID> kish;
-                king * t;
-                if (celltemp->getPiece()->get_type() == KING && celltemp->getPiece()->get_color() != this->color)
-                {
-                    kish.insert(kish.begin(), find(possible.begin(), possible.end(), id) + 1, possible.end());
-                    t = dynamic_cast<king *> (celltemp->getPiece());
-                    t->insert(kish);
-                    t->kishr = origin;
-                }
+                    king *t;
+                    if (celltemp->getPiece()->get_type() == KING && celltemp->getPiece()->get_color() != this->color)
+                    {
+                        kish.insert(kish.begin(), find(possible.begin(), possible.end(), id) + 1, possible.end());
+                        t = dynamic_cast<king *>(celltemp->getPiece());
+                        t->insert(kish);
+                        t->kishr = origin;
+                    }
                     temp.clear();
                 }
                 else
@@ -126,9 +186,9 @@ void pawn::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
         temp_num = num - 1;
         it = (find(alfa.cbegin(), alfa.cend(), character) + 1);
         if (possible.size() != 0)
-    {
-        id = possible.back();
-    }
+        {
+            id = possible.back();
+        }
         if ((it < alfa.cend()) && (temp_num > 0) && (it >= alfa.cbegin()))
         {
             temp += (it)->at(0);
@@ -140,14 +200,14 @@ void pawn::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
                 {
                     threat_id.push_back(temp);
                     vector<ID> kish;
-                king * t;
-                if (celltemp->getPiece()->get_type() == KING && celltemp->getPiece()->get_color() != this->color)
-                {
-                    kish.insert(kish.begin(), find(possible.begin(), possible.end(), id) + 1, possible.end());
-                    t = dynamic_cast<king *> (celltemp->getPiece());
-                    t->insert(kish);
-                    t->kishr = origin;
-                }
+                    king *t;
+                    if (celltemp->getPiece()->get_type() == KING && celltemp->getPiece()->get_color() != this->color)
+                    {
+                        kish.insert(kish.begin(), find(possible.begin(), possible.end(), id) + 1, possible.end());
+                        t = dynamic_cast<king *>(celltemp->getPiece());
+                        t->insert(kish);
+                        t->kishr = origin;
+                    }
                     temp.clear();
                 }
                 else
@@ -177,6 +237,10 @@ void pawn::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
                     {
                         possible.push_back(temp);
                     }
+                    else
+                    {
+                        break;
+                    }
                 }
 
                 temp.clear();
@@ -205,7 +269,7 @@ void pawn::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
         {
             id = possible.back();
         }
-        if ((it >= alfa.cbegin()) && (temp_num > 0) && (it <alfa.cend()))
+        if ((it >= alfa.cbegin()) && (temp_num > 0) && (it < alfa.cend()))
         {
             temp += (it)->at(0);
             temp += to_string(temp_num);
@@ -216,30 +280,29 @@ void pawn::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
                 {
                     threat_id.push_back(temp);
                     vector<ID> kish;
-                king * t;
-                if (celltemp->getPiece()->get_type() == KING && celltemp->getPiece()->get_color() != this->color)
-                {
-                    kish.insert(kish.begin(), find(possible.begin(), possible.end(), id) + 1, possible.end());
-                    t = dynamic_cast<king *> (celltemp->getPiece());
-                    t->insert(kish);
-                    t->kishr = origin;
-                }
+                    king *t;
+                    if (celltemp->getPiece()->get_type() == KING && celltemp->getPiece()->get_color() != this->color)
+                    {
+                        kish.insert(kish.begin(), find(possible.begin(), possible.end(), id) + 1, possible.end());
+                        t = dynamic_cast<king *>(celltemp->getPiece());
+                        t->insert(kish);
+                        t->kishr = origin;
+                    }
                     temp.clear();
                 }
                 else
                 {
                     kingcantmove.push_back(temp);
                 }
-                
             }
         }
         temp.clear();
         temp_num = num + 1;
         it = (find(alfa.cbegin(), alfa.cend(), character) + 1);
         if (possible.size() != 0)
-    {
-        id = possible.back();
-    }
+        {
+            id = possible.back();
+        }
         if ((it < alfa.cend()) && (temp_num <= 8) && (it >= alfa.cbegin()))
         {
             temp += (it)->at(0);
@@ -251,14 +314,14 @@ void pawn::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
                 {
                     threat_id.push_back(temp);
                     vector<ID> kish;
-                king * t;
-                if (celltemp->getPiece()->get_type() == KING && celltemp->getPiece()->get_color() != this->color)
-                {
-                    kish.insert(kish.begin(), find(possible.begin(), possible.end(), id) + 1, possible.end());
-                    t = dynamic_cast<king *> (celltemp->getPiece());
-                    t->insert(kish);
-                    t->kishr = origin;
-                }
+                    king *t;
+                    if (celltemp->getPiece()->get_type() == KING && celltemp->getPiece()->get_color() != this->color)
+                    {
+                        kish.insert(kish.begin(), find(possible.begin(), possible.end(), id) + 1, possible.end());
+                        t = dynamic_cast<king *>(celltemp->getPiece());
+                        t->insert(kish);
+                        t->kishr = origin;
+                    }
                     temp.clear();
                 }
             }
@@ -311,7 +374,7 @@ ChessMan *pawn::attack(std::string move, Cell **cell)
     auto temp = cut_str(move);
     if (!(attackpiece->get_color() == color) || !(attackpiece->get_color() == color))
     {
-        sort(threat_id.begin(),threat_id.end());
+        sort(threat_id.begin(), threat_id.end());
         if (binary_search(threat_id.cbegin(), threat_id.cend(), temp.second))
         {
             cell[1]->empty();
@@ -324,8 +387,16 @@ ChessMan *pawn::attack(std::string move, Cell **cell)
     return attackpiece;
 }
 
-
 std::vector<ID> pawn::get_kingcantmove()
 {
     return kingcantmove;
+}
+
+void pawn::enpassantattack(Cell **cell)
+{
+    ChessMan *attackpiece = cell[1]->getPiece();
+    cell[1]->empty();
+    cell[1]->setPiece(cell[0]->getPiece());
+    cell[0]->empty();
+    throw enpassantexcept(attackpiece, cell[1]->getId());
 }
