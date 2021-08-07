@@ -1,4 +1,5 @@
 #include "../include/connection.h"
+#include "../include/kishexcept.h"
 #include <iostream>
 #include <QDebug>
 using namespace std;
@@ -127,10 +128,11 @@ void connection::setOrder(QString order)
     } catch (invalid_argument & errorOrder) {
         std::cerr << errorOrder.what() << std::endl;
         emit loseMove();
-    }catch (exception & error){
-        std::cerr << error.what() << std::endl;
-        emit loseMove();
     }
+     catch (kishexcept & error){
+         std::cerr << error.what() << std::endl;
+         emit loseMove();
+     }
     order.clear();
 }
 

@@ -39,7 +39,7 @@ void rook::access(string origin, array<array<Cell, 8>, 8> &board)
     possible.clear();
     Cell *celltemp;
     vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
-    auto itkish = possible.begin();
+    ID id;
     int num = get_num(origin);
     string temp;
     int temp_num = num - 1;
@@ -61,9 +61,10 @@ void rook::access(string origin, array<array<Cell, 8>, 8> &board)
                 king * t;
                 if (celltemp->getPiece()->get_type() == KING && celltemp->getPiece()->get_color() != this->color)
                 {
-                    kish.insert(kish.begin(), itkish, possible.end());
+                    kish.insert(kish.begin(), possible.begin(), possible.end());
                     t = dynamic_cast<king *> (celltemp->getPiece());
                     t->insert(kish);
+                    t->kishr = origin;
                 }
                 temp.clear();
                 break;
@@ -75,7 +76,10 @@ void rook::access(string origin, array<array<Cell, 8>, 8> &board)
     }
 
     temp_num = num + 1;
-    itkish = possible.end() - 1;
+    if (possible.size() != 0)
+    {
+        id = possible.back();
+    }
     while (temp_num <= 8)
     {
         temp += origin.at(0);
@@ -94,9 +98,10 @@ void rook::access(string origin, array<array<Cell, 8>, 8> &board)
                 king * t;
                 if (celltemp->getPiece()->get_type() == KING && celltemp->getPiece()->get_color() != this->color)
                 {
-                    kish.insert(kish.begin(), itkish, possible.end());
+                    kish.insert(kish.begin(), find(possible.begin(), possible.end(), id) + 1, possible.end());
                     t = dynamic_cast<king *> (celltemp->getPiece());
                     t->insert(kish);
+                    t->kishr = origin;
                 }
                 temp.clear();
                 break;
@@ -110,7 +115,10 @@ void rook::access(string origin, array<array<Cell, 8>, 8> &board)
     get_char(origin, character);
 
     auto it = (find(alfa.cbegin(), alfa.cend(), character) - 1);
-    itkish = possible.end() - 1;
+    if (possible.size() != 0)
+    {
+        id = possible.back();
+    }
     while (it >= alfa.cbegin())
     {
         temp += (it)->at(0);
@@ -129,9 +137,10 @@ void rook::access(string origin, array<array<Cell, 8>, 8> &board)
                 king * t;
                 if (celltemp->getPiece()->get_type() == KING && celltemp->getPiece()->get_color() != this->color)
                 {
-                    kish.insert(kish.begin(), itkish, possible.end());
+                    kish.insert(kish.begin(), find(possible.begin(), possible.end(), id) + 1, possible.end());
                     t = dynamic_cast<king *> (celltemp->getPiece());
                     t->insert(kish);
+                    t->kishr = origin;
                 }
                 temp.clear();
                 break;
@@ -142,7 +151,10 @@ void rook::access(string origin, array<array<Cell, 8>, 8> &board)
         it--;
     }
     it = (find(alfa.cbegin(), alfa.cend(), character) + 1);
-    itkish = possible.end() - 1;
+    if (possible.size() != 0)
+    {
+        id = possible.back();
+    }
     while (it <= alfa.cend() - 1)
     {
         temp += (it)->at(0);
@@ -162,9 +174,10 @@ void rook::access(string origin, array<array<Cell, 8>, 8> &board)
                 auto ittemp = (find(alfa.cbegin(), alfa.cend(), character) - 1);
                 if (celltemp->getPiece()->get_type() == KING && celltemp->getPiece()->get_color() != this->color)
                 {
-                    kish.insert(kish.begin(), itkish, possible.end());
+                    kish.insert(kish.begin(), find(possible.begin(), possible.end(), id) + 1, possible.end());
                     t = dynamic_cast<king *> (celltemp->getPiece());
                     t->insert(kish);
+                    t->kishr = origin;
                 }
                 temp.clear();
                 break;

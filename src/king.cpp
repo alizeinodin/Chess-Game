@@ -66,7 +66,6 @@ void king::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
     int dx[] = {1, 1, 1, -1, -1, -1, 0, 0}; // all possible moves.
     int dy[] = {1, -1, 0, -1, 1, 0, -1, 1}; // all possible moves.
     auto it = find(alfa.cbegin(), alfa.cend(), character);
-    auto itkish = possible.begin();
     string temp;
     Cell *celltemp;
     int num = get_num(origin);
@@ -118,14 +117,20 @@ void king::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
     {
         startgame_black = false;
     }
-    
+    cout << "white start" << possible.empty() <<endl;
     if (possible.empty() && !startgame_white && color == "White")
     {
         ismate = true;
+    } else if (!possible.empty() && !startgame_white && color == "White")
+    {
+        ismate = false;
     }
     if (possible.empty() && !startgame_black && color == "Black")
     {
         ismate = true;
+    } else if (!possible.empty() && !startgame_white && color == "Black")
+    {
+        ismate = false;
     }
     
 

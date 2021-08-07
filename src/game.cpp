@@ -251,12 +251,14 @@ QString Game::undo()
     if (move.at(1) == '2')
     {
         gameBoard.undo(temp, player2->get_last_attack());
+        player2->addScore(-1, 5);
         Turn = false;
         moves.pop_back();
     }
     else if (move.at(1) == '1')
     {
         gameBoard.undo(temp, player1->get_last_attack());
+        player1->addScore(-1, 5);
         Turn = true;
         moves.pop_back();
     }
@@ -307,16 +309,17 @@ void Game::update_score()
             cout << "kish catch b\n";
             player1->setkish(true);
             player1->addScore(1, 10);
-            throw e;
-        }
-        catch (const matexcept &e)
-        {
-            if (player1->iskish())
+            try
             {
-                player1->addScore(1, 70);
+                gameBoard.checkmate(player1->getcolor());
+            }
+            catch(const matexcept& e)
+            {
+                player2->addScore(1, 70);
                 throw e;
             }
             
+            throw e;
         }
         if (player1->iskish())
         {
@@ -353,16 +356,16 @@ void Game::update_score()
             cout << "kish catch w\n";
             player2->setkish(true);
             player2->addScore(1, 10);
-            throw e;
-        }
-        catch (const matexcept &e)
-        {
-            if (player2->iskish())
+            try
             {
-                player2->addScore(1, 70);
-                throw e;
+                gameBoard.checkmate(player1->getcolor());
             }
-            
+            catch(const matexcept& er)
+            {
+                player1->addScore(1, 70);
+                throw er;
+            }
+            throw e;
         }
         if (player2->iskish())
         {

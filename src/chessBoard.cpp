@@ -180,8 +180,6 @@ ChessMan *ChessBoard::attack(MOVE move)
 
 int ChessBoard::threat(COLOR color)
 {
-    king *t;
-    bool mate = false;
     std::map<std::string, int> temp;
     auto it = temp.begin();
     int score = 0;
@@ -198,12 +196,6 @@ int ChessBoard::threat(COLOR color)
                 if (j.getPiece()->get_color() == color)
                 {
                     //cerr << "id: " << j.getId() << endl;
-                    if (j.getPiece()->get_type() == KING)
-                    {
-                        t = dynamic_cast<king *>(j.getPiece());
-                        mate = t->getmate();
-                        cout << "mate " <<boolalpha <<  mate << endl;
-                    }
                     temp = j.getPiece()->threat(j.getId(), Board);
                     it = temp.begin();
                     for (size_t i = 0; i < temp.size(); i++)
@@ -212,13 +204,6 @@ int ChessBoard::threat(COLOR color)
                         it++;
                     }
                 }
-            }
-        }
-        if (mate)
-        {
-            if (this->checkmate(t))
-            {
-                throw matexcept(color);
             }
         }
     }
@@ -239,10 +224,33 @@ void ChessBoard::undo(MOVE move, ChessMan *attackp)
     }
 }
 
-bool ChessBoard::checkmate(king *k)
+void ChessBoard::checkmate(COLOR color)
 {
-    auto kishpath = k->get_kishpath();
+    cout << "check\n";
+    bool mate = false;
+    king *k;
     vector<ID> temp;
+    bool find = false;
+    for (auto &i : Board)
+    {
+        for (auto &j : i)
+        {
+            if (j.getPiece()->get_type() == KING && j.getPiece()->get_color() == color)
+            {
+                k = dynamic_cast<king *> (j.getPiece());
+                find = true;
+                break;
+            }
+            
+        }
+        if (find)
+        {
+            break;
+        }
+        
+    }
+    //cout << "kish ref " << k->kishr << endl;
+    auto kishpath = k->get_kishpath();
     for (auto &i : kishpath)
     {
         for (auto &n : Board)
@@ -253,22 +261,25 @@ bool ChessBoard::checkmate(king *k)
                 {
                     if (k->get_color() == j.getPiece()->get_color())
                     {
+                        j.getPiece()->access(j.getId(), Board);
                         temp = j.getPiece()->get_possiblemoves();
                         sort(temp.begin(), temp.end());
                         if (binary_search(temp.cbegin(), temp.cend(), i))
                         {
-                            return false;
+                            cout << "in mate  " << i  << j.getPiece()->get_type() << endl;
+                            return;
                         }
                         temp = j.getPiece()->get_threat();
                         sort(temp.begin(), temp.end());
-                        if (binary_search(temp.cbegin(), temp.cend(), i))
+                        if (binary_search(temp.cbegin(), temp.cend(), k->kishr))
                         {
-                            return false;
+                            cout << "in mate  " << k->kishr << endl;
+                            return;
                         }
                     }
                 }
             }
         }
     }
-    return true;
+    throw matexcept(" and kish");
 }

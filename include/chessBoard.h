@@ -34,6 +34,7 @@ class ChessBoard
     ChessMan * attack(MOVE);
     int threat(COLOR);
     void undo(MOVE move, ChessMan *);
-    bool checkmate(king *);
+    void checkmate(COLOR);
+
 };
 #endif /* _CHESSBOARD_H*/
