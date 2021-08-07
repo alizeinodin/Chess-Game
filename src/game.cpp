@@ -125,7 +125,7 @@ void Game::order(MOVE move)
                         {
                             gameBoard.undo(move, attackpiece);
                             attackpiece = nullptr;
-                            throw invalid_argument("you have kish can't this move!");
+                            throw invalid_argument("you have kish can't this attack!");
                         }
                         saveMove += "1";
                     }
@@ -134,9 +134,9 @@ void Game::order(MOVE move)
                     return;
                 }
             }
-            throw invalid_argument("can not move this piece");
+            throw invalid_argument("It isn't your turn!");
         }
-        throw invalid_argument("piece not exist");
+        throw invalid_argument("piece not exist!");
     }
     else
     {
@@ -227,9 +227,9 @@ void Game::order(MOVE move)
                 }
                 
             }
-            throw invalid_argument("can not move this piece");
+            throw invalid_argument("It is not your turn!");
         }
-        throw invalid_argument("piece not exist");
+        throw invalid_argument("piece not exist!");
     }
 }
 

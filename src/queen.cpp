@@ -296,26 +296,21 @@ std::map<std::string, int> queen::threat(std::string cellid, array<array<Cell, 8
     return temp;
 }
 
-ChessMan *queen::attack(std::string move, Cell &cell)
+ChessMan *queen::attack(std::string move, Cell **cell)
 {
-    ChessMan *attackpiece = cell.getPiece();
+    ChessMan *attackpiece = cell[1]->getPiece();
     auto temp = cut_str(move);
     if (!(attackpiece->get_color() == color) || !(attackpiece->get_color() == color))
     {
         sort(threat_id.begin(),threat_id.end());
-        for (size_t i = 0; i < threat_id.size(); i++)
-        {
-            cout << threat_id.at(i) << endl;
-        }
-        
-        
         if (binary_search(threat_id.cbegin(), threat_id.cend(), temp.second))
         {
-            cell.empty();
-            cell.setPiece(this);
+            cell[1]->empty();
+            cell[1]->setPiece(cell[0]->getPiece());
+            cell[0]->empty();
             return attackpiece;
         }
     }
-    throw invalid_argument("can not attack!!!");
+    throw invalid_argument("can not move!!!");
     return attackpiece;
 }

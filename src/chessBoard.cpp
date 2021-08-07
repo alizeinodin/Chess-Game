@@ -171,7 +171,7 @@ ChessMan *ChessBoard::attack(MOVE move)
     temp->access(cells[0]->getId(), Board);
     if (!cells[0]->getState() && !cells[1]->getState())
     {
-        return temp->attack(move, *cells[1]);
+        return temp->attack(move, cells);
     }
     throw invalid_argument("can not attack");
 }
