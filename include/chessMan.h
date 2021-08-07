@@ -28,6 +28,7 @@ public:
     COLOR get_color();
     piece get_type();
     std::vector<ID> &get_possiblemoves();
+    std::vector<ID> &get_threat();
 };
 
 #endif /* _CHESSMAN_H */

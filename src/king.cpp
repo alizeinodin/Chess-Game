@@ -1,6 +1,6 @@
 #include "../include/king.h"
 #include "../include/util.h"
-#include "../include/matexcept.h"
+//#include "../include/matexcept.h"
 #include <algorithm>
 #include <vector>
 using namespace std;
@@ -66,6 +66,7 @@ void king::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
     int dx[] = {1, 1, 1, -1, -1, -1, 0, 0}; // all possible moves.
     int dy[] = {1, -1, 0, -1, 1, 0, -1, 1}; // all possible moves.
     auto it = find(alfa.cbegin(), alfa.cend(), character);
+    auto itkish = possible.begin();
     string temp;
     Cell *celltemp;
     int num = get_num(origin);
@@ -120,11 +121,11 @@ void king::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
     
     if (possible.empty() && !startgame_white && color == "White")
     {
-        throw matexcept(color);
+        ismate = true;
     }
     if (possible.empty() && !startgame_black && color == "Black")
     {
-        throw matexcept(color);
+        ismate = true;
     }
     
 
@@ -296,4 +297,15 @@ void king::castling(string str, std::array<std::array<Cell, 8>, 8> &board)
         }
     }
     throw invalid_argument("can not move!!!");
+}
+
+void king::insert(std::vector<ID> &temp)
+{
+    kishpath.insert(kishpath.begin(), temp.begin(), temp.end());
+}
+
+
+std::vector<ID> &king:: get_kishpath()
+{
+    return kishpath;
 }

@@ -1,6 +1,7 @@
 #include <array>
 #include <string>
 #include "cell.h"
+#include "king.h"
 #ifndef _UTIL_H
 #define _UTIL_H
 

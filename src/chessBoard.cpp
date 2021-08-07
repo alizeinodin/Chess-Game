@@ -1,5 +1,7 @@
 #include "../include/chessBoard.h"
 #include "../include/chessMan.h"
+//#include "../include/matexcept.h"
+#include <algorithm>
 using namespace std;
 
 ChessBoard &ChessBoard::getInstance()
@@ -26,7 +28,7 @@ void ChessBoard::startboard()
         ChessMan *solider = new pawn("Black");
         i.setPiece(solider);
     }
-for (auto &i : Board[0])
+    for (auto &i : Board[0])
     {
         if (i.getId().at(0) == 'A' || i.getId().at(0) == 'H')
         {
@@ -61,23 +63,23 @@ for (auto &i : Board[0])
         {
             ChessMan *piece = new rook("Black");
             i.setPiece(piece);
-        } else
-        if (i.getId().at(0) == 'B' || i.getId().at(0) == 'G')
+        }
+        else if (i.getId().at(0) == 'B' || i.getId().at(0) == 'G')
         {
             ChessMan *piece = new knight("Black");
             i.setPiece(piece);
-        } else
-        if (i.getId().at(0) == 'C' || i.getId().at(0) == 'F')
+        }
+        else if (i.getId().at(0) == 'C' || i.getId().at(0) == 'F')
         {
             ChessMan *piece = new bishop("Black");
             i.setPiece(piece);
-        } else
-        if (i.getId().at(0) == 'D')
+        }
+        else if (i.getId().at(0) == 'D')
         {
             ChessMan *piece = new queen("Black");
             i.setPiece(piece);
-        } else
-        if (i.getId().at(0) == 'E')
+        }
+        else if (i.getId().at(0) == 'E')
         {
             ChessMan *piece = new king("Black");
             i.setPiece(piece);
@@ -178,6 +180,8 @@ ChessMan *ChessBoard::attack(MOVE move)
 
 int ChessBoard::threat(COLOR color)
 {
+    king *t;
+    bool mate = false;
     std::map<std::string, int> temp;
     auto it = temp.begin();
     int score = 0;
@@ -194,6 +198,12 @@ int ChessBoard::threat(COLOR color)
                 if (j.getPiece()->get_color() == color)
                 {
                     //cerr << "id: " << j.getId() << endl;
+                    if (j.getPiece()->get_type() == KING)
+                    {
+                        t = dynamic_cast<king *>(j.getPiece());
+                        mate = t->getmate();
+                        cout << "mate " <<boolalpha <<  mate << endl;
+                    }
                     temp = j.getPiece()->threat(j.getId(), Board);
                     it = temp.begin();
                     for (size_t i = 0; i < temp.size(); i++)
@@ -204,15 +214,21 @@ int ChessBoard::threat(COLOR color)
                 }
             }
         }
+        if (mate)
+        {
+            if (this->checkmate(t))
+            {
+                throw matexcept(color);
+            }
+        }
     }
     return score;
 }
 
-
-void ChessBoard::undo(MOVE move, ChessMan * attackp)
+void ChessBoard::undo(MOVE move, ChessMan *attackp)
 {
     auto cellsid = cut_str(move);
-    Cell * cells[2];
+    Cell *cells[2];
     cells[0] = search_cell(cellsid.second, Board);
     cells[1] = search_cell(cellsid.first, Board);
     cells[1]->setPiece(cells[0]->getPiece());
@@ -221,4 +237,38 @@ void ChessBoard::undo(MOVE move, ChessMan * attackp)
     {
         cells[0]->setPiece(attackp);
     }
+}
+
+bool ChessBoard::checkmate(king *k)
+{
+    auto kishpath = k->get_kishpath();
+    vector<ID> temp;
+    for (auto &i : kishpath)
+    {
+        for (auto &n : Board)
+        {
+            for (auto &j : n)
+            {
+                if (j.getPiece() != nullptr)
+                {
+                    if (k->get_color() == j.getPiece()->get_color())
+                    {
+                        temp = j.getPiece()->get_possiblemoves();
+                        sort(temp.begin(), temp.end());
+                        if (binary_search(temp.cbegin(), temp.cend(), i))
+                        {
+                            return false;
+                        }
+                        temp = j.getPiece()->get_threat();
+                        sort(temp.begin(), temp.end());
+                        if (binary_search(temp.cbegin(), temp.cend(), i))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return true;
 }

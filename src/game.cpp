@@ -1,5 +1,6 @@
 #include "../include/game.h"
 #include "../include/player.h"
+
 #include <QDebug>
 using namespace std;
 
@@ -305,7 +306,17 @@ void Game::update_score()
         {
             cout << "kish catch b\n";
             player1->setkish(true);
+            player1->addScore(1, 10);
             throw e;
+        }
+        catch (const matexcept &e)
+        {
+            if (player1->iskish())
+            {
+                player1->addScore(1, 70);
+                throw e;
+            }
+            
         }
         if (player1->iskish())
         {
@@ -341,7 +352,17 @@ void Game::update_score()
         {
             cout << "kish catch w\n";
             player2->setkish(true);
+            player2->addScore(1, 10);
             throw e;
+        }
+        catch (const matexcept &e)
+        {
+            if (player2->iskish())
+            {
+                player2->addScore(1, 70);
+                throw e;
+            }
+            
         }
         if (player2->iskish())
         {

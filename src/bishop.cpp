@@ -52,6 +52,7 @@ void bishop::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
     char character[] = "a";
     get_char(origin, character);
     auto it = (find(alfa.cbegin(), alfa.cend(), character) - 1);
+    auto itkish = possible.begin();
     while ((it >= alfa.cbegin()) && (temp_num > 0))
     {
         temp += (it)->at(0);
@@ -67,6 +68,14 @@ void bishop::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
             else
             {
                 threat_id.push_back(temp);
+                vector<ID> kish;
+                king * t;
+                if (celltemp->getPiece()->get_type() == KING && celltemp->getPiece()->get_color() != this->color)
+                {
+                    kish.insert(kish.begin(), itkish, possible.end());
+                    t = dynamic_cast<king *> (celltemp->getPiece());
+                    t->insert(kish);
+                }
                 temp.clear();
                 break;
             }
@@ -79,6 +88,7 @@ void bishop::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
 
     temp_num = num + 1;
     it = (find(alfa.cbegin(), alfa.cend(), character) + 1);
+    itkish = possible.end() - 1;
     while ((it < alfa.cend()) && (temp_num <= 8))
     {
         temp += (it)->at(0);
@@ -94,6 +104,14 @@ void bishop::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
             else
             {
                 threat_id.push_back(temp);
+                vector<ID> kish;
+                king * t;
+                if (celltemp->getPiece()->get_type() == KING && celltemp->getPiece()->get_color() != this->color)
+                {
+                    kish.insert(kish.begin(), itkish, possible.end());
+                    t = dynamic_cast<king *> (celltemp->getPiece());
+                    t->insert(kish);
+                }
                 temp.clear();
                 break;
             }
@@ -106,6 +124,7 @@ void bishop::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
 
     temp_num = num - 1;
     it = (find(alfa.cbegin(), alfa.cend(), character) + 1);
+    itkish = possible.end() - 1;
     while ((it < alfa.cend()) && (temp_num > 0))
     {
         temp += (it)->at(0);
@@ -121,6 +140,14 @@ void bishop::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
             else
             {
                 threat_id.push_back(temp);
+                vector<ID> kish;
+                king * t;
+                if (celltemp->getPiece()->get_type() == KING && celltemp->getPiece()->get_color() != this->color)
+                {
+                    kish.insert(kish.begin(), itkish, possible.end());
+                    t = dynamic_cast<king *> (celltemp->getPiece());
+                    t->insert(kish);
+                }
                 temp.clear();
                 break;
             }
@@ -133,6 +160,7 @@ void bishop::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
 
     temp_num = num + 1;
     it = (find(alfa.cbegin(), alfa.cend(), character) - 1);
+    itkish = possible.end() - 1;
     while ((it >= alfa.cbegin()) && (temp_num <= 8))
     {
         temp += (it)->at(0);
@@ -149,6 +177,14 @@ void bishop::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
             else
             {
                 threat_id.push_back(temp);
+                vector<ID> kish;
+                king * t;
+                if (celltemp->getPiece()->get_type() == KING && celltemp->getPiece()->get_color() != this->color)
+                {
+                    kish.insert(kish.begin(), itkish, possible.end());
+                    t = dynamic_cast<king *> (celltemp->getPiece());
+                    t->insert(kish);
+                }
                 temp.clear();
                 break;
             }
