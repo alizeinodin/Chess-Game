@@ -14,6 +14,7 @@
 #include "cell.h"
 #include "fileConnect.h"
 #include "player.h"
+#include "matexcept.h"
 
 class ChessBoard
 {
@@ -33,5 +34,7 @@ class ChessBoard
     ChessMan * attack(MOVE);
     int threat(COLOR);
     void undo(MOVE move, ChessMan *);
+    void checkmate(COLOR);
+
 };
 #endif /* _CHESSBOARD_H*/

@@ -1,6 +1,6 @@
 #include "../include/king.h"
 #include "../include/util.h"
-#include "../include/matexcept.h"
+//#include "../include/matexcept.h"
 #include <algorithm>
 #include <vector>
 using namespace std;
@@ -117,14 +117,20 @@ void king::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
     {
         startgame_black = false;
     }
-    
+    cout << "white start" << possible.empty() <<endl;
     if (possible.empty() && !startgame_white && color == "White")
     {
-        throw matexcept(color);
+        ismate = true;
+    } else if (!possible.empty() && !startgame_white && color == "White")
+    {
+        ismate = false;
     }
     if (possible.empty() && !startgame_black && color == "Black")
     {
-        throw matexcept(color);
+        ismate = true;
+    } else if (!possible.empty() && !startgame_white && color == "Black")
+    {
+        ismate = false;
     }
     
 
@@ -171,17 +177,18 @@ std::map<std::string, int> king::threat(std::string cellid, array<array<Cell, 8>
     return temp;
 }
 
-ChessMan *king::attack(std::string move, Cell &cell)
+ChessMan *king::attack(std::string move, Cell **cell)
 {
-    ChessMan *attackpiece = cell.getPiece();
+    ChessMan *attackpiece = cell[1]->getPiece();
     auto temp = cut_str(move);
     if (!(attackpiece->get_color() == color) || !(attackpiece->get_color() == color))
     {
         sort(threat_id.begin(),threat_id.end());
         if (binary_search(threat_id.cbegin(), threat_id.cend(), temp.second))
         {
-            cell.empty();
-            cell.setPiece(this);
+            cell[1]->empty();
+            cell[1]->setPiece(cell[0]->getPiece());
+            cell[0]->empty();
             return attackpiece;
         }
     }
@@ -295,4 +302,15 @@ void king::castling(string str, std::array<std::array<Cell, 8>, 8> &board)
         }
     }
     throw invalid_argument("can not move!!!");
+}
+
+void king::insert(std::vector<ID> &temp)
+{
+    kishpath.insert(kishpath.begin(), temp.begin(), temp.end());
+}
+
+
+std::vector<ID> &king:: get_kishpath()
+{
+    return kishpath;
 }

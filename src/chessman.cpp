@@ -17,3 +17,7 @@ std::vector<ID> & ChessMan::get_possiblemoves()
     return possible;
 }
 
+std::vector<ID> & ChessMan::get_threat()
+{
+    return threat_id;
+}

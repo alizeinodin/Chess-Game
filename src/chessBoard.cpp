@@ -1,5 +1,7 @@
 #include "../include/chessBoard.h"
 #include "../include/chessMan.h"
+//#include "../include/matexcept.h"
+#include <algorithm>
 using namespace std;
 
 ChessBoard &ChessBoard::getInstance()
@@ -26,7 +28,7 @@ void ChessBoard::startboard()
         ChessMan *solider = new pawn("Black");
         i.setPiece(solider);
     }
-for (auto &i : Board[0])
+    for (auto &i : Board[0])
     {
         if (i.getId().at(0) == 'A' || i.getId().at(0) == 'H')
         {
@@ -61,23 +63,23 @@ for (auto &i : Board[0])
         {
             ChessMan *piece = new rook("Black");
             i.setPiece(piece);
-        } else
-        if (i.getId().at(0) == 'B' || i.getId().at(0) == 'G')
+        }
+        else if (i.getId().at(0) == 'B' || i.getId().at(0) == 'G')
         {
             ChessMan *piece = new knight("Black");
             i.setPiece(piece);
-        } else
-        if (i.getId().at(0) == 'C' || i.getId().at(0) == 'F')
+        }
+        else if (i.getId().at(0) == 'C' || i.getId().at(0) == 'F')
         {
             ChessMan *piece = new bishop("Black");
             i.setPiece(piece);
-        } else
-        if (i.getId().at(0) == 'D')
+        }
+        else if (i.getId().at(0) == 'D')
         {
             ChessMan *piece = new queen("Black");
             i.setPiece(piece);
-        } else
-        if (i.getId().at(0) == 'E')
+        }
+        else if (i.getId().at(0) == 'E')
         {
             ChessMan *piece = new king("Black");
             i.setPiece(piece);
@@ -171,7 +173,7 @@ ChessMan *ChessBoard::attack(MOVE move)
     temp->access(cells[0]->getId(), Board);
     if (!cells[0]->getState() && !cells[1]->getState())
     {
-        return temp->attack(move, *cells[1]);
+        return temp->attack(move, cells);
     }
     throw invalid_argument("can not attack");
 }
@@ -208,11 +210,10 @@ int ChessBoard::threat(COLOR color)
     return score;
 }
 
-
-void ChessBoard::undo(MOVE move, ChessMan * attackp)
+void ChessBoard::undo(MOVE move, ChessMan *attackp)
 {
     auto cellsid = cut_str(move);
-    Cell * cells[2];
+    Cell *cells[2];
     cells[0] = search_cell(cellsid.second, Board);
     cells[1] = search_cell(cellsid.first, Board);
     cells[1]->setPiece(cells[0]->getPiece());
@@ -221,4 +222,65 @@ void ChessBoard::undo(MOVE move, ChessMan * attackp)
     {
         cells[0]->setPiece(attackp);
     }
+}
+
+void ChessBoard::checkmate(COLOR color)
+{
+    cout << "check\n";
+    bool mate = false;
+    king *k;
+    vector<ID> temp;
+    bool find = false;
+    for (auto &i : Board)
+    {
+        for (auto &j : i)
+        {
+            if (!j.getState())
+            {
+                if (j.getPiece()->get_type() == KING && j.getPiece()->get_color() == color)
+                {
+                    k = dynamic_cast<king *>(j.getPiece());
+                    find = true;
+                    break;
+                }
+            }
+        }
+        if (find)
+        {
+            break;
+        }
+    }
+    //cout << "kish ref " << k->kishr << endl;
+    auto kishpath = k->get_kishpath();
+    for (auto &i : kishpath)
+    {
+        for (auto &n : Board)
+        {
+            for (auto &j : n)
+            {
+                if (j.getPiece() != nullptr)
+                {
+                    if (k->get_color() == j.getPiece()->get_color())
+                    {
+                        j.getPiece()->access(j.getId(), Board);
+                        temp = j.getPiece()->get_possiblemoves();
+                        sort(temp.begin(), temp.end());
+                        if (binary_search(temp.cbegin(), temp.cend(), i))
+                        {
+                            cout << "in mate  " << i << j.getPiece()->get_type() << endl;
+                            return;
+                        }
+                        temp = j.getPiece()->get_threat();
+                        sort(temp.begin(), temp.end());
+                        if (binary_search(temp.cbegin(), temp.cend(), k->kishr))
+                        {
+                            cout << "in mate  " << k->kishr << endl;
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    throw matexcept(" and kish");
 }

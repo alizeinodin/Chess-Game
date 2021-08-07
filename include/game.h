@@ -1,9 +1,9 @@
 #include <QString>
-#ifndef _GAME_H
-#define _GAME_H
 #include "chessBoard.h"
 #include "player.h"
 #include "fileConnect.h"
+#ifndef _GAME_H
+#define _GAME_H
 
 class Game
 {

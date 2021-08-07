@@ -39,6 +39,7 @@ void rook::access(string origin, array<array<Cell, 8>, 8> &board)
     possible.clear();
     Cell *celltemp;
     vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
+    ID id;
     int num = get_num(origin);
     string temp;
     int temp_num = num - 1;
@@ -56,6 +57,15 @@ void rook::access(string origin, array<array<Cell, 8>, 8> &board)
             else
             {
                 threat_id.push_back(temp);
+                vector<ID> kish;
+                king * t;
+                if (celltemp->getPiece()->get_type() == KING && celltemp->getPiece()->get_color() != this->color)
+                {
+                    kish.insert(kish.begin(), possible.begin(), possible.end());
+                    t = dynamic_cast<king *> (celltemp->getPiece());
+                    t->insert(kish);
+                    t->kishr = origin;
+                }
                 temp.clear();
                 break;
             }
@@ -66,7 +76,10 @@ void rook::access(string origin, array<array<Cell, 8>, 8> &board)
     }
 
     temp_num = num + 1;
-
+    if (possible.size() != 0)
+    {
+        id = possible.back();
+    }
     while (temp_num <= 8)
     {
         temp += origin.at(0);
@@ -81,6 +94,15 @@ void rook::access(string origin, array<array<Cell, 8>, 8> &board)
             else
             {
                 threat_id.push_back(temp);
+                vector<ID> kish;
+                king * t;
+                if (celltemp->getPiece()->get_type() == KING && celltemp->getPiece()->get_color() != this->color)
+                {
+                    kish.insert(kish.begin(), find(possible.begin(), possible.end(), id) + 1, possible.end());
+                    t = dynamic_cast<king *> (celltemp->getPiece());
+                    t->insert(kish);
+                    t->kishr = origin;
+                }
                 temp.clear();
                 break;
             }
@@ -93,7 +115,10 @@ void rook::access(string origin, array<array<Cell, 8>, 8> &board)
     get_char(origin, character);
 
     auto it = (find(alfa.cbegin(), alfa.cend(), character) - 1);
-
+    if (possible.size() != 0)
+    {
+        id = possible.back();
+    }
     while (it >= alfa.cbegin())
     {
         temp += (it)->at(0);
@@ -108,6 +133,15 @@ void rook::access(string origin, array<array<Cell, 8>, 8> &board)
             else
             {
                 threat_id.push_back(temp);
+                vector<ID> kish;
+                king * t;
+                if (celltemp->getPiece()->get_type() == KING && celltemp->getPiece()->get_color() != this->color)
+                {
+                    kish.insert(kish.begin(), find(possible.begin(), possible.end(), id) + 1, possible.end());
+                    t = dynamic_cast<king *> (celltemp->getPiece());
+                    t->insert(kish);
+                    t->kishr = origin;
+                }
                 temp.clear();
                 break;
             }
@@ -117,7 +151,10 @@ void rook::access(string origin, array<array<Cell, 8>, 8> &board)
         it--;
     }
     it = (find(alfa.cbegin(), alfa.cend(), character) + 1);
-
+    if (possible.size() != 0)
+    {
+        id = possible.back();
+    }
     while (it <= alfa.cend() - 1)
     {
         temp += (it)->at(0);
@@ -132,6 +169,16 @@ void rook::access(string origin, array<array<Cell, 8>, 8> &board)
             else
             {
                 threat_id.push_back(temp);
+                vector<ID> kish;
+                king * t;
+                auto ittemp = (find(alfa.cbegin(), alfa.cend(), character) - 1);
+                if (celltemp->getPiece()->get_type() == KING && celltemp->getPiece()->get_color() != this->color)
+                {
+                    kish.insert(kish.begin(), find(possible.begin(), possible.end(), id) + 1, possible.end());
+                    t = dynamic_cast<king *> (celltemp->getPiece());
+                    t->insert(kish);
+                    t->kishr = origin;
+                }
                 temp.clear();
                 break;
             }
@@ -179,17 +226,18 @@ std::map<std::string, int> rook::threat(std::string cellid, array<array<Cell, 8>
     return temp;
 }
 
-ChessMan *rook::attack(std::string move, Cell &cell)
+ChessMan *rook::attack(std::string move, Cell **cell)
 {
-    ChessMan *attackpiece = cell.getPiece();
+    ChessMan *attackpiece = cell[1]->getPiece();
     auto temp = cut_str(move);
     if (!(attackpiece->get_color() == color) || !(attackpiece->get_color() == color))
     {
         sort(threat_id.begin(),threat_id.end());
         if (binary_search(threat_id.cbegin(), threat_id.cend(), temp.second))
         {
-            cell.empty();
-            cell.setPiece(this);
+            cell[1]->empty();
+            cell[1]->setPiece(cell[0]->getPiece());
+            cell[0]->empty();
             return attackpiece;
         }
     }
