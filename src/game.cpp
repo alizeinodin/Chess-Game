@@ -240,11 +240,9 @@ void Game::startgame()
 
 QString Game::undo()
 {
-    int i = 0;
     string move = moves.back();
     // find last move of player
     // this code is for exist two move option in program
-    //cout << move.substr(2, 5) << endl;
     string temp = move.substr(2, 6);
     transform(temp.begin(), temp.end(), temp.begin(), ::toupper);
     if (move.at(1) == '2')
@@ -348,4 +346,11 @@ void Game::update_score()
             player2->setkish(false);
         }
     }
+}
+
+void Game::restart()
+{
+    player1->restartScore();
+    player2->restartScore();
+
 }

@@ -3,6 +3,7 @@
 #define _GAME_H
 #include "chessBoard.h"
 #include "player.h"
+#include "fileConnect.h"
 
 class Game
 {
@@ -14,6 +15,7 @@ class Game
     bool Turn = true;
     std::vector<MOVE> moves;
     ChessMan *attackpiece = nullptr;
+//    FileConnect file;
 
     public:
     enum Color {BLACK, WHITE};
@@ -27,6 +29,7 @@ class Game
     std::vector<MOVE> movesUndo();
     void restart();
     void update_score();
+//    void setFile(QString);
 };
 
 #endif /* _GAME_H */

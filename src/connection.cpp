@@ -156,6 +156,12 @@ void connection::undo()
     orgIdVal = firstCell;
     destIdVal = secondCell;
     updateScore();
+
+    if(counter > 0)
+    {
+        counter++;
+    }
+
     emit undoMove();
 }
 // ------------
@@ -164,8 +170,18 @@ void connection::undo()
 // ------------
 void connection::restart()
 {
-    for (size_t i = 0; i < game->movesUndo().size(); i++) {
+    if(counter == 0)
+    {
+        counter = 1;
+    }
+    if (counter <= game->movesUndo().size()) {
         undo();
+    }
+    if(counter > game->movesUndo().size())
+    {
+        counter = 1;
+        game->restart();
+        updateScore();
     }
 }
 // ------------
@@ -191,6 +207,7 @@ QString connection::destId()
 {
     return destIdVal;
 }
+
 // ------------
 
 // update score
@@ -204,5 +221,18 @@ void connection::updateScore()
     // player2 update score
     setPlayer2NScore(game->getPlayer(std::string("Black")).getScore(0));
     setPlayer2PScore(game->getPlayer(std::string("Black")).getScore(1));
+}
+// ------------
+
+// counter smart var
+// ------------
+void connection::setCounterRestart(unsigned long cnt)
+{
+    counter = cnt;
+}
+
+unsigned long connection::counterRestart()
+{
+    return counter;
 }
 // ------------
