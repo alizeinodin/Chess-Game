@@ -235,19 +235,20 @@ void ChessBoard::checkmate(COLOR color)
     {
         for (auto &j : i)
         {
-            if (j.getPiece()->get_type() == KING && j.getPiece()->get_color() == color)
+            if (!j.getState())
             {
-                k = dynamic_cast<king *> (j.getPiece());
-                find = true;
-                break;
+                if (j.getPiece()->get_type() == KING && j.getPiece()->get_color() == color)
+                {
+                    k = dynamic_cast<king *>(j.getPiece());
+                    find = true;
+                    break;
+                }
             }
-            
         }
         if (find)
         {
             break;
         }
-        
     }
     //cout << "kish ref " << k->kishr << endl;
     auto kishpath = k->get_kishpath();
@@ -266,7 +267,7 @@ void ChessBoard::checkmate(COLOR color)
                         sort(temp.begin(), temp.end());
                         if (binary_search(temp.cbegin(), temp.cend(), i))
                         {
-                            cout << "in mate  " << i  << j.getPiece()->get_type() << endl;
+                            cout << "in mate  " << i << j.getPiece()->get_type() << endl;
                             return;
                         }
                         temp = j.getPiece()->get_threat();
