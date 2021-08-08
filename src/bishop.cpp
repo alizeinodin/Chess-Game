@@ -112,7 +112,12 @@ void bishop::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
                 king * t;
                 if (celltemp->getPiece()->get_type() == KING && celltemp->getPiece()->get_color() != this->color)
                 {
-                    kish.insert(kish.begin(), find(possible.begin(), possible.end(), id) + 1, possible.end());
+                    auto itfind = find(possible.begin(), possible.end(), id);
+                    if (itfind != possible.cend())
+                    {
+                        itfind++;
+                    }
+                    kish.insert(kish.begin(), itfind, possible.end());                    
                     t = dynamic_cast<king *> (celltemp->getPiece());
                     t->insert(kish);
                     t->kishr = origin;
@@ -152,7 +157,12 @@ void bishop::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
                 king * t;
                 if (celltemp->getPiece()->get_type() == KING && celltemp->getPiece()->get_color() != this->color)
                 {
-                    kish.insert(kish.begin(), find(possible.begin(), possible.end(), id) + 1, possible.end());
+                    auto itfind = find(possible.begin(), possible.end(), id);
+                    if (itfind != possible.cend())
+                    {
+                        itfind++;
+                    }
+                    kish.insert(kish.begin(), itfind, possible.end());
                     t = dynamic_cast<king *> (celltemp->getPiece());
                     t->insert(kish);
                     t->kishr = origin;
@@ -193,7 +203,12 @@ void bishop::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
                 king * t;
                 if (celltemp->getPiece()->get_type() == KING && celltemp->getPiece()->get_color() != this->color)
                 {
-                    kish.insert(kish.begin(), find(possible.begin(), possible.end(), id) + 1, possible.end());
+                    auto itfind = find(possible.begin(), possible.end(), id);
+                    if (itfind != possible.cend())
+                    {
+                        itfind++;
+                    }
+                    kish.insert(kish.begin(), itfind, possible.end());
                     t = dynamic_cast<king *> (celltemp->getPiece());
                     t->insert(kish);
                     t->kishr = origin;

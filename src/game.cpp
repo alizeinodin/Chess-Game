@@ -108,6 +108,7 @@ void Game::order(MOVE move)
                             ID q = e.id;
                             cout << "enpassant\n";
                             attackpiece = e.attack;
+                            e.attack = nullptr;
                             move += "1";
                             move.at(3) = q.at(0);
                             move.at(4) = q.at(1);
@@ -178,6 +179,7 @@ void Game::order(MOVE move)
                             ID q = e.id;
                             cout << "enpassant\n";
                             attackpiece = e.attack;
+                            e.attack = nullptr;
                             move += "1";
                             move.at(3) = q.at(0);
                             move.at(4) = q.at(1);
@@ -215,8 +217,24 @@ void Game::order(MOVE move)
                     if (cell.getState())
                     {
                         cerr << "start move piece" << endl;
-                        gameBoard.movePiece(move);
-                        move += "0";
+                        try
+                        {
+                            gameBoard.movePiece(move);
+                            move += "0";
+                            saveMove += "0";
+                        }
+                        catch(enpassantexcept & e)
+                        {
+                            ID q = e.id;
+                            cout << "enpassant\n";
+                            attackpiece = e.attack;
+                            e.attack = nullptr;
+                            move += "1";
+                            move.at(3) = q.at(0);
+                            move.at(4) = q.at(1);
+                            saveMove = move;
+                            throw e;
+                        }
                         try
                         {
                             gameBoard.threat(player1->getcolor());
@@ -271,6 +289,7 @@ void Game::startgame()
 QString Game::undo()
 {
     string move = moves.back();
+    string tempscore;
     // find last move of player
     // this code is for exist two move option in program
     string temp = move.substr(2, 6);
@@ -278,14 +297,26 @@ QString Game::undo()
     if (move.at(1) == '2')
     {
         gameBoard.undo(temp, player2->get_last_attack());
+<<<<<<< HEAD
         player2->addScore(0, 5);
+=======
+        player2->addScore(-1, 5);
+        tempscore.append(move.begin() + 7, move.end());
+        player2->addScore(1, -stoi(tempscore));
+>>>>>>> 66f168dd241e13c68d7fb7683d9567e1d752c180
         Turn = false;
         moves.pop_back();
     }
     else if (move.at(1) == '1')
     {
         gameBoard.undo(temp, player1->get_last_attack());
+<<<<<<< HEAD
         player1->addScore(0, 5);
+=======
+        player1->addScore(-1, 5);
+        tempscore.append(move.begin() + 7, move.end());
+        player2->addScore(1, -stoi(tempscore));
+>>>>>>> 66f168dd241e13c68d7fb7683d9567e1d752c180
         Turn = true;
         moves.pop_back();
     }
@@ -306,6 +337,7 @@ void Game::update_score()
 {
     cout << "update\t" << Turn <<endl;
     int score = 0;
+    int temp = 0;
     if (Turn)
     {
         if (attackpiece != nullptr)
@@ -329,13 +361,18 @@ void Game::update_score()
         }
         try
         {
-            player2->addScore(1, gameBoard.threat(player2->getcolor()));
+            temp = gameBoard.threat(player2->getcolor());
+            player2->addScore(1, temp);
+            score += temp;
+            string t = to_string(score);
+            cout << "scorebe  " << moves.back() << endl;
+            moves.rbegin()->append(t);
+            cout << "score  " << moves.back() << endl;
         }
         catch (const kishexcept &e)
         {
             cout << "kish catch b\n";
             player1->setkish(true);
-            player1->addScore(1, 10);
             try
             {
                 gameBoard.checkmate(player1->getcolor());
@@ -343,9 +380,11 @@ void Game::update_score()
             catch(const matexcept& e)
             {
                 player2->addScore(1, 70);
+                score += 70;
                 throw e;
             }
-            
+            player1->addScore(1, 10);
+            score += 10;
             throw e;
         }
         if (player1->iskish())
@@ -376,13 +415,18 @@ void Game::update_score()
         }
         try
         {
-            player1->addScore(1, gameBoard.threat(player1->getcolor()));
+            temp = gameBoard.threat(player1->getcolor());
+            player1->addScore(1, temp);
+            score += temp;
+            string t = to_string(score);
+            cout << "scorebe  " << moves.back() << endl;
+            moves.rbegin()->append(t);
+            cout << "score  " << moves.back() << endl;
         }
         catch (const kishexcept &e)
         {
             cout << "kish catch w\n";
             player2->setkish(true);
-            player2->addScore(1, 10);
             try
             {
                 gameBoard.checkmate(player1->getcolor());
@@ -390,8 +434,11 @@ void Game::update_score()
             catch(const matexcept& er)
             {
                 player1->addScore(1, 70);
+                score += 70;
                 throw er;
             }
+            player2->addScore(1, 10);
+            score += 10;
             throw e;
         }
         if (player2->iskish())
