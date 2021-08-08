@@ -1,6 +1,7 @@
 #include "../include/game.h"
 #include "../include/player.h"
 #include "../include/enpassantexcept.h"
+#include "../include/pawnpromotion.h"
 #include <QDebug>
 using namespace std;
 
@@ -29,6 +30,9 @@ void Game::setPlayer(Color color, QString name)
     }
 }
 
+
+
+
 Player Game::getPlayer(COLOR c)
 {
     if (player1->getcolor() == c)
@@ -41,6 +45,9 @@ Player Game::getPlayer(COLOR c)
     }
     throw invalid_argument("invalid color");
 }
+
+
+
 
 void Game::order(MOVE move)
 {
@@ -56,6 +63,13 @@ void Game::order(MOVE move)
             //cout << cell.getPiece()->get_color();
             if (cell.getPiece()->get_color() == player1->getcolor())
             {
+                if (player1->getScore(0))
+                {
+                    gameBoard.randommoves(player1->getcolor());
+                    player1->addScore(0, -15);
+
+                }
+                
                 if (!player1->iskish())
                 {
                     saveMove = string("P1") + saveMove; // player1 moved piece
@@ -64,8 +78,31 @@ void Game::order(MOVE move)
                     {
 
                         cerr << "start move piece" << endl;
-                        gameBoard.movePiece(move);
-                        move += "0";
+                        try
+                        {
+                            gameBoard.movePiece(move);
+                            saveMove += "0";
+                        }
+                        catch(enpassantexcept & e)
+                        {
+                            ID q = e.id;
+                            cout << "enpassant\n";
+                            attackpiece = e.attack;
+                            e.attack = nullptr;
+                            saveMove += "1";
+                            saveMove.at(5) = q.at(0);
+                            saveMove.at(6) = q.at(1);
+                            moves.push_back(saveMove);
+                            Turn = false;
+                            throw e;
+                        }
+                        catch(pawnpromotion & e)
+                        {
+                            saveMove += "0";
+                            moves.push_back(saveMove);
+                            Turn = false;
+                            throw e;
+                        }
                         try
                         {
                             gameBoard.threat(player2->getcolor());
@@ -83,8 +120,29 @@ void Game::order(MOVE move)
                     }
                     else
                     {
-                        attackpiece = gameBoard.attack(move);
-                        saveMove += "1";
+                        try
+                        {
+                            attackpiece = gameBoard.attack(move);
+                            saveMove += "1";
+                        }
+                        catch(pawnpromotion& e)
+                        {
+                            saveMove += "1";
+                            attackpiece = e.attack;
+                            e.attack = nullptr;
+                            moves.push_back(saveMove);
+                            Turn = true;
+                            throw e;
+                        }
+                        try
+                        {
+                            gameBoard.threat(player2->getcolor());
+                        }
+                        catch (const kishexcept &e)
+                        {
+                            gameBoard.undo(move, nullptr);
+                            throw invalid_argument("you have kish can't this move!");
+                        }
                     }
                     moves.push_back(saveMove);
                     Turn = false;
@@ -100,7 +158,6 @@ void Game::order(MOVE move)
                         try
                         {
                             gameBoard.movePiece(move);
-                            move += "0";
                             saveMove += "0";
                         }
                         catch(enpassantexcept & e)
@@ -109,10 +166,18 @@ void Game::order(MOVE move)
                             cout << "enpassant\n";
                             attackpiece = e.attack;
                             e.attack = nullptr;
-                            move += "1";
-                            move.at(3) = q.at(0);
-                            move.at(4) = q.at(1);
-                            saveMove = move;
+                            saveMove += "1";
+                            saveMove.at(5) = q.at(0);
+                            saveMove.at(6) = q.at(1);
+                            moves.push_back(saveMove);
+                            Turn = false;
+                            throw e;
+                        }
+                        catch(pawnpromotion & e)
+                        {
+                            saveMove += "0";
+                            moves.push_back(saveMove);
+                            Turn = false;
                             throw e;
                         }
                         try
@@ -132,8 +197,20 @@ void Game::order(MOVE move)
                     }
                     else
                     {
-                        attackpiece = gameBoard.attack(move);
-                        move += "1";
+                        try
+                        {
+                            attackpiece = gameBoard.attack(move);
+                            saveMove += "1";
+                        }
+                        catch(pawnpromotion& e)
+                        {
+                            saveMove += "1";
+                            attackpiece = e.attack;
+                            e.attack = nullptr;
+                            moves.push_back(saveMove);
+                            Turn = false;
+                            throw e;
+                        }
                         try
                         {
                             gameBoard.threat(player2->getcolor());
@@ -144,7 +221,6 @@ void Game::order(MOVE move)
                             attackpiece = nullptr;
                             throw invalid_argument("you have kish can't this attack!");
                         }
-                        saveMove += "1";
                     }
                     moves.push_back(saveMove);
                     Turn = false;
@@ -171,7 +247,6 @@ void Game::order(MOVE move)
                         try
                         {
                             gameBoard.movePiece(move);
-                            move += "0";
                             saveMove += "0";
                         }
                         catch(enpassantexcept & e)
@@ -180,10 +255,18 @@ void Game::order(MOVE move)
                             cout << "enpassant\n";
                             attackpiece = e.attack;
                             e.attack = nullptr;
-                            move += "1";
-                            move.at(3) = q.at(0);
-                            move.at(4) = q.at(1);
-                            saveMove = move;
+                            saveMove += "1";
+                            saveMove.at(5) = q.at(0);
+                            saveMove.at(6) = q.at(1);
+                            moves.push_back(saveMove);
+                            Turn = true;
+                            throw e;
+                        }
+                        catch(pawnpromotion & e)
+                        {
+                            saveMove += "0";
+                            moves.push_back(saveMove);
+                            Turn = true;
                             throw e;
                         }
                         try
@@ -203,8 +286,20 @@ void Game::order(MOVE move)
                     }
                     else
                     {
-                        attackpiece = gameBoard.attack(move);
-                        saveMove += "1";
+                        try
+                        {
+                            attackpiece = gameBoard.attack(move);
+                            saveMove += "1";
+                        }
+                        catch(pawnpromotion& e)
+                        {
+                            saveMove += "1";
+                            attackpiece = e.attack;
+                            e.attack = nullptr;
+                            moves.push_back(saveMove);
+                            Turn = true;
+                            throw e;
+                        }
                     }
                     moves.push_back(saveMove);
                     Turn = true;
@@ -220,7 +315,6 @@ void Game::order(MOVE move)
                         try
                         {
                             gameBoard.movePiece(move);
-                            move += "0";
                             saveMove += "0";
                         }
                         catch(enpassantexcept & e)
@@ -229,10 +323,18 @@ void Game::order(MOVE move)
                             cout << "enpassant\n";
                             attackpiece = e.attack;
                             e.attack = nullptr;
-                            move += "1";
-                            move.at(3) = q.at(0);
-                            move.at(4) = q.at(1);
-                            saveMove = move;
+                            saveMove += "1";
+                            saveMove.at(5) = q.at(0);
+                            saveMove.at(6) = q.at(1);
+                            moves.push_back(saveMove);
+                            Turn = true;
+                            throw e;
+                        }
+                        catch(pawnpromotion & e)
+                        {
+                            saveMove += "0";
+                            moves.push_back(saveMove);
+                            Turn = true;
                             throw e;
                         }
                         try
@@ -248,15 +350,26 @@ void Game::order(MOVE move)
                         }
 
                         cout << "end move piece" << endl;
-                        saveMove += "0";
                         moves.push_back(saveMove);
                         Turn = true;
                         return;
                     }
                     else
                     {
-                        attackpiece = gameBoard.attack(move);
-                        move += "1";
+                        try
+                        {
+                            attackpiece = gameBoard.attack(move);
+                            saveMove += "1";
+                        }
+                        catch(pawnpromotion& e)
+                        {
+                            saveMove += "1";
+                            attackpiece = e.attack;
+                            e.attack = nullptr;
+                            moves.push_back(saveMove);
+                            Turn = true;
+                            throw e;
+                        }
                         try
                         {
                             gameBoard.threat(player1->getcolor());
@@ -267,7 +380,6 @@ void Game::order(MOVE move)
                             attackpiece = nullptr;
                             throw invalid_argument("you have kish can't this move!");
                         }
-                        saveMove += "1";
                     }
                     moves.push_back(saveMove);
                     Turn = true;
@@ -444,6 +556,10 @@ void Game::update_score()
     }
 }
 
+
+
+
+
 Player &Game::compareScore()
 {
     if(player1->getScore(1) > player2->getScore(1))
@@ -457,9 +573,45 @@ Player &Game::compareScore()
     }
 }
 
+
+
+
 void Game::restart()
 {
     player1->restartScore();
     player2->restartScore();
 
+}
+
+
+
+
+void Game::promotion(ID pawncell, piece typepiece)
+{
+    ChessMan * temppiece;
+    Cell * temp = gameBoard.search(pawncell);
+    switch (typepiece)
+    {
+    case QUEEN:
+        temppiece = new queen(temp->getPiece()->get_color());
+        break;
+    case ROOK:
+        temppiece = new rook(temp->getPiece()->get_color());
+        break;
+    case BISHOP:
+        temppiece = new bishop(temp->getPiece()->get_color());
+        break;
+    case KNIGHT:
+        temppiece = new knight(temp->getPiece()->get_color());
+        break;
+    case PAWN:
+        temppiece = new pawn(temp->getPiece()->get_color());
+        break;
+    default:
+        throw invalid_argument("piece type invalid");
+        break;
+    }
+    ChessMan * chess = temp->getPiece();
+    delete chess;
+    temp->setPiece(temppiece);
 }

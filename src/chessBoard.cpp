@@ -102,7 +102,7 @@ Cell &ChessBoard::search(std::string str)
     throw out_of_range("cell not exist");
 }
 
-void ChessBoard::randommoves(COLOR color)
+MOVE ChessBoard::randommoves(COLOR color)
 {
     ChessMan *temp;
     vector<int> rndcell;
@@ -159,7 +159,7 @@ void ChessBoard::movePiece(MOVE move)
         cells->getPiece()->move(move, Board);
         return;
     }
-    throw invalid_argument("3cell is empty");
+    throw invalid_argument("cell is empty");
 }
 
 ChessMan *ChessBoard::attack(MOVE move)

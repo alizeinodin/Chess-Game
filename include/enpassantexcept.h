@@ -5,7 +5,7 @@
 class enpassantexcept
 {
 public:
-    ChessMan * attack;
+    ChessMan * attack = nullptr;
     ID id;
     enpassantexcept(ChessMan * a, ID i) : attack(a) , id(i) {}
 };

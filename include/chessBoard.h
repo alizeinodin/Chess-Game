@@ -29,7 +29,7 @@ class ChessBoard
     std::array<std::array<Cell, 8>, 8> remmeber(std::string);
     void order(std::string);
     Cell & search(std::string);
-    void randommoves(COLOR);
+    MOVE randommoves(COLOR);
     void movePiece(std::string);
     ChessMan * attack(MOVE);
     int threat(COLOR);

@@ -3,6 +3,7 @@
 #include "../include/cell.h"
 #include "../include/kishexcept.h"
 #include "../include/enpassantexcept.h"
+#include "../include/pawnpromotion.h"
 #include <vector>
 #include <algorithm>
 using namespace std;
@@ -78,6 +79,20 @@ void pawn::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
                 cells[1] = search_cell(cellsid.second, board);
                 cells[1]->setPiece(cells[0]->getPiece());
                 cells[0]->empty();
+                if (color == "White")
+                {
+                    if (get_num(cellsid.second) == 8)
+                    {
+                        throw pawnpromotion(cellsid.first);
+                    }
+                }
+                else if (color == "Black")
+                {
+                    if (get_num(cellsid.second) == 1)
+                    {
+                        throw pawnpromotion(cellsid.first);
+                    }
+                }
                 if (i == 1)
                 {
                     enpassant = true;
@@ -415,6 +430,24 @@ ChessMan *pawn::attack(std::string move, Cell **cell)
             cell[1]->empty();
             cell[1]->setPiece(cell[0]->getPiece());
             cell[0]->empty();
+            if (color == "White")
+                {
+                    if (get_num(temp.second) == 8)
+                    {
+                        pawnpromotion a(temp.first);
+                        a.attack = attackpiece;
+                        throw a;
+                    }
+                }
+                else if (color == "Black")
+                {
+                    if (get_num(temp.second) == 1)
+                    {
+                        pawnpromotion a(temp.first);
+                        a.attack = attackpiece;
+                        throw a;
+                    }
+                }
             return attackpiece;
         }
     }

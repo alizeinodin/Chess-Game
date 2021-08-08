@@ -16,6 +16,7 @@ class Game
     bool Turn = true;
     std::vector<MOVE> moves;
     ChessMan *attackpiece = nullptr;
+    string promotion;
 //    FileConnect file;
 
     public:
@@ -31,6 +32,8 @@ class Game
     void restart();
     void update_score();
     Player &compareScore();
+    string random_move();
+    void promotion(ID pawncell, piece);
 //    void setFile(QString);
 };
 
