@@ -1,6 +1,6 @@
 #include "../include/game.h"
 #include "../include/player.h"
-
+#include "../include/enpassantexcept.h"
 #include <QDebug>
 using namespace std;
 
@@ -62,6 +62,7 @@ void Game::order(MOVE move)
                     cell = gameBoard.search(cut_str(move).second);
                     if (cell.getState())
                     {
+
                         cerr << "start move piece" << endl;
                         gameBoard.movePiece(move);
                         move += "0";
@@ -96,8 +97,23 @@ void Game::order(MOVE move)
                     if (cell.getState())
                     {
                         cerr << "start move piece" << endl;
-                        gameBoard.movePiece(move);
-                        move += "0";
+                        try
+                        {
+                            gameBoard.movePiece(move);
+                            move += "0";
+                            saveMove += "0";
+                        }
+                        catch(enpassantexcept & e)
+                        {
+                            ID q = e.id;
+                            cout << "enpassant\n";
+                            attackpiece = e.attack;
+                            move += "1";
+                            move.at(3) = q.at(0);
+                            move.at(4) = q.at(1);
+                            saveMove = move;
+                            throw e;
+                        }
                         try
                         {
                             gameBoard.threat(player2->getcolor());
@@ -109,7 +125,6 @@ void Game::order(MOVE move)
                         }
 
                         cout << "end move piece" << endl;
-                        saveMove += "0";
                         moves.push_back(saveMove);
                         Turn = false;
                         return;
@@ -152,8 +167,23 @@ void Game::order(MOVE move)
                     if (cell.getState())
                     {
                         cerr << "start move piece" << endl;
-                        gameBoard.movePiece(move);
-                        move += "0";
+                        try
+                        {
+                            gameBoard.movePiece(move);
+                            move += "0";
+                            saveMove += "0";
+                        }
+                        catch(enpassantexcept & e)
+                        {
+                            ID q = e.id;
+                            cout << "enpassant\n";
+                            attackpiece = e.attack;
+                            move += "1";
+                            move.at(3) = q.at(0);
+                            move.at(4) = q.at(1);
+                            saveMove = move;
+                            throw e;
+                        }
                         try
                         {
                             cout << "try pin\n";
@@ -165,7 +195,6 @@ void Game::order(MOVE move)
                             throw invalid_argument("this piece is pinned!");
                         }
                         cout << "end move piece" << endl;
-                        saveMove += "0";
                         moves.push_back(saveMove);
                         Turn = true;
                         return;

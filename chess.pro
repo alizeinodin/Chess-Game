@@ -64,7 +64,8 @@ HEADERS += \
     include/queen.h \
     include/rook.h \
     include/using.h \
-    include/util.h
+    include/util.h \
+    include/enpassantexcept.h
 
 DISTFILES += \
     media/Sound/attackPiece.WAV
