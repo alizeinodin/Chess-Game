@@ -134,8 +134,22 @@ void connection::setOrder(QString order)
          emit kish();
      }
     catch (matexcept & error){
-        messageStr = error.what();
-        emit loseMove();
+        try {
+            Player & winner = game->compareScore();
+            if(winner.getcolor() == "White")
+            {
+                winnerName = player1Name();
+            } else {
+                winnerName = player2Name();
+            }
+            winnerScore = winner.getScore(1);
+            winnertxt = QString("برنده شدید");
+             emit mat();
+        } catch (Equality) {
+            winnerName = player1Name() + QString(" و ") + player2Name();
+            winnerScore = game->getPlayer("White").getScore(1);
+            winnertxt = QString("مساوی شدید");
+        }
     }
     order.clear();
 }
@@ -249,5 +263,25 @@ QString connection::getMessage()
 {
     QString result = QString::fromStdString(messageStr);
     return result;
+}
+// ------------
+
+// winner data slots
+// ------------
+QString connection::getWinnerName()
+{
+    QString result = winnerName + QString(" عزیز");
+    return result;
+}
+
+QString connection::getWinnerScore()
+{
+    QString result = QString::fromStdString(to_string(winnerScore));
+    return result;
+}
+
+QString connection::getWinnerText()
+{
+    return winnertxt;
 }
 // ------------

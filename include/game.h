@@ -2,6 +2,7 @@
 #include "chessBoard.h"
 #include "player.h"
 #include "fileConnect.h"
+#include "equality.h"
 #ifndef _GAME_H
 #define _GAME_H
 
@@ -29,6 +30,7 @@ class Game
     std::vector<MOVE> movesUndo();
     void restart();
     void update_score();
+    Player &compareScore();
 //    void setFile(QString);
 };
 

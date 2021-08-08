@@ -66,6 +66,9 @@ signals:
     // kish signal
     void kish();
 
+    // mat signal
+    void mat();
+
 
 public slots:
 
@@ -133,6 +136,11 @@ public slots:
     // get message
     QString getMessage();
 
+    // get winner data
+    QString getWinnerName();
+    QString getWinnerScore();
+    QString getWinnerText();
+
 
 
 
@@ -160,6 +168,11 @@ private:
 
     // counter
     unsigned long counter = 0;
+
+    // winner data
+    QString winnerName;
+    unsigned long int winnerScore;
+    QString winnertxt;
 };
 
 #endif // CONNECTION_H

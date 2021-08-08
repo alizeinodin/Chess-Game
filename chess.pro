@@ -51,6 +51,7 @@ HEADERS += \
     include/chessBoard.h \
     include/chessMan.h \
     include/connection.h \
+    include/equality.h \
     include/fileConnect.h \
     include/game.h \
     include/id.h \

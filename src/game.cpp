@@ -278,14 +278,14 @@ QString Game::undo()
     if (move.at(1) == '2')
     {
         gameBoard.undo(temp, player2->get_last_attack());
-        player2->addScore(-1, 5);
+        player2->addScore(0, 5);
         Turn = false;
         moves.pop_back();
     }
     else if (move.at(1) == '1')
     {
         gameBoard.undo(temp, player1->get_last_attack());
-        player1->addScore(-1, 5);
+        player1->addScore(0, 5);
         Turn = true;
         moves.pop_back();
     }
@@ -398,6 +398,19 @@ void Game::update_score()
         {
             player2->setkish(false);
         }
+    }
+}
+
+Player &Game::compareScore()
+{
+    if(player1->getScore(1) > player2->getScore(1))
+    {
+        return *player1;
+    } else if(player1->getScore(1) < player2->getScore(1))
+    {
+        return *player2;
+    }else {
+        throw Equality();
     }
 }
 
