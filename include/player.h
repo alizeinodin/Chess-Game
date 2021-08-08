@@ -25,6 +25,7 @@ class Player
 
     public:
     Player(Name, COLOR);
+    void restartScore();
     void addScore(size_t state, int score); // add score to p of n score
     Score getScore(size_t); 
     COLOR getcolor();

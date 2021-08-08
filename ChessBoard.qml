@@ -30,12 +30,12 @@ Item {
         onSuccessMove:{
             board.move = "";
             board.turn = !board.turn;
-             //set animation destination
+            //set animation destination
             var indesDest = Func.indexCell(board.destid.id);
-             moveAnimation.tox = (indesDest) * (board.orgid.width + board.rowOrg.spacing);
-             moveAnimation.toy = (board.rowDest.index - board.rowOrg.index) * -(board.destid.height + (pixel * 1.35));
-             moveAnimation.running = true; // Animation for move
-             movePieceSound.play(); // sound of move piece2
+            moveAnimation.tox = (indesDest) * (board.orgid.width + board.rowOrg.spacing);
+            moveAnimation.toy = (board.rowDest.index - board.rowOrg.index) * -(board.destid.height + (pixel * 1.35));
+            moveAnimation.running = true; // Animation for move
+            movePieceSound.play(); // sound of move piece2
 
             // add piece to lose piece's of player
             if(board.destid.piece !== "")
@@ -49,6 +49,7 @@ Item {
                 }
             }
             board.destid.piece = board.orgid.piece;
+            message.visible = false;
         }
         onLoseMove:{
             losePieceSound.play();
@@ -63,36 +64,91 @@ Item {
             board.destimg = board.idMap[connection.destId()+'Img'];
             board.orgx = board.orgid.x;
             board.orgy = board.orgid.y;
-            //console.log(board.orgid.id, "   ", board.destid.id, "   ", board.rowOrg.index, "   ", board.rowDest.index,  "   ", board.orgimg.source, "   ", board.destimg.source);
 
-             //set animation destination
+            //set animation destination
             var indesDest = Func.indexCell(board.destid.id);
-             moveAnimation.tox = (indesDest) * (board.orgid.width + board.rowOrg.spacing);
-             moveAnimation.toy = (board.rowDest.index - board.rowOrg.index) * -(board.destid.height + (pixel * 1.35));
-             moveAnimation.running = true; // Animation for move
-             movePieceSound.play(); // sound of move piece2
+            moveAnimation.tox = (indesDest) * (board.orgid.width + board.rowOrg.spacing);
+            moveAnimation.toy = (board.rowDest.index - board.rowOrg.index) * -(board.destid.height + (pixel * 1.35));
+            moveAnimation.running = true; // Animation for move
+            movePieceSound.play(); // sound of move piece2
 
             // add piece to lose piece's of player
-//            if(board.destid.piece !== "")
-//            {
-//                if(board.turn)
-//                {
-//                    // func.recognizeImg used for convert QUrl to address that can read from js
-//                    console.log("index", listModel1.count);
-//                    listModel1.remove(listModel1.count);
-////                    console.log(listModel2.get(0).myImg);
-//                } else {
-//                    console.log(listModel2.get(listModel2.count));
-////                    listModel1.append({"myImg": Func.recognizeImg(board.img)});
-//                }
-//            }
+            //            if(board.destid.piece !== "")
+            //            {
+            //                if(board.turn)
+            //                {
+            //                    // func.recognizeImg used for convert QUrl to address that can read from js
+            //                    console.log("index", listModel1.count);
+            //                    listModel1.remove(listModel1.count);
+            ////                    console.log(listModel2.get(0).myImg);
+            //                } else {
+            //                    console.log(listModel2.get(listModel2.count));
+            ////                    listModel1.append({"myImg": Func.recognizeImg(board.img)});
+            //                }
+            //            }
+
             board.destid.piece = board.orgid.piece;
+            if(connection.counterRestart > 0)
+            {
+                connection.restart();
+            }
+            message.visible = false;
         }
+        onKish:
+        {
+            connection.successMove();
+            kishAudio.play();
+            messagerecTxt.text = connection.getMessage();
+            message.visible = true;
+        }
+
         onExit:{
             view.pop();
             view.pop();
             view.pop();
             view.pop();
+        }
+    }
+
+    Item {
+        id: message
+        width: board.width
+        height: pixel * 5
+        anchors.top: board.bottom
+        anchors.topMargin: pixel * 4
+        anchors.horizontalCenter: board.horizontalCenter
+        visible: false
+
+        Audio{
+            id:kishAudio
+            source: "media/Sound/kish.WAV"
+            volume: 1.0
+        }
+
+        Rectangle{
+            id:messagerec
+            anchors.fill: parent
+            color: "#EF9A9A"
+            radius: 5
+
+            Image {
+                id: warningIcon
+                source: "media/warning-icon-png-2774.png"
+                fillMode: Image.PreserveAspectFit
+                height: pixel * 4
+                anchors.verticalCenter: messagerec.verticalCenter
+                anchors.right: messagerec.right
+                anchors.rightMargin: pixel * 1
+            }
+
+            Text {
+                id: messagerecTxt
+                text: qsTr("شما کیش شدید")
+                anchors.right: warningIcon.left
+                anchors.rightMargin: pixel
+                anchors.verticalCenter: warningIcon.verticalCenter
+                font.family: fontfarsi.name
+            }
         }
     }
 
@@ -237,6 +293,7 @@ Item {
                 height: pixel * 8
                 font.family: fontfarsi.name
                 font.pixelSize: pixel*2
+                onClicked: connection.restart()
             }
             Button{
                 id: leftbtn
@@ -248,8 +305,17 @@ Item {
                 font.pixelSize: pixel*2
             }
             Button{
-                id: settingbtn
-                text: "تنظیمات"
+                id: savebtn
+                text: "ذخیره کردن"
+                anchors.horizontalCenter: btns.horizontalCenter
+                width: pixel * 16
+                height: pixel * 8
+                font.family: fontfarsi.name
+                font.pixelSize: pixel*2
+            }
+            Button{
+                id: twomovebtn
+                text: "دو حرکت در یک نوبت"
                 anchors.horizontalCenter: btns.horizontalCenter
                 width: pixel * 16
                 height: pixel * 8
@@ -554,7 +620,7 @@ Item {
         property var destid: null
         property var destimg: null
         property int orgx: 0
-        property int orgy: 0 
+        property int orgy: 0
         property var idMap: ({a1:a1, a2:a2, a3:a3, a4:a4, a5:a5, a6:a6, a7:a7, a8:a8,
                                  b1: b1, b2:b2, b3:b3, b4:b4, b5:b5, b6:b6, b7:b7, b8:b8,
                                  c1: c1, c2:c2, c3:c3, c4:c4, c5:c5, c6:c6, c7:c7, c8:c8,
@@ -572,7 +638,7 @@ Item {
                                  f1Img: f1Img, f2Img:f2Img, f3Img:f3Img, f4Img:f4Img, f5Img:f5Img, f6Img:f6Img, f7Img:f7Img, f8Img:f8Img,
                                  g1Img: g1Img, g2Img:g2Img, g3Img:g3Img, g4Img:g4Img, g5Img:g5Img, g6Img:g6Img, g7Img:g7Img, g8Img:g8Img,
                                  h1Img: h1Img, h2Img:h2Img, h3Img:h3Img, h4Img:h4Img, h5Img:h5Img, h6Img:h6Img, h7Img:h7Img, h8Img:h8Img
-                            })
+                             })
 
 
         // function for save org and dest id cell's
@@ -683,44 +749,44 @@ Item {
 
 
             MouseArea{
-            id:a1
-            cursorShape: Qt.ArrowCursor
-            property string id: "a1"
-            property string piece: "R"
-            width: pixel * 8
-            height: pixel * 8
+                id:a1
+                cursorShape: Qt.ArrowCursor
+                property string id: "a1"
+                property string piece: "R"
+                width: pixel * 8
+                height: pixel * 8
 
-            Image {
-                id: a1Img
-                source: "media/White/R.png"
-                anchors.fill: parent
-            }
+                Image {
+                    id: a1Img
+                    source: "media/White/R.png"
+                    anchors.fill: parent
+                }
 
-            onClicked: {
-                        board.saveId(this, a1Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
+                onClicked: {
+                    board.saveId(this, a1Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
                     }
+                }
             }
 
             MouseArea{
-            id:b1
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "b1"
-            property string piece: "H"
+                id:b1
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "b1"
+                property string piece: "H"
 
 
-        Image {
-            id: b1Img
-            anchors.fill: parent
-            source: "media/White/H.png"
-            }
-        onClicked: {
+                Image {
+                    id: b1Img
+                    anchors.fill: parent
+                    source: "media/White/H.png"
+                }
+                onClicked: {
                     board.saveId(this, b1Img, parent);
                     board.move = Func.checkMove(board.move, id, piece);
                     if(Func.validation(board.move))
@@ -728,144 +794,144 @@ Item {
                         connection.setOrder(board.move);
                     }
                 }
-        }
-
-        MouseArea{
-            id:c1
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "c1"
-            property string piece: "B"
-
-            Image {
-                id:c1Img
-                anchors.fill: parent
-                source: "media/White/B.png"
-            }
-            onClicked: {
-                board.saveId(this, c1Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-
-        MouseArea{
-            id:d1
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "d1"
-            property string piece: "Q"
-
-            Image {
-                id: d1Img
-                anchors.fill: parent
-                source: "media/White/Q.png"
             }
 
-            onClicked: {
-                board.saveId(this, d1Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
+            MouseArea{
+                id:c1
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "c1"
+                property string piece: "B"
 
-        MouseArea{
-            id:e1
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "e1"
-            property string piece: "K"
-            Image {
-                id: e1Img
-                anchors.fill: parent
-                source: "media/White/K.png"
+                Image {
+                    id:c1Img
+                    anchors.fill: parent
+                    source: "media/White/B.png"
+                }
+                onClicked: {
+                    board.saveId(this, c1Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
             }
-            onClicked: {
-                board.saveId(this, e1Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-        
-        MouseArea{
-            id:f1
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "f1"
-            property string piece: "B"
 
-            Image {
-                id: f1Img
-                anchors.fill: parent
-                source: "media/White/B.png"
+            MouseArea{
+                id:d1
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "d1"
+                property string piece: "Q"
+
+                Image {
+                    id: d1Img
+                    anchors.fill: parent
+                    source: "media/White/Q.png"
                 }
-            onClicked: {
-                board.saveId(this, f1Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
+
+                onClicked: {
+                    board.saveId(this, d1Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
                     }
-        }
-
-
-    MouseArea{
-            id:g1
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "g1"
-            property string piece: "H"
-
-            Image {
-                id: g1Img
-                anchors.fill: parent
-                source: "media/White/H.png"
                 }
-            onClicked: {
-                board.saveId(this, g1Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-    MouseArea{
-            id:h1
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "h1"
-            property string piece: "R"
-            Image {
-                id: h1Img
-                source: "media/White/R.png"
-                anchors.fill: parent
+            }
+
+            MouseArea{
+                id:e1
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "e1"
+                property string piece: "K"
+                Image {
+                    id: e1Img
+                    anchors.fill: parent
+                    source: "media/White/K.png"
                 }
-            onClicked: {
-                board.saveId(this, h1Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
+                onClicked: {
+                    board.saveId(this, e1Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
                     }
-        }
+                }
+            }
+
+            MouseArea{
+                id:f1
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "f1"
+                property string piece: "B"
+
+                Image {
+                    id: f1Img
+                    anchors.fill: parent
+                    source: "media/White/B.png"
+                }
+                onClicked: {
+                    board.saveId(this, f1Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+
+
+            MouseArea{
+                id:g1
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "g1"
+                property string piece: "H"
+
+                Image {
+                    id: g1Img
+                    anchors.fill: parent
+                    source: "media/White/H.png"
+                }
+                onClicked: {
+                    board.saveId(this, g1Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+            MouseArea{
+                id:h1
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "h1"
+                property string piece: "R"
+                Image {
+                    id: h1Img
+                    source: "media/White/R.png"
+                    anchors.fill: parent
+                }
+                onClicked: {
+                    board.saveId(this, h1Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
         }
 
         Row{
@@ -879,189 +945,189 @@ Item {
             property int index: 1
 
             MouseArea{
-            id:a2
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8.2
-            property string id: "a2"
-            property string piece: "P"
+                id:a2
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8.2
+                property string id: "a2"
+                property string piece: "P"
 
-            Image {
-                id: a2Img
-                anchors.fill: parent
-                source: "media/White/P.png"
+                Image {
+                    id: a2Img
+                    anchors.fill: parent
+                    source: "media/White/P.png"
                 }
                 onClicked: {
                     board.saveId(this, a2Img, parent);
-                            board.move = Func.checkMove(board.move, id, piece);
-                            if(Func.validation(board.move))
-                            {
-                                connection.setOrder(board.move);
-                            }
-                        }
-        }
-
-        MouseArea{
-            id:b2
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "b2"
-            property string piece: "P"
-
-            Image {
-                id: b2Img
-                anchors.fill: parent
-                source: "media/White/P.png"
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
                 }
-            onClicked: {
-                board.saveId(this, b2Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
+            }
 
-        }
+            MouseArea{
+                id:b2
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "b2"
+                property string piece: "P"
 
-        MouseArea{
-            id:c2
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "c2"
-            property string piece: "P"
-
-            Image {
-                id: c2Img
-                anchors.fill: parent
-                source: "media/White/P.png"
+                Image {
+                    id: b2Img
+                    anchors.fill: parent
+                    source: "media/White/P.png"
                 }
-            onClicked: {
-                board.saveId(this, c2Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
+                onClicked: {
+                    board.saveId(this, b2Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
                     }
-        }
+                }
 
-        MouseArea{
-            id:d2
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "d2"
-            property string piece: "P"
-
-            Image {
-                id: d2Img
-                anchors.fill: parent
-                source: "media/White/P.png"
             }
-            onClicked: {
-                board.saveId(this, d2Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
+
+            MouseArea{
+                id:c2
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "c2"
+                property string piece: "P"
+
+                Image {
+                    id: c2Img
+                    anchors.fill: parent
+                    source: "media/White/P.png"
+                }
+                onClicked: {
+                    board.saveId(this, c2Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
                     }
-        }
-
-
-        MouseArea{
-            id:e2
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "e2"
-            property string piece: "P"
-
-            Image {
-                id: e2Img
-                anchors.fill: parent
-                source: "media/White/P.png"
+                }
             }
-            onClicked: {
-                board.saveId(this, e2Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
+
+            MouseArea{
+                id:d2
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "d2"
+                property string piece: "P"
+
+                Image {
+                    id: d2Img
+                    anchors.fill: parent
+                    source: "media/White/P.png"
+                }
+                onClicked: {
+                    board.saveId(this, d2Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
                     }
-        }
-
-        MouseArea{
-            id:f2
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "f2"
-            property string piece: "P"
-
-            Image {
-                id: f2Img
-                anchors.fill: parent
-                source: "media/White/P.png"
+                }
             }
-            onClicked: {
-                board.saveId(this, f2Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
 
-        MouseArea{
-            id:g2
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "g2"
-            property string piece: "P"
-            Image {
-                id: g2Img
-                anchors.fill: parent
-                source: "media/White/P.png"
+
+            MouseArea{
+                id:e2
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "e2"
+                property string piece: "P"
+
+                Image {
+                    id: e2Img
+                    anchors.fill: parent
+                    source: "media/White/P.png"
+                }
+                onClicked: {
+                    board.saveId(this, e2Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
             }
-            onClicked: {
-                board.saveId(this, g2Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
+
+            MouseArea{
+                id:f2
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "f2"
+                property string piece: "P"
+
+                Image {
+                    id: f2Img
+                    anchors.fill: parent
+                    source: "media/White/P.png"
+                }
+                onClicked: {
+                    board.saveId(this, f2Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
                     }
-        }
-
-        MouseArea{
-            id:h2
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "h2"
-            property string piece: "P"
-
-            Image {
-                id: h2Img
-                anchors.fill: parent
-                source: "media/White/P.png"
+                }
             }
-            onClicked: {
-                board.saveId(this, h2Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
+
+            MouseArea{
+                id:g2
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "g2"
+                property string piece: "P"
+                Image {
+                    id: g2Img
+                    anchors.fill: parent
+                    source: "media/White/P.png"
+                }
+                onClicked: {
+                    board.saveId(this, g2Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
                     }
-        }
+                }
+            }
+
+            MouseArea{
+                id:h2
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "h2"
+                property string piece: "P"
+
+                Image {
+                    id: h2Img
+                    anchors.fill: parent
+                    source: "media/White/P.png"
+                }
+                onClicked: {
+                    board.saveId(this, h2Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
         }
         
         Row{
@@ -1075,1246 +1141,1245 @@ Item {
             property int index: 2
 
             MouseArea{
-            id:a3
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "a3"
-            property string piece: ""
+                id:a3
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "a3"
+                property string piece: ""
 
-            Image {
-                id: a3Img
-                anchors.fill: parent
-                source: ""
-            }
-            onClicked: {
-                board.saveId(this, a3Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
+                Image {
+                    id: a3Img
+                    anchors.fill: parent
+                    source: ""
+                }
+                onClicked: {
+                    board.saveId(this, a3Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
                     }
+                }
             }
-        
-
-        MouseArea{
-            id:b3
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "b3"
-            property string piece: ""
-
-            Image {
-                id: b3Img
-                anchors.fill: parent
-                source: ""
-            }
-            onClicked: {
-                board.saveId(this, b3Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-
-        MouseArea{
-            id:c3
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "c3"
-            property string piece: ""
-            objectName: "c3"
-
-            Image {
-                id: c3Img
-                anchors.fill: parent
-                source: ""
-            }
-            onClicked: {
-                board.saveId(this, c3Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-
-
-
-MouseArea{
-            id:d3
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "d3"
-            property string piece: ""
-            objectName: "d3"
-
-
-            Image {
-                id: d3Img
-                anchors.fill: parent
-                source: ""
-            }
-            onClicked: {
-                console.log("OPEN");
-                board.saveId(this, d3Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-
-        MouseArea{
-            id:e3
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "e3"
-            property string piece: ""
-
-            Image {
-                id: e3Img
-                anchors.fill: parent
-                source: ""
-            }
-            onClicked: {
-                board.saveId(this, e3Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-
-        MouseArea{
-            id:f3
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "f3"
-            property string piece: ""
-
-            Image {
-                id: f3Img
-                anchors.fill: parent
-                source: ""
-            }
-            onClicked: {
-                board.saveId(this, f3Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-
-        MouseArea{
-            id:g3
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "g3"
-            property string piece: ""
-
-            Image {
-                id: g3Img
-                anchors.fill: parent
-                source: ""
-            }
-            onClicked: {
-                board.saveId(this, g3Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-
-
-
-MouseArea{
-            id:h3
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "h3"
-            property string piece: ""
-
-            Image {
-                id: h3Img
-                anchors.fill: parent
-                source: ""
-            }
-            onClicked: {
-                board.saveId(this, h3Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-
-    }
-        
-
-Row{
-    id:row4
-    anchors.verticalCenter: board.verticalCenter
-    anchors.left: board.left
-    anchors.leftMargin: 5
-    anchors.top : row5.top 
-    spacing : pixel * 1.45
-    anchors.topMargin: pixel * 9.3
-    property int index: 3
 
 
             MouseArea{
-            id:a4
-            cursorShape: Qt.ArrowCurso
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "a4"
-            property string piece: ""
+                id:b3
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "b3"
+                property string piece: ""
 
-            Image {
-                id: a4Img
-                anchors.fill: parent
-                source: ""
-            }
-            onClicked: {
-                board.saveId(this, a4Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
+                Image {
+                    id: b3Img
+                    anchors.fill: parent
+                    source: ""
+                }
+                onClicked: {
+                    board.saveId(this, b3Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
                     }
+                }
+            }
+
+            MouseArea{
+                id:c3
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "c3"
+                property string piece: ""
+                objectName: "c3"
+
+                Image {
+                    id: c3Img
+                    anchors.fill: parent
+                    source: ""
+                }
+                onClicked: {
+                    board.saveId(this, c3Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+
+
+
+            MouseArea{
+                id:d3
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "d3"
+                property string piece: ""
+                objectName: "d3"
+
+
+                Image {
+                    id: d3Img
+                    anchors.fill: parent
+                    source: ""
+                }
+                onClicked: {
+                    board.saveId(this, d3Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+
+            MouseArea{
+                id:e3
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "e3"
+                property string piece: ""
+
+                Image {
+                    id: e3Img
+                    anchors.fill: parent
+                    source: ""
+                }
+                onClicked: {
+                    board.saveId(this, e3Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+
+            MouseArea{
+                id:f3
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "f3"
+                property string piece: ""
+
+                Image {
+                    id: f3Img
+                    anchors.fill: parent
+                    source: ""
+                }
+                onClicked: {
+                    board.saveId(this, f3Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+
+            MouseArea{
+                id:g3
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "g3"
+                property string piece: ""
+
+                Image {
+                    id: g3Img
+                    anchors.fill: parent
+                    source: ""
+                }
+                onClicked: {
+                    board.saveId(this, g3Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+
+
+
+            MouseArea{
+                id:h3
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "h3"
+                property string piece: ""
+
+                Image {
+                    id: h3Img
+                    anchors.fill: parent
+                    source: ""
+                }
+                onClicked: {
+                    board.saveId(this, h3Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+
         }
+        
+
+        Row{
+            id:row4
+            anchors.verticalCenter: board.verticalCenter
+            anchors.left: board.left
+            anchors.leftMargin: 5
+            anchors.top : row5.top
+            spacing : pixel * 1.45
+            anchors.topMargin: pixel * 9.3
+            property int index: 3
 
 
-        MouseArea{
-            id:b4
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "b4"
-            property string piece: ""
+            MouseArea{
+                id:a4
+                cursorShape: Qt.ArrowCurso
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "a4"
+                property string piece: ""
 
-            Image {
-                id: b4Img
-                anchors.fill: parent
-                source: ""
-            }
-            onClicked: {
-                board.saveId(this, b4Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
+                Image {
+                    id: a4Img
+                    anchors.fill: parent
+                    source: ""
+                }
+                onClicked: {
+                    board.saveId(this, a4Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
                     }
-        }
-
-
-        MouseArea{
-            id:c4
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "c4"
-            property string piece: ""
-
-            Image {
-                id: c4Img
-                anchors.fill: parent
-                source: ""
-            }
-            onClicked: {
-                board.saveId(this, c4Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-
-        MouseArea{
-            id:d4
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "d4"
-            property string piece: ""
-
-            Image {
-                id: d4Img
-                anchors.fill: parent
-                source: ""
-            }
-            onClicked: {
-                board.saveId(this, d4Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-
-
-MouseArea{
-            id:e4
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "e4"
-            property string piece: ""
-
-            Image {
-                id: e4Img
-                anchors.fill: parent
-                source: ""
-            }
-            onClicked: {
-                board.saveId(this, e4Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-
-        MouseArea{
-            id:f4
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "f4"
-            property string piece: ""
-
-            Image {
-                id: f4Img
-                anchors.fill: parent
-                source: ""
-            }
-            onClicked: {
-                board.saveId(this, f4Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-
-                MouseArea{
-            id:g4
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "g4"
-            property string piece: ""
-
-            Image {
-                id: g4Img
-                anchors.fill: parent
-                source: ""
-            }
-            onClicked: {
-                board.saveId(this, g4Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-
-
-
-        MouseArea{
-            id:h4
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "h4"
-            property string piece: ""
-
-            Image {
-                id: h4Img
-                anchors.fill: parent
-                source: ""
-            }
-            onClicked: {
-                board.saveId(this, h4Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-
-}
-
-
-
-
-Row{
-    id:row5
-    anchors.verticalCenter: board.verticalCenter
-    anchors.left: board.left
-    anchors.leftMargin: 5
-    anchors.top : row6.top 
-    spacing : pixel * 1.45
-    anchors.topMargin: pixel * 9.3
-    property int index: 4
-MouseArea{
-            id:a5
-            cursorShape: Qt.ArrowCurso
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "a5"
-            property string piece: ""
-
-            Image {
-                id: a5Img
-                anchors.fill: parent
-                source: ""
-            }
-            onClicked: {
-                board.saveId(this, a5Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-
-        MouseArea{
-            id:b5
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "b5"
-            property string piece: ""
-
-            Image {
-                id: b5Img
-                anchors.fill: parent
-                source: ""
-            }
-            onClicked: {
-                board.saveId(this, b5Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-
-
-
- MouseArea{
-            id:c5
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "c5"
-            property string piece: ""
-
-            Image {
-                id: c5Img
-                anchors.fill: parent
-                source: ""
-            }
-            onClicked: {
-                board.saveId(this, c5Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-
-
-              MouseArea{
-            id:d5
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "d5"
-            property string piece: ""
-
-            Image {
-                id: d5Img
-                anchors.fill: parent
-                source: ""
-            }
-            onClicked: {
-                board.saveId(this, d5Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-
-
-           MouseArea{
-            id:e5
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "e5"
-            property string piece: ""
-
-            Image {
-                id: e5Img
-                anchors.rightMargin: 0
-                anchors.bottomMargin: -3
-                anchors.leftMargin: 0
-                anchors.topMargin: 3
-                anchors.fill: parent
-                source: ""
-            }
-            onClicked: {
-                board.saveId(this, e5Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-
-
-               MouseArea{
-            id:f5
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "f5"
-            property string piece: ""
-
-            Image {
-                id: f5Img
-                anchors.fill: parent
-                source: ""
-            }
-            onClicked: {
-                board.saveId(this, f5Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-
-
-
-
-        MouseArea{
-            id:g5
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "g5"
-            property string piece: ""
-
-            Image {
-                id: g5Img
-                anchors.fill: parent
-                source: ""
-            }
-            onClicked: {
-                board.saveId(this, g5Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-
-                MouseArea{
-            id:h5
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "h5"
-            property string piece: ""
-
-            Image {
-                id: h5Img
-                anchors.fill: parent
-                source: ""
+                }
             }
 
-            onClicked: {
-                board.saveId(this, h5Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
+
+            MouseArea{
+                id:b4
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "b4"
+                property string piece: ""
+
+                Image {
+                    id: b4Img
+                    anchors.fill: parent
+                    source: ""
+                }
+                onClicked: {
+                    board.saveId(this, b4Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
                     }
-        }
-}
-
-
-
-
-
-Row{
-    id:row6
-    anchors.verticalCenter: board.verticalCenter
-    anchors.left: board.left
-    anchors.leftMargin: 5
-    anchors.top : row7.top 
-    spacing : pixel * 1.45
-    anchors.topMargin: pixel * 9.3
-    property int index: 5
-
-
- MouseArea{
-            id:a6
-            cursorShape: Qt.ArrowCurso
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "a6"
-            property string piece: ""
-
-            Image {
-                id: a6Img
-                anchors.fill: parent
-                source: ""
+                }
             }
-            onClicked: {
-                board.saveId(this, a6Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
+
+
+            MouseArea{
+                id:c4
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "c4"
+                property string piece: ""
+
+                Image {
+                    id: c4Img
+                    anchors.fill: parent
+                    source: ""
+                }
+                onClicked: {
+                    board.saveId(this, c4Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
                     }
-        }
-
-
-         MouseArea{
-            id:b6
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "b6"
-            property string piece: ""
-
-            Image {
-                id: b6Img
-                anchors.fill: parent
-                source: ""
+                }
             }
-            onClicked: {
-                board.saveId(this, b6Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
+
+            MouseArea{
+                id:d4
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "d4"
+                property string piece: ""
+
+                Image {
+                    id: d4Img
+                    anchors.fill: parent
+                    source: ""
+                }
+                onClicked: {
+                    board.saveId(this, d4Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
                     }
+                }
+            }
+
+
+            MouseArea{
+                id:e4
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "e4"
+                property string piece: ""
+
+                Image {
+                    id: e4Img
+                    anchors.fill: parent
+                    source: ""
+                }
+                onClicked: {
+                    board.saveId(this, e4Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+
+            MouseArea{
+                id:f4
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "f4"
+                property string piece: ""
+
+                Image {
+                    id: f4Img
+                    anchors.fill: parent
+                    source: ""
+                }
+                onClicked: {
+                    board.saveId(this, f4Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+
+            MouseArea{
+                id:g4
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "g4"
+                property string piece: ""
+
+                Image {
+                    id: g4Img
+                    anchors.fill: parent
+                    source: ""
+                }
+                onClicked: {
+                    board.saveId(this, g4Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+
+
+
+            MouseArea{
+                id:h4
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "h4"
+                property string piece: ""
+
+                Image {
+                    id: h4Img
+                    anchors.fill: parent
+                    source: ""
+                }
+                onClicked: {
+                    board.saveId(this, h4Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+
         }
 
 
 
-        MouseArea{
-            id:c6
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "c6"
-            property string piece: ""
 
-            Image {
-                id: c6Img
-                anchors.fill: parent
-                source: ""
-            }
-            onClicked: {
-                board.saveId(this, c6Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
+        Row{
+            id:row5
+            anchors.verticalCenter: board.verticalCenter
+            anchors.left: board.left
+            anchors.leftMargin: 5
+            anchors.top : row6.top
+            spacing : pixel * 1.45
+            anchors.topMargin: pixel * 9.3
+            property int index: 4
+            MouseArea{
+                id:a5
+                cursorShape: Qt.ArrowCurso
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "a5"
+                property string piece: ""
+
+                Image {
+                    id: a5Img
+                    anchors.fill: parent
+                    source: ""
+                }
+                onClicked: {
+                    board.saveId(this, a5Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
                     }
-        }
-
-       
-        MouseArea{
-            id:d6
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "d6"
-            property string piece: ""
-
-            Image {
-                id: d6Img
-                anchors.fill: parent
-                source: ""
+                }
             }
-            onClicked: {
-                board.saveId(this, d6Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
+
+            MouseArea{
+                id:b5
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "b5"
+                property string piece: ""
+
+                Image {
+                    id: b5Img
+                    anchors.fill: parent
+                    source: ""
+                }
+                onClicked: {
+                    board.saveId(this, b5Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
                     }
-        }
-
-
-
-        MouseArea{
-            id:e6
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "e6"
-            property string piece: ""
-
-            Image {
-                id: e6Img
-                anchors.fill: parent
-                source: ""
+                }
             }
-            onClicked: {
-                board.saveId(this, e6Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
+
+
+
+            MouseArea{
+                id:c5
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "c5"
+                property string piece: ""
+
+                Image {
+                    id: c5Img
+                    anchors.fill: parent
+                    source: ""
+                }
+                onClicked: {
+                    board.saveId(this, c5Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
                     }
-        }
-
-                MouseArea{
-            id:f6
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "f6"
-            property string piece: ""
-
-            Image {
-                id: f6Img
-                anchors.fill: parent
-                source: ""
+                }
             }
-            onClicked: {
-                board.saveId(this, f6Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
+
+
+            MouseArea{
+                id:d5
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "d5"
+                property string piece: ""
+
+                Image {
+                    id: d5Img
+                    anchors.fill: parent
+                    source: ""
+                }
+                onClicked: {
+                    board.saveId(this, d5Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
                     }
-        }
-
-
-        MouseArea{
-            id:g6
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "g6"
-            property string piece: ""
-
-            Image {
-                id: g6Img
-                anchors.fill: parent
-                source: ""
+                }
             }
-            onClicked: {
-                board.saveId(this, g6Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
+
+
+            MouseArea{
+                id:e5
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "e5"
+                property string piece: ""
+
+                Image {
+                    id: e5Img
+                    anchors.rightMargin: 0
+                    anchors.bottomMargin: -3
+                    anchors.leftMargin: 0
+                    anchors.topMargin: 3
+                    anchors.fill: parent
+                    source: ""
+                }
+                onClicked: {
+                    board.saveId(this, e5Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
                     }
-        }
-
-
-                MouseArea{
-            id:h6
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "h6"
-            property string piece: ""
-
-            Image {
-                id: h6Img
-                anchors.fill: parent
-                source: ""
+                }
             }
-            onClicked: {
-                board.saveId(this, h6Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
+
+
+            MouseArea{
+                id:f5
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "f5"
+                property string piece: ""
+
+                Image {
+                    id: f5Img
+                    anchors.fill: parent
+                    source: ""
+                }
+                onClicked: {
+                    board.saveId(this, f5Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+
+
+
+
+            MouseArea{
+                id:g5
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "g5"
+                property string piece: ""
+
+                Image {
+                    id: g5Img
+                    anchors.fill: parent
+                    source: ""
+                }
+                onClicked: {
+                    board.saveId(this, g5Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+
+            MouseArea{
+                id:h5
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "h5"
+                property string piece: ""
+
+                Image {
+                    id: h5Img
+                    anchors.fill: parent
+                    source: ""
                 }
 
+                onClicked: {
+                    board.saveId(this, h5Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+        }
+
+
+
+
+
+        Row{
+            id:row6
+            anchors.verticalCenter: board.verticalCenter
+            anchors.left: board.left
+            anchors.leftMargin: 5
+            anchors.top : row7.top
+            spacing : pixel * 1.45
+            anchors.topMargin: pixel * 9.3
+            property int index: 5
+
+
+            MouseArea{
+                id:a6
+                cursorShape: Qt.ArrowCurso
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "a6"
+                property string piece: ""
+
+                Image {
+                    id: a6Img
+                    anchors.fill: parent
+                    source: ""
+                }
+                onClicked: {
+                    board.saveId(this, a6Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+
+
+            MouseArea{
+                id:b6
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "b6"
+                property string piece: ""
+
+                Image {
+                    id: b6Img
+                    anchors.fill: parent
+                    source: ""
+                }
+                onClicked: {
+                    board.saveId(this, b6Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+
+
+
+            MouseArea{
+                id:c6
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "c6"
+                property string piece: ""
+
+                Image {
+                    id: c6Img
+                    anchors.fill: parent
+                    source: ""
+                }
+                onClicked: {
+                    board.saveId(this, c6Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+
+
+            MouseArea{
+                id:d6
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "d6"
+                property string piece: ""
+
+                Image {
+                    id: d6Img
+                    anchors.fill: parent
+                    source: ""
+                }
+                onClicked: {
+                    board.saveId(this, d6Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+
+
+
+            MouseArea{
+                id:e6
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "e6"
+                property string piece: ""
+
+                Image {
+                    id: e6Img
+                    anchors.fill: parent
+                    source: ""
+                }
+                onClicked: {
+                    board.saveId(this, e6Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+
+            MouseArea{
+                id:f6
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "f6"
+                property string piece: ""
+
+                Image {
+                    id: f6Img
+                    anchors.fill: parent
+                    source: ""
+                }
+                onClicked: {
+                    board.saveId(this, f6Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+
+
+            MouseArea{
+                id:g6
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "g6"
+                property string piece: ""
+
+                Image {
+                    id: g6Img
+                    anchors.fill: parent
+                    source: ""
+                }
+                onClicked: {
+                    board.saveId(this, g6Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+
+
+            MouseArea{
+                id:h6
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "h6"
+                property string piece: ""
+
+                Image {
+                    id: h6Img
+                    anchors.fill: parent
+                    source: ""
+                }
+                onClicked: {
+                    board.saveId(this, h6Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+
+            }
+        }
+
+
+
+        Row{
+            id : row8
+            anchors.verticalCenter: board.verticalCenter
+            anchors.left: board.left
+            anchors.leftMargin: 5
+            anchors.top : board.top
+            spacing : pixel * 1.45
+            property int index: 7
+            MouseArea{
+                id:a8
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "a8"
+                property string piece: "R"
+
+                Image {
+                    id: a8Img
+                    anchors.fill: parent
+                    source: "media/Black/R.png"
+                }
+                onClicked: {
+                    board.saveId(this, a8Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+
+
+            MouseArea{
+                id:b8
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "b8"
+                property string piece: "H"
+
+                Image {
+                    id: b8Img
+                    anchors.fill: parent
+                    source: "media/Black/H.png"
+                }
+                onClicked: {
+                    board.saveId(this, b8Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+
+            MouseArea{
+                id:c8
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "c8"
+                property string piece: "B"
+
+                Image {
+                    id: c8Img
+                    anchors.rightMargin: -1
+                    anchors.bottomMargin: 0
+                    anchors.leftMargin: 1
+                    anchors.topMargin: 0
+                    anchors.fill: parent
+                    source: "media/Black/B.png"
+                }
+                onClicked: {
+                    board.saveId(this, c8Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+
+
+
+            MouseArea{
+                id:d8
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "d8"
+                property string piece: "Q"
+
+                Image {
+                    id: d8Img
+                    anchors.rightMargin: -4
+                    anchors.bottomMargin: 0
+                    anchors.leftMargin: 4
+                    anchors.topMargin: 0
+                    anchors.fill: parent
+                    source: "media/Black/Q.png"
+                }
+                onClicked: {
+                    board.saveId(this, d8Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+
+            MouseArea{
+                id:e8
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "e8"
+                property string piece: "K"
+
+                Image {
+                    id: e8Img
+                    anchors.fill: parent
+                    source: "media/Black/K.png"
+                }
+                onClicked: {
+                    board.saveId(this, e8Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+
+            MouseArea{
+                id:f8
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "f8"
+                property string piece: "B"
+
+                Image {
+                    id: f8Img
+                    anchors.fill: parent
+                    source: "media/Black/B.png"
+                }
+                onClicked: {
+                    board.saveId(this, f8Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+
+            MouseArea{
+                id:g8
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "g8"
+                property string piece: "H"
+
+                Image {
+                    id: g8Img
+                    anchors.fill: parent
+                    source: "media/Black/H.png"
+                }
+                onClicked: {
+                    board.saveId(this, g8Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+
+
+            MouseArea{
+                id:h8
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "h8"
+                property string piece: "R"
+
+                Image {
+                    id: h8Img
+                    anchors.fill: parent
+                    source: "media/Black/R.png"
+                }
+                onClicked: {
+                    board.saveId(this, h8Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+        }
+
+
+
+        Row{
+            id:row7
+            anchors.verticalCenter: board.verticalCenter
+            anchors.left: board.left
+            anchors.leftMargin: 5
+            anchors.top : board.top
+            spacing : pixel * 1.45
+            anchors.topMargin: pixel * 9.3
+            property int index: 6
+
+            MouseArea{
+                id:a7
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "a7"
+                property string piece: "P"
+
+                Image {
+                    id: a7Img
+                    anchors.fill: parent
+                    source: "media/Black/P.png"
+                }
+                onClicked: {
+                    board.saveId(this, a7Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+
+            MouseArea{
+                id:b7
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "b7"
+                property string piece: "P"
+
+                Image {
+                    id: b7Img
+                    anchors.fill: parent
+                    source: "media/Black/P.png"
+                }
+                onClicked: {
+                    board.saveId(this, b7Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+
+            MouseArea{
+                id:c7
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "c7"
+                property string piece: "P"
+
+                Image {
+                    id: c7Img
+                    anchors.fill: parent
+                    source: "media/Black/P.png"
+                }
+                onClicked: {
+                    board.saveId(this, c7Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+
+            MouseArea{
+                id:d7
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "d7"
+                property string piece: "P"
+
+                Image {
+                    id: d7Img
+                    anchors.fill: parent
+                    source: "media/Black/P.png"
+                }
+
+                onClicked: {
+                    board.saveId(this, d7Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+
+            MouseArea{
+                id:e7
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "e7"
+                property string piece: "P"
+
+                Image {
+                    id: e7Img
+                    anchors.fill: parent
+                    source: "media/Black/P.png"
+                }
+
+                onClicked: {
+                    board.saveId(this, e7Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+
+            MouseArea{
+                id:f7
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "f7"
+                property string piece: "P"
+
+                Image {
+                    id: f7Img
+                    anchors.fill: parent
+                    source: "media/Black/P.png"
+                }
+                onClicked: {
+                    board.saveId(this, f7Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+
+            MouseArea{
+                id:g7
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "g7"
+                property string piece: "P"
+
+                Image {
+                    id: g7Img
+                    anchors.fill: parent
+                    source: "media/Black/P.png"
+                }
+                onClicked: {
+                    board.saveId(this, g7Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+
+            MouseArea{
+                id:h7
+                cursorShape: Qt.ArrowCursor
+                width: pixel * 8
+                height: pixel * 8
+                property string id: "h7"
+                property string piece: "P"
+
+                Image {
+                    id: h7Img
+                    anchors.fill: parent
+                    source: "media/Black/P.png"
+                }
+
+                onClicked: {
+                    board.saveId(this, h7Img, parent);
+                    board.move = Func.checkMove(board.move, id, piece);
+                    if(Func.validation(board.move))
+                    {
+                        connection.setOrder(board.move);
+                    }
+                }
+            }
+
+
+
+        }
+
+
+
+
     }
- }
-
-
-
- Row{
-    id : row8
-    anchors.verticalCenter: board.verticalCenter
-    anchors.left: board.left
-    anchors.leftMargin: 5
-    anchors.top : board.top 
-    spacing : pixel * 1.45
-    property int index: 7
-MouseArea{
-            id:a8
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "a8"
-            property string piece: "R"
-
-            Image {
-                id: a8Img
-                anchors.fill: parent
-                source: "media/Black/R.png"
-            }
-            onClicked: {
-                board.saveId(this, a8Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-
-
-        MouseArea{
-            id:b8
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "b8"
-            property string piece: "H"
-
-            Image {
-                id: b8Img
-                anchors.fill: parent
-                source: "media/Black/H.png"
-            }
-            onClicked: {
-                board.saveId(this, b8Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-
-        MouseArea{
-            id:c8
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "c8"
-            property string piece: "B"
-
-            Image {
-                id: c8Img
-                anchors.rightMargin: -1
-                anchors.bottomMargin: 0
-                anchors.leftMargin: 1
-                anchors.topMargin: 0
-                anchors.fill: parent
-                source: "media/Black/B.png"
-            }
-            onClicked: {
-                board.saveId(this, c8Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-
-
-
-        MouseArea{
-            id:d8
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "d8"
-            property string piece: "Q"
-
-            Image {
-                id: d8Img
-                anchors.rightMargin: -4
-                anchors.bottomMargin: 0
-                anchors.leftMargin: 4
-                anchors.topMargin: 0
-                anchors.fill: parent
-                source: "media/Black/Q.png"
-            }
-            onClicked: {
-                board.saveId(this, d8Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-
-MouseArea{
-            id:e8
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "e8"
-            property string piece: "K"
-
-            Image {
-                id: e8Img
-                anchors.fill: parent
-                source: "media/Black/K.png"
-            }
-            onClicked: {
-                board.saveId(this, e8Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-
-        MouseArea{
-            id:f8
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "f8"
-            property string piece: "B"
-
-            Image {
-                id: f8Img
-                anchors.fill: parent
-                source: "media/Black/B.png"
-            }
-            onClicked: {
-                board.saveId(this, f8Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-
-        MouseArea{
-            id:g8
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "g8"
-            property string piece: "H"
-
-            Image {
-                id: g8Img
-                anchors.fill: parent
-                source: "media/Black/H.png"
-            }
-            onClicked: {
-                board.saveId(this, g8Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-
-
- MouseArea{
-            id:h8
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "h8"
-            property string piece: "R"
-
-            Image {
-                id: h8Img
-                anchors.fill: parent
-                source: "media/Black/R.png"
-            }
-            onClicked: {
-                board.saveId(this, h8Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-}     
-
-
-
-Row{
-    id:row7
-    anchors.verticalCenter: board.verticalCenter
-    anchors.left: board.left
-    anchors.leftMargin: 5
-    anchors.top : board.top 
-    spacing : pixel * 1.45
-    anchors.topMargin: pixel * 9.3
-    property int index: 6
-
-        MouseArea{
-            id:a7
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "a7"
-            property string piece: "P"
-
-            Image {
-                id: a7Img
-                anchors.fill: parent
-                source: "media/Black/P.png"
-            }
-            onClicked: {
-                board.saveId(this, a7Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-
-        MouseArea{
-            id:b7
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "b7"
-            property string piece: "P"
-
-            Image {
-                id: b7Img
-                anchors.fill: parent
-                source: "media/Black/P.png"
-            }
-            onClicked: {
-                board.saveId(this, b7Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-
-        MouseArea{
-            id:c7
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "c7"
-            property string piece: "P"
-
-            Image {
-                id: c7Img
-                anchors.fill: parent
-                source: "media/Black/P.png"
-            }
-            onClicked: {
-                board.saveId(this, c7Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-
-        MouseArea{
-            id:d7
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "d7"
-            property string piece: "P"
-
-            Image {
-                id: d7Img
-                anchors.fill: parent
-                source: "media/Black/P.png"
-            }
-
-            onClicked: {
-                board.saveId(this, d7Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-
-        MouseArea{
-            id:e7
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "e7"
-            property string piece: "P"
-
-            Image {
-                id: e7Img
-                anchors.fill: parent
-                source: "media/Black/P.png"
-            }
-
-            onClicked: {
-                board.saveId(this, e7Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-
-        MouseArea{
-            id:f7
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "f7"
-            property string piece: "P"
-
-            Image {
-                id: f7Img
-                anchors.fill: parent
-                source: "media/Black/P.png"
-            }
-            onClicked: {
-                board.saveId(this, f7Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-
-        MouseArea{
-            id:g7
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "g7"
-            property string piece: "P"
-
-            Image {
-                id: g7Img
-                anchors.fill: parent
-                source: "media/Black/P.png"
-            }
-            onClicked: {
-                board.saveId(this, g7Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-
-        MouseArea{
-            id:h7
-            cursorShape: Qt.ArrowCursor
-            width: pixel * 8
-            height: pixel * 8
-            property string id: "h7"
-            property string piece: "P"
-
-            Image {
-                id: h7Img
-                anchors.fill: parent
-                source: "media/Black/P.png"
-            }
-
-            onClicked: {
-                board.saveId(this, h7Img, parent);
-                        board.move = Func.checkMove(board.move, id, piece);
-                        if(Func.validation(board.move))
-                        {
-                            connection.setOrder(board.move);
-                        }
-                    }
-        }
-
-
-
-}
 
 
 
 
-    }
-        
 
 
-  
 
-        
 
-        
 
-        
+
 
     
 
@@ -2497,83 +2562,83 @@ Row{
             }
         }
 
-    ToolSeparator{
-        width: scores.width / 1.7
-        height: 1
-        anchors.horizontalCenter: scores.horizontalCenter
-        anchors.top: player1scores.bottom
-        anchors.topMargin: pixel * 5
+        ToolSeparator{
+            width: scores.width / 1.7
+            height: 1
+            anchors.horizontalCenter: scores.horizontalCenter
+            anchors.top: player1scores.bottom
+            anchors.topMargin: pixel * 5
 
-        Rectangle{
-            anchors.fill: parent
-            color: "#B0BEC5"
+            Rectangle{
+                anchors.fill: parent
+                color: "#B0BEC5"
+            }
+        }
+
+        Column{
+            id: player2scores
+            spacing: 10
+            anchors.top: player1scores.bottom
+            width: scores.width
+            anchors.topMargin: pixel * 12
+
+            Image {
+                id: player2pic
+                anchors.horizontalCenter: player2scores.horizontalCenter
+                source: "media/blackking.png"
+                width: pixel * 13
+                height: pixel * 12
+            }
+
+            Text {
+                id: element4
+                anchors.horizontalCenter: player2scores.horizontalCenter
+                text: qsTr("امتیاز ") + qsTr(connection.player2Name) + qsTr(":")
+                font.family: fontfarsi.name
+                font.pixelSize: pixel * 2
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignHCenter
+            }
+
+            Text {
+                id: element5
+                anchors.horizontalCenter: player2scores.horizontalCenter
+                text: connection.player2PScore
+                font.pixelSize: pixel * 2
+                font.family: fontfarsi.name
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignHCenter
+            }
+
+            Text {
+                id: element6
+                anchors.horizontalCenter: player2scores.horizontalCenter
+                text: qsTr("امتیاز منفی ") + qsTr(connection.player2Name) + qsTr(":")
+                font.pixelSize: pixel * 2
+                font.family: fontfarsi.name
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignHCenter
+            }
+
+            Text {
+                id: element7
+                anchors.horizontalCenter: player2scores.horizontalCenter
+                text: connection.player2NScore
+                font.pixelSize: pixel * 2
+                font.family: fontfarsi.name
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignHCenter
+            }
+        }
+
+        ToolSeparator{
+            width: scores.width / 1.7
+            height: 1
+            anchors.horizontalCenter: scores.horizontalCenter
+            anchors.top: player2scores.bottom
+            anchors.topMargin: pixel * 5
         }
     }
-
-    Column{
-        id: player2scores
-        spacing: 10
-        anchors.top: player1scores.bottom
-        width: scores.width
-        anchors.topMargin: pixel * 12
-
-        Image {
-            id: player2pic
-            anchors.horizontalCenter: player2scores.horizontalCenter
-            source: "media/blackking.png"
-            width: pixel * 13
-            height: pixel * 12
-        }
-
-        Text {
-            id: element4
-            anchors.horizontalCenter: player2scores.horizontalCenter
-            text: qsTr("امتیاز ") + qsTr(connection.player2Name) + qsTr(":")
-            font.family: fontfarsi.name
-            font.pixelSize: pixel * 2
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-        }
-
-        Text {
-            id: element5
-            anchors.horizontalCenter: player2scores.horizontalCenter
-            text: connection.player2PScore
-            font.pixelSize: pixel * 2
-            font.family: fontfarsi.name
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-        }
-
-        Text {
-            id: element6
-            anchors.horizontalCenter: player2scores.horizontalCenter
-            text: qsTr("امتیاز منفی ") + qsTr(connection.player2Name) + qsTr(":")
-            font.pixelSize: pixel * 2
-            font.family: fontfarsi.name
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-        }
-
-        Text {
-            id: element7
-            anchors.horizontalCenter: player2scores.horizontalCenter
-            text: connection.player2NScore
-            font.pixelSize: pixel * 2
-            font.family: fontfarsi.name
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-        }
-    }
-
-    ToolSeparator{
-        width: scores.width / 1.7
-        height: 1
-        anchors.horizontalCenter: scores.horizontalCenter
-        anchors.top: player2scores.bottom
-        anchors.topMargin: pixel * 5
-    }
-}
 }
 
 

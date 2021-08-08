@@ -1,9 +1,9 @@
 #include "include/fileConnect.h"
 using namespace std;
 
-FileConnect::FileConnect(string name)
+FileConnect::FileConnect(QString name)
 {
-    myFile.open(name, ios::app);
+    myFile.open(name.toStdString(), ios::app);
     if (!myFile.is_open())
     {
         cerr << "ERROR" << endl;

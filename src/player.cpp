@@ -10,6 +10,12 @@ Player::Player(Name name, COLOR color)
     
 }
 
+void Player::restartScore()
+{
+    PScore = 0;
+    NScore = 0;
+}
+
 void Player::addScore(size_t state, int score)
 {
     switch (state)
@@ -17,7 +23,7 @@ void Player::addScore(size_t state, int score)
     case 1:
         PScore += score;
         break;
-    case -1:
+    case 0:
         NScore += score;
         break;
 

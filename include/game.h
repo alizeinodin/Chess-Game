@@ -1,6 +1,7 @@
 #include <QString>
 #include "chessBoard.h"
 #include "player.h"
+#include "fileConnect.h"
 #ifndef _GAME_H
 #define _GAME_H
 
@@ -14,6 +15,7 @@ class Game
     bool Turn = true;
     std::vector<MOVE> moves;
     ChessMan *attackpiece = nullptr;
+//    FileConnect file;
 
     public:
     enum Color {BLACK, WHITE};
@@ -27,6 +29,7 @@ class Game
     std::vector<MOVE> movesUndo();
     void restart();
     void update_score();
+//    void setFile(QString);
 };
 
 #endif /* _GAME_H */

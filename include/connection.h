@@ -29,7 +29,8 @@ class connection : public QObject
     Q_PROPERTY(QString player1Name READ player1Name WRITE setPlayer1Name NOTIFY player1NameChanged)
     Q_PROPERTY(QString player2Name READ player2Name WRITE setPlayer2Name NOTIFY player2NameChanged)
 
-    //Q_PROPERTY(QObject * orgId READ orgId WRITE setOrgId NOTIFY orgIdChanged)
+    // counter move's of restart
+    Q_PROPERTY(unsigned long counterRestart READ counterRestart WRITE setCounterRestart NOTIFY counterRestartChanged)
 public:
     explicit connection(QObject *parent = nullptr);
     void updateScore();
@@ -60,7 +61,10 @@ signals:
     void exit();
 
     // signal object
-//    void orgIdChanged();
+    void counterRestartChanged();
+
+    // kish signal
+    void kish();
 
 
 public slots:
@@ -122,6 +126,13 @@ public slots:
     // dest
     QString destId();
 
+    // counter restart
+    void setCounterRestart(unsigned long);
+    unsigned long counterRestart();
+
+    // get message
+    QString getMessage();
+
 
 
 
@@ -130,6 +141,7 @@ private:
 
     Game * game = nullptr;
     QString gameName;
+    std::string messageStr;
 
 
     // player's score
@@ -145,6 +157,9 @@ private:
     // org and dest id
     QString orgIdVal;
     QString destIdVal;
+
+    // counter
+    unsigned long counter = 0;
 };
 
 #endif // CONNECTION_H

@@ -122,17 +122,21 @@ void connection::setOrder(QString order)
     qDebug() << order;
     try {
         game->order(order.toStdString());
-        emit successMove();
         game->update_score();
         updateScore();
-    } catch (invalid_argument & errorOrder) {
-        std::cerr << errorOrder.what() << std::endl;
+        emit successMove();
+    } catch (invalid_argument & error) {
+        messageStr = error.what();
         emit loseMove();
     }
      catch (kishexcept & error){
-         std::cerr << error.what() << std::endl;
-         emit loseMove();
+         messageStr = error.what();
+         emit kish();
      }
+    catch (matexcept & error){
+        messageStr = error.what();
+        emit loseMove();
+    }
     order.clear();
 }
 
@@ -158,6 +162,12 @@ void connection::undo()
     orgIdVal = firstCell;
     destIdVal = secondCell;
     updateScore();
+
+    if(counter > 0)
+    {
+        counter++;
+    }
+
     emit undoMove();
 }
 // ------------
@@ -166,8 +176,18 @@ void connection::undo()
 // ------------
 void connection::restart()
 {
-    for (size_t i = 0; i < game->movesUndo().size(); i++) {
+    if(counter == 0)
+    {
+        counter = 1;
+    }
+    if (counter <= game->movesUndo().size()) {
         undo();
+    }
+    if(counter > game->movesUndo().size())
+    {
+        counter = 1;
+        game->restart();
+        updateScore();
     }
 }
 // ------------
@@ -193,6 +213,7 @@ QString connection::destId()
 {
     return destIdVal;
 }
+
 // ------------
 
 // update score
@@ -206,5 +227,27 @@ void connection::updateScore()
     // player2 update score
     setPlayer2NScore(game->getPlayer(std::string("Black")).getScore(0));
     setPlayer2PScore(game->getPlayer(std::string("Black")).getScore(1));
+}
+// ------------
+
+// counter smart var
+// ------------
+void connection::setCounterRestart(unsigned long cnt)
+{
+    counter = cnt;
+}
+
+unsigned long connection::counterRestart()
+{
+    return counter;
+}
+// ------------
+
+// get error.what of exceptions to ui
+// ------------
+QString connection::getMessage()
+{
+    QString result = QString::fromStdString(messageStr);
+    return result;
 }
 // ------------

@@ -41,5 +41,7 @@
         <file>media/background_player.jpg</file>
         <file>media/knight1.png</file>
         <file>media/knight2.png</file>
+        <file>media/warning-icon-png-2774.png</file>
+        <file>media/Sound/kish.WAV</file>
     </qresource>
 </RCC>
