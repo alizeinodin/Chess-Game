@@ -298,7 +298,8 @@ QString Game::undo()
     {
         gameBoard.undo(temp, player2->get_last_attack());
         player2->addScore(0, 5);
-        tempscore.append(move.begin() + 7, move.end());
+        tempscore.append(move.begin() + 8, move.end());
+        //cout << "sc " << *(move.begin() + 8) << endl << tempscore << endl;
         player2->addScore(1, -stoi(tempscore));
         Turn = false;
         moves.pop_back();
@@ -307,8 +308,9 @@ QString Game::undo()
     {
         gameBoard.undo(temp, player1->get_last_attack());
         player1->addScore(0, 5);
-        tempscore.append(move.begin() + 7, move.end());
-        player2->addScore(1, -stoi(tempscore));
+        tempscore.append(move.begin() + 8, move.end());
+        //cout << "sc " << *(move.begin() + 8) << endl << tempscore << endl;
+        player1->addScore(1, -stoi(tempscore));
         Turn = true;
         moves.pop_back();
     }
@@ -327,7 +329,6 @@ std::vector<MOVE> Game::movesUndo()
 
 void Game::update_score()
 {
-    cout << "update\t" << Turn <<endl;
     int score = 0;
     int temp = 0;
     if (Turn)
@@ -357,13 +358,10 @@ void Game::update_score()
             player2->addScore(1, temp);
             score += temp;
             string t = to_string(score);
-            cout << "scorebe  " << moves.back() << endl;
             moves.rbegin()->append(t);
-            cout << "score  " << moves.back() << endl;
         }
         catch (const kishexcept &e)
         {
-            cout << "kish catch b\n";
             player1->setkish(true);
             try
             {
@@ -373,10 +371,14 @@ void Game::update_score()
             {
                 player2->addScore(1, 70);
                 score += 70;
+                string t = to_string(score);
+                moves.rbegin()->append(t);
                 throw e;
             }
-            player1->addScore(1, 10);
+            player2->addScore(1, 10);
             score += 10;
+            string t = to_string(score);
+            moves.rbegin()->append(t);
             throw e;
         }
         if (player1->iskish())
@@ -411,9 +413,7 @@ void Game::update_score()
             player1->addScore(1, temp);
             score += temp;
             string t = to_string(score);
-            cout << "scorebe  " << moves.back() << endl;
             moves.rbegin()->append(t);
-            cout << "score  " << moves.back() << endl;
         }
         catch (const kishexcept &e)
         {
@@ -427,10 +427,14 @@ void Game::update_score()
             {
                 player1->addScore(1, 70);
                 score += 70;
+                string t = to_string(score);
+                moves.rbegin()->append(t);
                 throw er;
             }
-            player2->addScore(1, 10);
+            player1->addScore(1, 10);
             score += 10;
+            string t = to_string(score);
+            moves.rbegin()->append(t);
             throw e;
         }
         if (player2->iskish())

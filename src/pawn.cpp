@@ -354,6 +354,21 @@ std::map<std::string, int> pawn::threat(std::string cellid, array<array<Cell, 8>
     bool kish = false;
     map<string, int> temp;
     this->access(cellid, board);
+    if (this->color == "White")
+    {
+        cout << "paw" << get_num(cellid) << endl;
+        if (get_num(cellid) > 4)
+        {
+            temp.insert(make_pair(cellid, 3));
+        }
+    }
+    else if (this->color == "Black")
+    {
+        if (get_num(cellid) < 5)
+        {
+            temp.insert(make_pair(cellid, 3));
+        }
+    }
     for (size_t i = 0; i < threat_id.size(); i++)
     {
         if (search_cell(threat_id.at(i), board)->getPiece() != nullptr)

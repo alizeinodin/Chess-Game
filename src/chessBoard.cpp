@@ -255,6 +255,10 @@ void ChessBoard::checkmate(COLOR color)
     {
         return;
     }
+    if (k->get_threat().size() != 0)
+    {
+        return;
+    }
     //cout << "kish ref " << k->kishr << endl;
     auto kishpath = k->get_kishpath();
     for (auto &i : kishpath)
