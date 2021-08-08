@@ -240,6 +240,7 @@ void ChessBoard::checkmate(COLOR color)
                 if (j.getPiece()->get_type() == KING && j.getPiece()->get_color() == color)
                 {
                     k = dynamic_cast<king *>(j.getPiece());
+                    k->access(j.getId(), Board);
                     find = true;
                     break;
                 }
@@ -249,6 +250,10 @@ void ChessBoard::checkmate(COLOR color)
         {
             break;
         }
+    }
+    if (k->get_possiblemoves().size() != 0)
+    {
+        return;
     }
     //cout << "kish ref " << k->kishr << endl;
     auto kishpath = k->get_kishpath();
