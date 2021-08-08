@@ -98,7 +98,12 @@ void rook::access(string origin, array<array<Cell, 8>, 8> &board)
                 king * t;
                 if (celltemp->getPiece()->get_type() == KING && celltemp->getPiece()->get_color() != this->color)
                 {
-                    kish.insert(kish.begin(), find(possible.begin(), possible.end(), id) + 1, possible.end());
+                    auto itfind = find(possible.begin(), possible.end(), id);
+                    if (itfind != possible.cend())
+                    {
+                        itfind++;
+                    }
+                    kish.insert(kish.begin(), itfind, possible.end());                   
                     t = dynamic_cast<king *> (celltemp->getPiece());
                     t->insert(kish);
                     t->kishr = origin;
@@ -137,7 +142,12 @@ void rook::access(string origin, array<array<Cell, 8>, 8> &board)
                 king * t;
                 if (celltemp->getPiece()->get_type() == KING && celltemp->getPiece()->get_color() != this->color)
                 {
-                    kish.insert(kish.begin(), find(possible.begin(), possible.end(), id) + 1, possible.end());
+                    auto itfind = find(possible.begin(), possible.end(), id);
+                    if (itfind != possible.cend())
+                    {
+                        itfind++;
+                    }
+                    kish.insert(kish.begin(), itfind, possible.end());                    
                     t = dynamic_cast<king *> (celltemp->getPiece());
                     t->insert(kish);
                     t->kishr = origin;
@@ -174,7 +184,12 @@ void rook::access(string origin, array<array<Cell, 8>, 8> &board)
                 auto ittemp = (find(alfa.cbegin(), alfa.cend(), character) - 1);
                 if (celltemp->getPiece()->get_type() == KING && celltemp->getPiece()->get_color() != this->color)
                 {
-                    kish.insert(kish.begin(), find(possible.begin(), possible.end(), id) + 1, possible.end());
+                    auto itfind = find(possible.begin(), possible.end(), id);
+                    if (itfind != possible.cend())
+                    {
+                        itfind++;
+                    }
+                    kish.insert(kish.begin(), itfind, possible.end());                    
                     t = dynamic_cast<king *> (celltemp->getPiece());
                     t->insert(kish);
                     t->kishr = origin;
