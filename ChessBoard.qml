@@ -53,9 +53,13 @@ Item {
         }
         onLoseMove:{
             losePieceSound.play();
+            messagerecTxt.text = connection.getMessage();
+            message.visible = true;
             board.move = ""
         }
         onUndoMove:{
+            mat.visible = false;
+            message.visible = false;
             board.orgid = board.idMap[connection.orgId()];
             board.destid = board.idMap[connection.destId()];
             board.rowOrg = board.orgid.parent;
@@ -102,11 +106,108 @@ Item {
             message.visible = true;
         }
 
+        onMat:{
+            connection.successMove();
+            matAudio.play();
+            matName.text = connection.getWinnerName();
+            matScore.text = connection.getWinnerScore();
+            mattxt2.text = connection.getWinnerText();
+            mat.visible = true;
+        }
+
         onExit:{
             view.pop();
             view.pop();
             view.pop();
             view.pop();
+        }
+    }
+
+    Item {
+        id: mat
+        width: pixel * 85
+        height: pixel * 85
+        anchors.centerIn: mainBoard
+        z: 1
+        visible: false
+
+        Audio{
+            id: matAudio
+            source: "media/Sound/mat.WAV"
+            volume: 1.0
+        }
+
+        Rectangle
+        {
+            anchors.fill: parent
+            color: "#eee"
+            radius: 8
+        }
+
+        Image{
+            id: cupMat
+            source: "media/goldenCup.png"
+            fillMode: Image.PreserveAspectFit
+            height: pixel * 35
+            anchors.top: parent.top
+            anchors.topMargin: pixel * 5
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+
+        Item {
+            id: matData
+            anchors.top: cupMat.bottom
+            anchors.topMargin: pixel * 5
+            anchors.horizontalCenter: cupMat.horizontalCenter
+
+            Text {
+                id: matName
+                text: qsTr("علی عزیز")
+                anchors.top: parent.top
+                anchors.horizontalCenter: parent.horizontalCenter
+                font.family: fontfarsi.name
+                font.pixelSize: pixel*4
+            }
+            Text {
+                id: mattxt1
+                text: qsTr("شما با امتیاز:")
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.top: matName.bottom
+//                anchors.topMargin: pixel * 1
+                font.family: fontfarsi.name
+                font.pixelSize: pixel*3
+            }
+            Text {
+                id: matScore
+                text: qsTr("123213")
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.top: mattxt1.bottom
+                anchors.topMargin: pixel * 2
+                font.family: fontfarsi.name
+                font.pixelSize: pixel*4
+            }
+            Text {
+                id: mattxt2
+                text: qsTr("برنده شدید")
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.top: matScore.bottom
+                anchors.topMargin: pixel * 2
+                font.family: fontfarsi.name
+                font.pixelSize: pixel*3
+            }
+
+            Button{
+                id: startAgain
+                text: "شروع مجدد"
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.top: mattxt2.bottom
+                anchors.topMargin: pixel * 3
+                width: pixel * 16
+                height: pixel * 8
+                font.family: fontfarsi.name
+                font.pixelSize: pixel*2
+                onClicked: connection.exit()
+            }
         }
     }
 
