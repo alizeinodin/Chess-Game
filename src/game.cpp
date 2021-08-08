@@ -297,26 +297,18 @@ QString Game::undo()
     if (move.at(1) == '2')
     {
         gameBoard.undo(temp, player2->get_last_attack());
-<<<<<<< HEAD
         player2->addScore(0, 5);
-=======
-        player2->addScore(-1, 5);
         tempscore.append(move.begin() + 7, move.end());
         player2->addScore(1, -stoi(tempscore));
->>>>>>> 66f168dd241e13c68d7fb7683d9567e1d752c180
         Turn = false;
         moves.pop_back();
     }
     else if (move.at(1) == '1')
     {
         gameBoard.undo(temp, player1->get_last_attack());
-<<<<<<< HEAD
         player1->addScore(0, 5);
-=======
-        player1->addScore(-1, 5);
         tempscore.append(move.begin() + 7, move.end());
         player2->addScore(1, -stoi(tempscore));
->>>>>>> 66f168dd241e13c68d7fb7683d9567e1d752c180
         Turn = true;
         moves.pop_back();
     }
