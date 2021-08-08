@@ -63,6 +63,9 @@ signals:
     // signal object
     void counterRestartChanged();
 
+    // kish signal
+    void kish();
+
 
 public slots:
 
@@ -127,6 +130,9 @@ public slots:
     void setCounterRestart(unsigned long);
     unsigned long counterRestart();
 
+    // get message
+    QString getMessage();
+
 
 
 
@@ -135,6 +141,7 @@ private:
 
     Game * game = nullptr;
     QString gameName;
+    std::string messageStr;
 
 
     // player's score

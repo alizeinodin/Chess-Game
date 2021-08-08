@@ -122,17 +122,21 @@ void connection::setOrder(QString order)
     qDebug() << order;
     try {
         game->order(order.toStdString());
-        emit successMove();
         game->update_score();
         updateScore();
-    } catch (invalid_argument & errorOrder) {
-        std::cerr << errorOrder.what() << std::endl;
+        emit successMove();
+    } catch (invalid_argument & error) {
+        messageStr = error.what();
         emit loseMove();
     }
      catch (kishexcept & error){
-         std::cerr << error.what() << std::endl;
-         emit loseMove();
+         messageStr = error.what();
+         emit kish();
      }
+    catch (matexcept & error){
+        messageStr = error.what();
+        emit loseMove();
+    }
     order.clear();
 }
 
@@ -236,5 +240,14 @@ void connection::setCounterRestart(unsigned long cnt)
 unsigned long connection::counterRestart()
 {
     return counter;
+}
+// ------------
+
+// get error.what of exceptions to ui
+// ------------
+QString connection::getMessage()
+{
+    QString result = QString::fromStdString(messageStr);
+    return result;
 }
 // ------------

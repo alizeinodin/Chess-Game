@@ -49,6 +49,7 @@ Item {
                 }
             }
             board.destid.piece = board.orgid.piece;
+            message.visible = false;
         }
         onLoseMove:{
             losePieceSound.play();
@@ -91,12 +92,63 @@ Item {
             {
                 connection.restart();
             }
+            message.visible = false;
         }
+        onKish:
+        {
+            connection.successMove();
+            kishAudio.play();
+            messagerecTxt.text = connection.getMessage();
+            message.visible = true;
+        }
+
         onExit:{
             view.pop();
             view.pop();
             view.pop();
             view.pop();
+        }
+    }
+
+    Item {
+        id: message
+        width: board.width
+        height: pixel * 5
+        anchors.top: board.bottom
+        anchors.topMargin: pixel * 4
+        anchors.horizontalCenter: board.horizontalCenter
+        visible: false
+
+        Audio{
+            id:kishAudio
+            source: "media/Sound/kish.WAV"
+            volume: 1.0
+        }
+
+        Rectangle{
+            id:messagerec
+            anchors.fill: parent
+            color: "#EF9A9A"
+            radius: 5
+
+            Image {
+                id: warningIcon
+                source: "media/warning-icon-png-2774.png"
+                fillMode: Image.PreserveAspectFit
+                height: pixel * 4
+                anchors.verticalCenter: messagerec.verticalCenter
+                anchors.right: messagerec.right
+                anchors.rightMargin: pixel * 1
+            }
+
+            Text {
+                id: messagerecTxt
+                text: qsTr("شما کیش شدید")
+                anchors.right: warningIcon.left
+                anchors.rightMargin: pixel
+                anchors.verticalCenter: warningIcon.verticalCenter
+                font.family: fontfarsi.name
+            }
         }
     }
 
