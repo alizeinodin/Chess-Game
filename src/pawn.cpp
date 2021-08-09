@@ -46,7 +46,7 @@ void pawn::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
                     if (pawntemp->enpassant)
                     {
                         cells[1] = celltemp;
-                        this->enpassantattack(cells);
+                        this->enpassantattack(cells, move);
                     }
                 }
             }
@@ -66,7 +66,7 @@ void pawn::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
                     if (pawntemp->enpassant)
                     {
                         cells[1] = celltemp;
-                        this->enpassantattack(cells);
+                        this->enpassantattack(cells, move);
                     }
                 }
             }
@@ -96,6 +96,7 @@ void pawn::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
                 if (i == 1)
                 {
                     enpassant = true;
+                    enpassantid = possible.at(0);
                 }
                 else if (enpassant)
                 {
@@ -371,7 +372,7 @@ std::map<std::string, int> pawn::threat(std::string cellid, array<array<Cell, 8>
     this->access(cellid, board);
     if (this->color == "White")
     {
-        cout << "paw" << get_num(cellid) << endl;
+        //cout << "paw" << get_num(cellid) << endl;
         if (get_num(cellid) > 4)
         {
             temp.insert(make_pair(cellid, 3));
@@ -431,23 +432,23 @@ ChessMan *pawn::attack(std::string move, Cell **cell)
             cell[1]->setPiece(cell[0]->getPiece());
             cell[0]->empty();
             if (color == "White")
+            {
+                if (get_num(temp.second) == 8)
                 {
-                    if (get_num(temp.second) == 8)
-                    {
-                        pawnpromotion a(temp.first);
-                        a.attack = attackpiece;
-                        throw a;
-                    }
+                    pawnpromotion a(temp.first);
+                    a.attack = attackpiece;
+                    throw a;
                 }
-                else if (color == "Black")
+            }
+            else if (color == "Black")
+            {
+                if (get_num(temp.second) == 1)
                 {
-                    if (get_num(temp.second) == 1)
-                    {
-                        pawnpromotion a(temp.first);
-                        a.attack = attackpiece;
-                        throw a;
-                    }
+                    pawnpromotion a(temp.first);
+                    a.attack = attackpiece;
+                    throw a;
                 }
+            }
             return attackpiece;
         }
     }
@@ -460,11 +461,23 @@ std::vector<ID> pawn::get_kingcantmove()
     return kingcantmove;
 }
 
-void pawn::enpassantattack(Cell **cell)
+void pawn::enpassantattack(Cell **cell, MOVE m)
 {
+    cout << "enpass  method\n";
+    auto mv = cut_str(m);
     ChessMan *attackpiece = cell[1]->getPiece();
-    cell[1]->empty();
-    cell[1]->setPiece(cell[0]->getPiece());
-    cell[0]->empty();
-    throw enpassantexcept(attackpiece, cell[1]->getId());
+    pawn * p = dynamic_cast<pawn *> (attackpiece);
+    if (p->enpassantid == mv.second)
+    {
+        cout << "enpass  if...\n";
+        Cell *t;
+        string temp = cell[1]->getId();
+        int a = get_num(temp);
+        temp.at(1) = to_string(a).at(0);
+        
+        cell[1]->empty();
+        cell[1]->setPiece(cell[0]->getPiece());
+        cell[0]->empty();
+        throw enpassantexcept(attackpiece, cell[1]->getId());
+    }
 }
