@@ -327,6 +327,106 @@ Item {
             }
         }
     }
+    // when pawn come to end line of chessboard, it gets promoted. this item is for it
+    Item {
+        visible: false
+        id: convertPiece
+        width: pixel * 35
+        height: pixel * 10
+        anchors.margins: pixel * 2
+        anchors.centerIn: board
+        z:1
+        property var type: "White" // for pawn of black and white player this property can variable
+        Rectangle{
+            anchors.fill: parent
+            color: "#eee"
+            radius: 10
+
+            Row{
+                id:rowconvertPiece
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.verticalCenter: parent.verticalCenter
+                spacing: 3
+
+                MouseArea{
+                    width: pixel * 8
+                    height: pixel * 8
+                    hoverEnabled: true
+                    onEntered: colorAnimationConvertPieceShow.running = true
+                    onExited: colorAnimationConvertPieceDisplay.running = true
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: connection.undo();
+
+                    Rectangle{
+                        anchors.fill: parent
+                        color: "#607D8B"
+                        radius: 5
+                        Image {
+                            anchors.fill: parent
+                            source: "media/"+convertPiece.type+"/R.png"
+                        }
+                    }
+                }
+                MouseArea{
+                    width: pixel * 8
+                    height: pixel * 8
+                    hoverEnabled: true
+                    onEntered: colorAnimationConvertPieceShow.running = true
+                    onExited: colorAnimationConvertPieceDisplay.running = true
+                    cursorShape: Qt.PointingHandCursor
+
+                    Rectangle{
+                        anchors.fill: parent
+                        color: "#607D8B"
+                        radius: 5
+                        Image {
+                            anchors.fill: parent
+                            source: "media/"+convertPiece.type+"/B.png"
+                        }
+                    }
+                }
+                MouseArea{
+                    width: pixel * 8
+                    height: pixel * 8
+                    hoverEnabled: true
+                    onEntered: colorAnimationConvertPieceShow.running = true
+                    onExited: colorAnimationConvertPieceDisplay.running = true
+                    cursorShape: Qt.PointingHandCursor
+
+                    Rectangle{
+                        anchors.fill: parent
+                        color: "#607D8B"
+                        radius: 5
+                        Image {
+                            anchors.fill: parent
+                            source: "media/"+convertPiece.type+"/Q.png"
+                        }
+                    }
+                }
+                MouseArea{
+                    width: pixel * 8
+                    height: pixel * 8
+                    hoverEnabled: true
+                    onEntered: colorAnimationConvertPieceShow.running = true
+                    onExited: colorAnimationConvertPieceDisplay.running = true
+                    cursorShape: Qt.PointingHandCursor
+
+                    Rectangle{
+                        anchors.fill: parent
+                        color: "#607D8B"
+                        radius: 5
+                        Image {
+                            anchors.fill: parent
+                            source: "media/"+convertPiece.type+"/H.png"
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // end
+
 
     Item {
         id: settings
