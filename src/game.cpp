@@ -738,7 +738,7 @@ void Game::twomove(MOVE move)
     try
     {
         this->order(move);
-        if (Trun)
+        if (Turn)
         {
             Turn = false;
         }
@@ -749,7 +749,7 @@ void Game::twomove(MOVE move)
     }
     catch(const std::exception& e)
     {
-        if (Trun)
+        if (Turn)
         {
             Turn = false;
         }
