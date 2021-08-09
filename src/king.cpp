@@ -226,6 +226,7 @@ void king::castling(string str, std::array<std::array<Cell, 8>, 8> &board)
                         cells[0]->empty();
                         cells[1] = search_cell("F1", board);
                         cells[1]->setPiece(chess);
+                        iscastling = true;
                         return;
                     }
                 }
@@ -247,6 +248,7 @@ void king::castling(string str, std::array<std::array<Cell, 8>, 8> &board)
                         cells[0]->empty();
                         cells[1] = search_cell("D1", board);
                         cells[1]->setPiece(chess);
+                        iscastling = true;
                         return;
                     }
                 }
@@ -274,13 +276,14 @@ void king::castling(string str, std::array<std::array<Cell, 8>, 8> &board)
                         cells[0]->empty();
                         cells[1] = search_cell("F8", board);
                         cells[1]->setPiece(chess);
+                        iscastling = true;
                         return;
                     }
                 }
             }
             else if (temp.second == "C8")
             {
-                if (search_cell("C", board)->getState())
+                if (search_cell("C8", board)->getState())
                 {
                     bool b8 = search_cell("B8", board)->getState();
                     bool d8 = search_cell("D8", board)->getState();
@@ -295,6 +298,7 @@ void king::castling(string str, std::array<std::array<Cell, 8>, 8> &board)
                         cells[0]->empty();
                         cells[1] = search_cell("D8", board);
                         cells[1]->setPiece(chess);
+                        iscastling = true;
                         return;
                     }
                 }

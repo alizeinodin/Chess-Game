@@ -23,6 +23,7 @@ public:
     private: 
     std::vector<ID> kishpath;
     bool ismate = false;
+    bool iscastling = false;
     
 };
 
