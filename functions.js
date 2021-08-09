@@ -5,7 +5,6 @@ function recognize(str) {
     {
         return "";
     }
-//    console.log(typeof(str));
 
     var array = str.split("/");
     return array;

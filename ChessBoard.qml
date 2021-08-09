@@ -30,7 +30,7 @@ Item {
         onSuccessMove:{
             var Piece = board.move[0];
             board.move = "";
-            board.turn = !board.turn;
+//            board.turn = !board.turn;
             //set animation destination
             var indesDest = Func.indexCell(board.destid.id);
             var indexOrg = Func.indexCell(board.orgid.id);
@@ -42,7 +42,7 @@ Item {
             // add piece to lose piece's of player
             if(board.destid.piece !== "")
             {
-                if(board.turn)
+                if(Func.recognize(board.img)[2] === "White")
                 {
                     // func.recognizeImg used for convert QUrl to address that can read from js
                     listModel2.append({"myImg": Func.recognizeImg(board.img)});
@@ -134,7 +134,7 @@ Item {
                     board.destid = f1;
                     board.destimg = f1Img;
                     board.img = board.destimg.source.toString();
-                    board.turn = !board.turn;
+//                    board.turn = !board.turn;
                     connection.successMove();
                 }
 
@@ -150,7 +150,7 @@ Item {
                     board.destid = d1;
                     board.destimg = d1Img;
                     board.img = board.destimg.source.toString();
-                    board.turn = !board.turn;
+//                    board.turn = !board.turn;
                     connection.successMove();
                 }
             } else if(board.rowDest === row8)
@@ -168,7 +168,7 @@ Item {
                     board.destid = f8;
                     board.destimg = f8Img;
                     board.img = board.destimg.source.toString();
-                    board.turn = !board.turn;
+//                    board.turn = !board.turn;
                     connection.successMove();
                 }
 
@@ -184,7 +184,7 @@ Item {
                     board.destid = d8;
                     board.destimg = d8Img;
                     board.img = board.destimg.source.toString();
-                    board.turn = !board.turn;
+//                    board.turn = !board.turn;
                     connection.successMove();
                 }
             }
@@ -895,9 +895,8 @@ Item {
         anchors.horizontalCenter: mainBoard.horizontalCenter
         objectName: "board"
         property string move: ""
-        property bool turn: true
+        property bool turn: connection.turnGame
         property var img: null
-
         // access to id's with var
         property var rowOrg: null
         property var rowDest: null

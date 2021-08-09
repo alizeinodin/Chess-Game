@@ -129,6 +129,8 @@ void connection::setOrder(QString order)
         emit successMove();
     } catch (kishexcept & error){
         messageStr = error.what();
+        game->update_score();
+        updateScore();
         emit kish();
     }
     catch (matexcept & error){
@@ -142,14 +144,20 @@ void connection::setOrder(QString order)
             }
             winnerScore = winner.getScore(1);
             winnertxt = QString("برنده شدید");
+            game->update_score();
+            updateScore();
             emit mat();
         } catch (Equality & error) {
             winnerName = player1Name() + QString(" و ") + player2Name();
             winnerScore = game->getPlayer("White").getScore(1);
+            game->update_score();
+            updateScore();
             winnertxt = QString("مساوی شدید");
         }
     } catch (exception & error) {
         messageStr = error.what();
+        game->update_score();
+        updateScore();
         emit loseMove();
     }
     order.clear();
@@ -225,6 +233,9 @@ void connection::updateScore()
     // player2 update score
     setPlayer2NScore(game->getPlayer(std::string("Black")).getScore(0));
     setPlayer2PScore(game->getPlayer(std::string("Black")).getScore(1));
+
+    setTurnGame(game->getTurn());
+
 }
 // ------------
 
