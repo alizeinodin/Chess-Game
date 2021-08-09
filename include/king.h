@@ -19,11 +19,12 @@ public:
     bool getmate() {return ismate;}
     std::vector<ID>& get_kishpath();
     ID kishr;
+    bool iscastling = false;
 
     private: 
     std::vector<ID> kishpath;
     bool ismate = false;
-    bool iscastling = false;
+    
     
 };
 

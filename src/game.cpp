@@ -2,6 +2,7 @@
 #include "../include/player.h"
 #include "../include/enpassantexcept.h"
 #include "../include/pawnpromotion.h"
+#include "../include/undoattack.h"
 #include <QDebug>
 using namespace std;
 
@@ -526,29 +527,36 @@ QString Game::undo()
 {
     string move = moves.back();
     string tempscore;
+    ChessMan * tempattack;
     // find last move of player
     // this code is for exist two move option in program
     string temp = move.substr(2, 6);
     transform(temp.begin(), temp.end(), temp.begin(), ::toupper);
     if (move.at(1) == '2')
     {
-        gameBoard.undo(temp, player2->get_last_attack());
+        tempattack = player2->get_last_attack();
+        gameBoard.undo(temp, tempattack);
         player2->addScore(0, 5);
         tempscore.append(move.begin() + 8, move.end());
         //cout << "sc " << *(move.begin() + 8) << endl << tempscore << endl;
         player2->addScore(1, -stoi(tempscore));
         Turn = false;
         moves.pop_back();
+        undoattack e(temp.substr(0, 2), player2->getcolor());
+        throw e;
     }
     else if (move.at(1) == '1')
     {
-        gameBoard.undo(temp, player1->get_last_attack());
+        tempattack = player1->get_last_attack();
+        gameBoard.undo(temp, tempattack);
         player1->addScore(0, 5);
         tempscore.append(move.begin() + 8, move.end());
         //cout << "sc " << *(move.begin() + 8) << endl << tempscore << endl;
         player1->addScore(1, -stoi(tempscore));
         Turn = true;
         moves.pop_back();
+        undoattack e(temp.substr(0, 2), player1->getcolor());
+        throw e;
     }
     temp = move.substr(2, 5);
     cout << "move undo: " << temp << endl;
