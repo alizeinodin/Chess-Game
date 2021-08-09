@@ -30,9 +30,6 @@ void Game::setPlayer(Color color, QString name)
     }
 }
 
-
-
-
 Player Game::getPlayer(COLOR c)
 {
     if (player1->getcolor() == c)
@@ -46,16 +43,13 @@ Player Game::getPlayer(COLOR c)
     throw invalid_argument("invalid color");
 }
 
-
-
-
 void Game::order(MOVE move)
 {
     string saveMove = move;
     transform(move.begin(), move.end(), move.begin(), ::toupper);
     Cell cell = gameBoard.search(cut_str(move).first);
     cerr << move << endl;
-    cout << "w:" << boolalpha << player1->iskish() << "\tb:" << player2->iskish() <<endl;
+    cout << "w:" << boolalpha << player1->iskish() << "\tb:" << player2->iskish() << endl;
     if (Turn)
     {
         if (cell.getPiece() != nullptr)
@@ -67,9 +61,8 @@ void Game::order(MOVE move)
                 {
                     gameBoard.randommoves(player1->getcolor());
                     player1->addScore(0, -15);
-
                 }
-                
+
                 if (!player1->iskish())
                 {
                     saveMove = string("P1") + saveMove; // player1 moved piece
@@ -80,11 +73,22 @@ void Game::order(MOVE move)
                         cerr << "start move piece" << endl;
                         try
                         {
-                            gameBoard.movePiece(move);
+                            gameBoard.movePiece(move); //move   isn't  kish   p1
                             saveMove += "0";
+                            move += "0";
                         }
-                        catch(enpassantexcept & e)
+                        catch (enpassantexcept &e)
                         {
+                            try
+                            {
+                                move += "1";
+                                gameBoard.threat(player2->getcolor());
+                            }
+                            catch (const kishexcept &er)
+                            {
+                                gameBoard.undo(move, e.attack);
+                                throw invalid_argument("this piece is pinned!");
+                            }
                             ID q = e.id;
                             cout << "enpassant\n";
                             attackpiece = e.attack;
@@ -96,8 +100,18 @@ void Game::order(MOVE move)
                             Turn = false;
                             throw e;
                         }
-                        catch(pawnpromotion & e)
+                        catch (pawnpromotion &e)
                         {
+                            try
+                            {
+                                move += "0";
+                                gameBoard.threat(player2->getcolor());
+                            }
+                            catch (const kishexcept &e)
+                            {
+                                gameBoard.undo(move, nullptr);
+                                throw invalid_argument("this piece is pinned!");
+                            }
                             saveMove += "0";
                             moves.push_back(saveMove);
                             Turn = false;
@@ -122,10 +136,11 @@ void Game::order(MOVE move)
                     {
                         try
                         {
-                            attackpiece = gameBoard.attack(move);
+                            attackpiece = gameBoard.attack(move); //attack isn't  kish p1
                             saveMove += "1";
+                            move += "1";
                         }
-                        catch(pawnpromotion& e)
+                        catch (pawnpromotion &e)
                         {
                             saveMove += "1";
                             attackpiece = e.attack;
@@ -140,7 +155,7 @@ void Game::order(MOVE move)
                         }
                         catch (const kishexcept &e)
                         {
-                            gameBoard.undo(move, nullptr);
+                            gameBoard.undo(move, attackpiece);
                             throw invalid_argument("you have kish can't this move!");
                         }
                     }
@@ -157,11 +172,24 @@ void Game::order(MOVE move)
                         cerr << "start move piece" << endl;
                         try
                         {
-                            gameBoard.movePiece(move);
+                            gameBoard.movePiece(move); //move   is   kish   p1
                             saveMove += "0";
+                            move += "0";
                         }
-                        catch(enpassantexcept & e)
+                        catch (enpassantexcept &e)
                         {
+                            try
+                            {
+                                move += "1";
+                                gameBoard.threat(player2->getcolor());
+                                cout << "try\n";
+                            }
+                            catch (const kishexcept &er)
+                            {
+                                cout << "catch\n";
+                                gameBoard.undo(move, e.attack);
+                                throw invalid_argument("you have kish can't this move!");
+                            }
                             ID q = e.id;
                             cout << "enpassant\n";
                             attackpiece = e.attack;
@@ -173,8 +201,20 @@ void Game::order(MOVE move)
                             Turn = false;
                             throw e;
                         }
-                        catch(pawnpromotion & e)
+                        catch (pawnpromotion &e)
                         {
+                            try
+                            {
+                                move += "0";
+                                gameBoard.threat(player2->getcolor());
+                                cout << "try\n";
+                            }
+                            catch (const kishexcept &er)
+                            {
+                                cout << "catch\n";
+                                gameBoard.undo(move, nullptr);
+                                throw invalid_argument("you have kish can't this move!");
+                            }
                             saveMove += "0";
                             moves.push_back(saveMove);
                             Turn = false;
@@ -199,11 +239,24 @@ void Game::order(MOVE move)
                     {
                         try
                         {
-                            attackpiece = gameBoard.attack(move);
+                            attackpiece = gameBoard.attack(move); // attack is kish p1
                             saveMove += "1";
+                            move += "1";
                         }
-                        catch(pawnpromotion& e)
+                        catch (pawnpromotion &e)
                         {
+                            try
+                            {
+                                move += "1";
+                                gameBoard.threat(player2->getcolor());
+                                cout << "try\n";
+                            }
+                            catch (const kishexcept &e)
+                            {
+                                cout << "catch\n";
+                                gameBoard.undo(move, attackpiece);
+                                throw invalid_argument("you have kish can't this move!");
+                            }
                             saveMove += "1";
                             attackpiece = e.attack;
                             e.attack = nullptr;
@@ -246,11 +299,23 @@ void Game::order(MOVE move)
                         cerr << "start move piece" << endl;
                         try
                         {
-                            gameBoard.movePiece(move);
+                            gameBoard.movePiece(move); // movepiece  isn't   kish  p2
+                            move += "0";
                             saveMove += "0";
                         }
-                        catch(enpassantexcept & e)
+                        catch (enpassantexcept &e)
                         {
+                            try
+                            {
+                                move += "1";
+                                cout << "try pin\n";
+                                gameBoard.threat(player1->getcolor());
+                            }
+                            catch (const kishexcept &err)
+                            {
+                                gameBoard.undo(move, e.attack);
+                                throw invalid_argument("this piece is pinned!");
+                            }
                             ID q = e.id;
                             cout << "enpassant\n";
                             attackpiece = e.attack;
@@ -262,8 +327,19 @@ void Game::order(MOVE move)
                             Turn = true;
                             throw e;
                         }
-                        catch(pawnpromotion & e)
+                        catch (pawnpromotion &e)
                         {
+                            try
+                            {
+                                move += "0";
+                                cout << "try pin\n";
+                                gameBoard.threat(player1->getcolor());
+                            }
+                            catch (const kishexcept &e)
+                            {
+                                gameBoard.undo(move, nullptr);
+                                throw invalid_argument("this piece is pinned!");
+                            }
                             saveMove += "0";
                             moves.push_back(saveMove);
                             Turn = true;
@@ -288,10 +364,11 @@ void Game::order(MOVE move)
                     {
                         try
                         {
-                            attackpiece = gameBoard.attack(move);
+                            attackpiece = gameBoard.attack(move); //attack   isn't  kish   p2
                             saveMove += "1";
+                            move += "1";
                         }
-                        catch(pawnpromotion& e)
+                        catch (pawnpromotion &e)
                         {
                             saveMove += "1";
                             attackpiece = e.attack;
@@ -299,6 +376,15 @@ void Game::order(MOVE move)
                             moves.push_back(saveMove);
                             Turn = true;
                             throw e;
+                        }
+                        try
+                        {
+                            gameBoard.threat(player1->getcolor());
+                        }
+                        catch (const kishexcept &e)
+                        {
+                            gameBoard.undo(move, attackpiece);
+                            throw invalid_argument("this piece is pinned!");
                         }
                     }
                     moves.push_back(saveMove);
@@ -314,11 +400,24 @@ void Game::order(MOVE move)
                         cerr << "start move piece" << endl;
                         try
                         {
-                            gameBoard.movePiece(move);
+                            gameBoard.movePiece(move); //movepiece  is  kish  p2
                             saveMove += "0";
+                            move += "0";
                         }
-                        catch(enpassantexcept & e)
+                        catch (enpassantexcept &e)
                         {
+                            try
+                            {
+                                move += "1";
+                                gameBoard.threat(player1->getcolor());
+                                cout << "try\n";
+                            }
+                            catch (const kishexcept &r)
+                            {
+                                cout << "catch\n";
+                                gameBoard.undo(move, e.attack);
+                                throw invalid_argument("you have kish can't this move!");
+                            }
                             ID q = e.id;
                             cout << "enpassant\n";
                             attackpiece = e.attack;
@@ -330,8 +429,20 @@ void Game::order(MOVE move)
                             Turn = true;
                             throw e;
                         }
-                        catch(pawnpromotion & e)
+                        catch (pawnpromotion &e)
                         {
+                            try
+                            {
+                                move += "0";
+                                gameBoard.threat(player1->getcolor());
+                                cout << "try\n";
+                            }
+                            catch (const kishexcept &e)
+                            {
+                                cout << "catch\n";
+                                gameBoard.undo(move, nullptr);
+                                throw invalid_argument("you have kish can't this move!");
+                            }
                             saveMove += "0";
                             moves.push_back(saveMove);
                             Turn = true;
@@ -358,11 +469,25 @@ void Game::order(MOVE move)
                     {
                         try
                         {
-                            attackpiece = gameBoard.attack(move);
+                            attackpiece = gameBoard.attack(move); //attack is  kish  p2
                             saveMove += "1";
+                            move += "1";
                         }
-                        catch(pawnpromotion& e)
+                        catch (pawnpromotion &e)
                         {
+                            try
+                            {
+                                move += "1";
+                                gameBoard.threat(player1->getcolor());
+                                cout << "try\n";
+                            }
+                            catch (const kishexcept &e)
+                            {
+
+                                cout << "catch\n";
+                                gameBoard.undo(move, attackpiece);
+                                throw invalid_argument("you have kish can't this move!");
+                            }
                             saveMove += "1";
                             attackpiece = e.attack;
                             e.attack = nullptr;
@@ -385,7 +510,6 @@ void Game::order(MOVE move)
                     Turn = true;
                     return;
                 }
-                
             }
             throw invalid_argument("It is not your turn!");
         }
@@ -479,7 +603,7 @@ void Game::update_score()
             {
                 gameBoard.checkmate(player1->getcolor());
             }
-            catch(const matexcept& e)
+            catch (const matexcept &e)
             {
                 player2->addScore(1, 70);
                 score += 70;
@@ -535,7 +659,7 @@ void Game::update_score()
             {
                 gameBoard.checkmate(player1->getcolor());
             }
-            catch(const matexcept& er)
+            catch (const matexcept &er)
             {
                 player1->addScore(1, 70);
                 score += 70;
@@ -556,40 +680,32 @@ void Game::update_score()
     }
 }
 
-
-
-
-
 Player &Game::compareScore()
 {
-    if(player1->getScore(1) > player2->getScore(1))
+    if (player1->getScore(1) > player2->getScore(1))
     {
         return *player1;
-    } else if(player1->getScore(1) < player2->getScore(1))
+    }
+    else if (player1->getScore(1) < player2->getScore(1))
     {
         return *player2;
-    }else {
+    }
+    else
+    {
         throw Equality();
     }
 }
-
-
-
 
 void Game::restart()
 {
     player1->restartScore();
     player2->restartScore();
-
 }
-
-
-
 
 void Game::promotion(ID pawncell, piece typepiece)
 {
-    ChessMan * temppiece;
-    Cell * temp = gameBoard.search(pawncell);
+    ChessMan *temppiece;
+    Cell *temp = &gameBoard.search(pawncell);
     switch (typepiece)
     {
     case QUEEN:
@@ -611,7 +727,37 @@ void Game::promotion(ID pawncell, piece typepiece)
         throw invalid_argument("piece type invalid");
         break;
     }
-    ChessMan * chess = temp->getPiece();
+    ChessMan *chess = temp->getPiece();
     delete chess;
     temp->setPiece(temppiece);
+}
+
+
+void Game::twomove(MOVE move)
+{
+    try
+    {
+        this->order(move);
+        if (Trun)
+        {
+            Turn = false;
+        }
+        else
+        {
+            Turn = true;   
+        }
+    }
+    catch(const std::exception& e)
+    {
+        if (Trun)
+        {
+            Turn = false;
+        }
+        else
+        {
+            Turn = true;   
+        }
+        throw e;
+    }
+    
 }

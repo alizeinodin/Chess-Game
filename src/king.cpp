@@ -218,9 +218,9 @@ void king::castling(string str, std::array<std::array<Cell, 8>, 8> &board)
                     if (f1 && search_cell("H1", board)->getPiece()->get_type() == ROOK)
                     {
                         cells[0] = search_cell(temp.first, board);
-                        cells[0]->empty();
                         cells[1] = search_cell("G1", board);
-                        cells[1]->setPiece(this);
+                        cells[1]->setPiece(cells[0]->getPiece());
+                        cells[0]->empty();
                         cells[0] = search_cell("H1", board);
                         ChessMan *chess = cells[0]->getPiece();
                         cells[0]->empty();
@@ -239,9 +239,9 @@ void king::castling(string str, std::array<std::array<Cell, 8>, 8> &board)
                     if (d1 && b1 && search_cell("A1", board)->getPiece()->get_type() == ROOK)
                     {
                         cells[0] = search_cell(temp.first, board);
-                        cells[0]->empty();
                         cells[1] = search_cell("C1", board);
-                        cells[1]->setPiece(this);
+                        cells[1]->setPiece(cells[0]->getPiece());
+                        cells[0]->empty();
                         cells[0] = search_cell("A1", board);
                         ChessMan *chess = cells[0]->getPiece();
                         cells[0]->empty();
@@ -266,9 +266,9 @@ void king::castling(string str, std::array<std::array<Cell, 8>, 8> &board)
                     if (f8 && search_cell("H8", board)->getPiece()->get_type() == ROOK)
                     {
                         cells[0] = search_cell(temp.first, board);
-                        cells[0]->empty();
                         cells[1] = search_cell("G8", board);
-                        cells[1]->setPiece(this);
+                        cells[1]->setPiece(cells[0]->getPiece());
+                        cells[0]->empty();
                         cells[0] = search_cell("H8", board);
                         ChessMan *chess = cells[0]->getPiece();
                         cells[0]->empty();
@@ -287,9 +287,9 @@ void king::castling(string str, std::array<std::array<Cell, 8>, 8> &board)
                     if (d8 && b8 && search_cell("A8", board)->getPiece()->get_type() == ROOK)
                     {
                         cells[0] = search_cell(temp.first, board);
-                        cells[0]->empty();
                         cells[1] = search_cell("C8", board);
-                        cells[1]->setPiece(this);
+                        cells[1]->setPiece(cells[0]->getPiece());
+                        cells[0]->empty();
                         cells[0] = search_cell("A8", board);
                         ChessMan *chess = cells[0]->getPiece();
                         cells[0]->empty();
