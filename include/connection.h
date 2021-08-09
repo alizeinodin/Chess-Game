@@ -29,6 +29,9 @@ class connection : public QObject
     Q_PROPERTY(QString player1Name READ player1Name WRITE setPlayer1Name NOTIFY player1NameChanged)
     Q_PROPERTY(QString player2Name READ player2Name WRITE setPlayer2Name NOTIFY player2NameChanged)
 
+    // trun of game
+    Q_PROPERTY(bool turnGame READ turnGame WRITE setTurnGame NOTIFY turnGameChanged)
+
 public:
     explicit connection(QObject *parent = nullptr);
     void updateScore();
@@ -69,6 +72,9 @@ signals:
 
     // castleing
     void castleing();
+
+    // turn of game
+    void turnGameChanged();
 
 
 public slots:
@@ -141,6 +147,9 @@ public slots:
     QString getWinnerScore();
     QString getWinnerText();
 
+    // turn of game
+    bool turnGame();
+    void setTurnGame(bool);
 
 
 
@@ -150,6 +159,9 @@ private:
     Game * game = nullptr;
     QString gameName;
     std::string messageStr;
+
+    // turn of game
+    bool turn;
 
 
     // player's score

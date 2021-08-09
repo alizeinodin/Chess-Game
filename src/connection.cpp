@@ -264,3 +264,15 @@ QString connection::getWinnerText()
     return winnertxt;
 }
 // ------------
+
+// turn smart variable
+// ------------
+void connection::setTurnGame(bool turn)
+{
+    this->turn = turn;
+}
+bool connection::turnGame()
+{
+    return turn;
+}
+// ------------

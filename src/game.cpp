@@ -761,3 +761,10 @@ void Game::twomove(MOVE move)
     }
     
 }
+// this function get turn for ui
+// ---------------
+bool Game::getTurn()
+{
+    return Turn;
+}
+// ---------------

@@ -35,6 +35,7 @@ class Game
     std::string random_move();
     void promotion(ID pawncell, piece);
     void twomove(MOVE);
+    bool getTurn();
 //    void setFile(QString);
 };
 
