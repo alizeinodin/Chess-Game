@@ -29,8 +29,6 @@ class connection : public QObject
     Q_PROPERTY(QString player1Name READ player1Name WRITE setPlayer1Name NOTIFY player1NameChanged)
     Q_PROPERTY(QString player2Name READ player2Name WRITE setPlayer2Name NOTIFY player2NameChanged)
 
-    // counter move's of restart
-    Q_PROPERTY(unsigned long counterRestart READ counterRestart WRITE setCounterRestart NOTIFY counterRestartChanged)
 public:
     explicit connection(QObject *parent = nullptr);
     void updateScore();
@@ -68,6 +66,9 @@ signals:
 
     // mat signal
     void mat();
+
+    // castleing
+    void castleing();
 
 
 public slots:
@@ -130,7 +131,6 @@ public slots:
     QString destId();
 
     // counter restart
-    void setCounterRestart(unsigned long);
     unsigned long counterRestart();
 
     // get message
