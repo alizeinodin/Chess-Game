@@ -214,8 +214,69 @@ void ChessBoard::undo(MOVE move, ChessMan *attackp)
 {
     auto cellsid = cut_str(move);
     Cell *cells[2];
+    Cell * temp;
     cells[0] = search_cell(cellsid.second, Board);
     cells[1] = search_cell(cellsid.first, Board);
+    if (cellsid.second == "C1" || cellsid.second == "G1" || cellsid.second == "C8" || cellsid.second == "G8")
+    {
+        king *k;
+        if (cells[0]->getPiece()->get_type() == KING)
+        {
+            k = dynamic_cast<king *>(cells[0]->getPiece());
+            if (k->iscastling)
+            {
+                if (k->get_color() == "White")
+                {
+                    cells[1] = search_cell("F1", Board);
+                    if (!cells[1]->getState())
+                    {
+                        if (cells[1]->getPiece()->get_type() == ROOK)
+                        {
+                            temp = search_cell("H1", Board);
+                            temp->setPiece(cells[1]->getPiece());
+                            cells[1]->empty();
+                        }
+                    }
+                    cells[1] = search_cell("D1", Board);
+                    if (!cells[1]->getState())
+                    {
+                        if (cells[1]->getPiece()->get_type() == ROOK)
+                        {
+                            temp = search_cell("A1", Board);
+                            temp->setPiece(cells[1]->getPiece());
+                            cells[1]->empty();
+                        }
+                    }
+                }
+                else
+                {
+                    cells[1] = search_cell("F8", Board);
+                    if (!cells[1]->getState())
+                    {
+                        if (cells[1]->getPiece()->get_type() == ROOK)
+                        {
+                            temp = search_cell("H8", Board);
+                            temp->setPiece(cells[1]->getPiece());
+                            cells[1]->empty();
+                        }
+                    }
+                    cells[1] = search_cell("D8", Board);
+                    if (!cells[1]->getState())
+                    {
+                        if (cells[1]->getPiece()->get_type() == ROOK)
+                        {
+                            temp = search_cell("A8", Board);
+                            temp->setPiece(cells[1]->getPiece());
+                            cells[1]->empty();
+                        }
+                    }
+                }
+                
+            }
+        }
+        cells[0] = search_cell(cellsid.second, Board);
+        cells[1] = search_cell(cellsid.first, Board);
+    }
     cells[1]->setPiece(cells[0]->getPiece());
     cells[0]->empty();
     if (move.at(5) == '1')
