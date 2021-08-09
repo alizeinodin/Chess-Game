@@ -481,3 +481,134 @@ void pawn::enpassantattack(Cell **cell, MOVE m)
         throw enpassantexcept(attackpiece, cell[1]->getId());
     }
 }
+
+ID pawn::get_random(ID origin)
+{
+    if (origin.size() == 0)
+    {
+        throw invalid_argument("move command invalid");
+    }
+    threat_id.clear();
+    possible.clear();
+    Cell *celltemp;
+    int num = get_num(origin);
+    int temp_num = num - 1;
+    char character[] = "a";
+    ID id;
+    get_char(origin, character);
+    string temp;
+    if (this->color == "Black")
+    {
+        if (num == 7)
+        {
+            int dy[] = {-1, -2};
+            for (size_t i = 0; i < 2; i++)
+            {
+                temp += origin.at(0);
+                temp += to_string(num + dy[i]);
+                if (iscell(temp))
+                {
+                    possible.push_back(temp);
+                }
+
+                temp.clear();
+            }
+        }
+        else
+        {
+            temp += origin.at(0);
+            temp += to_string(num - 1);
+            if (iscell(temp))
+            {
+                possible.push_back(temp);
+            }
+
+            temp.clear();
+        }
+        vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
+        auto it = (find(alfa.cbegin(), alfa.cend(), character) - 1);
+        if ((it >= alfa.cbegin()) && (temp_num > 0) && (it < alfa.cend()))
+        {
+            temp += (it)->at(0);
+            temp += to_string(temp_num);
+            if (iscell(temp))
+            {
+                possible.push_back(temp);
+            }
+        }
+        temp.clear();
+        temp_num = num - 1;
+        it = (find(alfa.cbegin(), alfa.cend(), character) + 1);
+        if ((it < alfa.cend()) && (temp_num > 0) && (it >= alfa.cbegin()))
+        {
+            temp += (it)->at(0);
+            temp += to_string(temp_num);
+            if (iscell(temp))
+            {
+                possible.push_back(temp);
+            }
+        }
+    }
+    else
+    {
+        if (num == 2)
+        {
+            int dy[] = {1, 2};
+            for (size_t i = 0; i < 2; i++)
+            {
+                temp += origin.at(0);
+                temp += to_string(num + dy[i]);
+                //cout << "temp" << temp << endl;
+                //cout << "get" << iscell(temp);
+                if (iscell(temp))
+                {
+                    possible.push_back(temp);
+                }
+
+                temp.clear();
+            }
+        }
+        else
+        {
+            temp += origin.at(0);
+            temp += to_string(num + 1);
+            //cout << temp << endl;
+            if (iscell(temp))
+            {
+                possible.push_back(temp);
+            }
+            temp.clear();
+        }
+        vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
+        temp_num = num + 1;
+        auto it = (find(alfa.cbegin(), alfa.cend(), character) - 1);
+        if (possible.size() != 0)
+        {
+            id = possible.back();
+        }
+        if ((it >= alfa.cbegin()) && (temp_num > 0) && (it < alfa.cend()))
+        {
+            temp += (it)->at(0);
+            temp += to_string(temp_num);
+            if (iscell(temp))
+            {
+                possible.push_back(temp);
+            }
+        }
+        temp.clear();
+        temp_num = num + 1;
+        it = (find(alfa.cbegin(), alfa.cend(), character) + 1);
+        if ((it < alfa.cend()) && (temp_num <= 8) && (it >= alfa.cbegin()))
+        {
+            temp += (it)->at(0);
+            temp += to_string(temp_num);
+            if (iscell(temp))
+            {
+                possible.push_back(temp);
+            }
+        }
+    }
+    string rand = possible.at(randomNoGenerator(possible.size()- 1));
+    possible.clear();
+    return rand;
+}

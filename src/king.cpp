@@ -318,3 +318,38 @@ std::vector<ID> &king:: get_kishpath()
 {
     return kishpath;
 }
+
+ID king::get_random(ID origin)
+{
+    threat_id.clear();
+    possible.clear();
+    char character[] = "a";
+    get_char(origin, character);
+    vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
+    int dx[] = {1, 1, 1, -1, -1, -1, 0, 0}; // all possible moves.
+    int dy[] = {1, -1, 0, -1, 1, 0, -1, 1}; // all possible moves.
+    auto it = find(alfa.cbegin(), alfa.cend(), character);
+    string temp;
+    Cell *celltemp;
+    int num = get_num(origin);
+    for (size_t i = 0; i < 8; i++)
+    {
+        if (((num + dx[i]) <= 8) && ((num + dx[i]) > 0))
+        {
+            if (((it + dy[i]) < alfa.cend()) && ((it + dy[i]) >= alfa.cbegin()))
+            {
+                temp += (it + dy[i])->at(0);
+                temp += to_string(num + dx[i]);
+                //cout << origin << "\tking" << temp << endl;
+            }
+        }
+        if (iscell(temp))
+        {
+            possible.push_back(temp);
+        }
+        temp.clear();
+    }
+    string rand = possible.at(randomNoGenerator(possible.size()- 1));
+    possible.clear();
+    return rand;
+}

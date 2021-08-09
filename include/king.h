@@ -18,6 +18,7 @@ public:
     void insert(std::vector<ID>&);
     bool getmate() {return ismate;}
     std::vector<ID>& get_kishpath();
+    virtual ID get_random(ID);
     ID kishr;
     bool iscastling = false;
 
