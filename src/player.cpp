@@ -87,3 +87,21 @@ bool Player::iskish()
 {
     return kish;
 }
+
+
+void Player:: addporomotion(ChessMan * t)
+{
+    poromotion.push_back(t);
+}
+
+pawn * Player:: addporomotion()
+{
+    if (poromotion.size() != 0)
+    {
+        ChessMan * t = poromotion.back();
+
+        poromotion.pop_back();
+        return dynamic_cast<pawn *> (t);
+    }
+    return nullptr;
+}

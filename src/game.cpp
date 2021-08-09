@@ -578,7 +578,14 @@ void Game::promotion(ID pawncell, piece typepiece)
         break;
     }
     ChessMan *chess = temp->getPiece();
-    delete chess;
+    if (moves.back().at(1) == '1')
+    {
+        player1->addporomotion(chess);
+    }
+    else if (moves.back().at(1) == '2')
+    {
+        player2->addporomotion(chess);
+    }
     temp->setPiece(temppiece);
 }
 

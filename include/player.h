@@ -5,6 +5,7 @@
 #include <stdexcept>
 #include <vector>
 #include "chessMan.h"
+#include "pawn.h"
 
 using PID = std::string;
 using Name = QString;
@@ -21,6 +22,7 @@ class Player
     Score NScore = 0; // negative score
     COLOR color;
     std::vector<ChessMan *> attackpiece;
+    std::vector<ChessMan *> poromotion;
 
 
     public:
@@ -33,6 +35,8 @@ class Player
     ChessMan * get_last_attack();
     void setkish(bool);
     bool iskish();
+    void addporomotion(ChessMan *);
+    pawn * addporomotion();
 };
 
 #endif /* _PLAYER_H */
