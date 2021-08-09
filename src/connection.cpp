@@ -2,6 +2,8 @@
 #include "../include/kishexcept.h"
 #include <iostream>
 #include <QDebug>
+#include <QApplication>
+#include <QProcess>
 using namespace std;
 
 connection::connection(QObject *parent) : QObject(parent)
@@ -125,14 +127,10 @@ void connection::setOrder(QString order)
         game->update_score();
         updateScore();
         emit successMove();
-    } catch (invalid_argument & error) {
+    } catch (kishexcept & error){
         messageStr = error.what();
-        emit loseMove();
+        emit kish();
     }
-     catch (kishexcept & error){
-         messageStr = error.what();
-         emit kish();
-     }
     catch (matexcept & error){
         try {
             Player & winner = game->compareScore();
@@ -144,12 +142,15 @@ void connection::setOrder(QString order)
             }
             winnerScore = winner.getScore(1);
             winnertxt = QString("برنده شدید");
-             emit mat();
-        } catch (Equality) {
+            emit mat();
+        } catch (Equality & error) {
             winnerName = player1Name() + QString(" و ") + player2Name();
             winnerScore = game->getPlayer("White").getScore(1);
             winnertxt = QString("مساوی شدید");
         }
+    } catch (exception & error) {
+        messageStr = error.what();
+        emit loseMove();
     }
     order.clear();
 }
@@ -177,11 +178,6 @@ void connection::undo()
     destIdVal = secondCell;
     updateScore();
 
-    if(counter > 0)
-    {
-        counter++;
-    }
-
     emit undoMove();
 }
 // ------------
@@ -190,19 +186,8 @@ void connection::undo()
 // ------------
 void connection::restart()
 {
-    if(counter == 0)
-    {
-        counter = 1;
-    }
-    if (counter <= game->movesUndo().size()) {
-        undo();
-    }
-    if(counter > game->movesUndo().size())
-    {
-        counter = 1;
-        game->restart();
-        updateScore();
-    }
+    qApp->quit();
+    QProcess::startDetached(qApp->arguments()[0], qApp->arguments());;
 }
 // ------------
 
@@ -211,8 +196,7 @@ void connection::restart()
 void connection::exitGame()
 {
     delete game;
-    restart();
-    emit exit();
+    qApp->quit();
 }
 // ------------
 
@@ -244,13 +228,8 @@ void connection::updateScore()
 }
 // ------------
 
-// counter smart var
+// counter Wvar
 // ------------
-void connection::setCounterRestart(unsigned long cnt)
-{
-    counter = cnt;
-}
-
 unsigned long connection::counterRestart()
 {
     return counter;

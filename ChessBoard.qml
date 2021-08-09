@@ -28,10 +28,12 @@ Item {
     Connections{
         target: connection
         onSuccessMove:{
+            var Piece = board.move[0];
             board.move = "";
             board.turn = !board.turn;
             //set animation destination
             var indesDest = Func.indexCell(board.destid.id);
+            var indexOrg = Func.indexCell(board.orgid.id);
             moveAnimation.tox = (indesDest) * (board.orgid.width + board.rowOrg.spacing);
             moveAnimation.toy = (board.rowDest.index - board.rowOrg.index) * -(board.destid.height + (pixel * 1.35));
             moveAnimation.running = true; // Animation for move
@@ -50,6 +52,11 @@ Item {
             }
             board.destid.piece = board.orgid.piece;
             message.visible = false;
+            if(Piece === "K" && (indesDest-indexOrg) % 2 === 0)
+            {
+                console.log("cast");
+                pauseCast.running = true;
+            }
         }
         onLoseMove:{
             losePieceSound.play();
@@ -92,11 +99,6 @@ Item {
             //            }
 
             board.destid.piece = board.orgid.piece;
-            if(connection.counterRestart > 0)
-            {
-                connection.restart();
-            }
-            message.visible = false;
         }
         onKish:
         {
@@ -113,6 +115,79 @@ Item {
             matScore.text = connection.getWinnerScore();
             mattxt2.text = connection.getWinnerText();
             mat.visible = true;
+        }
+
+        onCastleing:{
+            var rowid;
+            if(board.rowDest === row1)
+            {
+                rowid = row1;
+                if(board.destid === g1)
+                {
+                    board.move = "Rh1f1";
+                    board.rowOrg = rowid;
+                    board.orgid = h1;
+                    board.orgimg = h1Img;
+                    board.orgx = h1.x;
+                    board.orgy = h1.y;
+                    board.rowDest = rowid;
+                    board.destid = f1;
+                    board.destimg = f1Img;
+                    board.img = board.destimg.source.toString();
+                    board.turn = !board.turn;
+                    connection.successMove();
+                }
+
+                if(board.destid === c1)
+                {
+                    board.move = "Ra1d1";
+                    board.rowOrg = rowid;
+                    board.orgid = a1;
+                    board.orgimg = a1Img;
+                    board.orgx = a1.x;
+                    board.orgy = a1.y;
+                    board.rowDest = rowid;
+                    board.destid = d1;
+                    board.destimg = d1Img;
+                    board.img = board.destimg.source.toString();
+                    board.turn = !board.turn;
+                    connection.successMove();
+                }
+            } else if(board.rowDest === row8)
+            {
+                rowid = row8;
+                if(board.destid === g8)
+                {
+                    board.move = "Rh8f8";
+                    board.rowOrg = rowid;
+                    board.orgid = h8;
+                    board.orgimg = h8Img;
+                    board.orgx = h8.x;
+                    board.orgy = h8.y;
+                    board.rowDest = rowid;
+                    board.destid = f8;
+                    board.destimg = f8Img;
+                    board.img = board.destimg.source.toString();
+                    board.turn = !board.turn;
+                    connection.successMove();
+                }
+
+                if(board.destid === c8)
+                {
+                    board.move = "Ra8d8";
+                    board.rowOrg = rowid;
+                    board.orgid = a8;
+                    board.orgimg = a8Img;
+                    board.orgx = a8.x;
+                    board.orgy = a8.y;
+                    board.rowDest = rowid;
+                    board.destid = d8;
+                    board.destimg = d8Img;
+                    board.img = board.destimg.source.toString();
+                    board.turn = !board.turn;
+                    connection.successMove();
+                }
+            }
         }
 
         onExit:{
@@ -173,7 +248,7 @@ Item {
                 text: qsTr("شما با امتیاز:")
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: matName.bottom
-//                anchors.topMargin: pixel * 1
+                //                anchors.topMargin: pixel * 1
                 font.family: fontfarsi.name
                 font.pixelSize: pixel*3
             }
@@ -397,15 +472,6 @@ Item {
                 onClicked: connection.restart()
             }
             Button{
-                id: leftbtn
-                text: "انصراف"
-                anchors.horizontalCenter: btns.horizontalCenter
-                width: pixel * 16
-                height: pixel * 8
-                font.family: fontfarsi.name
-                font.pixelSize: pixel*2
-            }
-            Button{
                 id: savebtn
                 text: "ذخیره کردن"
                 anchors.horizontalCenter: btns.horizontalCenter
@@ -416,7 +482,26 @@ Item {
             }
             Button{
                 id: twomovebtn
-                text: "دو حرکت در یک نوبت"
+                text: "دو حرکت"
+                anchors.horizontalCenter: btns.horizontalCenter
+                width: pixel * 16
+                height: pixel * 8
+                font.family: fontfarsi.name
+                font.pixelSize: pixel*2
+            }
+            Button{
+                id: comeback
+                text: "بازگشت"
+                anchors.horizontalCenter: btns.horizontalCenter
+                width: pixel * 16
+                height: pixel * 8
+                font.family: fontfarsi.name
+                font.pixelSize: pixel*2
+                onClicked: connection.exit();
+            }
+            Button{
+                id: leftbtn
+                text: "انصراف"
                 anchors.horizontalCenter: btns.horizontalCenter
                 width: pixel * 16
                 height: pixel * 8
@@ -798,6 +883,19 @@ Item {
                     // return org cell to orginal place
                     board.orgid.x = board.orgx;
                     board.orgid.y = board.orgy;
+                }
+            }
+        }
+
+        // pause animation in castleing
+        PauseAnimation {
+            id: pauseCast
+            running: false
+            duration: 1000
+            onRunningChanged: {
+                if(running == false)
+                {
+                    connection.castleing();
                 }
             }
         }
@@ -1230,7 +1328,7 @@ Item {
                 }
             }
         }
-        
+
         Row{
             id : row3
             anchors.verticalCenter: board.verticalCenter
@@ -1434,7 +1532,7 @@ Item {
             }
 
         }
-        
+
 
         Row{
             id:row4
@@ -2482,7 +2580,7 @@ Item {
 
 
 
-    
+
 
     Item {
         id: player1Piece
