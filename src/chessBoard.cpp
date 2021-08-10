@@ -104,11 +104,27 @@ Cell &ChessBoard::search(std::string str)
 
 MOVE ChessBoard::randommoves(COLOR color)
 {
+    cout << "\ncolor: " << color << endl;
     ChessMan *temp;
-    vector<int> rndcell;
     string cellid;
-    int rand = randomNoGenerator(6);
-    switch (rand)
+    vector<ID> man;
+    string origin;
+    for (size_t i = 0; i < 8; i++)
+    {
+        for (size_t j = 0; j < 8; j++)
+        {
+            if (!Board.at(i).at(j).getState())
+            {
+                if (Board.at(i).at(j).getPiece()->get_color() == color)
+                {
+                    man.push_back(Board.at(i).at(j).getId());
+                }
+            }
+        }
+    }
+    string tempman = man.at(randomNoGenerator(man.size() - 1));
+    temp = search_cell(tempman, Board)->getPiece();
+    switch (temp->get_type())
     {
     case QUEEN:
         cellid += 'Q';
@@ -129,23 +145,10 @@ MOVE ChessBoard::randommoves(COLOR color)
         cellid += 'R';
         break;
     }
-    rndcell.push_back(randomNoGenerator(8));
-    rndcell.push_back(randomNoGenerator(8));
-    string origin;
-    for (size_t i = 0; i < 8; i++)
-    {
-        for (size_t j = 0; j < 8; j++)
-        {
-            temp = Board.at(i).at(j).getPiece();
-            if (temp->get_color() == color && temp->get_type() == rand)
-            {
-                origin = Board.at(i).at(j).getId();
-            }
-        }
-    }
-    cellid += origin.substr(0, 1);
-    cellid += Board.at(rndcell[0]).at(rndcell[1]).getId();
-    this->movePiece(cellid);
+    cellid += tempman;
+    cellid += temp->get_random(tempman);
+    cout << cellid << endl;
+    return cellid;
 }
 
 void ChessBoard::movePiece(MOVE move)

@@ -141,3 +141,43 @@ ChessMan *knight::attack(std::string move, Cell **cell)
     throw invalid_argument("can not move!!!");
     return attackpiece;
 }
+
+ID knight::get_random(ID origin)
+{
+
+    if (origin.size() == 0)
+    {
+        throw invalid_argument("move command invalid");
+    }
+    threat_id.clear();
+    possible.clear();
+    char character[] = "a";
+    get_char(origin, character);
+    vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
+    int dx[8] = {2, 2, -2, -2, 1, 1, -1, -1}; // all possible moves.
+    int dy[8] = {1, -1, 1, -1, 2, -2, 2, -2}; // all possible moves.
+    auto it = find(alfa.cbegin(), alfa.cend(), character);
+    string temp;
+    Cell *celltemp;
+    int num = get_num(origin);
+    for (size_t i = 0; i < 8; i++)
+    {
+        if (!(((num + dx[i]) > 9) && ((num + dx[i]) < 0)))
+        {
+            if (((it + dy[i]) < alfa.cend()) && ((it + dy[i]) >= alfa.cbegin()))
+            {
+                temp += (it + dy[i])->at(0);
+                temp += to_string(num + dx[i]);
+                //cout << temp << endl;
+            }
+        }
+        if (iscell(temp))
+        {
+            possible.push_back(temp);
+        }
+        temp.clear();
+    }
+    string rand = possible.at(randomNoGenerator(possible.size()- 1));
+    possible.clear();
+    return rand;
+}

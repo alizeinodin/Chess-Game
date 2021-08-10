@@ -15,11 +15,13 @@ public:
     virtual std::map<std::string, int> threat(std::string, std::array<std::array<Cell, 8>, 8> &board); // threat with cell ID and score
     virtual ChessMan  * attack(std::string, Cell **);
     std::vector<ID> get_kingcantmove();
-    void enpassantattack(Cell **);
+    void enpassantattack(Cell **, MOVE m);
+    virtual ID get_random(ID);
 
     private:
     std::vector<ID> kingcantmove;
     bool enpassant = false;
+    ID enpassantid;
 };
 
 #endif /* _PAWN_H */

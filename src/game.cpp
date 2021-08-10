@@ -46,6 +46,7 @@ Player Game::getPlayer(COLOR c)
 
 void Game::order(MOVE move)
 {
+    cerr << move << endl;
     string saveMove = move;
     transform(move.begin(), move.end(), move.begin(), ::toupper);
     Cell cell = gameBoard.search(cut_str(move).first);
@@ -380,7 +381,7 @@ QString Game::undo()
         moves.pop_back();
         if (temp.at(5) == '1')
         {
-            undoattack e(temp.substr(3, 2), player2->getcolor());
+            undoattack e(temp.substr(1, 2), player2->getcolor());
             throw e;
         }
     }
@@ -396,7 +397,7 @@ QString Game::undo()
         moves.pop_back();
         if (temp.at(5) == '1')
         {
-            undoattack e(temp.substr(3, 2), player1->getcolor());
+            undoattack e(temp.substr(1, 2), player1->getcolor());
             throw e;
         }
     }
@@ -625,3 +626,23 @@ bool Game::getTurn()
     return Turn;
 }
 // ---------------
+
+std::string Game:: random_move()
+{
+    cout << "random  \n";
+    string move;
+    if (Turn)
+    {
+        move = gameBoard.randommoves(player1->getcolor());
+        this->order(move);
+
+    }
+    else
+    {
+        move = gameBoard.randommoves(player2->getcolor());
+        this->order(move);
+    }
+    cout << "move :: " << move << endl;
+    return move;
+    
+}

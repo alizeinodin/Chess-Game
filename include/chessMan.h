@@ -29,6 +29,7 @@ public:
     piece get_type();
     std::vector<ID> &get_possiblemoves();
     std::vector<ID> &get_threat();
+    virtual ID get_random(ID) = 0;
 };
 
 #endif /* _CHESSMAN_H */

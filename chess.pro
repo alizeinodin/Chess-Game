@@ -68,7 +68,9 @@ HEADERS += \
     include/undoattack.h \
     include/using.h \
     include/util.h \
-    include/enpassantexcept.h
+    include/enpassantexcept.h \
+    include/undoattack.h \
+    include/pawnporomotion.h
 
 DISTFILES += \
     media/Sound/attackPiece.WAV

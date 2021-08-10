@@ -14,6 +14,7 @@ public:
     virtual void access(std::string origin, std::array<std::array<Cell, 8>, 8> &board); // cheking access for cell's
     virtual std::map<std::string, int> threat(std::string, std::array<std::array<Cell, 8>, 8> &board); // threat with cell ID and score
     virtual ChessMan  * attack(std::string, Cell **);
+    virtual ID get_random(ID);
 };
 
 #endif /* _QUEEN_H */
