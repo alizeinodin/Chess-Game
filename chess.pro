@@ -65,6 +65,7 @@ HEADERS += \
     include/player.h \
     include/queen.h \
     include/rook.h \
+    include/undoattack.h \
     include/using.h \
     include/util.h \
     include/enpassantexcept.h

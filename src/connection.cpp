@@ -1,9 +1,11 @@
 #include "../include/connection.h"
 #include "../include/kishexcept.h"
+#include "../include/undoattack.h"
 #include <iostream>
 #include <QDebug>
 #include <QApplication>
 #include <QProcess>
+
 using namespace std;
 
 connection::connection(QObject *parent) : QObject(parent)
@@ -181,12 +183,16 @@ void connection::startGame(QString name)
 // ------------
 void connection::undo()
 {
-    QString order = game->undo(), firstCell = order.mid(1, 2), secondCell = order.mid(3, 2);
-    orgIdVal = firstCell;
-    destIdVal = secondCell;
-    updateScore();
-
-    emit undoMove();
+    try{
+        QString order = game->undo(), firstCell = order.mid(1, 2), secondCell = order.mid(3, 2);
+        orgIdVal = firstCell;
+        destIdVal = secondCell;
+        updateScore();
+        emit undoMove();
+    } catch(undoattack & myPiece)
+    {
+        std::cerr << "ID UNDO ATTACK: -----" << myPiece.id << "-----" << std::endl;
+    }
 }
 // ------------
 

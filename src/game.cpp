@@ -380,7 +380,7 @@ QString Game::undo()
         moves.pop_back();
         if (temp.at(5) == '1')
         {
-            undoattack e(temp.substr(0, 2), player2->getcolor());
+            undoattack e(temp.substr(3, 2), player2->getcolor());
             throw e;
         }
     }
@@ -396,7 +396,7 @@ QString Game::undo()
         moves.pop_back();
         if (temp.at(5) == '1')
         {
-            undoattack e(temp.substr(0, 2), player1->getcolor());
+            undoattack e(temp.substr(3, 2), player1->getcolor());
             throw e;
         }
     }
