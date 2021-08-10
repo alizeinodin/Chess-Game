@@ -478,6 +478,9 @@ void pawn::enpassantattack(Cell **cell, MOVE m)
         
         cell[2]->empty();
         cell[1]->setPiece(cell[0]->getPiece());
+        enpassantundo += "N";
+        enpassantundo += cell[2]->getId();
+        enpassantundo += cell[1]->getId();
         cell[0]->empty();
         throw enpassantexcept(attackpiece, cell[2]->getId());
     }

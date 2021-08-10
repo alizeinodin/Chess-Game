@@ -100,8 +100,6 @@ void Game::order(MOVE move)
                             attackpiece = e.attack;
                             e.attack = nullptr;
                             saveMove += "1";
-                            saveMove.at(5) = q.at(0);
-                            saveMove.at(6) = q.at(1);
                             moves.push_back(saveMove);
                             Turn = false;
                             throw e;
@@ -245,8 +243,6 @@ void Game::order(MOVE move)
                             attackpiece = e.attack;
                             e.attack = nullptr;
                             saveMove += "1";
-                            saveMove.at(5) = q.at(0);
-                            saveMove.at(6) = q.at(1);
                             moves.push_back(saveMove);
                             Turn = true;
                             throw e;
@@ -360,6 +356,8 @@ void Game::startgame()
     gameBoard.startboard();
 }
 
+
+
 QString Game::undo()
 {
     string move = moves.back();
@@ -372,32 +370,50 @@ QString Game::undo()
     if (move.at(1) == '2')
     {
         tempattack = player2->get_last_attack();
-        gameBoard.undo(temp, tempattack);
+        try
+        {
+            gameBoard.undo(temp, tempattack);
+            temp.pop_back();
+        }
+        catch(string & e)
+        {
+            temp += e;
+        }
         player2->addScore(0, 5);
         tempscore.append(move.begin() + 8, move.end());
-        //cout << "sc " << *(move.begin() + 8) << endl << tempscore << endl;
+        cout << "sc "  << tempscore << endl;
         player2->addScore(1, -stoi(tempscore));
         Turn = false;
         moves.pop_back();
         if (temp.at(5) == '1')
         {
             undoattack e(temp, player2->getcolor());
+            cout << temp <<endl;
             throw e;
         }
     }
     else if (move.at(1) == '1')
     {
         tempattack = player1->get_last_attack();
-        gameBoard.undo(temp, tempattack);
+        try
+        {
+            gameBoard.undo(temp, tempattack);
+            temp.pop_back();
+        }
+        catch(string & e)
+        {
+            temp += e;
+        }
         player1->addScore(0, 5);
         tempscore.append(move.begin() + 8, move.end());
-        //cout << "sc " << *(move.begin() + 8) << endl << tempscore << endl;
+        cout << "sc " << tempscore << endl;
         player1->addScore(1, -stoi(tempscore));
         Turn = true;
         moves.pop_back();
         if (temp.at(5) == '1')
         {
             undoattack e(temp, player1->getcolor());
+            cout << temp <<endl;
             throw e;
         }
     }
@@ -446,6 +462,7 @@ void Game::update_score()
             score += temp;
             string t = to_string(score);
             moves.rbegin()->append(t);
+            cout << "movescmd:: " << endl;
         }
         catch (const kishexcept &e)
         {
@@ -466,6 +483,7 @@ void Game::update_score()
             score += 10;
             string t = to_string(score);
             moves.rbegin()->append(t);
+            cout << "movescmd:: " << endl;
             throw e;
         }
         if (player1->iskish())
@@ -501,6 +519,7 @@ void Game::update_score()
             score += temp;
             string t = to_string(score);
             moves.rbegin()->append(t);
+            cout << "movescmd:: " << moves.back() << endl;
         }
         catch (const kishexcept &e)
         {
@@ -522,6 +541,7 @@ void Game::update_score()
             score += 10;
             string t = to_string(score);
             moves.rbegin()->append(t);
+            cout << "movescmd:: " << moves.back() << endl;
             throw e;
         }
         if (player2->iskish())

@@ -160,11 +160,12 @@ void connection::setOrder(QString order)
     } catch (enpassantexcept & piece)
     {
         enpassentPiece = QString::fromStdString(piece.id);
+        game->update_score();
         updateScore();
         emit enPassent();
     } catch (exception & error) {
         messageStr = error.what();
-        game->update_score();
+        //game->update_score();
         updateScore();
         emit loseMove();
     }
