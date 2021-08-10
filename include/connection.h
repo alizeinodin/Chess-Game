@@ -76,6 +76,9 @@ signals:
     // turn of game
     void turnGameChanged();
 
+    // undo attack piece
+    void undoAttack();
+
 
 public slots:
 
@@ -151,6 +154,9 @@ public slots:
     bool turnGame();
     void setTurnGame(bool);
 
+    // get undo attack piece
+    QString getUndoAttackColor();
+
 
 
 
@@ -185,6 +191,9 @@ private:
     QString winnerName;
     unsigned long int winnerScore;
     QString winnertxt;
+
+    // undo attack recognize piece
+    QString undoPieceColor;
 };
 
 #endif // CONNECTION_H

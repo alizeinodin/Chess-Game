@@ -30,7 +30,7 @@ Item {
         onSuccessMove:{
             var Piece = board.move[0];
             board.move = "";
-//            board.turn = !board.turn;
+            //            board.turn = !board.turn;
             //set animation destination
             var indesDest = Func.indexCell(board.destid.id);
             var indexOrg = Func.indexCell(board.orgid.id);
@@ -83,23 +83,31 @@ Item {
             moveAnimation.running = true; // Animation for move
             movePieceSound.play(); // sound of move piece2
 
-            // add piece to lose piece's of player
-            //            if(board.destid.piece !== "")
-            //            {
-            //                if(board.turn)
-            //                {
-            //                    // func.recognizeImg used for convert QUrl to address that can read from js
-            //                    console.log("index", listModel1.count);
-            //                    listModel1.remove(listModel1.count);
-            ////                    console.log(listModel2.get(0).myImg);
-            //                } else {
-            //                    console.log(listModel2.get(listModel2.count));
-            ////                    listModel1.append({"myImg": Func.recognizeImg(board.img)});
-            //                }
-            //            }
-
             board.destid.piece = board.orgid.piece;
         }
+        onUndoAttack:
+        {
+            board.undoAttack = true;
+            connection.undoMove();
+            // add piece to lose piece's of player
+//            var myImg;
+//            if(connection.getUndoAttackColor() === "White")
+//            {
+//                // func.recognizeImg used for convert QUrl to address that can read from js
+//                myImg = listModel1.get(listModel1.count-1).myImg;
+//                console.log(myImg);
+//                console.log("DEST: ", board.orgid.id);
+//                console.log("ID: ", Func.recognize(myImg)[2]);
+//                board.orgid.id = Func.recognize(myImg)[2].split(".")[0];
+//                board.orgimg.source = myImg;
+//                listModel1.remove(listModel1.count-1);
+//            } else {
+//                console.log(listModel2.get(listModel2.count));
+//                //                    listModel1.append({"myImg": Func.recognizeImg(board.img)});
+//            }
+
+        }
+
         onKish:
         {
             connection.successMove();
@@ -134,7 +142,7 @@ Item {
                     board.destid = f1;
                     board.destimg = f1Img;
                     board.img = board.destimg.source.toString();
-//                    board.turn = !board.turn;
+                    //                    board.turn = !board.turn;
                     connection.successMove();
                 }
 
@@ -150,7 +158,7 @@ Item {
                     board.destid = d1;
                     board.destimg = d1Img;
                     board.img = board.destimg.source.toString();
-//                    board.turn = !board.turn;
+                    //                    board.turn = !board.turn;
                     connection.successMove();
                 }
             } else if(board.rowDest === row8)
@@ -168,7 +176,7 @@ Item {
                     board.destid = f8;
                     board.destimg = f8Img;
                     board.img = board.destimg.source.toString();
-//                    board.turn = !board.turn;
+                    //                    board.turn = !board.turn;
                     connection.successMove();
                 }
 
@@ -184,7 +192,7 @@ Item {
                     board.destid = d8;
                     board.destimg = d8Img;
                     board.img = board.destimg.source.toString();
-//                    board.turn = !board.turn;
+                    //                    board.turn = !board.turn;
                     connection.successMove();
                 }
             }
@@ -895,6 +903,7 @@ Item {
         anchors.horizontalCenter: mainBoard.horizontalCenter
         objectName: "board"
         property string move: ""
+        property bool undoAttack: false
         property bool turn: connection.turnGame
         property var img: null
         // access to id's with var
@@ -976,8 +985,25 @@ Item {
                     board.destimg.source = board.orgimg.source;
 
                     // update origin piece
-                    board.orgid.piece = "";
-                    board.orgimg.source = "";
+                    if(!board.undoAttack) // if move is'not undo and undo is'nt attack
+                    {
+                        board.orgid.piece = "";
+                        board.orgimg.source = "";
+                    } else { // if move is undo attack
+                        var myImg;
+                        if(connection.getUndoAttackColor() === "White")
+                        {
+                            myImg = listModel1.get(listModel1.count-1).myImg; // Img's address of pic of list of move loses of player2
+                            listModel1.remove(listModel1.count-1); // this img come on board and delete from list of move loses
+                        }
+                        else{
+                            myImg = listModel2.get(listModel2.count-1).myImg; // like up and for player1
+                            listModel2.remove(listModel2.count-1);
+                        }
+                        board.orgid.piece = Func.recognize(myImg)[2].split(".")[0];
+                        board.orgimg.source = myImg;
+                        board.undoAttack = false;
+                    }
 
                     // return org cell to orginal place
                     board.orgid.x = board.orgx;

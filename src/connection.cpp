@@ -191,7 +191,11 @@ void connection::undo()
         emit undoMove();
     } catch(undoattack & myPiece)
     {
-        std::cerr << "ID UNDO ATTACK: -----" << myPiece.id << "-----" << std::endl;
+        QString order = QString::fromStdString(myPiece.id), firstCell = order.mid(1, 2), secondCell = order.mid(3, 2);
+        orgIdVal = secondCell.toLower();
+        destIdVal = firstCell.toLower();
+        undoPieceColor = QString::fromStdString(myPiece.color);
+        emit undoAttack();
     }
 }
 // ------------
@@ -291,5 +295,13 @@ void connection::setTurnGame(bool turn)
 bool connection::turnGame()
 {
     return turn;
+}
+// ------------
+
+// get undo piece color
+// ------------
+QString connection::getUndoAttackColor()
+{
+    return undoPieceColor;
 }
 // ------------
