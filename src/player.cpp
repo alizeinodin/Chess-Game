@@ -94,7 +94,7 @@ void Player:: addporomotion(ChessMan * t)
     poromotion.push_back(t);
 }
 
-pawn * Player:: addporomotion()
+pawn * Player:: getporomotion()
 {
     if (poromotion.size() != 0)
     {

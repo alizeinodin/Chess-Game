@@ -366,9 +366,20 @@ QString Game::undo()
     // find last move of player
     // this code is for exist two move option in program
     string temp = move.substr(2, 6);
+    Cell & cellt;
     transform(temp.begin(), temp.end(), temp.begin(), ::toupper);
     if (move.at(1) == '2')
     {
+        if (temp.at(0) == 'P')
+        {
+            cellt = gameBoard.search(temp.substr(3, 2));
+            if (cellt.getPiece()->get_type() != PAWN)
+            {
+                cellt.setPiece(player2->getporomotion());
+            }
+            
+        }
+        
         tempattack = player2->get_last_attack();
         try
         {
@@ -394,6 +405,15 @@ QString Game::undo()
     }
     else if (move.at(1) == '1')
     {
+        if (temp.at(0) == 'P')
+        {
+            cellt = gameBoard.search(temp.substr(3, 2));
+            if (cellt.getPiece()->get_type() != PAWN)
+            {
+                cellt.setPiece(player1->getporomotion());
+            }
+            
+        }
         tempattack = player1->get_last_attack();
         try
         {
@@ -653,12 +673,14 @@ std::string Game:: random_move()
     string move;
     if (Turn)
     {
+        player1->addScore(0, -15);
         move = gameBoard.randommoves(player1->getcolor());
         this->order(move);
 
     }
     else
     {
+        player2->addScore(0, -15);
         move = gameBoard.randommoves(player2->getcolor());
         this->order(move);
     }
