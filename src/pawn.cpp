@@ -15,7 +15,7 @@ pawn::pawn(COLOR c) : ChessMan(c)
 
 void pawn::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
 {
-    Cell *cells[2];
+    Cell *cells[3];
     if (move.size() == 0)
     {
         throw invalid_argument("move command invalid");
@@ -24,6 +24,7 @@ void pawn::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
     {
         auto cellsid = cut_str(move);
         cells[0] = search_cell(cellsid.first, board);
+        cells[1] = search_cell(cellsid.second, board);
         this->access(cellsid.first, board);
         vector<string> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
         char character[] = "a";
@@ -45,7 +46,7 @@ void pawn::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
                     pawntemp = dynamic_cast<pawn *>(celltemp->getPiece());
                     if (pawntemp->enpassant)
                     {
-                        cells[1] = celltemp;
+                        cells[2] = celltemp;
                         this->enpassantattack(cells, move);
                     }
                 }
@@ -65,7 +66,7 @@ void pawn::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
                     pawntemp = dynamic_cast<pawn *>(celltemp->getPiece());
                     if (pawntemp->enpassant)
                     {
-                        cells[1] = celltemp;
+                        cells[2] = celltemp;
                         this->enpassantattack(cells, move);
                     }
                 }
@@ -465,20 +466,20 @@ void pawn::enpassantattack(Cell **cell, MOVE m)
 {
     cout << "enpass  method\n";
     auto mv = cut_str(m);
-    ChessMan *attackpiece = cell[1]->getPiece();
+    ChessMan *attackpiece = cell[2]->getPiece();
     pawn * p = dynamic_cast<pawn *> (attackpiece);
     if (p->enpassantid == mv.second)
     {
         cout << "enpass  if...\n";
         Cell *t;
-        string temp = cell[1]->getId();
+        string temp = cell[2]->getId();
         int a = get_num(temp);
         temp.at(1) = to_string(a).at(0);
         
-        cell[1]->empty();
+        cell[2]->empty();
         cell[1]->setPiece(cell[0]->getPiece());
         cell[0]->empty();
-        throw enpassantexcept(attackpiece, cell[1]->getId());
+        throw enpassantexcept(attackpiece, cell[2]->getId());
     }
 }
 
