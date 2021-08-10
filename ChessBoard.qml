@@ -89,25 +89,24 @@ Item {
         {
             board.undoAttack = true;
             connection.undoMove();
-            // add piece to lose piece's of player
-//            var myImg;
-//            if(connection.getUndoAttackColor() === "White")
-//            {
-//                // func.recognizeImg used for convert QUrl to address that can read from js
-//                myImg = listModel1.get(listModel1.count-1).myImg;
-//                console.log(myImg);
-//                console.log("DEST: ", board.orgid.id);
-//                console.log("ID: ", Func.recognize(myImg)[2]);
-//                board.orgid.id = Func.recognize(myImg)[2].split(".")[0];
-//                board.orgimg.source = myImg;
-//                listModel1.remove(listModel1.count-1);
-//            } else {
-//                console.log(listModel2.get(listModel2.count));
-//                //                    listModel1.append({"myImg": Func.recognizeImg(board.img)});
-//            }
-
         }
 
+        onEnPassent:{
+            connection.successMove();
+            var enpassentPiece = board.idMap[connection.getEnPassentPiece()];
+            var enpassentImg = board.idMap[connection.getEnPassentPiece()+'Img'];
+            var img = enpassentImg.source.toString();
+            if(Func.recognize(img)[2] === "White")
+            {
+                // func.recognizeImg used for convert QUrl to address that can read from js
+                listModel2.append({"myImg": Func.recognizeImg(img)});
+            } else {
+                listModel1.append({"myImg": Func.recognizeImg(img)});
+            }
+
+            enpassentImg.source = "";
+            enpassentPiece.id = "";
+        }
         onKish:
         {
             connection.successMove();

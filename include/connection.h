@@ -79,6 +79,9 @@ signals:
     // undo attack piece
     void undoAttack();
 
+    // en passent
+    void enPassent();
+
 
 public slots:
 
@@ -157,6 +160,9 @@ public slots:
     // get undo attack piece
     QString getUndoAttackColor();
 
+    // get En Passent piece
+    QString getEnPassentPiece();
+
 
 
 
@@ -194,6 +200,9 @@ private:
 
     // undo attack recognize piece
     QString undoPieceColor;
+
+    // enpassent piece
+    QString enpassentPiece;
 };
 
 #endif // CONNECTION_H

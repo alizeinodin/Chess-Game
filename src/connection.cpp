@@ -1,6 +1,7 @@
 #include "../include/connection.h"
 #include "../include/kishexcept.h"
 #include "../include/undoattack.h"
+#include "../include/enpassantexcept.h"
 #include <iostream>
 #include <QDebug>
 #include <QApplication>
@@ -156,6 +157,11 @@ void connection::setOrder(QString order)
             updateScore();
             winnertxt = QString("مساوی شدید");
         }
+    } catch (enpassantexcept & piece)
+    {
+        enpassentPiece = QString::fromStdString(piece.id);
+        updateScore();
+        emit enPassent();
     } catch (exception & error) {
         messageStr = error.what();
         game->update_score();
@@ -195,6 +201,7 @@ void connection::undo()
         orgIdVal = secondCell.toLower();
         destIdVal = firstCell.toLower();
         undoPieceColor = QString::fromStdString(myPiece.color);
+        updateScore();
         emit undoAttack();
     }
 }
@@ -303,5 +310,13 @@ bool connection::turnGame()
 QString connection::getUndoAttackColor()
 {
     return undoPieceColor;
+}
+// ------------
+
+// get enpassent piece
+// ------------
+QString connection::getEnPassentPiece()
+{
+    return enpassentPiece.toLower();
 }
 // ------------
