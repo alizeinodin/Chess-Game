@@ -127,11 +127,21 @@ void connection::setOrder(QString order)
     qDebug() << order;
     try {
         game->order(order.toStdString());
+        if(twoMoveAccess)
+        {
+            twoMove();
+            game->twomove();
+        }
         game->update_score();
         updateScore();
         emit successMove();
     } catch (kishexcept & error){
         messageStr = error.what();
+        if(twoMoveAccess)
+        {
+            twoMove();
+            game->twomove();
+        }
         game->update_score();
         updateScore();
         emit kish();
@@ -147,12 +157,22 @@ void connection::setOrder(QString order)
             }
             winnerScore = winner.getScore(1);
             winnertxt = QString("برنده شدید");
+            if(twoMoveAccess)
+            {
+                twoMove();
+                game->twomove();
+            }
             game->update_score();
             updateScore();
             emit mat();
         } catch (Equality & error) {
             winnerName = player1Name() + QString(" و ") + player2Name();
             winnerScore = game->getPlayer("White").getScore(1);
+            if(twoMoveAccess)
+            {
+                twoMove();
+                game->twomove();
+            }
             game->update_score();
             updateScore();
             winnertxt = QString("مساوی شدید");
@@ -160,10 +180,21 @@ void connection::setOrder(QString order)
     } catch (enpassantexcept & piece)
     {
         enpassentPiece = QString::fromStdString(piece.id);
+        if(twoMoveAccess)
+        {
+            twoMove();
+            game->twomove();
+        }
+        game->update_score();
         updateScore();
         emit enPassent();
     } catch (exception & error) {
         messageStr = error.what();
+        if(twoMoveAccess)
+        {
+            twoMove();
+            game->twomove();
+        }
         game->update_score();
         updateScore();
         emit loseMove();
@@ -318,5 +349,22 @@ QString connection::getUndoAttackColor()
 QString connection::getEnPassentPiece()
 {
     return enpassentPiece.toLower();
+}
+// ------------
+
+// two move
+// ------------
+void connection::twoMove()
+{
+    static size_t counter = 0;
+    if(counter >= 2)
+    {
+        counter = 0;
+        twoMoveAccess = false;
+        return;
+    }
+    qDebug() << "COUNTER: " << counter;
+    counter++;
+    twoMoveAccess = true; // access for two move
 }
 // ------------

@@ -595,6 +595,7 @@ Item {
                 height: pixel * 8
                 font.family: fontfarsi.name
                 font.pixelSize: pixel*2
+                onClicked: connection.twoMove()
             }
             Button{
                 id: comeback

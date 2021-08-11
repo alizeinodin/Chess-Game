@@ -34,7 +34,7 @@ class Game
     Player &compareScore();
     std::string random_move();
     void promotion(ID pawncell, piece);
-    void twomove(MOVE);
+    void twomove();
     bool getTurn();
 //    void setFile(QString);
 };

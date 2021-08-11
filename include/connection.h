@@ -163,6 +163,9 @@ public slots:
     // get En Passent piece
     QString getEnPassentPiece();
 
+    // two move slot
+    void twoMove();
+
 
 
 
@@ -203,6 +206,9 @@ private:
 
     // enpassent piece
     QString enpassentPiece;
+
+    // two move access
+    bool twoMoveAccess = false;
 };
 
 #endif // CONNECTION_H
