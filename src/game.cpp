@@ -81,9 +81,42 @@ void Game::order(MOVE move)
                     {
                         try
                         {
+<<<<<<< HEAD
                             move += "1";
                             gameBoard.threat(player2->getcolor());
                             cout << "try\n";
+=======
+                            gameBoard.movePiece(move); //move   is   kish   p1
+                            saveMove += "0";
+                            move += "0";
+                        }
+                        catch (enpassantexcept &e)
+                        {
+                            try
+                            {
+                                move += "1";
+                                gameBoard.threat(player2->getcolor());
+                                cout << "try\n";
+                            }
+                            catch (const kishexcept &er)
+                            {
+                                cout << "catch\n";
+                                gameBoard.undo(move, e.attack);
+                                if (!player1->iskish())
+                                {
+                                    throw invalid_argument("this piece is pinned!");
+                                }
+                                throw invalid_argument("you have kish can't this move!");
+                            }
+                            ID q = e.id;
+                            cout << "enpassant\n";
+                            attackpiece = e.attack;
+                            e.attack = nullptr;
+                            saveMove += "1";
+                            moves.push_back(saveMove);
+                            Turn = false;
+                            throw e;
+>>>>>>> a386948aabc1ebd2b88fc9c665e7ceb342943c1a
                         }
                         catch (const kishexcept &er)
                         {
@@ -226,9 +259,42 @@ void Game::order(MOVE move)
                     {
                         try
                         {
+<<<<<<< HEAD
                             move += "1";
                             gameBoard.threat(player1->getcolor());
                             cout << "try\n";
+=======
+                            gameBoard.movePiece(move); //movepiece  is  kish  p2
+                            saveMove += "0";
+                            move += "0";
+                        }
+                        catch (enpassantexcept &e)
+                        {
+                            try
+                            {
+                                move += "1";
+                                gameBoard.threat(player1->getcolor());
+                                cout << "try\n";
+                            }
+                            catch (const kishexcept &r)
+                            {
+                                cout << "catch\n";
+                                gameBoard.undo(move, e.attack);
+                                if (!player2->iskish())
+                                {
+                                    throw invalid_argument("this piece is pinned!");
+                                }
+                                throw invalid_argument("you have kish can't this move!");
+                            }
+                            ID q = e.id;
+                            cout << "enpassant\n";
+                            attackpiece = e.attack;
+                            e.attack = nullptr;
+                            saveMove += "1";
+                            moves.push_back(saveMove);
+                            Turn = true;
+                            throw e;
+>>>>>>> a386948aabc1ebd2b88fc9c665e7ceb342943c1a
                         }
                         catch (const kishexcept &r)
                         {
@@ -360,6 +426,8 @@ void Game::startgame()
     gameBoard.startboard();
 }
 
+
+
 QString Game::undo()
 {
     string move = moves.back();
@@ -368,36 +436,74 @@ QString Game::undo()
     // find last move of player
     // this code is for exist two move option in program
     string temp = move.substr(2, 6);
+    Cell & cellt;
     transform(temp.begin(), temp.end(), temp.begin(), ::toupper);
     if (move.at(1) == '2')
     {
+        if (temp.at(0) == 'P')
+        {
+            cellt = gameBoard.search(temp.substr(3, 2));
+            if (cellt.getPiece()->get_type() != PAWN)
+            {
+                cellt.setPiece(player2->getporomotion());
+            }
+            
+        }
+        
         tempattack = player2->get_last_attack();
-        gameBoard.undo(temp, tempattack);
+        try
+        {
+            gameBoard.undo(temp, tempattack);
+            temp.pop_back();
+        }
+        catch(string & e)
+        {
+            temp += e;
+        }
         player2->addScore(0, 5);
         tempscore.append(move.begin() + 8, move.end());
-        //cout << "sc " << *(move.begin() + 8) << endl << tempscore << endl;
+        cout << "sc "  << tempscore << endl;
         player2->addScore(1, -stoi(tempscore));
         Turn = false;
         moves.pop_back();
         if (temp.at(5) == '1')
         {
             undoattack e(temp, player2->getcolor());
+            cout << temp <<endl;
             throw e;
         }
     }
     else if (move.at(1) == '1')
     {
+        if (temp.at(0) == 'P')
+        {
+            cellt = gameBoard.search(temp.substr(3, 2));
+            if (cellt.getPiece()->get_type() != PAWN)
+            {
+                cellt.setPiece(player1->getporomotion());
+            }
+            
+        }
         tempattack = player1->get_last_attack();
-        gameBoard.undo(temp, tempattack);
+        try
+        {
+            gameBoard.undo(temp, tempattack);
+            temp.pop_back();
+        }
+        catch(string & e)
+        {
+            temp += e;
+        }
         player1->addScore(0, 5);
         tempscore.append(move.begin() + 8, move.end());
-        //cout << "sc " << *(move.begin() + 8) << endl << tempscore << endl;
+        cout << "sc " << tempscore << endl;
         player1->addScore(1, -stoi(tempscore));
         Turn = true;
         moves.pop_back();
         if (temp.at(5) == '1')
         {
             undoattack e(temp, player1->getcolor());
+            cout << temp <<endl;
             throw e;
         }
     }
@@ -446,6 +552,7 @@ void Game::update_score()
             score += temp;
             string t = to_string(score);
             moves.rbegin()->append(t);
+            cout << "movescmd:: " << endl;
         }
         catch (const kishexcept &e)
         {
@@ -466,6 +573,7 @@ void Game::update_score()
             score += 10;
             string t = to_string(score);
             moves.rbegin()->append(t);
+            cout << "movescmd:: " << endl;
             throw e;
         }
         if (player1->iskish())
@@ -501,6 +609,7 @@ void Game::update_score()
             score += temp;
             string t = to_string(score);
             moves.rbegin()->append(t);
+            cout << "movescmd:: " << moves.back() << endl;
         }
         catch (const kishexcept &e)
         {
@@ -522,6 +631,7 @@ void Game::update_score()
             score += 10;
             string t = to_string(score);
             moves.rbegin()->append(t);
+            cout << "movescmd:: " << moves.back() << endl;
             throw e;
         }
         if (player2->iskish())
@@ -630,12 +740,14 @@ std::string Game:: random_move()
     string move;
     if (Turn)
     {
+        player1->addScore(0, -15);
         move = gameBoard.randommoves(player1->getcolor());
         this->order(move);
 
     }
     else
     {
+        player2->addScore(0, -15);
         move = gameBoard.randommoves(player2->getcolor());
         this->order(move);
     }

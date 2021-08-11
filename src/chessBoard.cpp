@@ -217,7 +217,7 @@ void ChessBoard::undo(MOVE move, ChessMan *attackp)
 {
     auto cellsid = cut_str(move);
     Cell *cells[2];
-    Cell * temp;
+    Cell *temp;
     cells[0] = search_cell(cellsid.second, Board);
     cells[1] = search_cell(cellsid.first, Board);
     if (cellsid.second == "C1" || cellsid.second == "G1" || cellsid.second == "C8" || cellsid.second == "G8")
@@ -274,12 +274,31 @@ void ChessBoard::undo(MOVE move, ChessMan *attackp)
                         }
                     }
                 }
-                
             }
         }
         cells[0] = search_cell(cellsid.second, Board);
         cells[1] = search_cell(cellsid.first, Board);
     }
+    if (cells[0]->getPiece()->get_type() == PAWN)
+    {
+        pawn *p = dynamic_cast<pawn *>(cells[0]->getPiece());
+        if (!p->enpassantundo.empty())
+        {
+            cellsid = cut_str(p->enpassantundo);
+            if (cellsid.second == cells[0]->getId())
+            {
+                cells[1]->setPiece(cells[0]->getPiece());
+                cells[0]->empty();
+                cells[0] = search_cell(cellsid.first, Board);
+                if (move.at(5) == '1')
+                {
+                    cells[0]->setPiece(attackp);
+                }
+                throw cellsid.second;
+            }
+        }
+    }
+
     cells[1]->setPiece(cells[0]->getPiece());
     cells[0]->empty();
     if (move.at(5) == '1')

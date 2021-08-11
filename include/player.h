@@ -36,7 +36,7 @@ class Player
     void setkish(bool);
     bool iskish();
     void addporomotion(ChessMan *);
-    pawn * addporomotion();
+    pawn * getporomotion();
 };
 
 #endif /* _PLAYER_H */

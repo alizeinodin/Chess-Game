@@ -17,7 +17,7 @@ public:
     std::vector<ID> get_kingcantmove();
     void enpassantattack(Cell **, MOVE m);
     virtual ID get_random(ID);
-
+    ID enpassantundo;
     private:
     std::vector<ID> kingcantmove;
     bool enpassant = false;

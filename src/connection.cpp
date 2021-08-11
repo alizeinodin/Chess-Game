@@ -180,22 +180,29 @@ void connection::setOrder(QString order)
     } catch (enpassantexcept & piece)
     {
         enpassentPiece = QString::fromStdString(piece.id);
+<<<<<<< HEAD
         if(twoMoveAccess)
         {
             twoMove();
             game->twomove();
         }
+=======
+>>>>>>> a386948aabc1ebd2b88fc9c665e7ceb342943c1a
         game->update_score();
         updateScore();
         emit enPassent();
     } catch (exception & error) {
         messageStr = error.what();
+<<<<<<< HEAD
         if(twoMoveAccess)
         {
             twoMove();
             game->twomove();
         }
         game->update_score();
+=======
+        //game->update_score();
+>>>>>>> a386948aabc1ebd2b88fc9c665e7ceb342943c1a
         updateScore();
         emit loseMove();
     }
