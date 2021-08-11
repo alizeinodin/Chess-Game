@@ -81,11 +81,6 @@ void Game::order(MOVE move)
                     {
                         try
                         {
-<<<<<<< HEAD
-                            move += "1";
-                            gameBoard.threat(player2->getcolor());
-                            cout << "try\n";
-=======
                             gameBoard.movePiece(move); //move   is   kish   p1
                             saveMove += "0";
                             move += "0";
@@ -116,7 +111,6 @@ void Game::order(MOVE move)
                             moves.push_back(saveMove);
                             Turn = false;
                             throw e;
->>>>>>> a386948aabc1ebd2b88fc9c665e7ceb342943c1a
                         }
                         catch (const kishexcept &er)
                         {
@@ -259,11 +253,6 @@ void Game::order(MOVE move)
                     {
                         try
                         {
-<<<<<<< HEAD
-                            move += "1";
-                            gameBoard.threat(player1->getcolor());
-                            cout << "try\n";
-=======
                             gameBoard.movePiece(move); //movepiece  is  kish  p2
                             saveMove += "0";
                             move += "0";
@@ -294,7 +283,6 @@ void Game::order(MOVE move)
                             moves.push_back(saveMove);
                             Turn = true;
                             throw e;
->>>>>>> a386948aabc1ebd2b88fc9c665e7ceb342943c1a
                         }
                         catch (const kishexcept &r)
                         {
