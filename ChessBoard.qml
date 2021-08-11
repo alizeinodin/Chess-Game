@@ -124,6 +124,18 @@ Item {
             mat.visible = true;
         }
 
+        onPromotion:{
+            if(connection.turnGame)
+            {
+                convertPiece.type = "White";
+            }else{
+                convertPiece.type = "Black";
+            }
+
+            connection.successMove();
+            convertPiece.open();
+        }
+
         onCastleing:{
             var rowid;
             if(board.rowDest === row1)
@@ -335,15 +347,19 @@ Item {
         }
     }
     // when pawn come to end line of chessboard, it gets promoted. this item is for it
-    Item {
-        visible: false
+    Dialog {
+        //        visible: true
         id: convertPiece
         width: pixel * 35
         height: pixel * 10
-        anchors.margins: pixel * 2
+        //        anchors.margins: pixel * 2
+        margins: pixel * 2
+        closePolicy: "CloseOnEscape"
         anchors.centerIn: board
-        z:1
+        parent: board
+        modal: true
         property var type: "White" // for pawn of black and white player this property can variable
+
         Rectangle{
             anchors.fill: parent
             color: "#eee"
@@ -358,17 +374,20 @@ Item {
                 MouseArea{
                     width: pixel * 8
                     height: pixel * 8
-                    hoverEnabled: true
-                    onEntered: colorAnimationConvertPieceShow.running = true
-                    onExited: colorAnimationConvertPieceDisplay.running = true
                     cursorShape: Qt.PointingHandCursor
-                    onClicked: connection.undo();
+                    onClicked: {
+                        convertPiece.close();
+                        connection.setPromotion(1, board.destid.id);
+                        board.destid.piece = "R";
+                        board.destimg.source = convertPieceRIMG.source;
+                    }
 
                     Rectangle{
                         anchors.fill: parent
                         color: "#607D8B"
                         radius: 5
                         Image {
+                            id: convertPieceRIMG
                             anchors.fill: parent
                             source: "media/"+convertPiece.type+"/R.png"
                         }
@@ -377,16 +396,20 @@ Item {
                 MouseArea{
                     width: pixel * 8
                     height: pixel * 8
-                    hoverEnabled: true
-                    onEntered: colorAnimationConvertPieceShow.running = true
-                    onExited: colorAnimationConvertPieceDisplay.running = true
                     cursorShape: Qt.PointingHandCursor
+                    onClicked: {
+                        convertPiece.close();
+                        connection.setPromotion(1, board.destid.id);
+                        board.destid.piece = "B";
+                        board.destimg.source = convertPieceBIMG.source;
+                    }
 
                     Rectangle{
                         anchors.fill: parent
                         color: "#607D8B"
                         radius: 5
                         Image {
+                            id: convertPieceBIMG
                             anchors.fill: parent
                             source: "media/"+convertPiece.type+"/B.png"
                         }
@@ -395,16 +418,20 @@ Item {
                 MouseArea{
                     width: pixel * 8
                     height: pixel * 8
-                    hoverEnabled: true
-                    onEntered: colorAnimationConvertPieceShow.running = true
-                    onExited: colorAnimationConvertPieceDisplay.running = true
                     cursorShape: Qt.PointingHandCursor
+                    onClicked: {
+                        convertPiece.close();
+                        connection.setPromotion(1, board.destid.id);
+                        board.destid.piece = "Q";
+                        board.destimg.source = convertPieceQIMG.source;
+                    }
 
                     Rectangle{
                         anchors.fill: parent
                         color: "#607D8B"
                         radius: 5
                         Image {
+                            id: convertPieceQIMG
                             anchors.fill: parent
                             source: "media/"+convertPiece.type+"/Q.png"
                         }
@@ -413,16 +440,20 @@ Item {
                 MouseArea{
                     width: pixel * 8
                     height: pixel * 8
-                    hoverEnabled: true
-                    onEntered: colorAnimationConvertPieceShow.running = true
-                    onExited: colorAnimationConvertPieceDisplay.running = true
                     cursorShape: Qt.PointingHandCursor
+                    onClicked: {
+                        convertPiece.close();
+                        connection.setPromotion(1, board.destid.id);
+                        board.destid.piece = "H";
+                        board.destimg.source = convertPieceHIMG.source;
+                    }
 
                     Rectangle{
                         anchors.fill: parent
                         color: "#607D8B"
                         radius: 5
                         Image {
+                            id: convertPieceHIMG
                             anchors.fill: parent
                             source: "media/"+convertPiece.type+"/H.png"
                         }

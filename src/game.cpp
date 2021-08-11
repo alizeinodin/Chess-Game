@@ -81,42 +81,9 @@ void Game::order(MOVE move)
                     {
                         try
                         {
-<<<<<<< HEAD
-                            gameBoard.movePiece(move); //move   is   kish   p1
-                            saveMove += "0";
-                            move += "0";
-                        }
-                        catch (enpassantexcept &e)
-                        {
-                            try
-                            {
-                                move += "1";
-                                gameBoard.threat(player2->getcolor());
-                                cout << "try\n";
-                            }
-                            catch (const kishexcept &er)
-                            {
-                                cout << "catch\n";
-                                gameBoard.undo(move, e.attack);
-                                if (!player1->iskish())
-                                {
-                                    throw invalid_argument("this piece is pinned!");
-                                }
-                                throw invalid_argument("you have kish can't this move!");
-                            }
-                            ID q = e.id;
-                            cout << "enpassant\n";
-                            attackpiece = e.attack;
-                            e.attack = nullptr;
-                            saveMove += "1";
-                            moves.push_back(saveMove);
-                            Turn = false;
-                            throw e;
-=======
                             move += "1";
                             gameBoard.threat(player2->getcolor());
                             cout << "try\n";
->>>>>>> 9b5186ac1420904389be9886faf5bbe0a65f126e
                         }
                         catch (const kishexcept &er)
                         {
@@ -259,42 +226,9 @@ void Game::order(MOVE move)
                     {
                         try
                         {
-<<<<<<< HEAD
-                            gameBoard.movePiece(move); //movepiece  is  kish  p2
-                            saveMove += "0";
-                            move += "0";
-                        }
-                        catch (enpassantexcept &e)
-                        {
-                            try
-                            {
-                                move += "1";
-                                gameBoard.threat(player1->getcolor());
-                                cout << "try\n";
-                            }
-                            catch (const kishexcept &r)
-                            {
-                                cout << "catch\n";
-                                gameBoard.undo(move, e.attack);
-                                if (!player2->iskish())
-                                {
-                                    throw invalid_argument("this piece is pinned!");
-                                }
-                                throw invalid_argument("you have kish can't this move!");
-                            }
-                            ID q = e.id;
-                            cout << "enpassant\n";
-                            attackpiece = e.attack;
-                            e.attack = nullptr;
-                            saveMove += "1";
-                            moves.push_back(saveMove);
-                            Turn = true;
-                            throw e;
-=======
                             move += "1";
                             gameBoard.threat(player1->getcolor());
                             cout << "try\n";
->>>>>>> 9b5186ac1420904389be9886faf5bbe0a65f126e
                         }
                         catch (const kishexcept &r)
                         {
@@ -671,9 +605,11 @@ void Game::promotion(ID pawncell, piece typepiece)
     switch (typepiece)
     {
     case QUEEN:
+        cout << "PROMOTION: " << pawncell << endl;
         temppiece = new queen(temp->getPiece()->get_color());
         break;
     case ROOK:
+        cout << "PROMOTION: " << pawncell << endl;
         temppiece = new rook(temp->getPiece()->get_color());
         break;
     case BISHOP:

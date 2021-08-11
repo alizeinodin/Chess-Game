@@ -82,6 +82,9 @@ signals:
     // en passent
     void enPassent();
 
+    // pawn promotion
+    void promotion();
+
 
 public slots:
 
@@ -166,7 +169,8 @@ public slots:
     // two move slot
     void twoMove();
 
-
+    // promotion pawn slot
+    void setPromotion(int, QString);
 
 
 private:
