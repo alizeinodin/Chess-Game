@@ -17,7 +17,7 @@ class Game
     std::vector<MOVE> moves;
     ChessMan *attackpiece = nullptr;
     //string promotion;
-//    FileConnect file;
+    FileConnect file;
 
     public:
     enum Color {BLACK, WHITE};
@@ -36,7 +36,8 @@ class Game
     void promotion(ID pawncell, piece);
     void twomove();
     bool getTurn();
-//    void setFile(QString);
+    void savegame();
+    
 };
 
 #endif /* _GAME_H */

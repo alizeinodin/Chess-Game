@@ -81,6 +81,7 @@ void Game::order(MOVE move)
                     {
                         try
                         {
+<<<<<<< HEAD
                             gameBoard.movePiece(move); //move   is   kish   p1
                             saveMove += "0";
                             move += "0";
@@ -111,6 +112,11 @@ void Game::order(MOVE move)
                             moves.push_back(saveMove);
                             Turn = false;
                             throw e;
+=======
+                            move += "1";
+                            gameBoard.threat(player2->getcolor());
+                            cout << "try\n";
+>>>>>>> 9b5186ac1420904389be9886faf5bbe0a65f126e
                         }
                         catch (const kishexcept &er)
                         {
@@ -253,6 +259,7 @@ void Game::order(MOVE move)
                     {
                         try
                         {
+<<<<<<< HEAD
                             gameBoard.movePiece(move); //movepiece  is  kish  p2
                             saveMove += "0";
                             move += "0";
@@ -283,6 +290,11 @@ void Game::order(MOVE move)
                             moves.push_back(saveMove);
                             Turn = true;
                             throw e;
+=======
+                            move += "1";
+                            gameBoard.threat(player1->getcolor());
+                            cout << "try\n";
+>>>>>>> 9b5186ac1420904389be9886faf5bbe0a65f126e
                         }
                         catch (const kishexcept &r)
                         {
@@ -424,7 +436,7 @@ QString Game::undo()
     // find last move of player
     // this code is for exist two move option in program
     string temp = move.substr(2, 6);
-    Cell & cellt;
+    Cell & cellt = gameBoard.search("A1");
     transform(temp.begin(), temp.end(), temp.begin(), ::toupper);
     if (move.at(1) == '2')
     {
@@ -627,6 +639,7 @@ void Game::update_score()
             player2->setkish(false);
         }
     }
+    file.openFile(gamename + player1->get_name() + player2->get_name() + ".acd");
 }
 
 Player &Game::compareScore()
@@ -742,4 +755,19 @@ std::string Game:: random_move()
     cout << "move :: " << move << endl;
     return move;
 
+}
+
+void Game::savegame()
+{
+    string save = moves.back();
+    save += " p1 PS";
+    save += to_string(player1->getScore(1));
+    save += " NS";
+    save += to_string(player1->getScore(0));
+    save += " p2 PS";
+    save += to_string(player2->getScore(1));
+    save += " NS";
+    save += to_string(player2->getScore(0));
+    cout << save <<endl;
+    file.WriteToFile(save);
 }

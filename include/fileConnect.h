@@ -7,9 +7,10 @@
 class FileConnect
 {
     private:
-        std::fstream myFile;
+        std::ofstream myFile;
     public:
-        FileConnect(QString);
+        FileConnect();
+        void openFile(QString);
         void WriteToFile(std::string);
         std::string ReadFromFile();
         std::fstream & getFile();

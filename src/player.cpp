@@ -105,3 +105,8 @@ pawn * Player:: getporomotion()
     }
     return nullptr;
 }
+
+Name Player:: get_name()
+{
+    return name;
+}

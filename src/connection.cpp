@@ -133,6 +133,7 @@ void connection::setOrder(QString order)
             game->twomove();
         }
         game->update_score();
+        game->savegame();
         updateScore();
         emit successMove();
     } catch (kishexcept & error){
