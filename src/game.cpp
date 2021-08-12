@@ -3,6 +3,7 @@
 #include "../include/enpassantexcept.h"
 #include "../include/pawnpromotion.h"
 #include "../include/undoattack.h"
+#include "../include/promotionundo.h"
 #include <algorithm>
 #include <string>
 #include <sstream>
@@ -370,6 +371,7 @@ QString Game::undo()
     string move = moves.back();
     string tempscore;
     ChessMan * tempattack;
+    bool undoprom = false;
     // find last move of player
     // this code is for exist two move option in program
     string temp = move.substr(2, 6);
@@ -384,6 +386,7 @@ QString Game::undo()
             if (cellt.getPiece()->get_type() != PAWN)
             {
                 cellt.setPiece(player2->getporomotion());
+                undoprom = true;
             }
             
         }
@@ -421,6 +424,7 @@ QString Game::undo()
             if (cellt.getPiece()->get_type() != PAWN)
             {
                 cellt.setPiece(player1->getporomotion());
+                undoprom = true;
             }
             
         }
@@ -455,6 +459,12 @@ QString Game::undo()
     cout << "make result: " << makeResult << endl;
     QString result = QString::fromStdString(makeResult);
     file.removelastline();
+    if (undoprom)
+    {
+        promotionundo e(result);
+        throw e;
+    }
+    
     return result;
 }
 
@@ -615,12 +625,10 @@ void Game::promotion(ID pawncell, piece typepiece)
     switch (typepiece)
     {
     case QUEEN:
-        cout << "PROMOTION: " << pawncell << endl;
         temppiece = new queen(temp->getPiece()->get_color());
         Special_mode += "-1";
         break;
     case ROOK:
-        cout << "PROMOTION: " << pawncell << endl;
         temppiece = new rook(temp->getPiece()->get_color());
         Special_mode += "-2";
         break;

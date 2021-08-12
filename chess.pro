@@ -64,6 +64,7 @@ HEADERS += \
     include/pawn.h \
     include/pawnpromotion.h \
     include/player.h \
+    include/promotionundo.h \
     include/queen.h \
     include/rook.h \
     include/undoattack.h \
