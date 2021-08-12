@@ -3,6 +3,7 @@
 #include "../include/undoattack.h"
 #include "../include/enpassantexcept.h"
 #include "../include/pawnpromotion.h"
+#include "../include/promotionundo.h"
 #include <iostream>
 #include <QDebug>
 #include <QApplication>
@@ -239,6 +240,9 @@ void connection::undo()
         undoPieceColor = QString::fromStdString(myPiece.color);
         updateScore();
         emit undoAttack();
+    } catch (promotionundo & myOrder)
+    {
+        qDebug() << "PROMOTION UNDO: " << myOrder.id;
     }
 }
 // ------------
