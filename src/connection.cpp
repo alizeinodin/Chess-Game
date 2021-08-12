@@ -381,6 +381,22 @@ QString connection::getEnPassentPiece()
 // ------------
 void connection::twoMove()
 {
+    if(game->getTurn())
+    {
+        if(player1PScore() < 30)
+        {
+            messageStr = string("امتیاز شما کمتر از ۳۰ است");
+            emit loseMove();
+            return;
+        }
+    } else {
+        if(player2PScore() < 30)
+        {
+            messageStr = string("امتیاز شما کمتر از ۳۰ است");
+            emit loseMove();
+            return;
+        }
+    }
     static size_t counter = 0;
     if(counter >= 2)
     {
