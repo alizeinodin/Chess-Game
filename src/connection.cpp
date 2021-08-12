@@ -192,7 +192,6 @@ void connection::setOrder(QString order)
         emit enPassent();
     } catch(pawnpromotion & mypromotion)
     {
-        qDebug() << "PAWN PROMOTION C++";
         emit promotion();
     } catch (exception & error) {
         messageStr = error.what();
@@ -249,7 +248,7 @@ void connection::undo()
 void connection::restart()
 {
     qApp->quit();
-    QProcess::startDetached(qApp->arguments()[0], qApp->arguments());;
+    QProcess::startDetached(qApp->arguments()[0], qApp->arguments());
 }
 // ------------
 
@@ -369,7 +368,6 @@ void connection::twoMove()
         twoMoveAccess = false;
         return;
     }
-    qDebug() << "COUNTER: " << counter;
     counter++;
     twoMoveAccess = true; // access for two move
 }
@@ -396,7 +394,6 @@ void connection::setPromotion(int state, QString id)
         piece = KNIGHT;
         break;
     }
-    
     game->promotion(id.toStdString(), piece);
 }
 // ------------

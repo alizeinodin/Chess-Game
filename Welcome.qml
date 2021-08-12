@@ -23,43 +23,6 @@ import connect 1.0
         id: fontfarsi
         source: "media/Font/IRANSansWeb_Bold.ttf"
     }
-    /*
-    property int widthVar: welcome.width / 2 - 30
-    property int heightVar: welcome.height / 2 - 100
-
-    Rectangle{
-        id: firistcircle
-        x: widthVar
-        y: heightVar
-        width: 80
-        height: 80
-        color: "#EEEEEE"
-        radius:40
-    }
-    Rectangle{
-        id: secondcircle
-        x: widthVar
-        y: heightVar
-        width: 80
-        height: 80
-        color: "#2e2e2e"
-        radius:40
-    }
-
-    SequentialAnimation{
-        id: rotationcircle
-        running: false
-        loops: 2
-
-        PathAnimation{
-            duration: 4000
-            easing.type: Easing.InQuad
-            path: Path{
-                startX: 1
-            }
-        }
-    }
-    */
 
     Image {
         id: logo
@@ -71,6 +34,31 @@ import connect 1.0
 
     Connect{
         id: connect
+    }
+
+    Dialog{
+        id: settingsDialog
+        parent: welcome
+        anchors.centerIn: welcome
+        title: "تنظیمات"
+        font.family: fontfarsi.name
+        modal: true
+        CheckBox{
+            checked: true
+            text: qsTr("موسقی متن")
+            font.family: fontfarsi.name
+            onCheckStateChanged: {
+                if(checked === false)
+                {
+                    mainAudio.stop();
+                }
+                if(checked === true)
+                {
+                    mainAudio.play();
+                }
+            }
+        }
+
     }
 
     Column{
@@ -91,10 +79,6 @@ import connect 1.0
             font.family: fontfarsi.name
             onClicked: {
                 view.push(player1Page);
-
-//                viewID.replace(playerPageID);
-//                playerPageID.visible = true;
-//                viewID.push(playerPageID);
             }
         }
         Button{
@@ -105,6 +89,9 @@ import connect 1.0
             focusPolicy: Qt.NoFocus
             font.pixelSize: 20
             font.family: fontfarsi.name
+            onClicked: {
+                view.push(chessBoardPage);
+            }
         }
         Button{
             id: settings
@@ -114,6 +101,7 @@ import connect 1.0
             focusPolicy: Qt.NoFocus
             font.pixelSize: 20
             font.family: fontfarsi.name
+            onClicked: settingsDialog.open()
         }
         Button{
             id: exit
