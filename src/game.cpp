@@ -617,19 +617,24 @@ void Game::promotion(ID pawncell, piece typepiece)
     case QUEEN:
         cout << "PROMOTION: " << pawncell << endl;
         temppiece = new queen(temp->getPiece()->get_color());
+        Special_mode += "-1";
         break;
     case ROOK:
         cout << "PROMOTION: " << pawncell << endl;
         temppiece = new rook(temp->getPiece()->get_color());
+        Special_mode += "-2";
         break;
     case BISHOP:
         temppiece = new bishop(temp->getPiece()->get_color());
+        Special_mode += "-3";
         break;
     case KNIGHT:
         temppiece = new knight(temp->getPiece()->get_color());
+        Special_mode += "-4";
         break;
     case PAWN:
         temppiece = new pawn(temp->getPiece()->get_color());
+        Special_mode += "-5";
         break;
     default:
         throw invalid_argument("piece type invalid");
@@ -713,14 +718,14 @@ void Game::savegame()
     }
     
     string save = moves.back();
-    save += "-p1PS-";
-    save += to_string(player1->getScore(1));
-    save += "-p1NS-";
-    save += to_string(player1->getScore(0));
-    save += "-p2PS-";
-    save += to_string(player2->getScore(1));
-    save += "-p2NS-";
-    save += to_string(player2->getScore(0));
+    // save += "-p1PS-";
+    // save += to_string(player1->getScore(1));
+    // save += "-p1NS-";
+    // save += to_string(player1->getScore(0));
+    // save += "-p2PS-";
+    // save += to_string(player2->getScore(1));
+    // save += "-p2NS-";
+    // save += to_string(player2->getScore(0));
     cout << save <<endl;
     file.WriteToFile(save);
 }
@@ -741,3 +746,48 @@ vector<QString> Game:: get_gamelist()
     return qs;
 }
 
+
+QString Game:: redo()
+{
+    string move;
+    move = file.ReadFromFile();
+    try
+    {
+        this->order(move.substr(2,5));
+        update_score();
+    }
+    catch(pawnpromotion& e)
+    {
+        //promotion(move.substr(5, 2), stoi(move.substr(move.find('-') + 1)));
+    }
+    catch(enpassantexcept &e)
+    {
+
+    }
+    
+}
+
+
+void Game::select_game(QString name)
+{
+    auto temp = file.get_gamelist();
+    string s = "sf";
+    vector<QString> qs;
+    stringstream f(s);
+    string path;
+    for (size_t i = 0; i < temp.size(); i++)
+    {
+        f = stringstream(temp.at((i)));
+        getline(f, s, '-');
+        qs.push_back(QString::fromStdString(s));
+    }
+    for (size_t i = 0; i < qs.size(); i++)
+    {
+        if (name == qs.at(i))
+        {
+            path = temp.at(i);
+            break;
+        }
+    }
+    file.openFile(QString::fromStdString(path));
+}

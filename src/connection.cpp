@@ -201,8 +201,8 @@ void connection::setOrder(QString order)
             twoMove();
             game->twomove();
         }
-        game->update_score();
-        updateScore();
+        //game->update_score();
+        //updateScore();
         emit loseMove();
     }
     order.clear();
@@ -396,7 +396,7 @@ void connection::setPromotion(int state, QString id)
         piece = KNIGHT;
         break;
     }
-    
+
     game->promotion(id.toStdString(), piece);
 }
 // ------------

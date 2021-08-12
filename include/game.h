@@ -38,6 +38,8 @@ class Game
     bool getTurn();
     void savegame();
     std::vector<QString> get_gamelist();
+    QString redo();
+    void select_game(QString name);
     
 };
 
