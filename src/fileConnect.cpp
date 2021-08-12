@@ -1,4 +1,5 @@
 #include "../include/fileConnect.h"
+#include <filesystem>
 #include <vector>
 using namespace std;
 
@@ -51,10 +52,12 @@ void FileConnect::openFile(QString name)
             break;
         }
         strlist.push_back(temp);
-        gamelist.close();
+        cout << temp << endl;
     }
+    gamelist.close();
     if (find(strlist.cbegin(), strlist.cend(), name.toStdString()) != strlist.cend())
     {
+        cout << "find!!!\n";
         myFile.open(name.toStdString(), ios::app);
         path = name.toStdString();
         if (!myFile.is_open())
@@ -98,28 +101,38 @@ std::vector<std::string> FileConnect:: get_gamelist()
             break;
         }
         strlist.push_back(temp);
-        gamelist.close();
     }
+    gamelist.close();
     return strlist;
 }
 
 void FileConnect:: removelastline()
 {
-    ofstream s("temp.txt");
+    ofstream s("temp.txt" , ios::out | ios::app);
     string temp;
     vector<string> d;
+    ifstream in(path);
     while (1)
     {
-        getline(myFile, temp);
-        if (myFile.eof())
+        //getline(in, temp);
+        in >> temp;
+        if (in.eof())
         {
             break;
         }
         d.push_back(temp);
+        cout << path << endl;
     }
-    while( getline(myFile,temp) )
+    for (size_t i = 0; i < d.size() - 1; i++)
     {
-        if(temp != d.back())
-            s << temp << "\n";
+        temp = d.at(i);
+        cout << temp << endl;
+        s << temp << endl;
     }
+    s.close();
+    in.close();
+    myFile.close();
+    remove(path.c_str());
+    rename("temp.txt", path.c_str());
+    openFile(QString::fromStdString(path));
 }

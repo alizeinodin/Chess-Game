@@ -582,7 +582,7 @@ void Game::update_score()
             player2->setkish(false);
         }
     }
-    file.openFile(gamename + "-" + player1->get_name() + "-" + player2->get_name() + ".acd");
+    //file.openFile(gamename + "-" + player1->get_name() + "-" + player2->get_name() + ".acd");
 }
 
 Player &Game::compareScore()
@@ -610,6 +610,7 @@ void Game::restart()
 void Game::promotion(ID pawncell, piece typepiece)
 {
     ChessMan *temppiece;
+    cout << pawncell << '\t' << typepiece <<endl;
     Cell *temp = &gameBoard.search(pawncell);
     switch (typepiece)
     {
@@ -704,6 +705,13 @@ std::string Game:: random_move()
 
 void Game::savegame()
 {
+    static bool first = true;
+    if (first)
+    {
+        file.openFile(gamename + "-" + player1->get_name() + "-" + player2->get_name() + ".acd");
+        first = false;
+    }
+    
     string save = moves.back();
     save += "-p1PS-";
     save += to_string(player1->getScore(1));

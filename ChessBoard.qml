@@ -399,7 +399,7 @@ Item {
                     cursorShape: Qt.PointingHandCursor
                     onClicked: {
                         convertPiece.close();
-                        connection.setPromotion(1, board.destid.id);
+                        connection.setPromotion(2, board.destid.id);
                         board.destid.piece = "B";
                         board.destimg.source = convertPieceBIMG.source;
                     }
@@ -421,7 +421,7 @@ Item {
                     cursorShape: Qt.PointingHandCursor
                     onClicked: {
                         convertPiece.close();
-                        connection.setPromotion(1, board.destid.id);
+                        connection.setPromotion(3, board.destid.id);
                         board.destid.piece = "Q";
                         board.destimg.source = convertPieceQIMG.source;
                     }
@@ -443,7 +443,7 @@ Item {
                     cursorShape: Qt.PointingHandCursor
                     onClicked: {
                         convertPiece.close();
-                        connection.setPromotion(1, board.destid.id);
+                        connection.setPromotion(4, board.destid.id);
                         board.destid.piece = "H";
                         board.destimg.source = convertPieceHIMG.source;
                     }

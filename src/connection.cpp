@@ -396,7 +396,7 @@ void connection::setPromotion(int state, QString id)
         piece = KNIGHT;
         break;
     }
-
+    
     game->promotion(id.toStdString(), piece);
 }
 // ------------
