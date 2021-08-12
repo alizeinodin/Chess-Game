@@ -40,6 +40,8 @@ class Game
     std::vector<QString> get_gamelist();
     QString redo();
     void select_game(QString name);
+    bool checkColorOfPiece(std::string);
+
     
 };
 

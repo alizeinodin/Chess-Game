@@ -746,7 +746,7 @@ vector<QString> Game:: get_gamelist()
     }
     for (auto &i : qs)
     {
-        cout << i.toStdString() << endl;
+//        cout << i.toStdString() << endl;
     }
     
     return qs;
@@ -797,3 +797,23 @@ void Game::select_game(QString name)
     }
     file.openFile(QString::fromStdString(path));
 }
+// check color of piece for hand nut
+// ---------------
+bool Game::checkColorOfPiece(string id)
+{
+    Cell cell = gameBoard.search(id);
+    if(Turn)
+    {
+        if(cell.getPiece()->get_color() == player1->getcolor())
+        {
+            return true; // this piece is for player
+        }
+    } else {
+        if(cell.getPiece()->get_color() == player2->getcolor())
+        {
+            return true; // this piece is for player
+        }
+    }
+    return false; // this piece is not for player
+}
+// ---------------

@@ -85,6 +85,12 @@ signals:
     // pawn promotion
     void promotion();
 
+    // undo promotion
+    void undoPromotion();
+
+    // hand to the nut
+    void handNut();
+
 
 public slots:
 
@@ -213,6 +219,9 @@ private:
 
     // two move access
     bool twoMoveAccess = false;
+
+    // hand to the nut check
+    bool handToTheNut = false;
 };
 
 #endif // CONNECTION_H
