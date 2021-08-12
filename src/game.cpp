@@ -98,8 +98,6 @@ void Game::order(MOVE move)
                         attackpiece = e.attack;
                         e.attack = nullptr;
                         saveMove += "1";
-                        saveMove.at(5) = q.at(0);
-                        saveMove.at(6) = q.at(1);
                         moves.push_back(saveMove);
                         Turn = false;
                         throw e;
@@ -243,8 +241,6 @@ void Game::order(MOVE move)
                         attackpiece = e.attack;
                         e.attack = nullptr;
                         saveMove += "1";
-                        saveMove.at(5) = q.at(0);
-                        saveMove.at(6) = q.at(1);
                         moves.push_back(saveMove);
                         Turn = true;
                         throw e;
@@ -377,6 +373,7 @@ QString Game::undo()
         if (temp.at(0) == 'P')
         {
             cellt = gameBoard.search(temp.substr(3, 2));
+            cout << cellt.getId() <<endl;
             if (cellt.getPiece()->get_type() != PAWN)
             {
                 cellt.setPiece(player2->getporomotion());
@@ -434,6 +431,7 @@ QString Game::undo()
         }
         player1->addScore(0, 5);
         tempscore.append(move.begin() + 8, move.end());
+        cout << move << endl;
         cout << "sc " << tempscore << endl;
         player1->addScore(1, -stoi(tempscore));
         Turn = true;
