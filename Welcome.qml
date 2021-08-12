@@ -111,6 +111,7 @@ import connect 1.0
             focusPolicy: Qt.NoFocus
             font.pixelSize: 20
             font.family: fontfarsi.name
+            onClicked: connect.exitGame()
         }
     }
 //    }

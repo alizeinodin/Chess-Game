@@ -144,7 +144,7 @@ void connection::setOrder(QString order)
             twoMove();
             game->twomove();
         }
-        game->update_score();
+//        game->update_score();
         updateScore();
         emit kish();
     }
@@ -164,7 +164,7 @@ void connection::setOrder(QString order)
                 twoMove();
                 game->twomove();
             }
-            game->update_score();
+//            game->update_score();
             updateScore();
             emit mat();
         } catch (Equality & error) {
@@ -175,7 +175,7 @@ void connection::setOrder(QString order)
                 twoMove();
                 game->twomove();
             }
-            game->update_score();
+//            game->update_score();
             updateScore();
             winnertxt = QString("مساوی شدید");
         }
@@ -256,7 +256,10 @@ void connection::restart()
 // ------------
 void connection::exitGame()
 {
-    delete game;
+    if(game != nullptr)
+    {
+        delete game;
+    }
     qApp->quit();
 }
 // ------------
