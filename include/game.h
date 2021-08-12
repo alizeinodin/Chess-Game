@@ -16,7 +16,7 @@ class Game
     bool Turn = true;
     std::vector<MOVE> moves;
     ChessMan *attackpiece = nullptr;
-    //string promotion;
+    std::string Special_mode;
     FileConnect file;
 
     public:
@@ -37,6 +37,7 @@ class Game
     void twomove();
     bool getTurn();
     void savegame();
+    std::vector<QString> get_gamelist();
     
 };
 

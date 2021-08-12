@@ -3,11 +3,12 @@
 #include <iostream>
 #include <fstream>
 #include <QString>
-
+#include <vector>
 class FileConnect
 {
     private:
-        std::ofstream myFile;
+        std::fstream myFile;
+        std::string path;
     public:
         FileConnect();
         void openFile(QString);
@@ -15,6 +16,8 @@ class FileConnect
         std::string ReadFromFile();
         std::fstream & getFile();
         ~FileConnect();
+        std::vector<std::string> get_gamelist();
+        void removelastline();
 };
 
 #endif /* _FILECONNECT_H */

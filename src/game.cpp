@@ -3,6 +3,9 @@
 #include "../include/enpassantexcept.h"
 #include "../include/pawnpromotion.h"
 #include "../include/undoattack.h"
+#include <algorithm>
+#include <string>
+#include <sstream>
 #include <QDebug>
 using namespace std;
 
@@ -371,6 +374,7 @@ QString Game::undo()
     // this code is for exist two move option in program
     string temp = move.substr(2, 6);
     Cell & cellt = gameBoard.search("A1");
+    cout << temp << endl;
     transform(temp.begin(), temp.end(), temp.begin(), ::toupper);
     if (move.at(1) == '2')
     {
@@ -388,22 +392,24 @@ QString Game::undo()
         try
         {
             gameBoard.undo(temp, tempattack);
-            temp.pop_back();
         }
         catch(string & e)
         {
+            temp.pop_back();
             temp += e;
         }
         player2->addScore(0, 5);
         tempscore.append(move.begin() + 8, move.end());
-        cout << "sc "  << tempscore << endl;
+        cout << "sc "  << temp << endl;
         player2->addScore(1, -stoi(tempscore));
         Turn = false;
         moves.pop_back();
         if (temp.at(5) == '1')
         {
+            temp.pop_back();
             undoattack e(temp, player2->getcolor());
             cout << temp <<endl;
+            file.removelastline();
             throw e;
         }
     }
@@ -422,10 +428,10 @@ QString Game::undo()
         try
         {
             gameBoard.undo(temp, tempattack);
-            temp.pop_back();
         }
         catch(string & e)
         {
+            temp.pop_back();
             temp += e;
         }
         player1->addScore(0, 5);
@@ -436,8 +442,10 @@ QString Game::undo()
         moves.pop_back();
         if (temp.at(5) == '1')
         {
+            temp.pop_back();
             undoattack e(temp, player1->getcolor());
             cout << temp <<endl;
+            file.removelastline();
             throw e;
         }
     }
@@ -446,6 +454,7 @@ QString Game::undo()
     string makeResult = temp[0] + temp.substr(3, 4) + temp.substr(1, 2);
     cout << "make result: " << makeResult << endl;
     QString result = QString::fromStdString(makeResult);
+    file.removelastline();
     return result;
 }
 
@@ -573,7 +582,7 @@ void Game::update_score()
             player2->setkish(false);
         }
     }
-    file.openFile(gamename + player1->get_name() + player2->get_name() + ".acd");
+    file.openFile(gamename + "-" + player1->get_name() + "-" + player2->get_name() + ".acd");
 }
 
 Player &Game::compareScore()
@@ -694,14 +703,31 @@ std::string Game:: random_move()
 void Game::savegame()
 {
     string save = moves.back();
-    save += " p1 PS";
+    save += "-p1PS-";
     save += to_string(player1->getScore(1));
-    save += " NS";
+    save += "-p1NS-";
     save += to_string(player1->getScore(0));
-    save += " p2 PS";
+    save += "-p2PS-";
     save += to_string(player2->getScore(1));
-    save += " NS";
+    save += "-p2NS-";
     save += to_string(player2->getScore(0));
     cout << save <<endl;
     file.WriteToFile(save);
 }
+
+
+vector<QString> Game:: get_gamelist()
+{
+    auto temp = file.get_gamelist();
+    string s = "sf";
+    vector<QString> qs;
+    stringstream f(s);
+    for (size_t i = 0; i < temp.size(); i++)
+    {
+        f = stringstream(temp.at((i)));
+        getline(f, s, '-');
+        qs.push_back(QString::fromStdString(s));
+    }
+    return qs;
+}
+
