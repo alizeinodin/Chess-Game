@@ -63,12 +63,6 @@ void Game::order(MOVE move)
             //cout << cell.getPiece()->get_color();
             if (cell.getPiece()->get_color() == player1->getcolor())
             {
-                if (player1->getScore(0))
-                {
-                    gameBoard.randommoves(player1->getcolor());
-                    player1->addScore(0, -15);
-                }
-
 
                 saveMove = string("P1") + saveMove; // player1 moved piece
                 cell = gameBoard.search(cut_str(move).second);
@@ -375,7 +369,7 @@ QString Game::undo()
     // find last move of player
     // this code is for exist two move option in program
     string temp = move.substr(2, 6);
-    Cell & cellt = gameBoard.search("A1");
+    Cell cellt;
     cout << temp << endl;
     transform(temp.begin(), temp.end(), temp.begin(), ::toupper);
     if (move.at(1) == '2')
@@ -592,6 +586,7 @@ void Game::update_score()
             player2->setkish(false);
         }
     }
+    //get_gamelist();
     //file.openFile(gamename + "-" + player1->get_name() + "-" + player2->get_name() + ".acd");
 }
 
@@ -751,6 +746,11 @@ vector<QString> Game:: get_gamelist()
         getline(f, s, '-');
         qs.push_back(QString::fromStdString(s));
     }
+    for (auto &i : qs)
+    {
+        cout << i.toStdString() << endl;
+    }
+    
     return qs;
 }
 
