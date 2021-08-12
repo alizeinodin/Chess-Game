@@ -85,12 +85,12 @@ import connect 1.0
             id: continueGame
             width: 230
             height: 70
-            text: "ادامه بازی"
+            text: "بازی های قبلی"
             focusPolicy: Qt.NoFocus
             font.pixelSize: 20
             font.family: fontfarsi.name
             onClicked: {
-                view.push(chessBoardPage);
+                view.push(reviewPage);
             }
         }
         Button{

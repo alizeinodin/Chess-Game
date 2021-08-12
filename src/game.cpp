@@ -746,7 +746,7 @@ vector<QString> Game:: get_gamelist()
     }
     for (auto &i : qs)
     {
-        cout << i.toStdString() << endl;
+        //cout << "game: " << i.toStdString() << endl;
     }
     
     return qs;

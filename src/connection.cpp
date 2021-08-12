@@ -417,3 +417,21 @@ void connection::setPromotion(int state, QString id)
     game->promotion(id.toStdString(), piece);
 }
 // ------------
+
+// get index of game list for review
+// ------------
+int connection::getindexgame()
+{
+    auto index = game->get_gamelist();
+    cout << index.size() <<endl;
+    return index.size();
+}
+// ------------
+
+// get game name
+// ------------
+QString connection::getgamename(int index)
+{
+    auto name = game->get_gamelist();
+    return name.at(index);
+}
