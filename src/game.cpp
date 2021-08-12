@@ -63,12 +63,6 @@ void Game::order(MOVE move)
             //cout << cell.getPiece()->get_color();
             if (cell.getPiece()->get_color() == player1->getcolor())
             {
-                if (player1->getScore(0))
-                {
-                    gameBoard.randommoves(player1->getcolor());
-                    player1->addScore(0, -15);
-                }
-
 
                 saveMove = string("P1") + saveMove; // player1 moved piece
                 cell = gameBoard.search(cut_str(move).second);
@@ -104,8 +98,6 @@ void Game::order(MOVE move)
                         attackpiece = e.attack;
                         e.attack = nullptr;
                         saveMove += "1";
-                        saveMove.at(5) = q.at(0);
-                        saveMove.at(6) = q.at(1);
                         moves.push_back(saveMove);
                         Turn = false;
                         throw e;
@@ -249,8 +241,6 @@ void Game::order(MOVE move)
                         attackpiece = e.attack;
                         e.attack = nullptr;
                         saveMove += "1";
-                        saveMove.at(5) = q.at(0);
-                        saveMove.at(6) = q.at(1);
                         moves.push_back(saveMove);
                         Turn = true;
                         throw e;
@@ -375,7 +365,7 @@ QString Game::undo()
     // find last move of player
     // this code is for exist two move option in program
     string temp = move.substr(2, 6);
-    Cell & cellt = gameBoard.search("A1");
+    Cell cellt;
     cout << temp << endl;
     transform(temp.begin(), temp.end(), temp.begin(), ::toupper);
     if (move.at(1) == '2')
@@ -383,6 +373,7 @@ QString Game::undo()
         if (temp.at(0) == 'P')
         {
             cellt = gameBoard.search(temp.substr(3, 2));
+            cout << cellt.getId() <<endl;
             if (cellt.getPiece()->get_type() != PAWN)
             {
                 cellt.setPiece(player2->getporomotion());
@@ -440,6 +431,7 @@ QString Game::undo()
         }
         player1->addScore(0, 5);
         tempscore.append(move.begin() + 8, move.end());
+        cout << move << endl;
         cout << "sc " << tempscore << endl;
         player1->addScore(1, -stoi(tempscore));
         Turn = true;
@@ -592,6 +584,7 @@ void Game::update_score()
             player2->setkish(false);
         }
     }
+    //get_gamelist();
     //file.openFile(gamename + "-" + player1->get_name() + "-" + player2->get_name() + ".acd");
 }
 
@@ -751,6 +744,11 @@ vector<QString> Game:: get_gamelist()
         getline(f, s, '-');
         qs.push_back(QString::fromStdString(s));
     }
+    for (auto &i : qs)
+    {
+        cout << i.toStdString() << endl;
+    }
+    
     return qs;
 }
 

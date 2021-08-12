@@ -125,7 +125,20 @@ void connection::setOrder(QString order)
     {
         emit loseMove();
     }
-
+    if (game->getTurn())
+    {
+        if (game->getPlayer(std::string("White")).getScore(0) == 15)
+        {
+            game->random_move();
+        }
+        else {
+            if (game->getPlayer(std::string("Black")).getScore(0) == 15)
+            {
+                game->random_move();
+            }
+        }
+    }
+    
     qDebug() << order;
     try {
         game->order(order.toStdString());
