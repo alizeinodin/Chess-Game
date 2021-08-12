@@ -614,9 +614,11 @@ void Game::promotion(ID pawncell, piece typepiece)
     switch (typepiece)
     {
     case QUEEN:
+        cout << "PROMOTION: " << pawncell << endl;
         temppiece = new queen(temp->getPiece()->get_color());
         break;
     case ROOK:
+        cout << "PROMOTION: " << pawncell << endl;
         temppiece = new rook(temp->getPiece()->get_color());
         break;
     case BISHOP:

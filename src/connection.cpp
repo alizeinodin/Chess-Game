@@ -2,6 +2,7 @@
 #include "../include/kishexcept.h"
 #include "../include/undoattack.h"
 #include "../include/enpassantexcept.h"
+#include "../include/pawnpromotion.h"
 #include <iostream>
 #include <QDebug>
 #include <QApplication>
@@ -189,6 +190,10 @@ void connection::setOrder(QString order)
         game->update_score();
         updateScore();
         emit enPassent();
+    } catch(pawnpromotion & mypromotion)
+    {
+        qDebug() << "PAWN PROMOTION C++";
+        emit promotion();
     } catch (exception & error) {
         messageStr = error.what();
         if(twoMoveAccess)
@@ -367,5 +372,31 @@ void connection::twoMove()
     qDebug() << "COUNTER: " << counter;
     counter++;
     twoMoveAccess = true; // access for two move
+}
+// ------------
+
+// set promotion slot
+// ------------
+void connection::setPromotion(int state, QString id)
+{
+    piece piece;
+    id = id.toUpper();
+
+    switch (state) {
+    case 1:
+        piece = ROOK;
+        break;
+    case 2:
+        piece = BISHOP;
+        break;
+    case 3:
+        piece = QUEEN;
+        break;
+    case 4:
+        piece = KNIGHT;
+        break;
+    }
+
+    game->promotion(id.toStdString(), piece);
 }
 // ------------

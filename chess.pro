@@ -62,6 +62,7 @@ HEADERS += \
     include/matexcept.h \
     include/moving.h \
     include/pawn.h \
+    include/pawnpromotion.h \
     include/player.h \
     include/queen.h \
     include/rook.h \
