@@ -210,6 +210,7 @@ Item {
         }
 
         onUndoPromotion:{
+            console.log("UNDO PROMOTION");
             mat.visible = false;
             message.visible = false;
             board.orgid = board.idMap[connection.orgId()];
@@ -228,7 +229,10 @@ Item {
             moveAnimation.running = true; // Animation for move
             movePieceSound.play(); // sound of move piece2
 
-            board.destid.piece = board.orgid.piece;
+            connection.setPromotion(1, board.destid.id);
+            board.orgimg.source = "media/"+convertPiece.type+"/P.png";
+
+            board.orgid.piece = "P";
         }
 
         onHandNut:{

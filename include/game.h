@@ -41,6 +41,7 @@ class Game
     QString redo();
     void select_game(QString name);
     bool checkColorOfPiece(std::string);
+    void addScore(size_t, int);
 
     
 };

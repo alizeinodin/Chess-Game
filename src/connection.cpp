@@ -138,20 +138,20 @@ void connection::setOrder(QString order)
             orgIdVal = QString::fromStdString(destid).toLower();
             if(!handToTheNut)
             {
-                if(game->getTurn())
-                {
-                    qDebug() << "Player1";
-                    game->getPlayer(std::string("White")).addScore(0, 1);
-                } else {
-                    qDebug() << "Player2";
-                    game->getPlayer(std::string("Black")).addScore(0, 1);
-                }
+//                if(game->getTurn())
+//                {
+//                    game->getPlayer(std::string("White")).addScore(0, 1);
+//                } else {
+//                    game->getPlayer(std::string("Black")).addScore(0, 1);
+//                }
+                game->addScore(0 ,1);
+                updateScore();
                 handToTheNut = true;
             }
-            game->update_score();
-            updateScore();
             emit handNut();
             return;
+        }else {
+            order = order.mid(0, 3) + order.mid(4, 2); // this move is attack
         }
     }
     // ----------
@@ -173,7 +173,7 @@ void connection::setOrder(QString order)
     }
     // ----------
     
-    qDebug() << order;
+//    qDebug() << order;
     try {
         game->order(order.toStdString());
         if(twoMoveAccess)
@@ -248,6 +248,7 @@ void connection::setOrder(QString order)
         game->update_score();
         updateScore();
         handToTheNut = false;
+
         emit promotion();
     } catch (exception & error) {
         messageStr = error.what();

@@ -817,3 +817,19 @@ bool Game::checkColorOfPiece(string id)
     return false; // this piece is not for player
 }
 // ---------------
+
+// add score's for players
+// ---------------
+void Game::addScore(size_t state, int score)
+{
+    // state = 0 --> negative score
+    // state = 1 --> positive score
+
+    if(Turn)
+    {
+        player1->addScore(state, score);
+    }else {
+        player2->addScore(state, score);
+    }
+}
+// ---------------
