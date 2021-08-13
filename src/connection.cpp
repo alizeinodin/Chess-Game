@@ -132,7 +132,6 @@ void connection::setOrder(QString order)
     // ----------
     if(order[3].isUpper())
     {
-        qDebug() << "HAND NUT: " << order.mid(4, 2);
         std::string destid = order.mid(4, 2).toUpper().toStdString();
         if(game->checkColorOfPiece(destid)) // hand to the nut is true
         {
@@ -141,14 +140,16 @@ void connection::setOrder(QString order)
             {
                 if(game->getTurn())
                 {
+                    qDebug() << "Player1";
                     game->getPlayer(std::string("White")).addScore(0, 1);
                 } else {
+                    qDebug() << "Player2";
                     game->getPlayer(std::string("Black")).addScore(0, 1);
                 }
                 handToTheNut = true;
             }
-            //            game->update_score();
-            //            updateScore();
+            game->update_score();
+            updateScore();
             emit handNut();
             return;
         }
@@ -487,3 +488,21 @@ void connection::setPromotion(int state, QString id)
     game->promotion(id.toStdString(), piece);
 }
 // ------------
+
+// get index of game list for review
+// ------------
+int connection::getindexgame()
+{
+    auto index = game->get_gamelist();
+    cout << index.size() <<endl;
+    return index.size();
+}
+// ------------
+
+// get game name
+// ------------
+QString connection::getgamename(int index)
+{
+    auto name = game->get_gamelist();
+    return name.at(index);
+}

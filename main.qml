@@ -87,6 +87,10 @@ ApplicationWindow {
         visible: false
         id: nameGamePage
     }
+    Review{
+        visible: false
+        id: reviewPage
+    }
 
 
 //        background: BorderImage

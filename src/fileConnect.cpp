@@ -52,7 +52,7 @@ void FileConnect::openFile(QString name)
             break;
         }
         strlist.push_back(temp);
-        cout << temp << endl;
+        //cout << temp << endl;
     }
     gamelist.close();
     if (find(strlist.cbegin(), strlist.cend(), name.toStdString()) != strlist.cend())

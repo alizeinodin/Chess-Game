@@ -178,6 +178,11 @@ public slots:
     // promotion pawn slot
     void setPromotion(int, QString);
 
+    // get index of game list for review
+    int getindexgame();
+
+    // get game name
+    QString getgamename(int);
 
 private:
 
