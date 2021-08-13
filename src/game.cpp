@@ -4,6 +4,7 @@
 #include "../include/pawnpromotion.h"
 #include "../include/undoattack.h"
 #include "../include/promotionundo.h"
+#include "../include/castling.h"
 #include <algorithm>
 #include <string>
 #include <sstream>
@@ -392,6 +393,16 @@ QString Game::undo()
             temp.pop_back();
             temp += e;
         }
+        catch(castlingundo &e)
+        {
+            player2->addScore(0, 5);
+            tempscore.append(move.begin() + 8, move.end());
+            cout << "sc "  << temp << endl;
+            player2->addScore(1, -stoi(tempscore));
+            Turn = false;
+            moves.pop_back();
+            throw e;
+        }
         player2->addScore(0, 5);
         tempscore.append(move.begin() + 8, move.end());
         cout << "sc "  << temp << endl;
@@ -428,6 +439,16 @@ QString Game::undo()
         {
             temp.pop_back();
             temp += e;
+        }
+        catch(castlingundo &e)
+        {
+            player1->addScore(0, 5);
+            tempscore.append(move.begin() + 8, move.end());
+            cout << "sc "  << temp << endl;
+            player1->addScore(1, -stoi(tempscore));
+            Turn = false;
+            moves.pop_back();
+            throw e;
         }
         player1->addScore(0, 5);
         tempscore.append(move.begin() + 8, move.end());
@@ -512,6 +533,7 @@ void Game::update_score()
                 score += 70;
                 string t = to_string(score);
                 moves.rbegin()->append(t);
+                Special_mode = "-end";
                 throw e;
             }
             player2->addScore(1, 10);
@@ -570,6 +592,7 @@ void Game::update_score()
                 score += 70;
                 string t = to_string(score);
                 moves.rbegin()->append(t);
+                Special_mode = "-end";
                 throw er;
             }
             player1->addScore(1, 10);
@@ -727,6 +750,15 @@ void Game::savegame()
     // save += to_string(player2->getScore(1));
     // save += "-p2NS-";
     // save += to_string(player2->getScore(0));
+    if (Special_mode.size() != 0)
+    {
+        if (Special_mode == "-end")
+        {
+            file.setendgame();
+        }
+        
+        save += Special_mode;
+    }
     cout << save <<endl;
     file.WriteToFile(save);
 }
@@ -738,10 +770,18 @@ vector<QString> Game:: get_gamelist()
     string s = "sf";
     vector<QString> qs;
     stringstream f(s);
+    string endgame;
     for (size_t i = 0; i < temp.size(); i++)
     {
         f = stringstream(temp.at((i)));
         getline(f, s, '-');
+        while (getline(f, endgame, '-'))
+        {
+            if (endgame == "end")
+            {
+                s += "-end";
+            }
+        }
         qs.push_back(QString::fromStdString(s));
     }
     for (auto &i : qs)

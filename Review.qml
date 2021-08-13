@@ -4,6 +4,13 @@ import QtQuick.Controls 2.13
 Page{
     id: pageReview
     anchors.fill: parent
+    Connections{
+        target: connection
+        onEnd:{
+            Component.onC
+        }
+    }
+
     Item {
         id: reviewgame
         anchors.leftMargin: 100

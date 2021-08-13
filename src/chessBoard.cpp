@@ -1,5 +1,6 @@
 #include "../include/chessBoard.h"
 #include "../include/chessMan.h"
+#include "../include/castling.h"
 //#include "../include/matexcept.h"
 #include <algorithm>
 using namespace std;
@@ -218,8 +219,10 @@ void ChessBoard::undo(MOVE move, ChessMan *attackp)
     auto cellsid = cut_str(move);
     Cell *cells[2];
     Cell *temp;
+    string rookcast;
     cells[0] = search_cell(cellsid.second, Board);
     cells[1] = search_cell(cellsid.first, Board);
+    bool cast =false;
     if (cellsid.second == "C1" || cellsid.second == "G1" || cellsid.second == "C8" || cellsid.second == "G8")
     {
         king *k;
@@ -238,6 +241,8 @@ void ChessBoard::undo(MOVE move, ChessMan *attackp)
                             temp = search_cell("H1", Board);
                             temp->setPiece(cells[1]->getPiece());
                             cells[1]->empty();
+                            cast = true;
+                            rookcast = "F1H1";
                         }
                     }
                     cells[1] = search_cell("D1", Board);
@@ -248,6 +253,8 @@ void ChessBoard::undo(MOVE move, ChessMan *attackp)
                             temp = search_cell("A1", Board);
                             temp->setPiece(cells[1]->getPiece());
                             cells[1]->empty();
+                            cast = true;
+                            rookcast = "D1A1";
                         }
                     }
                 }
@@ -261,6 +268,8 @@ void ChessBoard::undo(MOVE move, ChessMan *attackp)
                             temp = search_cell("H8", Board);
                             temp->setPiece(cells[1]->getPiece());
                             cells[1]->empty();
+                            cast = true;
+                            rookcast = "F8H8";
                         }
                     }
                     cells[1] = search_cell("D8", Board);
@@ -271,6 +280,8 @@ void ChessBoard::undo(MOVE move, ChessMan *attackp)
                             temp = search_cell("A8", Board);
                             temp->setPiece(cells[1]->getPiece());
                             cells[1]->empty();
+                            cast = true;
+                            rookcast = "D8A8";
                         }
                     }
                 }
@@ -305,6 +316,12 @@ void ChessBoard::undo(MOVE move, ChessMan *attackp)
     {
         cells[0]->setPiece(attackp);
     }
+    if (cast)
+    {
+        castlingundo e(move.pop_back(), rookcast);
+        throw e;
+    }
+    
 }
 
 void ChessBoard::checkmate(COLOR color)

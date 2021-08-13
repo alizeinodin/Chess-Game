@@ -7,6 +7,7 @@
 #include <iostream>
 #include <QDebug>
 #include <QApplication>
+#include <sstream>
 #include <QProcess>
 
 using namespace std;
@@ -505,5 +506,13 @@ int connection::getindexgame()
 QString connection::getgamename(int index)
 {
     auto name = game->get_gamelist();
+    string temp = name.at(index).toStdString();
+    stringstream tok(temp);
+    string endstr;
+    getline(tok, endstr, '-');
+    getline(tok, endstr, '-');
+    if (endstr == "end") {
+        emit end();
+    }
     return name.at(index);
 }

@@ -85,11 +85,16 @@ signals:
     // pawn promotion
     void promotion();
 
+<<<<<<< HEAD
+    // end game
+    void end();
+=======
     // undo promotion
     void undoPromotion();
 
     // hand to the nut
     void handNut();
+>>>>>>> edde7e9fa5e57df635c6a6912c064adb0e0dcd08
 
 
 public slots:
