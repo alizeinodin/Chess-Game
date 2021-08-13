@@ -29,7 +29,7 @@ FileConnect::~FileConnect()
 
 fstream &FileConnect::getFile()
 {
-    //return myFile;
+    return myFile;
 }
 
 

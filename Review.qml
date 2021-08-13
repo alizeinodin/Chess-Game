@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.13
 import QtQuick.Controls 2.13
 
 Page{
@@ -14,27 +14,43 @@ Page{
     Item {
         id: reviewgame
         anchors.leftMargin: 100
-        //anchors.horizontalCenter: pageReview.horizontalCenter
+        //        anchors.horizontalCenter: pageReview.horizontalCenter
 
         ScrollView {
             id: scrollView
-
+            anchors.fill: parent
 
             Grid {
                 id: gridView
-                //anchors.centerIn: pageReview
                 spacing: 15
+                anchors.fill: parent
+                //                flow: Grid.TopToBottom
 
+                GroupBox {
+                    id: groupBox
+                    width: 250
+                    height: 200
+
+
+                    Text {
+                        id: name
+                        width: 176
+                        height: 21
+                        text: connection.getgamename(index)
+                        horizontalAlignment: Text.AlignHCenter
+                        font.bold: true
+                    }
+                    /*
                 Repeater
                 {
                     id:rep
                     model: connection.getindexgame()
+                    anchors.fill: parent
                     GroupBox {
                         id: groupBox
-                        x: 157
-                        y: 86
                         width: 250
                         height: 200
+
 
                         Text {
                             id: name
@@ -47,8 +63,6 @@ Page{
                         Button
                         {
                             id:b
-                            x: 30
-                            y: 60
                             width: 167
                             height: 40
                             text:"Exam"
@@ -61,8 +75,6 @@ Page{
                         Button
                         {
                             id:b2
-                            x: 30
-                            y: 119
                             width: 167
                             height: 40
                             text: "Scores"
@@ -71,18 +83,20 @@ Page{
                     }
 
                 }
+                */
 
+                }
             }
 
 
 
 
 
+            }
         }
     }
-}
 
-/*##^##
+    /*##^##
 Designer {
     D{i:0;autoSize:true;height:480;width:640}
 }

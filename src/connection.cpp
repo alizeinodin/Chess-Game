@@ -122,10 +122,43 @@ void connection::setPlayer2Name(QString value)
 
 void connection::setOrder(QString order)
 {
+    // check exist piece in orginal cell
+    // ----------
     if(!order[0].isUpper())
     {
         emit loseMove();
     }
+    // ----------
+    // check hand to the nut
+    // ----------
+    if(order[3].isUpper())
+    {
+        std::string destid = order.mid(4, 2).toUpper().toStdString();
+        if(game->checkColorOfPiece(destid)) // hand to the nut is true
+        {
+            orgIdVal = QString::fromStdString(destid).toLower();
+            if(!handToTheNut)
+            {
+                if(game->getTurn())
+                {
+                    qDebug() << "Player1";
+                    game->getPlayer(std::string("White")).addScore(0, 1);
+                } else {
+                    qDebug() << "Player2";
+                    game->getPlayer(std::string("Black")).addScore(0, 1);
+                }
+                handToTheNut = true;
+            }
+            game->update_score();
+            updateScore();
+            emit handNut();
+            return;
+        }
+    }
+    // ----------
+
+    // random move for 15 negative socore
+    // ----------
     if (game->getTurn())
     {
         if (game->getPlayer(std::string("White")).getScore(0) == 15)
@@ -139,6 +172,7 @@ void connection::setOrder(QString order)
             }
         }
     }
+    // ----------
     
     qDebug() << order;
     try {
@@ -151,6 +185,7 @@ void connection::setOrder(QString order)
         game->update_score();
         game->savegame();
         updateScore();
+        handToTheNut = false;
         emit successMove();
     } catch (kishexcept & error){
         messageStr = error.what();
@@ -159,8 +194,9 @@ void connection::setOrder(QString order)
             twoMove();
             game->twomove();
         }
-//        game->update_score();
+        //        game->update_score();
         updateScore();
+        handToTheNut = false;
         emit kish();
     }
     catch (matexcept & error){
@@ -179,8 +215,9 @@ void connection::setOrder(QString order)
                 twoMove();
                 game->twomove();
             }
-//            game->update_score();
+            //            game->update_score();
             updateScore();
+            handToTheNut = false;
             emit mat();
         } catch (Equality & error) {
             winnerName = player1Name() + QString(" و ") + player2Name();
@@ -190,8 +227,9 @@ void connection::setOrder(QString order)
                 twoMove();
                 game->twomove();
             }
-//            game->update_score();
+            //            game->update_score();
             updateScore();
+            handToTheNut = false;
             winnertxt = QString("مساوی شدید");
         }
     } catch (enpassantexcept & piece)
@@ -204,9 +242,13 @@ void connection::setOrder(QString order)
         }
         game->update_score();
         updateScore();
+        handToTheNut = false;
         emit enPassent();
     } catch(pawnpromotion & mypromotion)
     {
+        game->update_score();
+        updateScore();
+        handToTheNut = false;
         emit promotion();
     } catch (exception & error) {
         messageStr = error.what();
@@ -217,6 +259,7 @@ void connection::setOrder(QString order)
         }
         //game->update_score();
         //updateScore();
+        handToTheNut = false;
         emit loseMove();
     }
     order.clear();
@@ -256,7 +299,14 @@ void connection::undo()
         emit undoAttack();
     } catch (promotionundo & myOrder)
     {
-        qDebug() << "PROMOTION UNDO: " << myOrder.id;
+        QString order = myOrder.id, firstCell = order.mid(1, 2), secondCell = order.mid(3, 2);
+        qDebug() << "PROMOTION UNDO:";
+        qDebug() << order << "     " << firstCell << "     " << secondCell;
+        setPromotion(5, secondCell.toUpper());
+        orgIdVal = firstCell;
+        destIdVal = secondCell;
+        emit undoPromotion();
+        //        qDebug() << "PROMOTION UNDO: " << myOrder.id;
     }
 }
 // ------------
@@ -387,6 +437,7 @@ void connection::twoMove()
         if(player1PScore() < 30)
         {
             messageStr = string("امتیاز شما کمتر از ۳۰ است");
+            twoMoveAccess = false;
             emit loseMove();
             return;
         }
@@ -394,6 +445,7 @@ void connection::twoMove()
         if(player2PScore() < 30)
         {
             messageStr = string("امتیاز شما کمتر از ۳۰ است");
+            twoMoveAccess = false;
             emit loseMove();
             return;
         }
@@ -429,6 +481,9 @@ void connection::setPromotion(int state, QString id)
         break;
     case 4:
         piece = KNIGHT;
+        break;
+    case 5:
+        piece = PAWN;
         break;
     }
     game->promotion(id.toStdString(), piece);
