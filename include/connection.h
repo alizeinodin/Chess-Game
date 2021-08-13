@@ -85,6 +85,9 @@ signals:
     // pawn promotion
     void promotion();
 
+    // end game
+    void end();
+
 
 public slots:
 

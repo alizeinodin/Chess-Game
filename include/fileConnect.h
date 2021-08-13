@@ -18,6 +18,7 @@ class FileConnect
         ~FileConnect();
         std::vector<std::string> get_gamelist();
         void removelastline();
+        void setendgame();
 };
 
 #endif /* _FILECONNECT_H */

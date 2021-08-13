@@ -136,3 +136,37 @@ void FileConnect:: removelastline()
     rename("temp.txt", path.c_str());
     openFile(QString::fromStdString(path));
 }
+
+
+void FileConnect::setendgame()
+{
+    ofstream s("temp.txt" , ios::out | ios::app);
+    string temp;
+    vector<string> d;
+    ifstream in("gamelist.txt");
+    while (1)
+    {
+        //getline(in, temp);
+        in >> temp;
+        if (in.eof())
+        {
+            break;
+        }
+        d.push_back(temp);
+        cout << path << endl;
+    }
+    for (size_t i = 0; i < d.size(); i++)
+    {
+        temp = d.at(i);
+        if (temp == path)
+        {
+            temp += "-end";
+        }
+        cout << temp << endl;
+        s << temp << endl;
+    }
+    s.close();
+    in.close();
+    remove("gamelist.txt");
+    rename("temp.txt", "gamelist.txt");
+}
