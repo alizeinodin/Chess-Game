@@ -508,6 +508,18 @@ int connection::getindexgame()
 }
 // ------------
 
+// undo castleing, undo order for king
+// ------------
+void connection::undoCastleingKing()
+{
+    QString order = undoCastKing, firstCell = order.mid(1, 2), secondCell = order.mid(3, 2);
+    orgIdVal = secondCell;
+    destIdVal = firstCell;
+    updateScore();
+    emit undoMove();
+}
+// ------------
+
 // get game name
 // ------------
 //QString connection::getgamename(int index)
