@@ -542,7 +542,7 @@ QString Game::undo(bool isreview)
             throw e;
         }
     }
-    temp = move.substr(2, 5);
+    //temp = move.substr(2, 5);
     cout << "move undo: " << temp << endl;
     string makeResult = temp[0] + temp.substr(3, 4) + temp.substr(1, 2);
     cout << "make result: " << makeResult << endl;
