@@ -415,6 +415,13 @@ QString Game::undo()
             undoattack e(temp, player2->getcolor());
             cout << temp <<endl;
             file.removelastline();
+            if (undoprom)
+            {
+                promotionundo er(result);
+                er.attackUndo = true;
+                er.e = &e;
+                throw er;
+            }
             throw e;
         }
     }
@@ -463,6 +470,13 @@ QString Game::undo()
             undoattack e(temp, player1->getcolor());
             cout << temp <<endl;
             file.removelastline();
+            if (undoprom)
+            {
+                promotionundo er(result);
+                er.attackUndo = true;
+                er.e = &e;
+                throw er;
+            }
             throw e;
         }
     }
@@ -804,7 +818,7 @@ QString Game:: redo()
     }
     catch(pawnpromotion& e)
     {
-        //promotion(move.substr(5, 2), stoi(move.substr(move.find('-') + 1)));
+        promotion(move.substr(5, 2), piece(stoi(move.substr(move.find('-') + 1))));
     }
     catch(enpassantexcept &e)
     {
