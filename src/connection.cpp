@@ -140,12 +140,12 @@ void connection::setOrder(QString order)
             orgIdVal = QString::fromStdString(destid).toLower();
             if(!handToTheNut)
             {
-//                if(game->getTurn())
-//                {
-//                    game->getPlayer(std::string("White")).addScore(0, 1);
-//                } else {
-//                    game->getPlayer(std::string("Black")).addScore(0, 1);
-//                }
+                //                if(game->getTurn())
+                //                {
+                //                    game->getPlayer(std::string("White")).addScore(0, 1);
+                //                } else {
+                //                    game->getPlayer(std::string("Black")).addScore(0, 1);
+                //                }
                 game->addScore(0 ,1);
                 updateScore();
                 handToTheNut = true;
@@ -175,7 +175,7 @@ void connection::setOrder(QString order)
     }
     // ----------
     
-//    qDebug() << order;
+    //    qDebug() << order;
     try {
         game->order(order.toStdString());
         if(twoMoveAccess)
@@ -305,6 +305,11 @@ void connection::undo()
         setPromotion(5, secondCell.toUpper());
         orgIdVal = firstCell;
         destIdVal = secondCell;
+        if(myOrder.attackUndo)
+        {
+            undoPieceColor = QString::fromStdString(myOrder.e->color);
+            emit undoPromotionAttack();
+        }
         updateScore();
         emit undoPromotion();
     } catch(castlingundo & myOrder)
