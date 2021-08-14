@@ -917,7 +917,7 @@ QString Game:: redo()
     {
         throw temp += "-e";
     }
-    return temp;
+    return QString::fromStdString(temp);
     
 }
 // ---------------
