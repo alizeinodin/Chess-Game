@@ -90,12 +90,14 @@ signals:
     // undo promotion
     void undoPromotion();
 
+    // undo promotion attack
+    void undoPromotionAttack();
+
     // hand to the nut
     void handNut();
 
     // undo castleing
     void undoCastleing();
-
 
 public slots:
 

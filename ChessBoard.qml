@@ -239,8 +239,11 @@ Item {
             message.visible = false;
             board.move = "";
             connection.undoMove(); // rook move
-            pauseCast.running = true;
-            connection.undoCastleingKing(); // king move
+            pauseUndoCast.running = true;
+        }
+        onUndoPromotionAttack:{
+            board.undoAttack = true;
+            connection.undoCastleing();
         }
 
         onHandNut:{
@@ -1097,6 +1100,19 @@ Item {
                 if(running == false)
                 {
                     connection.castleing();
+                }
+            }
+        }
+
+        // pause animation in castleing
+        PauseAnimation {
+            id: pauseUndoCast
+            running: false
+            duration: 1000
+            onRunningChanged: {
+                if(running == false)
+                {
+                    connection.undoCastleingKing();
                 }
             }
         }
