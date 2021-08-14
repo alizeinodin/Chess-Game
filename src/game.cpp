@@ -405,7 +405,8 @@ QString Game::undo(bool isreview)
     // this code is for exist two move option in program
     string temp = move.substr(2, 6);
     Cell *cellt;
-    //cout << temp << endl;
+    string undoenpassant;
+    cout << move << endl;
     transform(temp.begin(), temp.end(), temp.begin(), ::toupper);
     if (move.at(1) == '2')
     {
@@ -429,8 +430,8 @@ QString Game::undo(bool isreview)
         }
         catch(string & e)
         {
-            temp.pop_back();
-            temp += e;
+            *(temp.rbegin()) = '0';
+            undoenpassant = e;
         }
         catch(castlingundo &e)
         {
@@ -495,8 +496,8 @@ QString Game::undo(bool isreview)
         }
         catch(string & e)
         {
-            temp.pop_back();
-            temp += e;
+            *(temp.rbegin()) = '0';
+            undoenpassant = e;
         }
         catch(castlingundo &e)
         {
@@ -543,8 +544,11 @@ QString Game::undo(bool isreview)
         }
     }
     //temp = move.substr(2, 5);
+    temp.pop_back();
     cout << "move undo: " << temp << endl;
     string makeResult = temp[0] + temp.substr(3, 4) + temp.substr(1, 2);
+    makeResult += undoenpassant;
+    transform(makeResult.begin(), makeResult.end(), makeResult.begin(), ::tolower);
     cout << "make result: " << makeResult << endl;
     QString result = QString::fromStdString(makeResult);
     if (!isreview)
@@ -556,7 +560,7 @@ QString Game::undo(bool isreview)
         promotionundo e(result);
         throw e;
     }
-    
+    qDebug() << result;
     return result;
 }
 // ---------------
