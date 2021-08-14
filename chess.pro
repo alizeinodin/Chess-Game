@@ -48,6 +48,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     include/bishop.h \
+    include/castling.h \
     include/cell.h \
     include/chessBoard.h \
     include/chessMan.h \

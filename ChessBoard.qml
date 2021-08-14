@@ -210,7 +210,6 @@ Item {
         }
 
         onUndoPromotion:{
-            console.log("UNDO PROMOTION");
             mat.visible = false;
             message.visible = false;
             board.orgid = board.idMap[connection.orgId()];
@@ -232,7 +231,16 @@ Item {
             connection.setPromotion(1, board.destid.id);
             board.orgimg.source = "media/"+convertPiece.type+"/P.png";
 
-            board.orgid.piece = "P";
+            board.destid.piece = "P";
+        }
+
+        onUndoCastleing:{
+            mat.visible = false;
+            message.visible = false;
+            board.move = "";
+            connection.undoMove(); // rook move
+            pauseCast.running = true;
+            connection.undoCastleingKing(); // king move
         }
 
         onHandNut:{

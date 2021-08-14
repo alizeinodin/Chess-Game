@@ -85,16 +85,16 @@ signals:
     // pawn promotion
     void promotion();
 
-<<<<<<< HEAD
     // end game
     void end();
-=======
     // undo promotion
     void undoPromotion();
 
     // hand to the nut
     void handNut();
->>>>>>> edde7e9fa5e57df635c6a6912c064adb0e0dcd08
+
+    // undo castleing
+    void undoCastleing();
 
 
 public slots:
@@ -189,6 +189,9 @@ public slots:
     // get game name
     QString getgamename(int);
 
+    // undo casleing slot
+    void undoCastleingKing();
+
 private:
 
     Game * game = nullptr;
@@ -232,6 +235,9 @@ private:
 
     // hand to the nut check
     bool handToTheNut = false;
+
+    // undo casleing second order
+    QString undoCastKing;
 };
 
 #endif // CONNECTION_H

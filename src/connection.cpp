@@ -4,6 +4,7 @@
 #include "../include/enpassantexcept.h"
 #include "../include/pawnpromotion.h"
 #include "../include/promotionundo.h"
+#include "../include/castling.h"
 #include <iostream>
 #include <QDebug>
 #include <QApplication>
@@ -301,13 +302,19 @@ void connection::undo()
     } catch (promotionundo & myOrder)
     {
         QString order = myOrder.id, firstCell = order.mid(1, 2), secondCell = order.mid(3, 2);
-        qDebug() << "PROMOTION UNDO:";
-        qDebug() << order << "     " << firstCell << "     " << secondCell;
         setPromotion(5, secondCell.toUpper());
         orgIdVal = firstCell;
         destIdVal = secondCell;
+        updateScore();
         emit undoPromotion();
-        //        qDebug() << "PROMOTION UNDO: " << myOrder.id;
+    } catch(castlingundo & myOrder)
+    {
+        QString order = QString::fromStdString(myOrder.rookid).toLower(), firstCell = order.mid(0, 2), secondCell = order.mid(2, 2);
+        orgIdVal = firstCell;
+        destIdVal = secondCell;
+        undoCastKing = QString::fromStdString(myOrder.undomove).toLower();
+        updateScore();
+        emit undoCastleing();
     }
 }
 // ------------
@@ -515,4 +522,16 @@ QString connection::getgamename(int index)
         emit end();
     }
     return name.at(index);
+}
+// ------------
+
+// undo castleing, undo order for king
+// ------------
+void connection::undoCastleingKing()
+{
+    QString order = undoCastKing, firstCell = order.mid(1, 2), secondCell = order.mid(3, 2);
+    orgIdVal = secondCell;
+    destIdVal = firstCell;
+    updateScore();
+    emit undoMove();
 }

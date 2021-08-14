@@ -7,7 +7,7 @@ class castlingundo
 {
 public:
     ID rookid;
-    MOVE undomove
+    MOVE undomove;
     castlingundo(MOVE m,ID id) : rookid(id) , undomove(m) {}
 };
 
