@@ -576,6 +576,7 @@ void Game::update_score()
             }
             player2->addScore(1, score);
             player2->add_attack_piece(attackpiece);
+            attackpiece = nullptr;
         }
         try
         {
@@ -634,6 +635,7 @@ void Game::update_score()
             }
             player1->addScore(1, score);
             player1->add_attack_piece(attackpiece);
+            attackpiece = nullptr;
         }
         try
         {
