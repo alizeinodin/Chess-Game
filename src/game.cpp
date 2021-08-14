@@ -56,6 +56,15 @@ void Game::order(MOVE move)
     transform(move.begin(), move.end(), move.begin(), ::toupper);
     Cell cell = gameBoard.search(cut_str(move).first);
     cerr << move << endl;
+    string nscore;
+    bool check = false;
+    if (moves.size() > 1)
+    {
+        nscore = *(moves.end() - 2);
+        nscore = nscore.substr(2, 5);
+        check = true;
+        transform(nscore.begin(), nscore.end(), nscore.begin(), ::toupper);
+    }
     //cout << "w:" << boolalpha << player1->iskish() << "\tb:" << player2->iskish() << endl;
     if (Turn)
     {
@@ -64,7 +73,14 @@ void Game::order(MOVE move)
             //cout << cell.getPiece()->get_color();
             if (cell.getPiece()->get_color() == player1->getcolor())
             {
-
+                if (check)
+                {
+                    cout << cut_str(nscore).second << '\t'<< cut_str(move).first;
+                    if (cut_str(nscore).second == cut_str(move).first && cut_str(nscore).first == cut_str(move).second)
+                    {
+                        player1->addScore(0, 2);
+                    }
+                }
                 saveMove = string("P1") + saveMove; // player1 moved piece
                 cell = gameBoard.search(cut_str(move).second);
                 if (cell.getState())
@@ -208,6 +224,13 @@ void Game::order(MOVE move)
         {
             if (cell.getPiece()->get_color() == player2->getcolor())
             {
+                if (check)
+                {
+                    if (cut_str(nscore).second == cut_str(move).first && cut_str(nscore).first == cut_str(move).second)
+                    {
+                        player1->addScore(0, 2);
+                    }
+                }
                 saveMove = string("P2") + saveMove; // player1 moved piece
                 cell = gameBoard.search(cut_str(move).second);
                 if (cell.getState())
@@ -817,18 +840,15 @@ QString Game:: redo()
 {
     string move;
     move = file.ReadFromFile();
+    string temp = move.substr(2,5);
     try
     {
-        this->order(move.substr(2,5));
-        update_score();
+        this->order(temp);
     }
     catch(pawnpromotion& e)
     {
         promotion(move.substr(5, 2), piece(stoi(move.substr(move.find('-') + 1))));
-    }
-    catch(enpassantexcept &e)
-    {
-
+        throw temp + move.substr(move.find('-') + 1);
     }
     
 }
