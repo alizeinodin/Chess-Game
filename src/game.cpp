@@ -911,8 +911,13 @@ QString Game:: redo()
     catch(pawnpromotion& e)
     {
         promotion(move.substr(5, 2), piece(stoi(move.substr(move.find('-') + 1))));
-        throw temp + move.substr(move.find('-') + 1);
+        throw temp + '-' + move.substr(move.find('-') + 1);
     }
+    catch(enpassantexcept &e)
+    {
+        throw temp += "-e";
+    }
+    return temp;
     
 }
 // ---------------
