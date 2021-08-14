@@ -460,7 +460,7 @@ QString Game::undo()
                 QString result = QString::fromStdString(makeResult);
                 promotionundo er(result);
                 er.attackUndo = true;
-                er.e = &e;
+                er.e = e.color;
                 Turn = false;
                 throw er;
             }
@@ -519,7 +519,7 @@ QString Game::undo()
                 QString result = QString::fromStdString(makeResult);
                 promotionundo er(result);
                 er.attackUndo = true;
-                er.e = &e;
+                er.e = e.color;
                 Turn = true;
                 throw er;
             }

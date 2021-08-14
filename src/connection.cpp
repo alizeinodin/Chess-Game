@@ -307,7 +307,8 @@ void connection::undo()
         destIdVal = secondCell;
         if(myOrder.attackUndo)
         {
-            undoPieceColor = QString::fromStdString(myOrder.e->color);
+            //cout << myOrder.e->color;
+            undoPieceColor = QString::fromStdString(myOrder.e);
             emit undoPromotionAttack();
         }
         updateScore();
