@@ -318,6 +318,7 @@ void ChessBoard::undo(MOVE move, ChessMan *attackp)
     }
     if (cast)
     {
+        move.pop_back();
         castlingundo e(move, rookcast);
         throw e;
     }

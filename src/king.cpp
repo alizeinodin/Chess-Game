@@ -25,7 +25,7 @@ void king::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
         size_t i = 0;
         for (; i < possible.size(); i++)
         {
-            cout << possible.at(i) << " King: " << boolalpha << (possible.at(i) == cellsid.second) <<endl;
+            //cout << possible.at(i) << " King: " << boolalpha << (possible.at(i) == cellsid.second) <<endl;
             if (possible.at(i) == cellsid.second)
             {
                 cells[0] = search_cell(cellsid.first, board);
@@ -85,15 +85,15 @@ void king::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
             celltemp = search_cell(temp, board);
             if (celltemp->getState())
             {
-                cout << !possible_move_king(temp, this->color, board) <<endl;
+                //cout << !possible_move_king(temp, this->color, board) <<endl;
                 if (!possible_move_king(temp, this->color, board))
                 {
-                    cout << temp;
+                    //cout << temp;
                     possible.push_back(temp);
                 }
                 else
                 {
-                    cout << "ajab  " << temp << endl;
+                    //cout << "ajab  " << temp << endl;
                 }
                 
             }
@@ -112,12 +112,12 @@ void king::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
     {
         startgame_white = false;
     }
-    cout << "black "<< (!possible.empty() && startgame_black && color == "Black") << endl;
+    //cout << "black "<< (!possible.empty() && startgame_black && color == "Black") << endl;
     if (!possible.empty() && startgame_black && color == "Black")
     {
         startgame_black = false;
     }
-    cout << "white start" << possible.empty() <<endl;
+    //cout << "white start" << possible.empty() <<endl;
     if (possible.empty() && !startgame_white && color == "White")
     {
         ismate = true;

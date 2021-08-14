@@ -510,28 +510,16 @@ int connection::getindexgame()
 
 // get game name
 // ------------
-QString connection::getgamename(int index)
-{
-    auto name = game->get_gamelist();
-    string temp = name.at(index).toStdString();
-    stringstream tok(temp);
-    string endstr;
-    getline(tok, endstr, '-');
-    getline(tok, endstr, '-');
-    if (endstr == "end") {
-        emit end();
-    }
-    return name.at(index);
-}
-// ------------
-
-// undo castleing, undo order for king
-// ------------
-void connection::undoCastleingKing()
-{
-    QString order = undoCastKing, firstCell = order.mid(1, 2), secondCell = order.mid(3, 2);
-    orgIdVal = secondCell;
-    destIdVal = firstCell;
-    updateScore();
-    emit undoMove();
-}
+//QString connection::getgamename(int index)
+//{
+//    auto name = game->get_gamelist();
+//    string temp = name.at(index).toStdString();
+//    stringstream tok(temp);
+//    string endstr;
+//    getline(tok, endstr, '-');
+//    getline(tok, endstr, '-');
+//    if (endstr == "end") {
+//        emit end();
+//    }
+//    return name.at(index);
+//}

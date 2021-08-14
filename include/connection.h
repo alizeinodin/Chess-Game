@@ -187,7 +187,7 @@ public slots:
     int getindexgame();
 
     // get game name
-    QString getgamename(int);
+    //QString getgamename(int);
 
     // undo casleing slot
     void undoCastleingKing();
