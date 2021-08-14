@@ -18,6 +18,11 @@ Game::Game(Name name) : gamename(name) {}
 //    static Game game(name);
 //    return game;
 //}
+
+// ---------------
+
+//  set player for game
+// ---------------
 void Game::setPlayer(Color color, QString name)
 {
     switch (color)
@@ -35,7 +40,10 @@ void Game::setPlayer(Color color, QString name)
         break;
     }
 }
+// ---------------
 
+//  return player
+// ---------------
 Player Game::getPlayer(COLOR c)
 {
     if (player1->getcolor() == c)
@@ -49,6 +57,10 @@ Player Game::getPlayer(COLOR c)
     throw invalid_argument("invalid color");
 }
 
+// ---------------
+
+// send move command to game
+// ---------------
 void Game::order(MOVE move)
 {
     cerr << move << endl;
@@ -378,7 +390,10 @@ void Game::startgame()
     gameBoard.startboard();
 }
 
+// ---------------
 
+// undo move
+// ---------------
 
 QString Game::undo()
 {
@@ -389,18 +404,18 @@ QString Game::undo()
     // find last move of player
     // this code is for exist two move option in program
     string temp = move.substr(2, 6);
-    Cell cellt;
+    Cell *cellt;
     //cout << temp << endl;
     transform(temp.begin(), temp.end(), temp.begin(), ::toupper);
     if (move.at(1) == '2')
     {
         if (temp.at(0) == 'P')
         {
-            cellt = gameBoard.search(temp.substr(3, 2));
+            cellt = &gameBoard.search(temp.substr(3, 2));
             //cout << cellt.getId() <<endl;
-            if (cellt.getPiece()->get_type() != PAWN)
+            if (cellt->getPiece()->get_type() != PAWN)
             {
-                cellt.setPiece(player2->getporomotion());
+                cellt->setPiece(player2->getporomotion());
                 undoprom = true;
             }
             
@@ -446,6 +461,7 @@ QString Game::undo()
                 promotionundo er(result);
                 er.attackUndo = true;
                 er.e = &e;
+                Turn = false;
                 throw er;
             }
             throw e;
@@ -455,10 +471,10 @@ QString Game::undo()
     {
         if (temp.at(0) == 'P')
         {
-            cellt = gameBoard.search(temp.substr(3, 2));
-            if (cellt.getPiece()->get_type() != PAWN)
+            cellt = &gameBoard.search(temp.substr(3, 2));
+            if (cellt->getPiece()->get_type() != PAWN)
             {
-                cellt.setPiece(player1->getporomotion());
+                cellt->setPiece(player1->getporomotion());
                 undoprom = true;
             }
             
@@ -479,7 +495,7 @@ QString Game::undo()
             tempscore.append(move.begin() + 8, move.end());
             //cout << "sc "  << temp << endl;
             player1->addScore(1, -stoi(tempscore));
-            Turn = false;
+            Turn = true;
             moves.pop_back();
             throw e;
         }
@@ -504,6 +520,7 @@ QString Game::undo()
                 promotionundo er(result);
                 er.attackUndo = true;
                 er.e = &e;
+                Turn = true;
                 throw er;
             }
             throw e;
@@ -523,12 +540,18 @@ QString Game::undo()
     
     return result;
 }
+// ---------------
 
+// get moves command
+// ---------------
 std::vector<MOVE> Game::movesUndo()
 {
     return moves;
 }
+// ---------------
 
+// undate score for player
+// ---------------
 void Game::update_score()
 {
     int score = 0;
@@ -653,7 +676,10 @@ void Game::update_score()
     //get_gamelist();
     //file.openFile(gamename + "-" + player1->get_name() + "-" + player2->get_name() + ".acd");
 }
+// ---------------
 
+// get pscore of player
+// ---------------
 Player &Game::compareScore()
 {
     if (player1->getScore(1) > player2->getScore(1))
@@ -669,13 +695,19 @@ Player &Game::compareScore()
         throw Equality();
     }
 }
+// ---------------
 
+// restart game
+// ---------------
 void Game::restart()
 {
     player1->restartScore();
     player2->restartScore();
 }
+// ---------------
 
+// for pawn promotion
+// ---------------
 void Game::promotion(ID pawncell, piece typepiece)
 {
     ChessMan *temppiece;
@@ -718,6 +750,7 @@ void Game::promotion(ID pawncell, piece typepiece)
     }
     temp->setPiece(temppiece);
 }
+// ---------------
 
 // two move option for player's with -30 score
 // -------------------
@@ -753,6 +786,8 @@ bool Game::getTurn()
 }
 // ---------------
 
+// for random move
+// ---------------
 std::string Game:: random_move()
 {
     //cout << "random  \n";
@@ -774,7 +809,10 @@ std::string Game:: random_move()
     return move;
 
 }
+// ---------------
 
+// save game in file
+// ---------------
 void Game::savegame()
 {
     static bool first = true;
@@ -806,7 +844,10 @@ void Game::savegame()
     file.WriteToFile(save);
 }
 
+// ---------------
 
+// get game list for select game 
+// ---------------
 vector<QString> Game:: get_gamelist()
 {
     auto temp = file.get_gamelist();
@@ -834,7 +875,10 @@ vector<QString> Game:: get_gamelist()
     
     return qs;
 }
+// ---------------
 
+// redo moves
+// ---------------
 
 QString Game:: redo()
 {
@@ -852,7 +896,10 @@ QString Game:: redo()
     }
     
 }
+// ---------------
 
+// select game
+// ---------------
 
 void Game::select_game(QString name)
 {
@@ -877,6 +924,8 @@ void Game::select_game(QString name)
     }
     file.openFile(QString::fromStdString(path));
 }
+// ---------------
+
 // check color of piece for hand nut
 // ---------------
 bool Game::checkColorOfPiece(string id)
