@@ -417,6 +417,9 @@ QString Game::undo()
             file.removelastline();
             if (undoprom)
             {
+                temp = move.substr(2, 5);
+                string makeResult = temp[0] + temp.substr(3, 4) + temp.substr(1, 2);
+                QString result = QString::fromStdString(makeResult);
                 promotionundo er(result);
                 er.attackUndo = true;
                 er.e = &e;
@@ -472,6 +475,9 @@ QString Game::undo()
             file.removelastline();
             if (undoprom)
             {
+                temp = move.substr(2, 5);
+                string makeResult = temp[0] + temp.substr(3, 4) + temp.substr(1, 2);
+                QString result = QString::fromStdString(makeResult);
                 promotionundo er(result);
                 er.attackUndo = true;
                 er.e = &e;
