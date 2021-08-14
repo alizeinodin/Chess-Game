@@ -395,7 +395,7 @@ void Game::startgame()
 // undo move
 // ---------------
 
-QString Game::undo()
+QString Game::undo(bool isreview)
 {
     string move = moves.back();
     string tempscore;
@@ -439,6 +439,10 @@ QString Game::undo()
             player2->addScore(1, -stoi(tempscore));
             Turn = false;
             moves.pop_back();
+            if (!isreview)
+            {
+                file.removelastline();
+            }
             throw e;
         }
         player2->addScore(0, 5);
@@ -452,7 +456,10 @@ QString Game::undo()
             temp.pop_back();
             undoattack e(temp, player2->getcolor());
             //cout << temp <<endl;
-            file.removelastline();
+            if (!isreview)
+            {
+                file.removelastline();
+            }
             if (undoprom)
             {
                 temp = move.substr(2, 5);
@@ -497,6 +504,10 @@ QString Game::undo()
             player1->addScore(1, -stoi(tempscore));
             Turn = true;
             moves.pop_back();
+            if (!isreview)
+            {
+                file.removelastline();
+            }
             throw e;
         }
         player1->addScore(0, 5);
@@ -511,7 +522,10 @@ QString Game::undo()
             temp.pop_back();
             undoattack e(temp, player1->getcolor());
             //cout << temp <<endl;
-            file.removelastline();
+            if (!isreview)
+            {
+                file.removelastline();
+            }
             if (undoprom)
             {
                 temp = move.substr(2, 5);
@@ -531,7 +545,10 @@ QString Game::undo()
     string makeResult = temp[0] + temp.substr(3, 4) + temp.substr(1, 2);
     cout << "make result: " << makeResult << endl;
     QString result = QString::fromStdString(makeResult);
-    file.removelastline();
+    if (!isreview)
+    {
+        file.removelastline();
+    }
     if (undoprom)
     {
         promotionundo e(result);

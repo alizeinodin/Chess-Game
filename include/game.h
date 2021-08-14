@@ -27,7 +27,7 @@ class Game
     void setPlayer(Color, QString);
     Player getPlayer(COLOR);
     void order(MOVE);
-    QString undo();
+    QString undo(bool isreview);
     std::vector<MOVE> movesUndo();
     void restart();
     void update_score();

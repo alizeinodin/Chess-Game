@@ -286,7 +286,7 @@ void connection::startGame(QString name)
 void connection::undo()
 {
     try{
-        QString order = game->undo(), firstCell = order.mid(1, 2), secondCell = order.mid(3, 2);
+        QString order = game->undo(false), firstCell = order.mid(1, 2), secondCell = order.mid(3, 2);
         orgIdVal = firstCell;
         destIdVal = secondCell;
         updateScore();
