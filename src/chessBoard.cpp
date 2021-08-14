@@ -88,7 +88,7 @@ void ChessBoard::startboard()
     }
 }
 
-Cell &ChessBoard::search(std::string str)
+Cell *ChessBoard::search(std::string str)
 {
     char character[] = "a";
     get_char(str, character);
@@ -97,7 +97,7 @@ Cell &ChessBoard::search(std::string str)
     int x = get_num(str) - 1;
     if (Board.at(x).at(y).getId() == str)
     {
-        return Board.at(x).at(y);
+        return &Board.at(x).at(y);
     }
 
     throw out_of_range("cell not exist");
