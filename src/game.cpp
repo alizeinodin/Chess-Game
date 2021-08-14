@@ -66,7 +66,7 @@ void Game::order(MOVE move)
     cerr << move << endl;
     string saveMove = move;
     transform(move.begin(), move.end(), move.begin(), ::toupper);
-    Cell cell = gameBoard.search(cut_str(move).first);
+    Cell* cell = gameBoard.search(cut_str(move).first);
     cerr << move << endl;
     string nscore;
     bool check = false;
@@ -80,10 +80,10 @@ void Game::order(MOVE move)
     //cout << "w:" << boolalpha << player1->iskish() << "\tb:" << player2->iskish() << endl;
     if (Turn)
     {
-        if (cell.getPiece() != nullptr)
+        if (cell->getPiece() != nullptr)
         {
             //cout << cell.getPiece()->get_color();
-            if (cell.getPiece()->get_color() == player1->getcolor())
+            if (cell->getPiece()->get_color() == player1->getcolor())
             {
                 if (check)
                 {
@@ -95,7 +95,7 @@ void Game::order(MOVE move)
                 }
                 saveMove = string("P1") + saveMove; // player1 moved piece
                 cell = gameBoard.search(cut_str(move).second);
-                if (cell.getState())
+                if (cell->getState())
                 {
                     cerr << "start move piece" << endl;
                     try
@@ -232,9 +232,9 @@ void Game::order(MOVE move)
     }
     else
     {
-        if (cell.getPiece() != nullptr)
+        if (cell->getPiece() != nullptr)
         {
-            if (cell.getPiece()->get_color() == player2->getcolor())
+            if (cell->getPiece()->get_color() == player2->getcolor())
             {
                 if (check)
                 {
@@ -245,7 +245,7 @@ void Game::order(MOVE move)
                 }
                 saveMove = string("P2") + saveMove; // player1 moved piece
                 cell = gameBoard.search(cut_str(move).second);
-                if (cell.getState())
+                if (cell->getState())
                 {
                     cerr << "start move piece" << endl;
                     try
@@ -411,10 +411,11 @@ QString Game::undo(bool isreview)
     {
         if (temp.at(0) == 'P')
         {
-            cellt = &gameBoard.search(temp.substr(3, 2));
+            cellt = gameBoard.search(temp.substr(3, 2));
             //cout << cellt.getId() <<endl;
             if (cellt->getPiece()->get_type() != PAWN)
             {
+                delete cellt->getPiece();
                 cellt->setPiece(player2->getporomotion());
                 undoprom = true;
             }
@@ -478,9 +479,10 @@ QString Game::undo(bool isreview)
     {
         if (temp.at(0) == 'P')
         {
-            cellt = &gameBoard.search(temp.substr(3, 2));
+            cellt = gameBoard.search(temp.substr(3, 2));
             if (cellt->getPiece()->get_type() != PAWN)
             {
+                delete cellt->getPiece();
                 cellt->setPiece(player1->getporomotion());
                 undoprom = true;
             }
@@ -731,7 +733,7 @@ void Game::promotion(ID pawncell, piece typepiece)
 {
     ChessMan *temppiece;
     //cout << pawncell << '\t' << typepiece <<endl;
-    Cell *temp = &gameBoard.search(pawncell);
+    Cell *temp = gameBoard.search(pawncell);
     switch (typepiece)
     {
     case QUEEN:
@@ -917,7 +919,7 @@ QString Game:: redo()
     {
         throw temp += "-e";
     }
-    return temp;
+    return QString::fromStdString(temp);
     
 }
 // ---------------
@@ -954,15 +956,15 @@ void Game::select_game(QString name)
 // ---------------
 bool Game::checkColorOfPiece(string id)
 {
-    Cell cell = gameBoard.search(id);
+    Cell* cell = gameBoard.search(id);
     if(Turn)
     {
-        if(cell.getPiece()->get_color() == player1->getcolor())
+        if(cell->getPiece()->get_color() == player1->getcolor())
         {
             return true; // this piece is for player
         }
     } else {
-        if(cell.getPiece()->get_color() == player2->getcolor())
+        if(cell->getPiece()->get_color() == player2->getcolor())
         {
             return true; // this piece is for player
         }

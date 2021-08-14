@@ -28,7 +28,7 @@ class ChessBoard
     void startboard();
     std::array<std::array<Cell, 8>, 8> remmeber(std::string);
     void order(std::string);
-    Cell & search(std::string);
+    Cell * search(std::string);
     MOVE randommoves(COLOR);
     void movePiece(std::string);
     ChessMan * attack(MOVE);
