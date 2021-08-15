@@ -107,6 +107,9 @@ signals:
     // undo enpassent
     void undoEnpassent();
 
+    // random move
+    void randomMove();
+
 public slots:
 
     // game name
@@ -208,6 +211,12 @@ public slots:
     void setCheckRandom(bool);
     bool checkRandom();
 
+    // cancel player
+    void cancel();
+
+    // get random String
+    QString getRandom();
+
 private:
 
     Game * game = nullptr;
@@ -255,9 +264,8 @@ private:
 
     // undo casleing second order
     QString undoCastKing;
-
     // check random
-    bool checkrandom;
+    bool checkrandom = false;
 };
 
 #endif // CONNECTION_H

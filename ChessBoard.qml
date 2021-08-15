@@ -28,6 +28,22 @@ Item {
     Connections{
         target: connection
         onSuccessMove:{
+            //            if(connection.checkRandom)
+            //            {
+            //                console.log("hello world!");
+            //                board.orgid = board.idMap[connection.orgId()];
+            //                board.destid = board.idMap[connection.destId()];
+            //                board.rowOrg = board.orgid.parent;
+            //                board.rowDest = board.destid.parent;
+            //                board.orgimg = board.idMap[connection.orgId()+'Img'];
+            //                board.destimg = board.idMap[connection.destId()+'Img'];
+            //                board.orgx = board.orgid.x;
+            //                board.orgy = board.orgid.y;
+            //                board.move = connection.tempId();
+            //                console.log("ORDER:  ", board.move);
+            //                connection.checkRandom = false;
+            //            } else {
+
             var Piece = board.move[0];
             board.move = "";
             //            board.turn = !board.turn;
@@ -52,11 +68,11 @@ Item {
             }
             board.destid.piece = board.orgid.piece;
             message.visible = false;
-            if(Piece === "K" && (indesDest-indexOrg) % 2 === 0)
+            if(Piece === "K" || Piece === "k" && (indesDest-indexOrg) % 2 === 0)
             {
-                console.log("cast");
                 pauseCast.running = true;
             }
+            //            }
         }
         onLoseMove:{
             losePieceSound.play();
@@ -266,6 +282,11 @@ Item {
             board.move = board.orgid.piece + board.orgid.id;
         }
 
+        onRandomMove:{
+            mat.visible = false;
+            message.visible = false;
+        }
+
         onExit:{
             view.pop();
             view.pop();
@@ -324,7 +345,6 @@ Item {
                 text: qsTr("شما با امتیاز:")
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: matName.bottom
-                //                anchors.topMargin: pixel * 1
                 font.family: fontfarsi.name
                 font.pixelSize: pixel*3
             }
@@ -357,7 +377,7 @@ Item {
                 height: pixel * 8
                 font.family: fontfarsi.name
                 font.pixelSize: pixel*2
-                onClicked: connection.exit()
+                onClicked: connection.restart()
             }
         }
     }
@@ -684,6 +704,7 @@ Item {
                 height: pixel * 8
                 font.family: fontfarsi.name
                 font.pixelSize: pixel*2
+                onClicked: connection.cancel()
             }
             Button{
                 id: comeback
@@ -1129,7 +1150,6 @@ Item {
                         listModel2.remove(listModel2.count-1);
                     }
                     tempid.piece = Func.recognize(myImg)[2].split(".")[0];
-//                    console.log("TEMPID: ", tempid.id);
                     tempid.id = connection.tempId();
                     tempImgId.source = myImg;
                 }
@@ -2046,7 +2066,6 @@ Item {
                     source: ""
                 }
                 onClicked: {
-                    console.log("CLICKED", "    ", piece);
                     board.saveId(this, c5Img, parent);
                     board.move = Func.checkMove(board.move, id, piece);
                     if(Func.validation(board.move))

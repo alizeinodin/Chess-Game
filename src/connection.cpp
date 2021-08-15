@@ -152,28 +152,33 @@ void connection::setOrder(QString order)
         }
     }
     // ----------
-    
-        qDebug() << order;
     try {
 
         // random move for 15 negative socore
         // ----------
         if (game->getTurn())
         {
-            if (game->getPlayer(std::string("White")).getScore(0) == 15)
+            if (game->getPlayer(std::string("White")).getScore(0) >= 15)
             {
                 order = QString::fromStdString(game->random_move());
                 setCheckRandom(true);
             }
-            else {
-                if (game->getPlayer(std::string("Black")).getScore(0) == 15)
-                {
-                    order = QString::fromStdString(game->random_move());
-                    setCheckRandom(true);
-                }
+        } else {
+            if (game->getPlayer(std::string("Black")).getScore(0) >= 15)
+            {
+                order = QString::fromStdString(game->random_move());
+                setCheckRandom(true);
             }
         }
         // ----------
+
+        if(checkRandom())
+        {
+            order = order.toLower();
+            orgIdVal = order.mid(1, 2);
+            destIdVal = order.mid(3, 2);
+            tempIdVal = order;
+        }
 
         game->order(order.toStdString());
         if(twoMoveAccess)
@@ -214,7 +219,6 @@ void connection::setOrder(QString order)
                 twoMove();
                 game->twomove();
             }
-            //            game->update_score();
             updateScore();
             handToTheNut = false;
             emit mat();
@@ -325,6 +329,16 @@ void connection::undo()
         undoCastKing = QString::fromStdString(myOrder.undomove).toLower();
         updateScore();
         emit undoCastleing();
+    } catch (exception & error) {
+        messageStr = error.what();
+        if(twoMoveAccess)
+        {
+            twoMove();
+            game->twomove();
+        }
+        updateScore();
+        handToTheNut = false;
+        emit loseMove();
     }
 }
 // ------------
@@ -382,6 +396,11 @@ void connection::updateScore()
     setPlayer2PScore(game->getPlayer(std::string("Black")).getScore(1));
 
     setTurnGame(game->getTurn());
+
+    if(player1NScore() >= 15 || player2NScore() >= 15)
+    {
+        emit randomMove();
+    }
 
 }
 // ------------
@@ -518,7 +537,6 @@ void connection::setPromotion(int state, QString id)
 int connection::getindexgame()
 {
     auto index = game->get_gamelist();
-    cout << index.size() <<endl;
     return index.size();
 }
 // ------------
@@ -542,10 +560,54 @@ bool connection::checkRandom()
     return checkrandom;
 }
 
-
 void connection::setCheckRandom(bool check)
 {
     checkrandom = check;
+}
+// ------------
+
+// cancel game
+// ------------
+void connection::cancel()
+{
+    updateScore();
+    if(game->getTurn())
+    {
+        winnerName = player2Name();
+        winnerScore = game->getPlayer("Black").getScore(1);
+    } else {
+        winnerName = player1Name();
+        winnerScore = game->getPlayer("White").getScore(1);
+    }
+    winnertxt = QString("برنده شدید");
+    if(twoMoveAccess)
+    {
+        twoMove();
+        game->twomove();
+    }
+    handToTheNut = false;
+    emit mat();
+}
+// ------------
+
+// get random string
+// ------------
+QString connection::getRandom()
+{
+    if (game->getTurn())
+    {
+        if (game->getPlayer(std::string("White")).getScore(0) >= 15)
+        {
+            order = QString::fromStdString(game->random_move());
+            setCheckRandom(true);
+        }
+    } else {
+        if (game->getPlayer(std::string("Black")).getScore(0) >= 15)
+        {
+            order = QString::fromStdString(game->random_move());
+            setCheckRandom(true);
+        }
+    }
 }
 // ------------
 

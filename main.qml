@@ -18,10 +18,6 @@ ApplicationWindow {
     Material.accent: Material.Purple
     Material.background: "#EEEEEE"
 
-//    Test{
-
-//    }
-
     property var viewID: view
 
     StackView{
@@ -36,8 +32,6 @@ ApplicationWindow {
         source: "media/Font/IRANSansWeb_Bold.ttf"
     }
 
-//    property var mainAudioID: mainAudio
-
     Audio{
         id:mainAudio
         source: "media/Sound/main music.mp3"
@@ -50,18 +44,6 @@ ApplicationWindow {
         id: connection
 
     }
-
-//    Button{
-//        id: btn
-//        text: "کلیک کنید"
-//        font.family: fontvazir.name
-//        onClicked: {
-//            connection.setOrder(20);
-//            m.visible = true;
-//        }
-
-//    }
-    property var welcomePageID: welcomePage
     Welcome{
         visible: false
         id:welcomePage
@@ -71,7 +53,6 @@ ApplicationWindow {
         visible: false
         id: chessBoardPage
     }
-//    property var playerPageID: playerPage
     Player1{
         visible: false
         id: player1Page
