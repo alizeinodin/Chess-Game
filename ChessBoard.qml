@@ -72,7 +72,11 @@ Item {
             {
                 pauseCast.running = true;
             }
-            //            }
+
+            if(connection.player1NScore >= 15 || connection.player2NScore >= 15)
+            {
+                connection.randomMove();
+            }
         }
         onLoseMove:{
             losePieceSound.play();
@@ -100,6 +104,11 @@ Item {
             movePieceSound.play(); // sound of move piece2
 
             board.destid.piece = board.orgid.piece;
+
+            if(connection.player1NScore >= 15 || connection.player2NScore >= 15)
+            {
+                connection.randomMove();
+            }
         }
         onUndoAttack:
         {
@@ -122,6 +131,11 @@ Item {
 
             enpassentImg.source = "";
             enpassentPiece.id = "";
+
+            if(connection.player1NScore >= 15 || connection.player2NScore >= 15)
+            {
+                connection.randomMove();
+            }
         }
         onKish:
         {
@@ -129,6 +143,10 @@ Item {
             kishAudio.play();
             messagerecTxt.text = connection.getMessage();
             message.visible = true;
+            if(connection.player1NScore >= 15 || connection.player2NScore >= 15)
+            {
+                connection.randomMove();
+            }
         }
 
         onMat:{
@@ -150,6 +168,10 @@ Item {
 
             connection.successMove();
             convertPiece.open();
+            if(connection.player1NScore >= 15 || connection.player2NScore >= 15)
+            {
+                connection.randomMove();
+            }
         }
 
         onCastleing:{
@@ -223,6 +245,10 @@ Item {
                     connection.successMove();
                 }
             }
+            if(connection.player1NScore >= 15 || connection.player2NScore >= 15)
+            {
+                connection.randomMove();
+            }
         }
 
         onUndoPromotion:{
@@ -271,27 +297,27 @@ Item {
 
         }
 
-        onSetRandomMove:{
-            mat.visible = false;
-            message.visible = false;
-            board.orgid = board.idMap[connection.orgId()];
-            board.destid = board.idMap[connection.destId()];
-            board.rowOrg = board.orgid.parent;
-            board.rowDest = board.destid.parent;
-            board.orgimg = board.idMap[connection.orgId()+'Img'];
-            board.destimg = board.idMap[connection.destId()+'Img'];
-            board.orgx = board.orgid.x;
-            board.orgy = board.orgid.y;
+//        onSetRandomMove:{
+//            mat.visible = false;
+//            message.visible = false;
+//            board.orgid = board.idMap[connection.orgId()];
+//            board.destid = board.idMap[connection.destId()];
+//            board.rowOrg = board.orgid.parent;
+//            board.rowDest = board.destid.parent;
+//            board.orgimg = board.idMap[connection.orgId()+'Img'];
+//            board.destimg = board.idMap[connection.destId()+'Img'];
+//            board.orgx = board.orgid.x;
+//            board.orgy = board.orgid.y;
 
-            //set animation destination
-            var indesDest = Func.indexCell(board.destid.id);
-            moveAnimation.tox = (indesDest) * (board.orgid.width + board.rowOrg.spacing);
-            moveAnimation.toy = (board.rowDest.index - board.rowOrg.index) * -(board.destid.height + (pixel * 1.35));
-            moveAnimation.running = true; // Animation for move
-            movePieceSound.play(); // sound of move piece2
+//            //set animation destination
+//            var indesDest = Func.indexCell(board.destid.id);
+//            moveAnimation.tox = (indesDest) * (board.orgid.width + board.rowOrg.spacing);
+//            moveAnimation.toy = (board.rowDest.index - board.rowOrg.index) * -(board.destid.height + (pixel * 1.35));
+//            moveAnimation.running = true; // Animation for move
+//            movePieceSound.play(); // sound of move piece2
 
-            board.destid.piece = board.orgid.piece;
-        }
+//            board.destid.piece = board.orgid.piece;
+//        }
 
         onHandNut:{
             mat.visible = false;
@@ -307,6 +333,13 @@ Item {
         onRandomMove:{
             mat.visible = false;
             message.visible = false;
+            board.move = connection.getRandom();
+            var first = board.idMap[connection.orgId()], second = board.idMap[connection.destId()];
+            var firstImg = board.idMap[connection.orgId()+"Img"], secondImg = board.idMap[connection.destId()+"Img"];
+            board.saveId(first, firstImg, first.parent);
+            board.saveId(second, secondImg, second.parent);
+            console.log("Move: ", board.move);
+            connection.setOrder(board.move);
         }
 
         onExit:{

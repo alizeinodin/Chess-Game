@@ -36,7 +36,7 @@ Page{
                         id: name
                         width: 176
                         height: 21
-                        text: connection.getgamename(index)
+//                        text: connection.getgamename(index)
                         horizontalAlignment: Text.AlignHCenter
                         font.bold: true
                     }

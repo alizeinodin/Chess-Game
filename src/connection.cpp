@@ -156,40 +156,38 @@ void connection::setOrder(QString order)
 
         // random move for 15 negative socore
         // ----------
-        if (game->getTurn())
-        {
-            if (game->getPlayer(std::string("White")).getScore(0) >= 15)
-            {
-                order = QString::fromStdString(game->random_move());
-                QString firstCell = order.mid(1, 2), secondCell = order.mid(3, 2);
-                orgIdVal = secondCell;
-                destIdVal = firstCell;
-                setCheckRandom(true);
-                RandomMove();
-                return;
-            }
-            else {
-                if (game->getPlayer(std::string("Black")).getScore(0) == 15)
-                {
-                    order = QString::fromStdString(game->random_move());
-                    QString firstCell = order.mid(1, 2), secondCell = order.mid(3, 2);
-                    orgIdVal = secondCell;
-                    destIdVal = firstCell;
-                    setCheckRandom(true);
-                    RandomMove();
-                    return;
-                }
-            }
-        }
+//        if (game->getTurn())
+//        {
+//            if (game->getPlayer(std::string("White")).getScore(0) >= 15)
+//            {
+//                order = QString::fromStdString(game->random_move());
+//                QString firstCell = order.mid(1, 2), secondCell = order.mid(3, 2);
+//                orgIdVal = secondCell;
+//                destIdVal = firstCell;
+//                setCheckRandom(true);
+//                return;
+//            }
+//            else {
+//                if (game->getPlayer(std::string("Black")).getScore(0) == 15)
+//                {
+//                    order = QString::fromStdString(game->random_move());
+//                    QString firstCell = order.mid(1, 2), secondCell = order.mid(3, 2);
+//                    orgIdVal = secondCell;
+//                    destIdVal = firstCell;
+//                    setCheckRandom(true);
+//                    return;
+//                }
+//            }
+//        }
         // ----------
 
-        if(checkRandom())
-        {
-            order = order.toLower();
-            orgIdVal = order.mid(1, 2);
-            destIdVal = order.mid(3, 2);
-            tempIdVal = order;
-        }
+//        if(checkRandom())
+//        {
+//            order = order.toLower();
+//            orgIdVal = order.mid(1, 2);
+//            destIdVal = order.mid(3, 2);
+//            tempIdVal = order;
+//        }
 
         game->order(order.toStdString());
         if(twoMoveAccess)
@@ -265,7 +263,7 @@ void connection::setOrder(QString order)
         handToTheNut = false;
 
         emit promotion();
-    } 
+    }
     catch (exception & error) {
         messageStr = error.what();
         if(twoMoveAccess)
@@ -408,11 +406,6 @@ void connection::updateScore()
     setPlayer2PScore(game->getPlayer(std::string("Black")).getScore(1));
 
     setTurnGame(game->getTurn());
-
-    if(player1NScore() >= 15 || player2NScore() >= 15)
-    {
-        emit randomMove();
-    }
 
 }
 // ------------
@@ -608,20 +601,26 @@ void connection::cancel()
 // ------------
 QString connection::getRandom()
 {
+    QString order;
     if (game->getTurn())
     {
         if (game->getPlayer(std::string("White")).getScore(0) >= 15)
         {
             order = QString::fromStdString(game->random_move());
-            setCheckRandom(true);
+            //            setCheckRandom(true);
         }
     } else {
         if (game->getPlayer(std::string("Black")).getScore(0) >= 15)
         {
             order = QString::fromStdString(game->random_move());
-            setCheckRandom(true);
+            //            setCheckRandom(true);
         }
     }
+    QString firstCell = order.mid(1, 2), secondCell = order.mid(3, 2);
+    orgIdVal = secondCell.toLower();
+    destIdVal = firstCell.toLower();
+    updateScore();
+    return order;
 }
 // ------------
 
