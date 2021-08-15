@@ -583,6 +583,7 @@ void Game::update_score()
     {
         if (attackpiece != nullptr)
         {
+            cout << "attackp2\n";
             switch (attackpiece->get_type())
             {
             case QUEEN:
