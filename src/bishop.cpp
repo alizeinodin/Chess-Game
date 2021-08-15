@@ -59,7 +59,6 @@ void bishop::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
         temp += to_string(temp_num);
         if (iscell(temp))
         {
-            //cout << "cell1: " << temp <<endl;
             celltemp = search_cell(temp, board);
             if (celltemp->getState())
             {
@@ -99,7 +98,6 @@ void bishop::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
         temp += to_string(temp_num);
         if (iscell(temp))
         {
-            //cout << "cell2: " << temp <<endl;
             celltemp = search_cell(temp, board);
             if (celltemp->getState())
             {
@@ -144,7 +142,6 @@ void bishop::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
         temp += to_string(temp_num);
         if (iscell(temp))
         {
-            //cout << "cell3: " << temp <<endl;
             celltemp = search_cell(temp, board);
             if (celltemp->getState())
             {
@@ -187,11 +184,9 @@ void bishop::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
     {
         temp += (it)->at(0);
         temp += to_string(temp_num);
-        //cout << "cell4: " << temp <<endl;
         if (iscell(temp))
         {
             celltemp = search_cell(temp, board);
-            //cout << boolalpha << celltemp->getState();
             if (celltemp->getState())
             {
                 possible.push_back(temp);
@@ -220,7 +215,6 @@ void bishop::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
 
         temp.clear();
         it--;
-        //cout << "it: " << *it <<endl;
         temp_num++;
     }
 }
@@ -352,14 +346,12 @@ ID bishop::get_random(ID origin)
     {
         temp += (it)->at(0);
         temp += to_string(temp_num);
-        //cout << "cell4: " << temp <<endl;
         if (iscell(temp))
         {
             possible.push_back(temp);
         }
         temp.clear();
         it--;
-        //cout << "it: " << *it <<endl;
         temp_num++;
     }
     string rand = possible.at(randomNoGenerator(possible.size()- 1));

@@ -34,17 +34,14 @@ void knight::access(std::string origin, std::array<std::array<Cell, 8>, 8> &boar
             {
                 temp += (it + dy[i])->at(0);
                 temp += to_string(num + dx[i]);
-                //cout << temp << endl;
             }
         }
         if (iscell(temp))
         {
             celltemp = search_cell(temp, board);
-            //cout << "get" << temp <<endl;
             if (celltemp->getState())
             {
                 possible.push_back(temp);
-                //cout << temp <<endl;
             }
             else
             {
@@ -69,7 +66,6 @@ void knight::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
         this->access(cellsid.first, board);
         for (size_t i = 0; i < possible.size(); i++)
         {
-            //cout << possible.at(i).getId();
             if (possible.at(i) == cellsid.second)
             {
                 cells[0] = search_cell(cellsid.first, board);
@@ -168,7 +164,6 @@ ID knight::get_random(ID origin)
             {
                 temp += (it + dy[i])->at(0);
                 temp += to_string(num + dx[i]);
-                //cout << temp << endl;
             }
         }
         if (iscell(temp))

@@ -253,13 +253,10 @@ void pawn::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
             {
                 temp += origin.at(0);
                 temp += to_string(num + dy[i]);
-                //cout << "temp" << temp << endl;
-                //cout << "get" << iscell(temp);
                 if (iscell(temp))
                 {
 
                     celltemp = search_cell(temp, board);
-                    //cout << "get" << celltemp.getState();
                     if (celltemp->getState())
                     {
                         possible.push_back(temp);
@@ -277,11 +274,9 @@ void pawn::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
         {
             temp += origin.at(0);
             temp += to_string(num + 1);
-            //cout << temp << endl;
             if (iscell(temp))
             {
                 celltemp = search_cell(temp, board);
-                //cout << "get" << celltemp.getState();
                 if (celltemp->getState())
                 {
                     possible.push_back(temp);
@@ -373,7 +368,6 @@ std::map<std::string, int> pawn::threat(std::string cellid, array<array<Cell, 8>
     this->access(cellid, board);
     if (this->color == "White")
     {
-        //cout << "paw" << get_num(cellid) << endl;
         if (get_num(cellid) > 4)
         {
             temp.insert(make_pair(cellid, 3));
@@ -464,13 +458,11 @@ std::vector<ID> pawn::get_kingcantmove()
 
 void pawn::enpassantattack(Cell **cell, MOVE m)
 {
-    cout << "enpass  method\n";
     auto mv = cut_str(m);
     ChessMan *attackpiece = cell[2]->getPiece();
     pawn * p = dynamic_cast<pawn *> (attackpiece);
     if (p->enpassantid == mv.second)
     {
-        cout << "enpass  if...\n";
         Cell *t;
         string temp = cell[2]->getId();
         int a = get_num(temp);
@@ -562,8 +554,6 @@ ID pawn::get_random(ID origin)
             {
                 temp += origin.at(0);
                 temp += to_string(num + dy[i]);
-                //cout << "temp" << temp << endl;
-                //cout << "get" << iscell(temp);
                 if (iscell(temp))
                 {
                     possible.push_back(temp);
@@ -576,7 +566,6 @@ ID pawn::get_random(ID origin)
         {
             temp += origin.at(0);
             temp += to_string(num + 1);
-            //cout << temp << endl;
             if (iscell(temp))
             {
                 possible.push_back(temp);

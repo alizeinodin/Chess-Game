@@ -21,7 +21,6 @@ class Game
 
     public:
     enum Color {BLACK, WHITE};
-    //Game & getInstance(Name);
     Game(Name);
     void startgame();
     void setPlayer(Color, QString);
@@ -43,7 +42,6 @@ class Game
     bool checkColorOfPiece(std::string);
     void addScore(size_t, int);
 
-    
 };
 
 #endif /* _GAME_H */

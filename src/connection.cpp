@@ -308,7 +308,6 @@ void connection::undo()
         destIdVal = secondCell;
         if(myOrder.attackUndo)
         {
-            //cout << myOrder.e->color;
             undoPieceColor = QString::fromStdString(myOrder.e);
             emit undoPromotionAttack();
         }
@@ -510,7 +509,6 @@ void connection::setPromotion(int state, QString id)
 int connection::getindexgame()
 {
     auto index = game->get_gamelist();
-    cout << index.size() <<endl;
     return index.size();
 }
 // ------------

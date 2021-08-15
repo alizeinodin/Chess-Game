@@ -37,4 +37,5 @@ class ChessBoard
     void checkmate(COLOR);
 
 };
+
 #endif /* _CHESSBOARD_H*/
