@@ -130,6 +130,7 @@ void connection::setOrder(QString order)
         emit loseMove();
     }
     // ----------
+
     // check hand to the nut
     // ----------
     if(order[3].isUpper())
@@ -152,7 +153,7 @@ void connection::setOrder(QString order)
     }
     // ----------
     
-    //    qDebug() << order;
+        qDebug() << order;
     try {
 
         // random move for 15 negative socore
@@ -162,12 +163,13 @@ void connection::setOrder(QString order)
             if (game->getPlayer(std::string("White")).getScore(0) == 15)
             {
                 order = QString::fromStdString(game->random_move());
-
+                setCheckRandom(true);
             }
             else {
                 if (game->getPlayer(std::string("Black")).getScore(0) == 15)
                 {
                     order = QString::fromStdString(game->random_move());
+                    setCheckRandom(true);
                 }
             }
         }
@@ -287,8 +289,10 @@ void connection::undo()
         if(order.length() > 5) // undo of en passent
         {
             undoPieceColor = game->getTurn() == true ? QString("White") : QString("Black");
+            QString third = order.mid(5, 2);
+            tempIdVal = third;
             updateScore();
-            emit undoAttack();
+            emit undoEnpassent();
         }
         updateScore();
         emit undoMove();
@@ -356,6 +360,11 @@ QString connection::orgId()
 QString connection::destId()
 {
     return destIdVal;
+}
+
+QString connection::tempId()
+{
+    return tempIdVal;
 }
 
 // ------------
@@ -522,6 +531,20 @@ void connection::undoCastleingKing()
     destIdVal = firstCell;
     updateScore();
     emit undoMove();
+}
+// ------------
+
+// checking random. if random move is start, it is true
+// ------------
+bool connection::checkRandom()
+{
+    return checkrandom;
+}
+
+
+void connection::setCheckRandom(bool check)
+{
+    checkrandom = check;
 }
 // ------------
 

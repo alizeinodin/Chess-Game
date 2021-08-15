@@ -246,6 +246,15 @@ Item {
             connection.undoCastleing();
         }
 
+        onUndoEnpassent:{
+            mat.visible = false;
+            message.visible = false;
+            board.move = "";
+            connection.undoMove();
+            pauseUndoEnpassent.running = true;
+
+        }
+
         onHandNut:{
             mat.visible = false;
             message.visible = false;
@@ -1085,7 +1094,7 @@ Item {
             }
         }
 
-        // pause animation in castleing
+        // pause animation in undo castleing
         PauseAnimation {
             id: pauseUndoCast
             running: false
@@ -1094,6 +1103,35 @@ Item {
                 if(running == false)
                 {
                     connection.undoCastleingKing();
+                }
+            }
+        }
+
+        // pause animation in enpassent
+        PauseAnimation {
+            id: pauseUndoEnpassent
+            running: false
+            duration: 1000
+            onRunningChanged: {
+                if(running == false)
+                {
+                    var tempid = board.idMap[connection.tempId()];
+                    var tempImgId = board.idMap[connection.tempId()+'Img'];
+
+                    var myImg;
+                    if(connection.getUndoAttackColor() === "White")
+                    {
+                        myImg = listModel1.get(listModel1.count-1).myImg; // Img's address of pic of list of move loses of player2
+                        listModel1.remove(listModel1.count-1); // this img come on board and delete from list of move loses
+                    }
+                    else{
+                        myImg = listModel2.get(listModel2.count-1).myImg; // like up and for player1
+                        listModel2.remove(listModel2.count-1);
+                    }
+                    tempid.piece = Func.recognize(myImg)[2].split(".")[0];
+//                    console.log("TEMPID: ", tempid.id);
+                    tempid.id = connection.tempId();
+                    tempImgId.source = myImg;
                 }
             }
         }
@@ -2008,6 +2046,7 @@ Item {
                     source: ""
                 }
                 onClicked: {
+                    console.log("CLICKED", "    ", piece);
                     board.saveId(this, c5Img, parent);
                     board.move = Func.checkMove(board.move, id, piece);
                     if(Func.validation(board.move))

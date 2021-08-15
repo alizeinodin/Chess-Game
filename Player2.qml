@@ -27,7 +27,7 @@ Page {
         Text {
             id: player2txt
             text: qsTr("بازیکن شماره 2 نام خود را وارد کنید:")
-            font.family: fontID.name
+            font.family: fontfarsi.name
             anchors.horizontalCenter: player2Img.horizontalCenter
             font.pixelSize: 20
             font.letterSpacing: 1.2

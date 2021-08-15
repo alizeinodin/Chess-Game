@@ -25,7 +25,7 @@ Page {
         Text {
             id: namegametxt
             text: qsTr("نام بازی را وارد کنید:")
-            font.family: fontID.name
+            font.family: fontfarsi.name
             anchors.horizontalCenter: textField.horizontalCenter
             font.pixelSize: 20
             font.letterSpacing: 1.2
