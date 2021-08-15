@@ -658,15 +658,6 @@ Item {
                 onClicked: connection.restart()
             }
             Button{
-                id: savebtn
-                text: "ذخیره کردن"
-                anchors.horizontalCenter: btns.horizontalCenter
-                width: pixel * 16
-                height: pixel * 8
-                font.family: fontfarsi.name
-                font.pixelSize: pixel*2
-            }
-            Button{
                 id: twomovebtn
                 text: "دو حرکت"
                 anchors.horizontalCenter: btns.horizontalCenter
@@ -675,16 +666,6 @@ Item {
                 font.family: fontfarsi.name
                 font.pixelSize: pixel*2
                 onClicked: connection.twoMove()
-            }
-            Button{
-                id: comeback
-                text: "بازگشت"
-                anchors.horizontalCenter: btns.horizontalCenter
-                width: pixel * 16
-                height: pixel * 8
-                font.family: fontfarsi.name
-                font.pixelSize: pixel*2
-                onClicked: connection.exit();
             }
             Button{
                 id: leftbtn
@@ -696,14 +677,14 @@ Item {
                 font.pixelSize: pixel*2
             }
             Button{
-                id: exit
-                text: "خروج"
+                id: comeback
+                text: "بازگشت"
                 anchors.horizontalCenter: btns.horizontalCenter
                 width: pixel * 16
                 height: pixel * 8
                 font.family: fontfarsi.name
                 font.pixelSize: pixel*2
-                onClicked: connection.exitGame()
+                onClicked: connection.exit();
             }
         }
     }

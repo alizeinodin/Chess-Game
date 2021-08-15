@@ -140,12 +140,6 @@ void connection::setOrder(QString order)
             orgIdVal = QString::fromStdString(destid).toLower();
             if(!handToTheNut)
             {
-                //                if(game->getTurn())
-                //                {
-                //                    game->getPlayer(std::string("White")).addScore(0, 1);
-                //                } else {
-                //                    game->getPlayer(std::string("Black")).addScore(0, 1);
-                //                }
                 game->addScore(0 ,1);
                 updateScore();
                 handToTheNut = true;
@@ -261,8 +255,7 @@ void connection::setOrder(QString order)
             twoMove();
             game->twomove();
         }
-        //game->update_score();
-        //updateScore();
+        updateScore();
         handToTheNut = false;
         emit loseMove();
     }
@@ -291,6 +284,12 @@ void connection::undo()
         QString order = game->undo(false), firstCell = order.mid(1, 2), secondCell = order.mid(3, 2);
         orgIdVal = firstCell;
         destIdVal = secondCell;
+        if(order.length() > 5) // undo of en passent
+        {
+            undoPieceColor = game->getTurn() == true ? QString("White") : QString("Black");
+            updateScore();
+            emit undoAttack();
+        }
         updateScore();
         emit undoMove();
     } catch(undoattack & myPiece)
