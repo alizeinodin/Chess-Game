@@ -107,6 +107,8 @@ signals:
     // undo enpassent
     void undoEnpassent();
 
+    void RandomMove();
+
 public slots:
 
     // game name
@@ -207,13 +209,14 @@ public slots:
     // checking random slot
     void setCheckRandom(bool);
     bool checkRandom();
+    QString getRandomMove() {return random;}
 
 private:
 
     Game * game = nullptr;
     QString gameName;
     std::string messageStr;
-
+    QString random;
     // turn of game
     bool turn;
 

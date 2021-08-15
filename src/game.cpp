@@ -215,9 +215,9 @@ void Game::order(MOVE move)
                 return;
 
             }
-            throw invalid_argument("It isn't your turn!");
+            throw invalid_argument("!نوبت شما نیست");
         }
-        throw invalid_argument("piece not exist!");
+        throw invalid_argument("!مهره ای وجود ندارد");
     }
     else
     {
@@ -356,9 +356,9 @@ void Game::order(MOVE move)
                 return;
 
             }
-            throw invalid_argument("It is not your turn!");
+            throw invalid_argument("!نوبت شما نیست");
         }
-        throw invalid_argument("piece not exist!");
+        throw invalid_argument("!مهره ای وجود ندارد");
     }
 }
 

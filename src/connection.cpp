@@ -163,13 +163,23 @@ void connection::setOrder(QString order)
             if (game->getPlayer(std::string("White")).getScore(0) == 15)
             {
                 order = QString::fromStdString(game->random_move());
+                QString firstCell = order.mid(1, 2), secondCell = order.mid(3, 2);
+                orgIdVal = secondCell;
+                destIdVal = firstCell;
                 setCheckRandom(true);
+                RandomMove();
+                return;
             }
             else {
                 if (game->getPlayer(std::string("Black")).getScore(0) == 15)
                 {
                     order = QString::fromStdString(game->random_move());
+                    QString firstCell = order.mid(1, 2), secondCell = order.mid(3, 2);
+                    orgIdVal = secondCell;
+                    destIdVal = firstCell;
                     setCheckRandom(true);
+                    RandomMove();
+                    return;
                 }
             }
         }
@@ -250,7 +260,8 @@ void connection::setOrder(QString order)
         handToTheNut = false;
 
         emit promotion();
-    } catch (exception & error) {
+    } 
+    catch (exception & error) {
         messageStr = error.what();
         if(twoMoveAccess)
         {
@@ -546,6 +557,8 @@ void connection::setCheckRandom(bool check)
 {
     checkrandom = check;
 }
+
+
 // ------------
 
 // get game name
