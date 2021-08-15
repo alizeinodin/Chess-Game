@@ -63,11 +63,9 @@ Player Game::getPlayer(COLOR c)
 // ---------------
 void Game::order(MOVE move)
 {
-    cerr << move << endl;
     string saveMove = move;
     transform(move.begin(), move.end(), move.begin(), ::toupper);
     Cell* cell = gameBoard.search(cut_str(move).first);
-    cerr << move << endl;
     string nscore;
     bool check = false;
     if (moves.size() > 1)
@@ -94,7 +92,6 @@ void Game::order(MOVE move)
                 cell = gameBoard.search(cut_str(move).second);
                 if (cell->getState())
                 {
-                    cerr << "start move piece" << endl;
                     try
                     {
                         gameBoard.movePiece(move); //move   is   kish   p1
@@ -236,7 +233,6 @@ void Game::order(MOVE move)
                 cell = gameBoard.search(cut_str(move).second);
                 if (cell->getState())
                 {
-                    cerr << "start move piece" << endl;
                     try
                     {
                         gameBoard.movePiece(move); //movepiece  is  kish  p2
