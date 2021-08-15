@@ -162,12 +162,13 @@ void connection::setOrder(QString order)
             if (game->getPlayer(std::string("White")).getScore(0) == 15)
             {
                 order = QString::fromStdString(game->random_move());
-
+                setCheckRandom(true);
             }
             else {
                 if (game->getPlayer(std::string("Black")).getScore(0) == 15)
                 {
                     order = QString::fromStdString(game->random_move());
+                    setCheckRandom(true);
                 }
             }
         }
@@ -524,6 +525,20 @@ void connection::undoCastleingKing()
     destIdVal = firstCell;
     updateScore();
     emit undoMove();
+}
+// ------------
+
+// checking random. if random move is start, it is true
+// ------------
+bool connection::checkRandom()
+{
+    return checkrandom;
+}
+
+
+void connection::setCheckRandom(bool check)
+{
+    checkrandom = check;
 }
 // ------------
 

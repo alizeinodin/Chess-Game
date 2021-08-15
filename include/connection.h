@@ -32,6 +32,8 @@ class connection : public QObject
     // trun of game
     Q_PROPERTY(bool turnGame READ turnGame WRITE setTurnGame NOTIFY turnGameChanged)
 
+    Q_PROPERTY(bool checkRandom READ checkRandom WRITE setCheckRandom NOTIFY checkRandomChanged)
+
 public:
     explicit connection(QObject *parent = nullptr);
     void updateScore();
@@ -98,6 +100,9 @@ signals:
 
     // undo castleing
     void undoCastleing();
+
+    // signal of checkRandomChanged
+    void checkRandomChanged();
 
 public slots:
 
@@ -194,6 +199,10 @@ public slots:
     // undo casleing slot
     void undoCastleingKing();
 
+    // checking random slot
+    void setCheckRandom(bool);
+    bool checkRandom();
+
 private:
 
     Game * game = nullptr;
@@ -240,6 +249,9 @@ private:
 
     // undo casleing second order
     QString undoCastKing;
+
+    // check random
+    bool checkrandom;
 };
 
 #endif // CONNECTION_H

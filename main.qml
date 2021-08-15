@@ -26,13 +26,11 @@ ApplicationWindow {
 
     StackView{
         id: view
-        initialItem: welcomePageID
+        initialItem: welcomePage
         width: root.width
         height: root.height
 
     }
-
-    property var fontID: fontfarsi
     FontLoader{
         id: fontfarsi
         source: "media/Font/IRANSansWeb_Bold.ttf"
@@ -69,7 +67,6 @@ ApplicationWindow {
         id:welcomePage
     }
 
-    property var chessBoardPageID: chessBoardPage
     ChessBoard{
         visible: false
         id: chessBoardPage
@@ -91,56 +88,4 @@ ApplicationWindow {
         visible: false
         id: reviewPage
     }
-
-
-//        background: BorderImage
-//        {
-//            id: name
-//            source: "backchess.jpg"
-//            width: 640; height: 480
-//            border.left: 5; border.top: 5
-//            border.right: 5; border.bottom: 5
-//        }
-
-//        Button {
-//            id: button
-//            x: 510
-//            y: 388
-//            width: 100
-//            height: 33
-//            text: qsTr("Next")
-//            opacity: 0.57
-//        }
-
-//    Text {
-//        id: element
-//        x: 240
-//        y: 54
-//        width: 160
-//        height: 52
-//        color: "#ffffff"
-//        text: qsTr("Chess")
-//        styleColor: "#ffffff"
-//        font.family: "Times New Roman"
-//        font.bold: true
-//        horizontalAlignment: Text.AlignHCenter
-//        font.pixelSize: 33
-//    }
-
-//    TextField {
-//        id: textField
-//        x: 220
-//        y: 384
-//        text: qsTr("")
-//        opacity: 0.57
-//        clip: false
-//        visible: true
-//        placeholderText: "Game Name"
-//    }
-
-//    StackView
-//    {
-//            id: stackView
-//            anchors.fill: parent
-//    }
 }
