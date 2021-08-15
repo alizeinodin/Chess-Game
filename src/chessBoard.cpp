@@ -90,6 +90,7 @@ void ChessBoard::startboard()
 
 Cell *ChessBoard::search(std::string str)
 {
+    cout << "search"<< str;
     char character[] = "a";
     get_char(str, character);
     string temp = "ABCDEFGH";
@@ -305,7 +306,7 @@ void ChessBoard::undo(MOVE move, ChessMan *attackp)
                 {
                     cells[0]->setPiece(attackp);
                 }
-                throw cellsid.second;
+                throw cellsid.first;
             }
         }
     }
