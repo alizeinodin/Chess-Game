@@ -334,10 +334,15 @@ Item {
             mat.visible = false;
             message.visible = false;
             board.move = connection.getRandom();
-            var first = board.idMap[connection.orgId()], second = board.idMap[connection.destId()];
-            var firstImg = board.idMap[connection.orgId()+"Img"], secondImg = board.idMap[connection.destId()+"Img"];
-            board.saveId(first, firstImg, first.parent);
-            board.saveId(second, secondImg, second.parent);
+            board.orgid = board.idMap[connection.orgId()];
+            board.destid = board.idMap[connection.destId()];
+            board.rowOrg = board.orgid.parent;
+            board.rowDest = board.destid.parent;
+            board.orgimg = board.idMap[connection.orgId()+'Img'];
+            board.destimg = board.idMap[connection.destId()+'Img'];
+            board.orgx = board.orgid.x;
+            board.orgy = board.orgid.y;
+            board.img = board.destimg.source.toString();
             console.log("Move: ", board.move);
             connection.setOrder(board.move);
         }
