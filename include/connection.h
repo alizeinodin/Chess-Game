@@ -104,6 +104,9 @@ signals:
     // signal of checkRandomChanged
     void checkRandomChanged();
 
+    // undo enpassent
+    void undoEnpassent();
+
 public slots:
 
     // game name
@@ -162,6 +165,8 @@ public slots:
     QString orgId();
     // dest
     QString destId();
+    // temp
+    QString tempId();
 
     // counter restart
     unsigned long counterRestart();
@@ -226,6 +231,7 @@ private:
     // org and dest id
     QString orgIdVal;
     QString destIdVal;
+    QString tempIdVal;
 
     // counter
     unsigned long counter = 0;

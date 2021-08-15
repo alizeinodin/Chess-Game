@@ -130,6 +130,7 @@ void connection::setOrder(QString order)
         emit loseMove();
     }
     // ----------
+
     // check hand to the nut
     // ----------
     if(order[3].isUpper())
@@ -152,7 +153,7 @@ void connection::setOrder(QString order)
     }
     // ----------
     
-    //    qDebug() << order;
+        qDebug() << order;
     try {
 
         // random move for 15 negative socore
@@ -288,8 +289,10 @@ void connection::undo()
         if(order.length() > 5) // undo of en passent
         {
             undoPieceColor = game->getTurn() == true ? QString("White") : QString("Black");
+            QString third = order.mid(5, 2);
+            tempIdVal = third;
             updateScore();
-            emit undoAttack();
+            emit undoEnpassent();
         }
         updateScore();
         emit undoMove();
@@ -309,7 +312,6 @@ void connection::undo()
         destIdVal = secondCell;
         if(myOrder.attackUndo)
         {
-            //cout << myOrder.e->color;
             undoPieceColor = QString::fromStdString(myOrder.e);
             emit undoPromotionAttack();
         }
@@ -358,6 +360,11 @@ QString connection::orgId()
 QString connection::destId()
 {
     return destIdVal;
+}
+
+QString connection::tempId()
+{
+    return tempIdVal;
 }
 
 // ------------

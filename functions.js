@@ -41,6 +41,7 @@ function checkMove(move, id, piece)
 //        move += id;
 //    }
     move += piece + id;
+    console.log("MOVE--> ", move);
     return move;
 }
 
