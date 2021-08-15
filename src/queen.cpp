@@ -70,7 +70,6 @@ void queen::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board
                 king * t;
                 if (celltemp->getPiece()->get_type() == KING && celltemp->getPiece()->get_color() != this->color)
                 {
-                    cout << "in if...\n";
                     kish.insert(kish.begin(), possible.begin(), possible.end());
                     t = dynamic_cast<king *> (celltemp->getPiece());
                     t->insert(kish);
@@ -220,7 +219,6 @@ void queen::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board
     }
     
     
-    //cout << *(possible.end() - 1) << "id\n";
     while ((it >= alfa.cbegin()) && (temp_num > 0))
     {
         temp += (it)->at(0);

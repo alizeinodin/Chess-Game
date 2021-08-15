@@ -24,15 +24,12 @@ bool iscell(string cell)
         cell.copy(temp, 2, 1);
         temp[1] = '\0';
         array<string, 8> alfa = {"A", "B", "C", "D", "E", "F", "G", "H"};
-        //cout << "temp۱: " << temp << endl;
         int num = stoi(temp);
         cell.copy(temp, 1, 0);
         temp[1] = '\0';
-        //cout << "temp۲: " << temp << endl;
 
         if (binary_search(alfa.cbegin(), alfa.cend(), temp))
         {
-            //cout << "open" << endl;
             if (num < 9 && num > 0)
             {
                 return true;
@@ -110,10 +107,6 @@ bool possible_move_king(ID id, COLOR color, std::array<std::array<Cell, 8>, 8> &
                         pawntemp = dynamic_cast<pawn *>(c);
                         temp = pawntemp->get_kingcantmove();
                         sort(temp.begin(), temp.end());
-                        for (size_t i = 0; i < temp.size(); i++)
-                        {
-                            //cout << j.getId() << "  pawn king " << temp.at(i) << endl;
-                        }
                         
                         if (binary_search(temp.cbegin(), temp.cend(), id))
                         {
@@ -124,15 +117,6 @@ bool possible_move_king(ID id, COLOR color, std::array<std::array<Cell, 8>, 8> &
                     {
                         temp = j.getPiece()->get_possiblemoves();
                         sort(temp.begin(), temp.end());
-                        if (j.getPiece()->get_type() == QUEEN)
-                        {
-                            for (size_t i = 0; i < temp.size(); i++)
-                            {
-                                //cout << temp[i] << "\t";
-                            }
-                            
-                        }
-                        //cout<< boolalpha << binary_search(temp.cbegin(), temp.cend(), id) <<endl;
                         if (binary_search(temp.cbegin(), temp.cend(), id))
                         {
                             return true;

@@ -271,6 +271,28 @@ Item {
 
         }
 
+        onSetRandomMove:{
+            mat.visible = false;
+            message.visible = false;
+            board.orgid = board.idMap[connection.orgId()];
+            board.destid = board.idMap[connection.destId()];
+            board.rowOrg = board.orgid.parent;
+            board.rowDest = board.destid.parent;
+            board.orgimg = board.idMap[connection.orgId()+'Img'];
+            board.destimg = board.idMap[connection.destId()+'Img'];
+            board.orgx = board.orgid.x;
+            board.orgy = board.orgid.y;
+
+            //set animation destination
+            var indesDest = Func.indexCell(board.destid.id);
+            moveAnimation.tox = (indesDest) * (board.orgid.width + board.rowOrg.spacing);
+            moveAnimation.toy = (board.rowDest.index - board.rowOrg.index) * -(board.destid.height + (pixel * 1.35));
+            moveAnimation.running = true; // Animation for move
+            movePieceSound.play(); // sound of move piece2
+
+            board.destid.piece = board.orgid.piece;
+        }
+
         onHandNut:{
             mat.visible = false;
             message.visible = false;

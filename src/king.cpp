@@ -17,7 +17,6 @@ void king::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
     {
         throw invalid_argument("move command invalid");
     }
-    //cout << "Move King: " << boolalpha << (move.at(0) == 'K') << endl;
     if(move.at(0) == 'K')
     {
         auto cellsid = cut_str(move);
@@ -25,7 +24,6 @@ void king::move(MOVE move, std::array<std::array<Cell, 8>, 8> &board)
         size_t i = 0;
         for (; i < possible.size(); i++)
         {
-            //cout << possible.at(i) << " King: " << boolalpha << (possible.at(i) == cellsid.second) <<endl;
             if (possible.at(i) == cellsid.second)
             {
                 cells[0] = search_cell(cellsid.first, board);
@@ -77,7 +75,6 @@ void king::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
             {
                 temp += (it + dy[i])->at(0);
                 temp += to_string(num + dx[i]);
-                //cout << origin << "\tking" << temp << endl;
             }
         }
         if (iscell(temp))
@@ -85,17 +82,10 @@ void king::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
             celltemp = search_cell(temp, board);
             if (celltemp->getState())
             {
-                //cout << !possible_move_king(temp, this->color, board) <<endl;
                 if (!possible_move_king(temp, this->color, board))
                 {
-                    //cout << temp;
                     possible.push_back(temp);
-                }
-                else
-                {
-                    //cout << "ajab  " << temp << endl;
-                }
-                
+                }              
             }
             else
             {
@@ -112,12 +102,10 @@ void king::access(std::string origin, std::array<std::array<Cell, 8>, 8> &board)
     {
         startgame_white = false;
     }
-    //cout << "black "<< (!possible.empty() && startgame_black && color == "Black") << endl;
     if (!possible.empty() && startgame_black && color == "Black")
     {
         startgame_black = false;
     }
-    //cout << "white start" << possible.empty() <<endl;
     if (possible.empty() && !startgame_white && color == "White")
     {
         ismate = true;
@@ -340,7 +328,6 @@ ID king::get_random(ID origin)
             {
                 temp += (it + dy[i])->at(0);
                 temp += to_string(num + dx[i]);
-                //cout << origin << "\tking" << temp << endl;
             }
         }
         if (iscell(temp))

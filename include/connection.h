@@ -210,6 +210,7 @@ public slots:
     // checking random slot
     void setCheckRandom(bool);
     bool checkRandom();
+    QString getRandomMove() {return random;}
 
     // cancel player
     void cancel();
@@ -222,7 +223,7 @@ private:
     Game * game = nullptr;
     QString gameName;
     std::string messageStr;
-
+    QString random;
     // turn of game
     bool turn;
 

@@ -15,11 +15,8 @@ string FileConnect::ReadFromFile()
 
 void FileConnect::WriteToFile(string data)
 {
-    //cout << data <<endl;
     myFile << data << endl;
-    //cout << boolalpha << myFile.fail() <<endl;
     myFile.clear();
-    //cout << boolalpha << myFile.fail() <<endl;
 }
 
 FileConnect::~FileConnect()
@@ -52,12 +49,10 @@ void FileConnect::openFile(QString name)
             break;
         }
         strlist.push_back(temp);
-        //cout << temp << endl;
     }
     gamelist.close();
     if (find(strlist.cbegin(), strlist.cend(), name.toStdString()) != strlist.cend())
     {
-        //cout << "find!!!\n";
         myFile.open(name.toStdString(), ios::app);
         path = name.toStdString();
         if (!myFile.is_open())
@@ -121,12 +116,10 @@ void FileConnect:: removelastline()
             break;
         }
         d.push_back(temp);
-        //cout << path << endl;
     }
     for (size_t i = 0; i < d.size() - 1; i++)
     {
         temp = d.at(i);
-        //cout << temp << endl;
         s << temp << endl;
     }
     s.close();
@@ -153,7 +146,6 @@ void FileConnect::setendgame()
             break;
         }
         d.push_back(temp);
-        //cout << path << endl;
     }
     for (size_t i = 0; i < d.size(); i++)
     {
@@ -162,7 +154,6 @@ void FileConnect::setendgame()
         {
             temp += "-end";
         }
-        //cout << temp << endl;
         s << temp << endl;
     }
     s.close();

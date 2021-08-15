@@ -90,7 +90,6 @@ void ChessBoard::startboard()
 
 Cell *ChessBoard::search(std::string str)
 {
-    cout << "search"<< str;
     char character[] = "a";
     get_char(str, character);
     string temp = "ABCDEFGH";
@@ -106,7 +105,6 @@ Cell *ChessBoard::search(std::string str)
 
 MOVE ChessBoard::randommoves(COLOR color)
 {
-    cout << "\ncolor: " << color << endl;
     ChessMan *temp;
     string cellid;
     vector<ID> man;
@@ -149,7 +147,6 @@ MOVE ChessBoard::randommoves(COLOR color)
     }
     cellid += tempman;
     cellid += temp->get_random(tempman);
-    cout << cellid << endl;
     return cellid;
 }
 
@@ -158,7 +155,6 @@ void ChessBoard::movePiece(MOVE move)
     auto cellsid = cut_str(move);
     Cell *cells;
     cells = search_cell(cellsid.first, Board);
-    //cout << cells.getId();
     if (!cells->getState())
     {
         cells->getPiece()->move(move, Board);
@@ -188,19 +184,14 @@ int ChessBoard::threat(COLOR color)
     std::map<std::string, int> temp;
     auto it = temp.begin();
     int score = 0;
-    //cout << "len:  " << Board.size() << endl;
     for (auto &i : Board)
     {
-        //cout << "len 2:  " << i.size() << endl;
         for (auto &j : i)
         {
             if (j.getPiece() != nullptr)
             {
-                //cout << j.getPiece()->get_type() << "\t";
-                //cout << j.getPiece()->get_type() << "\t" << j.getPiece()->get_color() << endl;
                 if (j.getPiece()->get_color() == color)
                 {
-                    //cerr << "id: " << j.getId() << endl;
                     temp = j.getPiece()->threat(j.getId(), Board);
                     it = temp.begin();
                     for (size_t i = 0; i < temp.size(); i++)
@@ -328,7 +319,6 @@ void ChessBoard::undo(MOVE move, ChessMan *attackp)
 
 void ChessBoard::checkmate(COLOR color)
 {
-    cout << "check\n";
     bool mate = false;
     king *k;
     vector<ID> temp;
@@ -361,7 +351,6 @@ void ChessBoard::checkmate(COLOR color)
     {
         return;
     }
-    //cout << "kish ref " << k->kishr << endl;
     auto kishpath = k->get_kishpath();
     for (auto &i : kishpath)
     {
@@ -378,14 +367,12 @@ void ChessBoard::checkmate(COLOR color)
                         sort(temp.begin(), temp.end());
                         if (binary_search(temp.cbegin(), temp.cend(), i))
                         {
-                            cout << "in mate  " << i << j.getPiece()->get_type() << endl;
                             return;
                         }
                         temp = j.getPiece()->get_threat();
                         sort(temp.begin(), temp.end());
                         if (binary_search(temp.cbegin(), temp.cend(), k->kishr))
                         {
-                            cout << "in mate  " << k->kishr << endl;
                             return;
                         }
                     }
