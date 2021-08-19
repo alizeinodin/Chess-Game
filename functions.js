@@ -34,12 +34,6 @@ function checkMove(move, id, piece)
 {
     // if the move was attack, piece is'nt null and order is like this: Ra1Bb1
     // for solve this, i write this function
-//    if(move === "")
-//    {
-//        move = piece + id;
-//    } else{
-//        move += id;
-//    }
     move += piece + id;
     return move;
 }

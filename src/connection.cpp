@@ -199,6 +199,7 @@ void connection::setOrder(QString order)
         game->savegame();
         updateScore();
         handToTheNut = false;
+        order.clear();
         emit successMove();
     } catch (kishexcept & error){
         messageStr = error.what();
@@ -210,6 +211,7 @@ void connection::setOrder(QString order)
         //        game->update_score();
         updateScore();
         handToTheNut = false;
+        order.clear();
         emit kish();
     }
     catch (matexcept & error){
@@ -230,6 +232,7 @@ void connection::setOrder(QString order)
             }
             updateScore();
             handToTheNut = false;
+            order.clear();
             emit mat();
         } catch (Equality & error) {
             winnerName = player1Name() + QString(" و ") + player2Name();
@@ -243,6 +246,7 @@ void connection::setOrder(QString order)
             updateScore();
             handToTheNut = false;
             winnertxt = QString("مساوی شدید");
+            order.clear();
         }
     } catch (enpassantexcept & piece)
     {
@@ -255,12 +259,14 @@ void connection::setOrder(QString order)
         game->update_score();
         updateScore();
         handToTheNut = false;
+        order.clear();
         emit enPassent();
     } catch(pawnpromotion & mypromotion)
     {
         game->update_score();
         updateScore();
         handToTheNut = false;
+        order.clear();
 
         emit promotion();
     }
@@ -273,9 +279,9 @@ void connection::setOrder(QString order)
         }
         updateScore();
         handToTheNut = false;
+        order.clear();
         emit loseMove();
     }
-    order.clear();
 }
 
 // ------------
@@ -619,6 +625,7 @@ QString connection::getRandom()
     QString firstCell = order.mid(1, 2), secondCell = order.mid(3, 2);
     orgIdVal = secondCell.toLower();
     destIdVal = firstCell.toLower();
+    order = order[0]+order.mid(1, 4).toLower();
     updateScore();
     return order;
 }

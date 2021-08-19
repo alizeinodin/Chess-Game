@@ -28,22 +28,6 @@ Item {
     Connections{
         target: connection
         onSuccessMove:{
-            //            if(connection.checkRandom)
-            //            {
-            //                console.log("hello world!");
-            //                board.orgid = board.idMap[connection.orgId()];
-            //                board.destid = board.idMap[connection.destId()];
-            //                board.rowOrg = board.orgid.parent;
-            //                board.rowDest = board.destid.parent;
-            //                board.orgimg = board.idMap[connection.orgId()+'Img'];
-            //                board.destimg = board.idMap[connection.destId()+'Img'];
-            //                board.orgx = board.orgid.x;
-            //                board.orgy = board.orgid.y;
-            //                board.move = connection.tempId();
-            //                console.log("ORDER:  ", board.move);
-            //                connection.checkRandom = false;
-            //            } else {
-
             var Piece = board.move[0];
             board.move = "";
             //            board.turn = !board.turn;
