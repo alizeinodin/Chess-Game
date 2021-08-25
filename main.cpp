@@ -18,6 +18,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QGuiApplication app(argc, argv);
+    app.setWindowIcon(QIcon(":/media/knight2.png"));
 
     QQuickStyle::setStyle("Material");
     qmlRegisterType<connection>("connect", 1, 0, "Connect");

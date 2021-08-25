@@ -13,7 +13,8 @@ ApplicationWindow {
     minimumHeight: 500
     width: Screen.width
     height: Screen.height
-    title: qsTr("Chess")
+    title: qsTr("BuAli Chess")
+    font.family: fontfarsi.name
     Material.theme: Material.Light
     Material.accent: Material.Purple
     Material.background: "#EEEEEE"
