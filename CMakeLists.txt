@@ -2,20 +2,22 @@ cmake_minimum_required(VERSION 3.16)
 
 project(chess VERSION 1.0.0 LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-find_package(Qt5 5.12 REQUIRED COMPONENTS
-    Core
-    Gui
-    Quick
-    QuickControls2
-    Multimedia
-    Widgets
-)
+# Prefer Qt6; fall back to Qt5 for older systems
+find_package(Qt6 QUIET COMPONENTS Core Gui Quick QuickControls2 Multimedia Widgets)
+if(Qt6_FOUND)
+    set(QT_PACKAGE Qt6)
+    message(STATUS "Building Bu-Ali Chess with Qt6")
+else()
+    find_package(Qt5 5.15 REQUIRED COMPONENTS Core Gui Quick QuickControls2 Multimedia Widgets)
+    set(QT_PACKAGE Qt5)
+    message(STATUS "Building Bu-Ali Chess with Qt5")
+endif()
 
 set(SOURCES
     main.cpp
@@ -76,19 +78,21 @@ target_include_directories(chess PRIVATE
 )
 
 target_link_libraries(chess PRIVATE
-    Qt5::Core
-    Qt5::Gui
-    Qt5::Quick
-    Qt5::QuickControls2
-    Qt5::Multimedia
-    Qt5::Widgets
+    ${QT_PACKAGE}::Core
+    ${QT_PACKAGE}::Gui
+    ${QT_PACKAGE}::Quick
+    ${QT_PACKAGE}::QuickControls2
+    ${QT_PACKAGE}::Multimedia
+    ${QT_PACKAGE}::Widgets
 )
 
 target_compile_definitions(chess PRIVATE QT_DEPRECATED_WARNINGS)
+if(Qt6_FOUND)
+    target_compile_definitions(chess PRIVATE BUALI_QT6)
+endif()
 
 install(TARGETS chess RUNTIME DESTINATION bin)
 
-# Optional desktop entry helper for Linux packaging
 if(UNIX AND NOT APPLE)
     install(FILES packaging/linux/bu-ali-chess.desktop
             DESTINATION share/applications

@@ -1,5 +1,5 @@
-import QtQuick 2.0
-import QtQuick.Controls 2.13
+import QtQuick
+import QtQuick.Controls
 Page {
     id:page2Player
     anchors.fill: parent

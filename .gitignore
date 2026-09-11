@@ -73,6 +73,7 @@ Thumbs.db
 
 # Local build / package outputs
 /build-release/
+/build-qt6/
 /build/
 /dist/
 .qmake.stash

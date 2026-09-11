@@ -1,8 +1,8 @@
-import QtQuick 2.13
-import QtQuick.Window 2.13
-import QtQuick.Controls 2.13
-import QtQuick.Controls.Material 2.3
-import QtMultimedia 5.9
+import QtQuick
+import QtQuick.Window
+import QtQuick.Controls
+import QtQuick.Controls.Material
+import QtMultimedia
 import connect 1.0
 
 ApplicationWindow {
@@ -32,11 +32,13 @@ ApplicationWindow {
         source: "media/Font/IRANSansWeb_Bold.ttf"
     }
 
-    Audio{
-        id:mainAudio
-        source: "media/Sound/main music.mp3"
-        autoPlay: true
-        loops: -1
+    // Qt 6: Audio → MediaPlayer + AudioOutput
+    MediaPlayer {
+        id: mainAudio
+        source: "qrc:/media/Sound/main music.mp3"
+        audioOutput: AudioOutput { volume: 1.0 }
+        loops: MediaPlayer.Infinite
+        Component.onCompleted: play()
     }
 
 

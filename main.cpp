@@ -1,29 +1,23 @@
-#include <iostream>
-#include "include/king.h"
-#include "include/util.h"
-#include "include/pawn.h"
-#include "include/rook.h"
-#include "include/bishop.h"
-#include "include/knight.h"
 #include <array>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQuickStyle>
 #include <QIcon>
-#include "include/connection.h"
 #include <QDebug>
-using namespace std;
+#include "include/connection.h"
 
 int main(int argc, char *argv[])
 {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+#endif
 
     QGuiApplication app(argc, argv);
     app.setApplicationName(QStringLiteral("Bu-Ali Chess"));
     app.setOrganizationName(QStringLiteral("Bu-Ali Sina University"));
     app.setWindowIcon(QIcon(QStringLiteral(":/media/knight2.png")));
 
-    QQuickStyle::setStyle("Material");
+    QQuickStyle::setStyle(QStringLiteral("Material"));
     qmlRegisterType<connection>("connect", 1, 0, "Connect");
 
     QQmlApplicationEngine engine;

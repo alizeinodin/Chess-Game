@@ -1,69 +1,49 @@
 # Bu-Ali Chess
 
-Chess game project for the advanced programming course at Bu-Ali Sina University.
+Chess game for the advanced programming course at Bu-Ali Sina University.
 
-C++ backend + QML/JavaScript frontend (Qt Quick, Material style).
-
-**Score:** 173/100
+C++ backend + QML frontend. Targets **Qt 6** (falls back to Qt 5.15).
 
 ## Features
 
 - OOP chess engine (moves, check/mate, castling, en passant, promotion, undo)
-- Save/load game data via `.acd` files
-- Qt Quick UI with animations and sound
+- Save/load via `.acd` files
+- Qt Quick UI (Material) with sound
 
 ## Requirements
 
-See **[INSTALL.md](INSTALL.md)** (Persian + detailed steps).
+See **[INSTALL.md](INSTALL.md)** for full Persian + English steps.
 
-Short version:
-
-- **Qt 5.12–5.15** with Quick, Quick Controls 2, Multimedia
-- C++11 compiler (g++ / MinGW / MSVC)
-
-### Ubuntu / Debian (dev packages)
+### Ubuntu / Debian (Qt 6)
 
 ```bash
-sudo apt install -y build-essential cmake qt5-qmake qtbase5-dev \
-  qtdeclarative5-dev qtquickcontrols2-5-dev qtmultimedia5-dev \
-  libqt5multimedia5-plugins qml-module-qtquick-controls2 \
-  qml-module-qtmultimedia qml-module-qtquick-layouts \
-  qml-module-qtgraphicaleffects
+sudo apt install -y build-essential cmake qmake6 \
+  qt6-base-dev qt6-declarative-dev qt6-multimedia-dev \
+  qml6-module-qtquick qml6-module-qtquick-controls \
+  qml6-module-qtquick-layouts qml6-module-qtquick-window \
+  qml6-module-qtquick-templates qml6-module-qtmultimedia \
+  qml6-module-qtqml qml6-module-qtqml-models \
+  qml6-module-qtqml-workerscript \
+  gstreamer1.0-plugins-good gstreamer1.0-libav
 ```
 
-## Build
+## Build & package
 
 ```bash
 chmod +x scripts/*.sh
-./scripts/build-linux.sh
+./scripts/build-linux.sh      # prefers qmake6
+./scripts/package-linux.sh    # → dist/Bu-Ali-Chess-linux.zip
 ```
 
-Or open `chess.pro` in Qt Creator and build Release.
+Or open `chess.pro` in Qt Creator with a **Qt 6** kit.
 
-## Package / distribute
-
-```bash
-./scripts/package-linux.sh          # → dist/Bu-Ali-Chess-linux.zip
-```
-
-Windows (from Qt Command Prompt):
-
-```bat
-packaging\windows\build-windows.bat
-packaging\windows\package-windows.bat
-```
-
-## Legacy release folders
-
-Older packages under `Bu-Ali Chess (linux)` and `Bu-Ali Chess(windows)` are incomplete
-(missing bundled Qt libs / `.exe`). Prefer regenerating with the scripts above.
+Windows: `packaging\windows\build-windows.bat` then `package-windows.bat` (Qt 6 kit).
 
 ## Project layout
 
 | Path | Role |
 |------|------|
-| `main.cpp`, `src/`, `include/` | C++ engine + QML bridge (`connection`) |
-| `*.qml`, `functions.js`, `qml.qrc` | UI and assets |
-| `chess.pro` / `CMakeLists.txt` | Build files |
+| `main.cpp`, `src/`, `include/` | Engine + QML bridge |
+| `*.qml`, `qml.qrc` | UI / assets |
+| `chess.pro` / `CMakeLists.txt` | Qt6 (preferred) / Qt5 fallback |
 | `scripts/` | Linux build & package |
-| `packaging/` | Desktop entry + Windows helpers |
