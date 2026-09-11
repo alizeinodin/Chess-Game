@@ -1,9 +1,8 @@
-import QtQuick
-import QtQuick.Window
-import QtQuick.Controls
-import QtQuick.Controls.Material
+import QtQuick 2.15
+import QtQuick.Window 2.15
+import QtQuick.Controls 2.15
+import QtQuick.Controls.Material 2.15
 import connect 1.0
-import QtMultimedia
 import "functions.js" as Func
 
 Item {
@@ -346,7 +345,7 @@ Item {
         z: 1
         visible: false
 
-        SoundEffect {
+        SoundPlayer {
             id: matAudio
             source: "qrc:/media/Sound/mat.WAV"
             volume: 1.0
@@ -434,7 +433,7 @@ Item {
         anchors.horizontalCenter: board.horizontalCenter
         visible: false
 
-        SoundEffect {
+        SoundPlayer {
             id:kishAudio
             source: "qrc:/media/Sound/kish.WAV"
             volume: 1.0
@@ -1200,21 +1199,21 @@ Item {
         }
 
         // sound of move piece
-        SoundEffect {
+        SoundPlayer {
             id: movePieceSound
             source: "qrc:/media/Sound/movePiece.WAV"
             volume: 1.0
         }
 
         // sound of lose move
-        SoundEffect {
+        SoundPlayer {
             id: losePieceSound
             source: "qrc:/media/Sound/Lose.wav"
             volume: 1.0
         }
 
         // sound of attack move
-        SoundEffect {
+        SoundPlayer {
             id: attackPieceSound
             source: "qrc:/media/Sound/attackPiece.WAV"
             volume: 1.0
