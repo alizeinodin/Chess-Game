@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Bu-Ali Chess
+Name[fa]=شطرنج بوعلی
+Comment=Chess game (Bu-Ali Sina University)
+Comment[fa]=بازی شطرنج — پروژه دانشگاه بوعلی سینا
+Exec=chess
+Icon=bu-ali-chess
+Terminal=false
+Categories=Game;BoardGame;
+StartupNotify=true

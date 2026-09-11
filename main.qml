@@ -1,7 +1,6 @@
 import QtQuick 2.13
 import QtQuick.Window 2.13
 import QtQuick.Controls 2.13
-import QtQuick.Controls.Styles 1.4
 import QtQuick.Controls.Material 2.3
 import QtMultimedia 5.9
 import connect 1.0

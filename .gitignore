@@ -71,3 +71,11 @@ Thumbs.db
 *.dll
 *.exe
 
+# Local build / package outputs
+/build-release/
+/build/
+/dist/
+.qmake.stash
+*.user
+*.user.*
+

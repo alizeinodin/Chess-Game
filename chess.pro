@@ -1,6 +1,10 @@
 QT += quick
 QT += quickcontrols2
 QT += widgets
+QT += multimedia
+
+TARGET = chess
+TEMPLATE = app
 
 CONFIG += c++11
 
@@ -71,9 +75,9 @@ HEADERS += \
     include/undoattack.h \
     include/using.h \
     include/util.h \
-    include/enpassantexcept.h \
-    include/undoattack.h \
-    include/pawnporomotion.h
+    include/enpassantexcept.h
 
 DISTFILES += \
     media/Sound/attackPiece.WAV
+
+INCLUDEPATH += $$PWD $$PWD/include
