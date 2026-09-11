@@ -1,9 +1,7 @@
-import QtQuick 2.13
-import QtQuick.Window 2.13
-import QtQuick.Controls 2.13
-import QtQuick.Controls.Styles 1.4
-import QtQuick.Controls.Material 2.3
-import QtMultimedia 5.9
+import QtQuick 2.15
+import QtQuick.Window 2.15
+import QtQuick.Controls 2.15
+import QtQuick.Controls.Material 2.15
 import connect 1.0
 
 ApplicationWindow {
@@ -21,52 +19,50 @@ ApplicationWindow {
 
     property var viewID: view
 
-    StackView{
+    StackView {
         id: view
         initialItem: welcomePage
         width: root.width
         height: root.height
-
     }
-    FontLoader{
+
+    FontLoader {
         id: fontfarsi
         source: "media/Font/IRANSansWeb_Bold.ttf"
     }
 
-    Audio{
-        id:mainAudio
-        source: "media/Sound/main music.mp3"
+    SoundPlayer {
+        id: mainAudio
+        source: "qrc:/media/Sound/main music.mp3"
+        volume: 1.0
+        looping: true
         autoPlay: true
-        loops: -1
     }
 
-
-    Connect{
+    Connect {
         id: connection
-
     }
-    Welcome{
+    Welcome {
         visible: false
-        id:welcomePage
+        id: welcomePage
     }
-
-    ChessBoard{
+    ChessBoard {
         visible: false
         id: chessBoardPage
     }
-    Player1{
+    Player1 {
         visible: false
         id: player1Page
     }
-    Player2{
+    Player2 {
         visible: false
         id: player2page
     }
-    Gamename{
+    Gamename {
         visible: false
         id: nameGamePage
     }
-    Review{
+    Review {
         visible: false
         id: reviewPage
     }

@@ -45,5 +45,6 @@
         <file>media/Sound/mat.WAV</file>
         <file>media/goldenCup.png</file>
         <file>Review.qml</file>
+        <file>SoundPlayer.qml</file>
     </qresource>
 </RCC>
