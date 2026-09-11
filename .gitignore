@@ -80,3 +80,5 @@ Thumbs.db
 *.user
 *.user.*
 
+build-qt5-compat/
+build-qt6-compat/
