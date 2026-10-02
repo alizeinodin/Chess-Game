@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Ali Zeinodin — Software Engineer (C++)</title>
+<style>
+  @font-face { font-family: Roboto; src: url("fonts/roboto/Roboto-Regular.ttf") format("truetype"); font-weight: 400; }
+  @font-face { font-family: Roboto; src: url("fonts/roboto/Roboto-Medium.ttf") format("truetype"); font-weight: 500; }
+  @font-face { font-family: Roboto; src: url("fonts/roboto/Roboto-Bold.ttf") format("truetype"); font-weight: 700; }
+  @font-face { font-family: Roboto; src: url("fonts/roboto/Roboto-Light.ttf") format("truetype"); font-weight: 300; }
+
+  :root {
+    --blue: #116fcc;
+    --blue-soft: #e1effb;
+    --ink: #222;
+    --muted: #555;
+    --line: #d0d3d8;
+    --pill: #e7e8e9;
+  }
+
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: Roboto, Arial, sans-serif;
+    color: var(--ink);
+    font-size: 10pt;
+    line-height: 1.45;
+    background: #fff;
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 14mm 15mm 12mm;
+    margin: 0 auto;
+  }
+  .page + .page { page-break-before: always; }
+
+  /* Header */
+  .header {
+    display: grid;
+    grid-template-columns: 92px 1fr auto;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .photo {
+    width: 88px; height: 88px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #e5e7eb;
+  }
+  .name { margin: 0; color: var(--blue); font-size: 26pt; font-weight: 700; line-height: 1.1; }
+  .role { margin: 4px 0 0; font-size: 12pt; font-weight: 400; color: #333; }
+  .contacts { font-size: 9pt; color: #333; text-align: left; }
+  .contacts .row { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+  .contacts a { color: #333; text-decoration: none; }
+  .ico {
+    width: 16px; height: 16px; display: inline-flex; align-items: center; justify-content: center;
+    color: #666; flex-shrink: 0;
+  }
+  .ico svg { width: 14px; height: 14px; fill: currentColor; }
+
+  .meta {
+    margin: 8px 0 14px;
+    padding: 7px 12px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    font-size: 9pt;
+    color: #444;
+    display: flex; gap: 18px; flex-wrap: wrap;
+  }
+
+  h2 {
+    margin: 0 0 10px;
+    color: var(--blue);
+    font-size: 14pt;
+    font-weight: 700;
+  }
+
+  .summary p { margin: 0 0 8px; text-align: justify; color: #222; }
+
+  /* Timeline */
+  .timeline { position: relative; padding-left: 18px; }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 4px; top: 8px; bottom: 8px;
+    border-left: 2px dotted #c5c9cf;
+  }
+  .item { position: relative; margin-bottom: 16px; }
+  .item::before {
+    content: "";
+    position: absolute;
+    left: -18px; top: 7px;
+    width: 10px; height: 10px;
+    background: var(--blue);
+    border-radius: 50%;
+  }
+  .pill {
+    display: inline-block;
+    background: var(--pill);
+    color: #444;
+    border-radius: 999px;
+    padding: 2px 12px;
+    font-size: 9pt;
+    margin-bottom: 4px;
+  }
+  .item h3 { margin: 2px 0; font-size: 11.5pt; font-weight: 700; }
+  .company { margin: 0 0 4px; font-size: 10.5pt; color: #222; }
+  .sub { margin: 6px 0 3px; font-weight: 700; font-size: 10pt; }
+  .item ul { margin: 4px 0 0; padding-left: 18px; }
+  .item li { margin-bottom: 3px; }
+  .tools { margin: 6px 0 0; }
+  .edu-detail { margin: 2px 0; color: #333; }
+  .edu-detail strong { font-weight: 700; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+  .chip {
+    background: var(--blue-soft);
+    color: #1a4f86;
+    border-radius: 999px;
+    padding: 5px 12px;
+    font-size: 9pt;
+    font-weight: 500;
+  }
+
+  .langs { margin-top: 6px; }
+  .lang { display: flex; align-items: center; gap: 14px; margin: 8px 0; }
+  .lang span { width: 70px; }
+  .bars { display: flex; gap: 4px; }
+  .bar {
+    width: 18px; height: 8px; border-radius: 2px;
+    background: #d9dde3;
+  }
+  .bar.on { background: var(--blue); }
+
+  .proj-for { color: #444; margin: 0 0 2px; }
+  .proj-for strong { font-weight: 700; }
+  .link { color: var(--blue); text-decoration: none; word-break: break-all; }
+  .link:hover { text-decoration: underline; }
+
+  .social { display: flex; gap: 28px; margin-top: 8px; font-size: 11pt; }
+  .social a { color: #333; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+
+  @media print {
+    .page { width: auto; min-height: auto; padding: 0; margin: 0; }
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<section class="page">
+  <header class="header">
+    <img class="photo" src="profile-0.png" alt="Ali Zeinodin" />
+    <div>
+      <h1 class="name">Ali Zeinodin</h1>
+      <p class="role">Software Engineer</p>
+    </div>
+    <div class="contacts">
+      <div class="row">
+        <span class="ico"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg></span>
+        <a href="mailto:alizeinodin79@gmail.com">alizeinodin79@gmail.com</a>
+      </div>
+      <div class="row">
+        <span class="ico"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.5 15.5 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.4 11.4 0 00.57 3.6 1 1 0 01-.25 1L6.6 10.8z"/></svg></span>
+        <span>(+98)9336011397</span>
+      </div>
+      <div class="row">
+        <span class="ico"><svg viewBox="0 0 24 24"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.3 7 13 7 13s7-7.7 7-13c0-3.9-3.1-7-7-7zm0 9.5A2.5 2.5 0 1112 6a2.5 2.5 0 010 5.5z"/></svg></span>
+        <span>Remote — Available in European/US time zones</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="meta">
+    <span>DoB: 2000-10-27</span>
+    <span>Marital Status: Single</span>
+    <span>Military Service: Educational Exemption</span>
+  </div>
+
+  <h2>Profile Summary</h2>
+  <div class="summary">
+    <p>
+      Software Engineer with 6 years of professional experience and a strong foundation in
+      <strong>C/C++</strong>, object-oriented design, and systems thinking. Hands-on experience building
+      desktop applications with <strong>C++, Qt Quick, and QML</strong>, including a full chess engine with
+      bidirectional C++/QML integration, advanced game rules, file persistence, and Linux/Windows packaging.
+    </p>
+    <p>
+      Solid background in software architecture (OOP, design patterns, modular systems, clean code) and
+      competitive programming. Comfortable delivering complex features end-to-end, writing maintainable
+      code, and collaborating in Agile teams. Also experienced with backend stacks (PHP/Laravel, Python)
+      and modern tooling (Git, CMake/qmake, Docker, Linux).
+    </p>
+    <p>
+      Enthusiastic about performance, reliability, and problem-solving — continuously sharpening algorithmic
+      and engineering skills through contests and real-world projects.
+    </p>
+  </div>
+
+  <h2 style="margin-top:16px;">Education</h2>
+  <div class="timeline">
+    <div class="item">
+      <div class="pill">September 2025 - Present</div>
+      <h3>Master of Software Engineering</h3>
+      <p class="edu-detail"><strong>Branch:</strong> Computer Engineering</p>
+      <p class="edu-detail"><strong>Institute/University:</strong> Islamic Azad University, Science and Research Branch</p>
+      <p class="edu-detail"><strong>GPA:</strong> A</p>
+      <p class="edu-detail">Top-ranked computer science in the Middle East</p>
+    </div>
+    <div class="item">
+      <div class="pill">September 2020 - September 2024</div>
+      <h3>Bachelor of Computer Science</h3>
+      <p class="edu-detail"><strong>Branch:</strong> Computer Engineering</p>
+      <p class="edu-detail"><strong>Institute/University:</strong> Bu-Ali Sina University</p>
+      <p class="edu-detail"><strong>GPA:</strong> A</p>
+      <p class="edu-detail">Graduated top of class (1/55)</p>
+      <p class="edu-detail">Top-ranked computer science in the Middle East</p>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 2 -->
+<section class="page">
+  <h2>Work Experience</h2>
+  <div class="timeline">
+    <div class="item">
+      <div class="pill">March 2024 - Present</div>
+      <h3>Senior Backend Developer</h3>
+      <p class="company">MCI</p>
+      <p class="sub">Tasks and Achievements</p>
+      <p>Project: <strong>SOAR &amp; VMS</strong> Platform for <strong>MCI (Hamrah-e-Avval)</strong> — Outsourced</p>
+      <ul>
+        <li>Working as a Backend Developer and Software Engineer on a large-scale cybersecurity-related SOAR/VMS system developed for MCI, the largest mobile operator in Iran.</li>
+        <li>Responsible for analyzing business requirements, designing the system architecture, and implementing backend services within a Microservices and Modular structure.</li>
+        <li>Developed multiple system features using PHP, Laravel, MySQL, Redis, Docker, Linux, Vue.js, Vuetify, Swagger, and RESTful APIs, following clean code and self-testing principles.</li>
+        <li>Collaborated closely with the team and product owner in an Agile (Scrum) environment to refine requirements, design workflows, and deliver scalable and maintainable solutions.</li>
+        <li>Implemented security-focused development practices aligned with the nature of the project (cybersecurity), ensuring data integrity, access control, and secure communication between services.</li>
+        <li>Contributed to UI panel development for system operators using Vue.js and Vuetify, enhancing usability and operational efficiency.</li>
+        <li>Conducted initial acceptance testing, prepared technical documentation, and participated in deployment and environment setup on production servers.</li>
+      </ul>
+      <p class="tools"><strong>Tools and technologies used:</strong> PHP, Laravel, MySQL, Redis, Docker, Linux, Vue.js, Vuetify, Swagger, PHPUnit, Apache, npm, Microservices, Jira, Confluence.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 3 -->
+<section class="page">
+  <div class="timeline">
+    <div class="item">
+      <div class="pill">July 2023 - April 2024</div>
+      <h3>Backend Developer</h3>
+      <p class="company">Langeek</p>
+      <p class="sub">Tasks and Achievements</p>
+      <ul>
+        <li>Worked as a Backend Developer on a comprehensive language-learning platform designed for non-Persian speakers, similar in concept to Duolingo.</li>
+        <li>Contributed to the refactoring of existing backend services to improve maintainability, performance, and scalability, following Clean Code and self-testing principles.</li>
+        <li>Developed new features and microservices, including: Picture Dictionary Service, NLP Analyser Module, User Panel and internal management features.</li>
+        <li>Collaborated with cross-functional teams using Python, PHP, Laravel, Symfony, MySQL, Redis, Docker, Linux, React, TypeScript, Redux, Doctrine ORM, TailwindCSS, and JSX/TSX.</li>
+        <li>Improved system stability and code quality through consistent refactoring, automated testing, and following best practices in API design and caching.</li>
+        <li>Benefited from a strong team culture focused on continuous learning, especially through regular study of technical books and knowledge-sharing sessions.</li>
+      </ul>
+      <p class="tools"><strong>Tools and technologies used:</strong> Python, PHP, Laravel, Symfony, MySQL, Redis, Docker, Linux, React, TypeScript, Redux, Doctrine ORM, TailwindCSS, JSX/TSX, ElasticSearch, RabbitMQ, NextJS.</p>
+    </div>
+
+    <div class="item">
+      <div class="pill">August 2023 - July 2024</div>
+      <h3>Team Lead &amp; Software Engineer</h3>
+      <p class="company">Bu-Ali Sina University</p>
+      <p class="sub">Tasks and Achievements</p>
+      <ul>
+        <li>Led a small team of 3 to design and develop a software system for managing university telephony, integrating legacy PBX systems with a mobile application.</li>
+        <li>Developed the backend architecture using PHP, Laravel, and Neo4j, ensuring modularity, reliability, and error prevention in complex phone routing scenarios.</li>
+        <li>Collaborated closely with end-users and university IT staff to gather requirements and translate them into functional specifications.</li>
+        <li>Coordinated with front-end and UI developers to deliver a seamless user experience.</li>
+        <li>Delivered a robust system capable of generating importable reports for the existing Goyan platform.</li>
+      </ul>
+      <p class="tools"><strong>Tools and technologies used:</strong> PHP, Laravel, Neo4j, Docker, Linux, React, TypeScript, TailwindCSS.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 4 -->
+<section class="page">
+  <div class="timeline">
+    <div class="item">
+      <div class="pill">June 2022 - April 2023</div>
+      <h3>Full-Stack Developer</h3>
+      <p class="company">Aazem</p>
+      <p class="sub">Tasks and Achievements</p>
+      <ul>
+        <li>Developed custom survey modules using PHP and Yii framework for a LimeSurvey-based survey application.</li>
+        <li>Enhanced legacy code maintainability and implemented database normalization.</li>
+        <li>Added multilingual support and documented project APIs using OpenAPI standards.</li>
+      </ul>
+      <p class="tools"><strong>Tech stack:</strong> PHP, Yii, JavaScript, HTML/CSS, jQuery, Docker, Linux</p>
+    </div>
+
+    <div class="item">
+      <div class="pill">June 2021 - April 2022</div>
+      <h3>Backend Developer</h3>
+      <p class="company">National Elite Foundation</p>
+      <p class="sub">Tasks and Achievements</p>
+      <ul>
+        <li>Developed the backend for Ghazi-Yar, a judicial assistant software for analyzing past court cases and providing suggestions for new cases.</li>
+        <li>Designed databases, developed REST APIs, and integrated with AI modules for predictive recommendations.</li>
+        <li>Implemented unit and feature testing, ensuring reliability and maintainability.</li>
+        <li>Produced technical documentation to support team development and future enhancements.</li>
+      </ul>
+      <p class="tools"><strong>Tech stack:</strong> Python, Django, JavaScript, HTML/CSS, Pandas, NumPy, Matplotlib, Docker, Linux</p>
+    </div>
+
+    <div class="item">
+      <div class="pill">September 2018 - October 2020</div>
+      <h3>Freelance Web Developer</h3>
+      <p class="company">Self-Employed / Freelance</p>
+      <p class="sub">Tasks and Achievements</p>
+      <ul>
+        <li>Developed custom modules and themes for WordPress and vBulletin, including plugins for a game development forum.</li>
+        <li>Built and maintained web applications using PHP, Laravel, HTML/CSS, Bootstrap, enhancing functionality and user experience.</li>
+      </ul>
+      <p class="tools"><strong>Tech stack:</strong> PHP, WordPress, vBulletin, HTML/CSS, Bootstrap, JavaScript</p>
+    </div>
+  </div>
+
+  <h2>Skills</h2>
+  <div class="chips">
+    <span class="chip">C/C++</span>
+    <span class="chip">Qt / QML</span>
+    <span class="chip">OOP</span>
+    <span class="chip">Design Patterns</span>
+    <span class="chip">Software Architecture</span>
+    <span class="chip">CMake / qmake</span>
+    <span class="chip">STL</span>
+    <span class="chip">Algorithms</span>
+    <span class="chip">Data Structures</span>
+    <span class="chip">Qt Quick Controls</span>
+    <span class="chip">Linux</span>
+    <span class="chip">Git</span>
+    <span class="chip">Debugging</span>
+    <span class="chip">Optimization</span>
+    <span class="chip">Requirement analysis</span>
+    <span class="chip">Testing</span>
+    <span class="chip">Docker</span>
+    <span class="chip">Python</span>
+    <span class="chip">PHP</span>
+    <span class="chip">Laravel</span>
+    <span class="chip">JavaScript</span>
+    <span class="chip">GoLang</span>
+    <span class="chip">MySQL</span>
+    <span class="chip">Redis</span>
+    <span class="chip">MongoDB</span>
+  </div>
+
+  <h2 style="margin-top:18px;">Language</h2>
+  <div class="langs">
+    <div class="lang">
+      <span>English</span>
+      <div class="bars">
+        <i class="bar on"></i><i class="bar on"></i><i class="bar on"></i><i class="bar"></i><i class="bar"></i>
+      </div>
+    </div>
+    <div class="lang">
+      <span>Persian</span>
+      <div class="bars">
+        <i class="bar on"></i><i class="bar on"></i><i class="bar on"></i><i class="bar on"></i><i class="bar on"></i>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 5 -->
+<section class="page">
+  <h2>Projects</h2>
+  <div class="timeline">
+    <div class="item">
+      <div class="pill">May 2021</div>
+      <h3>Chess Game (C++ / Qt)</h3>
+      <p class="proj-for"><strong>For:</strong> University courses</p>
+      <p>A fully functional desktop chess application written in <strong>C++</strong> and <strong>Qt Quick/QML</strong>. Implemented an OOP game engine (pieces, board, players), advanced rules (check/mate, castling, en passant, promotion, undo), C++↔QML bridging with Q_PROPERTY and signals/slots, animated Material UI, file-based game persistence, and packaged builds for Linux and Windows. Course score: 173/100.</p>
+      <p>Link: <a class="link" href="https://github.com/alizeinodin/Chess-Game">https://github.com/alizeinodin/Chess-Game</a></p>
+    </div>
+
+    <div class="item">
+      <div class="pill">March 2021</div>
+      <h3>IMDB Practice (C++)</h3>
+      <p class="proj-for"><strong>For:</strong> University practice</p>
+      <p>Domain modeling practice similar to IMDB, implemented in <strong>C++</strong> with focus on OOP structure, data organization, and maintainable class design.</p>
+      <p>Link: <a class="link" href="https://github.com/alizeinodin/imdbpractice">https://github.com/alizeinodin/imdbpractice</a></p>
+    </div>
+
+    <div class="item">
+      <div class="pill">November 2023</div>
+      <h3>KarLearn</h3>
+      <p class="proj-for"><strong>For:</strong> University courses</p>
+      <p>An educational platform similar to SabzLearn for online courses.</p>
+      <p>Link: <a class="link" href="https://github.com/alizeinodin/karlearn">https://github.com/alizeinodin/karlearn</a></p>
+    </div>
+
+    <div class="item">
+      <div class="pill">October 2022</div>
+      <h3>SMSApi Laravel Package</h3>
+      <p class="proj-for"><strong>For:</strong> FOSS</p>
+      <p>A Laravel package for integration with the SMS.ir service and managing SMS services.</p>
+      <p>Link: <a class="link" href="https://github.com/alizeinodin/SMSApi">https://github.com/alizeinodin/SMSApi</a></p>
+    </div>
+
+    <div class="item">
+      <div class="pill">May 2022</div>
+      <h3>Chapar Messenger</h3>
+      <p class="proj-for"><strong>For:</strong> Self-Employed</p>
+      <p>A simple messaging platform with real-time chat features.</p>
+      <p>Link: <a class="link" href="https://github.com/alizeinodin/chapar">https://github.com/alizeinodin/chapar</a></p>
+    </div>
+
+    <div class="item">
+      <div class="pill">April 2022</div>
+      <h3>Wooden door</h3>
+      <p class="proj-for"><strong>For:</strong> University courses</p>
+      <p>A job platform similar to JobVision for connecting employers and candidates.</p>
+      <p>Link: <a class="link" href="https://github.com/alizeinodin/woodenDoor">https://github.com/alizeinodin/woodenDoor</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 6 -->
+<section class="page">
+  <div class="timeline">
+    <div class="item">
+      <div class="pill">August 2021</div>
+      <h3>Kiwi Event System</h3>
+      <p class="proj-for"><strong>For:</strong> Student association of university</p>
+      <p>An event management system for the student association.</p>
+      <p>Link: <a class="link" href="https://github.com/alizeinodin/kiwi">https://github.com/alizeinodin/kiwi</a></p>
+    </div>
+
+    <div class="item">
+      <div class="pill">October 2020</div>
+      <h3>Mafia Game</h3>
+      <p class="proj-for"><strong>For:</strong> FOSS</p>
+      <p>A multiplayer Mafia game with user management and game logic.</p>
+      <p>Link: <a class="link" href="https://github.com/alizeinodin/Mafia">https://github.com/alizeinodin/Mafia</a></p>
+    </div>
+  </div>
+
+  <h2 style="margin-top:10px;">Honors</h2>
+  <div class="timeline">
+    <div class="item">
+      <div class="pill">August 2021</div>
+      <h3>1st Place, ICPC Western Iran Regional Contest</h3>
+    </div>
+    <div class="item">
+      <div class="pill">October 2024</div>
+      <h3>Top Performer, PHP/Laravel Olympiad</h3>
+      <p>Link: <a class="link" href="https://quera.org/media/public/certificate/2a49865c95f0404e96d375e3298ddef2.png">https://quera.org/media/public/certificate/2a49865c95f0404e96d375e3298ddef2.png</a></p>
+    </div>
+    <div class="item">
+      <div class="pill">March 2024</div>
+      <h3>9th Place, Software Engineering Contest, Quera (IranServer)</h3>
+      <p>Link: <a class="link" href="https://quera.org/contest/assignments/81560/scoreboard/">https://quera.org/contest/assignments/81560/scoreboard/</a></p>
+    </div>
+    <div class="item">
+      <div class="pill">September 2023</div>
+      <h3>3rd Place, AI Competition</h3>
+    </div>
+  </div>
+
+  <h2 style="margin-top:18px;">Social Network</h2>
+  <div class="social">
+    <a href="https://www.linkedin.com/in/ali-zeinodin">
+      <span class="ico"><svg viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zM8.3 18.3H5.7V9.7h2.6v8.6zM7 8.4a1.5 1.5 0 110-3 1.5 1.5 0 010 3zM18.3 18.3h-2.6v-4.2c0-1-.4-1.7-1.3-1.7-.7 0-1.1.5-1.3.9-.1.2-.1.5-.1.8v4.2h-2.6s.0-6.8 0-7.5h2.6v1.1c.3-.5 1-1.3 2.4-1.3 1.8 0 3.1 1.2 3.1 3.7v4z"/></svg></span>
+      ali-zeinodin
+    </a>
+    <a href="https://github.com/alizeinodin">
+      <span class="ico"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.2-3.4-1.2-.4-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5a3.9 3.9 0 011-2.7 3.6 3.6 0 01.1-2.7s.8-.3 2.8 1a9.5 9.5 0 015 0c2-1.3 2.8-1 2.8-1a3.6 3.6 0 01.1 2.7 3.9 3.9 0 011 2.7c0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0012 2z"/></svg></span>
+      alizeinodin
+    </a>
+  </div>
+</section>
+
+</body>
+</html>
