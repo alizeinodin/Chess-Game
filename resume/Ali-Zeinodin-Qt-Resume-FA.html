@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<title>رزومه علی زین‌الدینی — توسعه‌دهنده Qt / C++</title>
+<style>
+  @font-face { font-family: Vazirmatn; src: url("fonts/ttf/Vazirmatn-Regular.ttf") format("truetype"); font-weight: 400; }
+  @font-face { font-family: Vazirmatn; src: url("fonts/ttf/Vazirmatn-Medium.ttf") format("truetype"); font-weight: 500; }
+  @font-face { font-family: Vazirmatn; src: url("fonts/ttf/Vazirmatn-SemiBold.ttf") format("truetype"); font-weight: 600; }
+  @font-face { font-family: Vazirmatn; src: url("fonts/ttf/Vazirmatn-Bold.ttf") format("truetype"); font-weight: 700; }
+
+  :root { --ink:#1a2332; --muted:#4a5568; --line:#d7dde8; --accent:#0b6e4f; --soft:#e8f5f0; }
+  * { box-sizing: border-box; }
+  html, body { margin:0; padding:0; color:var(--ink); font-family:Vazirmatn,"Noto Sans Arabic",sans-serif; font-size:9.4pt; line-height:1.42; background:#fff; }
+  .page { width:210mm; min-height:297mm; margin:0 auto; padding:10mm 12mm 8mm; }
+  header { display:grid; grid-template-columns:1fr auto; gap:8px; padding-bottom:7px; border-bottom:2.5px solid var(--accent); margin-bottom:8px; }
+  h1 { margin:0; font-size:18pt; font-weight:700; }
+  .title { margin:1px 0 0; color:var(--accent); font-size:10pt; font-weight:600; }
+  .contacts { margin-top:5px; display:flex; flex-wrap:wrap; gap:3px 12px; color:var(--muted); font-size:8pt; }
+  .contacts a { color:var(--muted); text-decoration:none; }
+  .side-meta { text-align:left; font-size:8pt; color:var(--muted); align-self:end; }
+  h2 { margin:9px 0 4px; font-size:10pt; font-weight:700; color:var(--accent); border-bottom:1px solid var(--line); padding-bottom:2px; }
+  .summary { margin:0; text-align:justify; }
+  .skills { display:grid; grid-template-columns:78px 1fr; gap:2px 8px; margin:0; }
+  .skills dt { font-weight:600; color:var(--accent); }
+  .skills dd { margin:0; }
+  .chips { display:flex; flex-wrap:wrap; gap:4px; margin:5px 0 0; }
+  .chip { background:var(--soft); color:var(--accent); border:1px solid #c6e6da; border-radius:3px; padding:1px 7px; font-size:7.8pt; font-weight:500; }
+  .job, .project { margin-bottom:6px; }
+  .job-head, .project-head { display:flex; justify-content:space-between; gap:8px; align-items:baseline; }
+  .job-head h3, .project-head h3 { margin:0; font-size:9.6pt; font-weight:700; }
+  .org { color:var(--muted); font-weight:500; }
+  .date { white-space:nowrap; color:var(--muted); font-size:8pt; font-weight:500; }
+  ul { margin:2px 0 0; padding-right:14px; }
+  li { margin-bottom:1px; }
+  .featured { background:#f7fbf9; border:1px solid #d7ebe3; border-radius:5px; padding:6px 8px; }
+  .tag { display:inline-block; background:var(--accent); color:#fff; font-size:7.2pt; padding:1px 6px; border-radius:3px; margin-left:5px; font-weight:600; }
+  .footer-note { margin-top:7px; font-size:7.5pt; color:var(--muted); border-top:1px solid var(--line); padding-top:4px; }
+  @media print {
+    .page { width:auto; min-height:auto; padding:0; margin:0; }
+    body { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div>
+        <h1>سید علی زین‌الدینی</h1>
+        <p class="title">توسعه‌دهنده C++ / Qt | اپلیکیشن دسکتاپ کراس‌پلتفرم</p>
+        <div class="contacts">
+          <span>تهران</span>
+          <a href="mailto:alizeinodin79@gmail.com">alizeinodin79@gmail.com</a>
+          <a href="https://github.com/alizeinodin">github.com/alizeinodin</a>
+          <a href="https://www.linkedin.com/in/ali-zeinodin">linkedin.com/in/ali-zeinodin</a>
+          <a href="https://t.me/alizeinodin">t.me/alizeinodin</a>
+        </div>
+      </div>
+      <div class="side-meta">آمادگی همکاری پروژه‌ای<br>Qt · QML · C++</div>
+    </header>
+
+    <h2>خلاصه حرفه‌ای</h2>
+    <p class="summary">
+      مهندس نرم‌افزار با بیش از ۶ سال تجربه حرفه‌ای و تمرکز عملی روی توسعه دسکتاپ با
+      <strong>C++، Qt Quick و QML</strong>. در پروژه شاخص «شطرنج بوعلی» معماری شیءگرا، ارتباط
+      C++/QML، انیمیشن UI، ذخیره‌سازی فایل و انتشار برای Windows/Linux را پیاده کرده‌ام.
+      تجربه تحویل سیستم‌های پیچیده در Agile را دارم و منطق دامنه را به رابط کاربری تمیز تبدیل می‌کنم.
+    </p>
+    <div class="chips">
+      <span class="chip">Qt Quick / QML</span>
+      <span class="chip">C++ OOP</span>
+      <span class="chip">Signals &amp; Slots</span>
+      <span class="chip">Q_PROPERTY</span>
+      <span class="chip">CMake / qmake</span>
+      <span class="chip">Cross-platform</span>
+      <span class="chip">Material UI</span>
+    </div>
+
+    <h2>مهارت‌های فنی مرتبط با Qt</h2>
+    <dl class="skills">
+      <dt>Desktop UI</dt>
+      <dd>Qt Quick، QML، Qt Quick Controls 2، Material Style، انیمیشن و بازخورد صوتی/تصویری</dd>
+      <dt>C++ / Qt</dt>
+      <dd>شیءگرایی و چندریختی، Exception، QObject، qmlRegisterType، ارتباط دوطرفه C++ ↔ QML</dd>
+      <dt>ابزار</dt>
+      <dd>Qt Creator، qmake، CMake، Git، بسته‌بندی و انتشار Linux / Windows</dd>
+      <dt>مهندسی</dt>
+      <dd>طراحی معماری، Clean Code، ماژولاریتی، دیباگ سیستم‌های پیچیده، مستندسازی</dd>
+      <dt>سایر</dt>
+      <dd>JavaScript (در QML)، PHP/Laravel، Python، Docker، MySQL، Linux</dd>
+    </dl>
+
+    <h2>پروژه شاخص Qt</h2>
+    <div class="project featured">
+      <div class="project-head">
+        <h3><span class="tag">پروژه اصلی</span>Bu-Ali Chess — بازی شطرنج دسکتاپ</h3>
+        <span class="date">۱۴۰۰ · امتیاز ۱۷۳/۱۰۰</span>
+      </div>
+      <div class="org">C++ + QML/Qt Quick · دانشگاه بوعلی سینا · <a href="https://github.com/alizeinodin/Chess-Game">github.com/alizeinodin/Chess-Game</a></div>
+      <ul>
+        <li>موتور بازی OOP کامل (مهره، خانه، صفحه، بازیکن، بازی) با چندریختی برای رفتار مهره‌ها.</li>
+        <li>لایه <strong>Connection</strong> بین C++ و QML با <strong>Q_PROPERTY</strong>، سیگنال/اسلات و qmlRegisterType.</li>
+        <li>قوانین پیشرفته: کیش/مات، قلعه، آن‌پاسان، ترفیع سرباز، Undo حرکات خاص، امتیازدهی تهدید.</li>
+        <li>UI پنج‌صفحه‌ای Material، ListView مهره‌های زده‌شده، انیمیشن حرکت، ذخیره فایل و انتشار Linux/Windows.</li>
+      </ul>
+    </div>
+    <div class="project">
+      <div class="project-head">
+        <h3>IMDB Practice — مدل‌سازی دامنه با C++</h3>
+        <span class="date">۱۴۰۰</span>
+      </div>
+      <div class="org">C++ · <a href="https://github.com/alizeinodin/imdbpractice">github.com/alizeinodin/imdbpractice</a> — تمرین ساختار داده‌ای و منطق شیءگرا مشابه IMDB.</div>
+    </div>
+
+    <h2>تجربه حرفه‌ای</h2>
+    <div class="job">
+      <div class="job-head">
+        <h3>Senior Full Stack Developer <span class="org">— همراه اول (MCI)</span></h3>
+        <span class="date">۱۴۰۳ – اکنون</span>
+      </div>
+      <ul>
+        <li>طراحی معماری و پیاده‌سازی سرویس‌های بک‌اند در سیستم مقیاس‌بزرگ SOAR/VMS (Microservice/Modular).</li>
+        <li>تحویل فیچرهای پیچیده در Agile با تمرکز روی کیفیت، امنیت و نگهداری — قابل انتقال به پروژه‌های Qt.</li>
+      </ul>
+    </div>
+    <div class="job">
+      <div class="job-head">
+        <h3>Software Engineer <span class="org">— دانشگاه بوعلی سینا</span></h3>
+        <span class="date">مرداد ۱۴۰۲ – تیر ۱۴۰۳</span>
+      </div>
+      <ul>
+        <li>رهبری تیم طراحی سامانه تلفن دانشگاه و یکپارچه‌سازی با PBX؛ معماری بک‌اند با Laravel و Neo4j.</li>
+      </ul>
+    </div>
+    <div class="job">
+      <div class="job-head">
+        <h3>Backend Developer <span class="org">— LanGeek</span></h3>
+        <span class="date">تیر ۱۴۰۲ – فروردین ۱۴۰۳</span>
+      </div>
+      <ul>
+        <li>توسعه/بازطراحی سرویس‌های پلتفرم آموزش زبان (NLP و دیکشنری تصویری) با تمرکز روی Clean Code.</li>
+      </ul>
+    </div>
+
+    <h2>تحصیلات</h2>
+    <div>
+      <strong>کاردانی مهندسی نرم‌افزار کامپیوتر</strong> — دانشگاه بوعلی سینا
+      <span class="org"> · دستیار ارشد آموزشی پایگاه داده · پروژه برنامه‌سازی پیشرفته (شطرنج Qt)</span>
+    </div>
+
+    <p class="footer-note">
+      هدف همکاری: پروژه‌های دسکتاپ Qt/QML (ابزار داخلی، پنل اپراتوری، اپ Windows/Linux). نمونه کار: Bu-Ali Chess.
+    </p>
+  </div>
+</body>
+</html>

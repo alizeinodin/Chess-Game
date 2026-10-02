@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<title>Ali Zeinodin — C++ / Qt Developer Resume</title>
+<style>
+  @font-face { font-family: Vazirmatn; src: url("fonts/ttf/Vazirmatn-Regular.ttf") format("truetype"); font-weight: 400; }
+  @font-face { font-family: Vazirmatn; src: url("fonts/ttf/Vazirmatn-Medium.ttf") format("truetype"); font-weight: 500; }
+  @font-face { font-family: Vazirmatn; src: url("fonts/ttf/Vazirmatn-SemiBold.ttf") format("truetype"); font-weight: 600; }
+  @font-face { font-family: Vazirmatn; src: url("fonts/ttf/Vazirmatn-Bold.ttf") format("truetype"); font-weight: 700; }
+
+  :root { --ink:#1a2332; --muted:#4a5568; --line:#d7dde8; --accent:#0b6e4f; --soft:#e8f5f0; }
+  * { box-sizing: border-box; }
+  html, body { margin:0; padding:0; color:var(--ink); font-family:Vazirmatn,"Segoe UI",sans-serif; font-size:9.3pt; line-height:1.42; background:#fff; }
+  .page { width:210mm; min-height:297mm; margin:0 auto; padding:10mm 12mm 8mm; }
+  header { display:grid; grid-template-columns:1fr auto; gap:8px; padding-bottom:7px; border-bottom:2.5px solid var(--accent); margin-bottom:8px; }
+  h1 { margin:0; font-size:18pt; font-weight:700; letter-spacing:-0.02em; }
+  .title { margin:1px 0 0; color:var(--accent); font-size:10pt; font-weight:600; }
+  .contacts { margin-top:5px; display:flex; flex-wrap:wrap; gap:3px 12px; color:var(--muted); font-size:8pt; }
+  .contacts a { color:var(--muted); text-decoration:none; }
+  .side-meta { text-align:right; font-size:8pt; color:var(--muted); align-self:end; }
+  h2 { margin:9px 0 4px; font-size:9.5pt; font-weight:700; color:var(--accent); border-bottom:1px solid var(--line); padding-bottom:2px; text-transform:uppercase; letter-spacing:0.04em; }
+  .summary { margin:0; text-align:justify; }
+  .skills { display:grid; grid-template-columns:88px 1fr; gap:2px 8px; margin:0; }
+  .skills dt { font-weight:600; color:var(--accent); }
+  .skills dd { margin:0; }
+  .chips { display:flex; flex-wrap:wrap; gap:4px; margin:5px 0 0; }
+  .chip { background:var(--soft); color:var(--accent); border:1px solid #c6e6da; border-radius:3px; padding:1px 7px; font-size:7.8pt; font-weight:500; }
+  .job, .project { margin-bottom:6px; }
+  .job-head, .project-head { display:flex; justify-content:space-between; gap:8px; align-items:baseline; }
+  .job-head h3, .project-head h3 { margin:0; font-size:9.6pt; font-weight:700; }
+  .org { color:var(--muted); font-weight:500; }
+  .date { white-space:nowrap; color:var(--muted); font-size:8pt; font-weight:500; }
+  ul { margin:2px 0 0; padding-left:14px; }
+  li { margin-bottom:1px; }
+  .featured { background:#f7fbf9; border:1px solid #d7ebe3; border-radius:5px; padding:6px 8px; }
+  .tag { display:inline-block; background:var(--accent); color:#fff; font-size:7.2pt; padding:1px 6px; border-radius:3px; margin-right:5px; font-weight:600; }
+  .footer-note { margin-top:7px; font-size:7.5pt; color:var(--muted); border-top:1px solid var(--line); padding-top:4px; }
+  @media print {
+    .page { width:auto; min-height:auto; padding:0; margin:0; }
+    body { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div>
+        <h1>Ali Zeinodin</h1>
+        <p class="title">C++ / Qt Developer | Cross-Platform Desktop Applications</p>
+        <div class="contacts">
+          <span>Tehran, Iran</span>
+          <a href="mailto:alizeinodin79@gmail.com">alizeinodin79@gmail.com</a>
+          <a href="https://github.com/alizeinodin">github.com/alizeinodin</a>
+          <a href="https://www.linkedin.com/in/ali-zeinodin">linkedin.com/in/ali-zeinodin</a>
+          <a href="https://t.me/alizeinodin">t.me/alizeinodin</a>
+        </div>
+      </div>
+      <div class="side-meta">Open to Qt projects<br>Qt · QML · C++</div>
+    </header>
+
+    <h2>Professional Summary</h2>
+    <p class="summary">
+      Software engineer with 6+ years of experience and hands-on focus on desktop apps using
+      <strong>C++, Qt Quick, and QML</strong>. Built Bu-Ali Chess end-to-end: OOP engine,
+      C++/QML bridging, animated UI, file persistence, and Linux/Windows packaging.
+      Proven at delivering complex systems in Agile and turning domain rules into clean UIs.
+    </p>
+    <div class="chips">
+      <span class="chip">Qt Quick / QML</span>
+      <span class="chip">C++ OOP</span>
+      <span class="chip">Signals &amp; Slots</span>
+      <span class="chip">Q_PROPERTY</span>
+      <span class="chip">CMake / qmake</span>
+      <span class="chip">Cross-platform</span>
+      <span class="chip">Material UI</span>
+    </div>
+
+    <h2>Qt-Focused Technical Skills</h2>
+    <dl class="skills">
+      <dt>Desktop UI</dt>
+      <dd>Qt Quick, QML, Qt Quick Controls 2, Material Style, animations, audio/visual feedback</dd>
+      <dt>C++ / Qt</dt>
+      <dd>OOP &amp; polymorphism, exceptions, QObject, qmlRegisterType, bidirectional C++ ↔ QML</dd>
+      <dt>Tooling</dt>
+      <dd>Qt Creator, qmake, CMake, Git, packaging &amp; release for Linux and Windows</dd>
+      <dt>Engineering</dt>
+      <dd>Architecture design, clean code, modularity, debugging complex systems, technical docs</dd>
+      <dt>Also</dt>
+      <dd>JavaScript (in QML), PHP/Laravel, Python, Docker, MySQL, Linux</dd>
+    </dl>
+
+    <h2>Featured Qt Project</h2>
+    <div class="project featured">
+      <div class="project-head">
+        <h3><span class="tag">Flagship</span>Bu-Ali Chess — Desktop Chess Application</h3>
+        <span class="date">2021 · Score 173/100</span>
+      </div>
+      <div class="org">C++ + QML/Qt Quick · Bu-Ali Sina University · <a href="https://github.com/alizeinodin/Chess-Game">github.com/alizeinodin/Chess-Game</a></div>
+      <ul>
+        <li>OOP game engine (Piece, Cell, Board, Player, Game) with polymorphic piece behavior.</li>
+        <li><strong>Connection</strong> bridge via <strong>Q_PROPERTY</strong>, signals/slots, and qmlRegisterType.</li>
+        <li>Advanced rules: check/mate, castling, en passant, promotion, special-move undo, threat scoring.</li>
+        <li>5-screen Material UI, ListView for captured pieces, animations, file save, Linux/Windows builds.</li>
+      </ul>
+    </div>
+    <div class="project">
+      <div class="project-head">
+        <h3>IMDB Practice — Domain Modeling in C++</h3>
+        <span class="date">2021</span>
+      </div>
+      <div class="org">C++ · <a href="https://github.com/alizeinodin/imdbpractice">github.com/alizeinodin/imdbpractice</a> — IMDB-like domain structures with OOP modeling focus.</div>
+    </div>
+
+    <h2>Professional Experience</h2>
+    <div class="job">
+      <div class="job-head">
+        <h3>Senior Full Stack Developer <span class="org">— Hamrahe Aval (MCI)</span></h3>
+        <span class="date">2024 – Present</span>
+      </div>
+      <ul>
+        <li>Architecture and backend delivery for a large-scale SOAR/VMS cybersecurity system (microservices/modular).</li>
+        <li>Complex feature delivery in Agile with clean code and security — transferable to production Qt work.</li>
+      </ul>
+    </div>
+    <div class="job">
+      <div class="job-head">
+        <h3>Software Engineer <span class="org">— Bu-Ali Sina University</span></h3>
+        <span class="date">Aug 2023 – Jul 2024</span>
+      </div>
+      <ul>
+        <li>Led design of a university telephony system integrating legacy PBX; backend with Laravel and Neo4j.</li>
+      </ul>
+    </div>
+    <div class="job">
+      <div class="job-head">
+        <h3>Backend Developer <span class="org">— LanGeek</span></h3>
+        <span class="date">Jul 2023 – Apr 2024</span>
+      </div>
+      <ul>
+        <li>Built/refactored language-learning services (NLP module, picture dictionary) with clean, scalable code.</li>
+      </ul>
+    </div>
+
+    <h2>Education</h2>
+    <div>
+      <strong>Associate of Science, Computer Software Engineering</strong> — Bu-Ali Sina University
+      <span class="org"> · Head TA (Database Systems) · Advanced Programming project (Qt Chess)</span>
+    </div>
+
+    <p class="footer-note">
+      Seeking: Qt/QML desktop projects (internal tools, operator panels, Windows/Linux apps). Portfolio: Bu-Ali Chess.
+    </p>
+  </div>
+</body>
+</html>
